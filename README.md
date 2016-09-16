@@ -1,12 +1,17 @@
 # RAMS  
+
 ##### 6th September 2016  
+
 ### OVERVIEW  
-Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper. 
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper.   
+
 ### GOALS  
 Lorem ipsum dolor sit amet, co
 nsectetuer adipiscing elit
-Sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
-### SPECIFICATIONS  
+Sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.  
+
+### SPECIFICATIONS    
+
 #### Company  
 * Hire Agency  
 * Post Job Listings  
