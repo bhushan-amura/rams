@@ -1,4 +1,3 @@
-=======
 Your Company
 21  Baker’s Street
 
@@ -54,4 +53,3 @@ Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
 nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat
 volutpat.
 
->>>>>>> fc7be680238c48c34440dcddeaf1b0971b7bd504
