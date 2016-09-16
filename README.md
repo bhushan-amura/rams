@@ -2,6 +2,8 @@
 
 ##### 6th September 2016  
 
+# ** future application if time permits
+
 ### OVERVIEW  
 Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper.   
 
@@ -84,6 +86,7 @@ Sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat vol
   * tagline
   * contact{phone number,email}
   * number of employees
+  * activity_logs**
 * Job Openings
   * title
   * type
@@ -116,7 +119,7 @@ Sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat vol
   * country
   * latitude
   * longitude
-
+* Activity_logs**
 * Candidate profile
   * status [ seeker / non-seeker]
   * Personal details {name
@@ -134,6 +137,8 @@ Sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat vol
   * experience[]
   * references[]
   * achievements
+* Shortlisted candidates
+* Invites** [company_id + candidate_id + schedule + accept/reject]
 * Links
   * type [linkedin/github/codechef/hackerrank/etc]
   * url
@@ -151,14 +156,15 @@ Sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat vol
   * location
   * employers
   * description
-* RAMS 
+* RAMS
   * companies []
   * candidates []
-  * company_id + rating + counter
+  * company_id + rating + counter + reviews
   * company_ratings []
-  * Admin []
-
-
+  * admin []
+  * activity_logs**
+* Admin
+* Users contains admin candidates companies
 
 ### MILESTONES  
 Lorem Ipsum
