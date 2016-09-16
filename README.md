@@ -73,9 +73,92 @@ Sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat vol
 * Approve Company registration
 * lead stage opportunity, incoming ,prospect   staging
 
+### DATABASE DESIGN
+* Company Profile
+  * name
+  * location
+  * type of company [ startup / incorporation / MNC / LLC ]
+  * logo
+  * url
+  * info / desc
+  * tagline
+  * contact{phone number,email}
+  * number of employees
+* Job Openings
+  * title
+  * type
+  * description
+  * number of positions
+  * status [in-progress / stopped]
+  * ctc
+  * location [ remote available or not ]
+  * criteria
+    * experience
+    * skills[]
+    * qualification[]
+* Skills
+  * name
+* Qualification/ education
+  * name
+* Schedule
+  * event type [ interview or presentation ]
+  * date
+  * time
+  * location
+* Location
+  * city
+  * street_name
+  * street_address
+  * building_name
+  * building_number
+  * zip_code
+  * state
+  * country
+  * latitude
+  * longitude
 
-####
-lead stage opportunity, incoming ,prospect   staging
+* Candidate profile
+  * status [ seeker / non-seeker]
+  * Personal details {name
+  * DOB
+  * gender
+  * email
+  * marital status
+  * languages}
+  * summary
+  * qualification[]
+  * links
+  * skills[]
+  * projects[]
+  * interests
+  * experience[]
+  * references[]
+  * achievements
+* Links
+  * type [linkedin/github/codechef/hackerrank/etc]
+  * url
+* Projects
+  * name
+  * description
+  * technologies used
+  * recognition
+  * links 
+  * duration [start_date,end_date]
+  * teammates
+* Experience
+  * type [full time/part time/internship]
+  * duration [start_date,end_date]
+  * location
+  * employers
+  * description
+* RAMS 
+  * companies []
+  * candidates []
+  * company_id + rating + counter
+  * company_ratings []
+  * Admin []
+
+
 
 ### MILESTONES  
 Lorem Ipsum
