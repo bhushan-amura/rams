@@ -1,28 +1,40 @@
-== README
+# RAMS  
+##### 6th September 2016  
+### OVERVIEW  
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper. 
+### GOALS  
+Lorem ipsum dolor sit amet, co
+nsectetuer adipiscing elit
+Sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
+### SPECIFICATIONS  
+#### Company  
+* Hire Agency  
+* Post Job Listings  
+* Company Profile  
+* Short-list Criteria, Skills, aggregate, number of candidates, Select college or pool   
+* Schedule Tests, Interviews, Presentation  
+* Browse short-listed candidates  
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+#### Agency  
+* Get Companies  
+* Get Candidates  
+* Shortlist Candidates for companies  
+* Agency admin portal  
+* Mail Notification candidates and company  
+* Pagination of candidates  
+* Company Ratings   
 
-Things you may want to cover:
+#### Candidates  
+* Register  
+* Give test  
+* Receive Notification Mail  
+* Review Company Rating  
+* Profile  
+* Job Expectation  
+* Apply and Search for Jobs**   
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+### MILESTONES  
+Lorem Ipsum
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
+Dolor Sit Amet
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
