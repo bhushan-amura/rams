@@ -9,7 +9,7 @@ class CreateCandidates < ActiveRecord::Migration
       t.string "email", :null => false, :limit => 100
       t.string "marital_status"
       t.boolean "status", :default => true, :comment => "A job seeker(true) or not(false)"
-      t.text   "languages", :default => "English"
+      t.text   "languages"
       t.text   "summary", :limit => 500
       
       t.timestamps null: false
