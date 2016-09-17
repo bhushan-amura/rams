@@ -11,7 +11,7 @@ class CreateCandidates < ActiveRecord::Migration
       t.boolean "status", :default => true, :comment => "A job seeker(true) or not(false)"
       t.text   "languages", :default => "English"
       t.text   "summary", :limit => 500
-
+      
       t.timestamps null: false
     end
   end
