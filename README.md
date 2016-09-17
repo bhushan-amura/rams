@@ -87,7 +87,7 @@ Sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat vol
   * contact{phone number,email}
   * number of employees
   * activity_logs**
-* Job Openings
+* Job Openings [ Opporunity ]
   * title
   * type
   * description
@@ -103,11 +103,12 @@ Sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat vol
   * name
 * Qualification/ education
   * name
-* Schedule
-  * event type [ interview or presentation ]
+* Schedule [ Event ]
+  * event type [ interview or presentation or test ]
   * date
   * time
   * location
+  * interview ? interviwewr : organiser
 * Location
   * city
   * street_name
@@ -137,11 +138,21 @@ Sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat vol
   * experience[]
   * references[]
   * achievements
+* Test
+  * test_id
+  * test_score
+  * candidate_id
+  * test_name
+  * test_url
 * Shortlisted candidates
 * Invites** [company_id + candidate_id + schedule + accept/reject]
 * Links
   * type [linkedin/github/codechef/hackerrank/etc]
   * url
+* Reviews
+  * text
+  * rating
+  * company_id
 * Projects
   * name
   * description
