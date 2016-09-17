@@ -1,0 +1,4 @@
+log/*
+.byebug_history
+*.~
+*.swp
