@@ -4,3 +4,4 @@ log/*
 *.swp
 db/schema.rb
 tmp/*
+db/migrate/*
