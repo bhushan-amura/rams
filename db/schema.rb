@@ -11,13 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20160919125258) do
+=======
+ActiveRecord::Schema.define(version: 20160919125127) do
+>>>>>>> 39317746aa8c3148b565ce45aec13bbeaca707de
 
   create_table "achievements", force: :cascade do |t|
-    t.string   "title",        limit: 255, null: false
-    t.string   "description",  limit: 255
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.string   "title",        limit: 255,   null: false
+    t.text     "description",  limit: 65535
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
     t.integer  "candidate_id", limit: 4
   end
 
@@ -30,16 +34,6 @@ ActiveRecord::Schema.define(version: 20160919125258) do
   end
 
   add_index "admins", ["user_id"], name: "index_admins_on_user_id", using: :btree
-
-  create_table "candidate_skills", id: false, force: :cascade do |t|
-    t.integer  "candidate_id", limit: 4, null: false
-    t.integer  "skill_id",     limit: 4, null: false
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-  end
-
-  add_index "candidate_skills", ["candidate_id"], name: "index_candidate_skills_on_candidate_id", using: :btree
-  add_index "candidate_skills", ["skill_id"], name: "index_candidate_skills_on_skill_id", using: :btree
 
   create_table "candidates", force: :cascade do |t|
     t.string   "first_name",     limit: 20,                   null: false
@@ -63,6 +57,19 @@ ActiveRecord::Schema.define(version: 20160919125258) do
   add_index "candidates_qualifications", ["candidate_id"], name: "index_candidates_qualifications_on_candidate_id", using: :btree
   add_index "candidates_qualifications", ["qualification_id"], name: "index_candidates_qualifications_on_qualification_id", using: :btree
 
+<<<<<<< HEAD
+=======
+  create_table "candidates_skills", id: false, force: :cascade do |t|
+    t.integer  "candidate_id", limit: 4, null: false
+    t.integer  "skill_id",     limit: 4, null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "candidates_skills", ["candidate_id"], name: "index_candidates_skills_on_candidate_id", using: :btree
+  add_index "candidates_skills", ["skill_id"], name: "index_candidates_skills_on_skill_id", using: :btree
+
+>>>>>>> 39317746aa8c3148b565ce45aec13bbeaca707de
   create_table "companies", force: :cascade do |t|
     t.string   "name",                limit: 255,              null: false
     t.string   "company_type",        limit: 255,              null: false
@@ -99,21 +106,28 @@ ActiveRecord::Schema.define(version: 20160919125258) do
   end
 
   create_table "experiences", force: :cascade do |t|
-    t.string   "employer_name",   limit: 255,   null: false
-    t.string   "start_date",      limit: 255
-    t.string   "end_date",        limit: 255
-    t.text     "description",     limit: 65535
-    t.string   "experience_type", limit: 255
-    t.integer  "candidate_id",    limit: 4
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
+    t.string   "name",         limit: 20,    null: false
+    t.string   "start_date",   limit: 255
+    t.string   "end_date",     limit: 255
+    t.text     "description",  limit: 65535
+    t.string   "shift_type",   limit: 255
+    t.integer  "candidate_id", limit: 4
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.string   "email",        limit: 100
   end
 
   add_index "experiences", ["candidate_id"], name: "index_experiences_on_candidate_id", using: :btree
 
+<<<<<<< HEAD
   create_table "job_oppurtunity", force: :cascade do |t|
     t.string   "title",               limit: 255, null: false
     t.string   "shift_type",          limit: 255, null: false
+=======
+  create_table "job_openings", force: :cascade do |t|
+    t.string   "title",               limit: 255, null: false
+    t.string   "shift",               limit: 255, null: false
+>>>>>>> 39317746aa8c3148b565ce45aec13bbeaca707de
     t.string   "description",         limit: 255, null: false
     t.integer  "number_of_positions", limit: 4,   null: false
     t.boolean  "status"
@@ -123,14 +137,18 @@ ActiveRecord::Schema.define(version: 20160919125258) do
     t.integer  "company_id",          limit: 4
   end
 
+<<<<<<< HEAD
   add_index "job_oppurtunity", ["company_id"], name: "index_job_oppurtunity_on_company_id", using: :btree
+=======
+  add_index "job_openings", ["company_id"], name: "index_job_openings_on_company_id", using: :btree
+>>>>>>> 39317746aa8c3148b565ce45aec13bbeaca707de
 
   create_table "links", force: :cascade do |t|
-    t.string   "type",         limit: 50,  null: false
-    t.string   "url",          limit: 255, null: false
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.string   "type",         limit: 50,    null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
     t.integer  "candidate_id", limit: 4
+    t.text     "url",          limit: 65535, null: false
   end
 
   add_index "links", ["candidate_id"], name: "index_links_on_candidate_id", using: :btree
@@ -193,6 +211,24 @@ ActiveRecord::Schema.define(version: 20160919125258) do
     t.datetime "updated_at",            null: false
   end
 
+  create_table "test_scores", id: false, force: :cascade do |t|
+    t.integer  "candidate_id", limit: 4,  null: false
+    t.integer  "test_id",      limit: 4,  null: false
+    t.float    "score",        limit: 24
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
+
+  add_index "test_scores", ["candidate_id"], name: "index_test_scores_on_candidate_id", using: :btree
+  add_index "test_scores", ["test_id"], name: "index_test_scores_on_test_id", using: :btree
+
+  create_table "tests", force: :cascade do |t|
+    t.string   "name",       limit: 255, null: false
+    t.string   "url",        limit: 255, null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false
     t.string   "encrypted_password",     limit: 255, default: "", null: false
@@ -215,7 +251,11 @@ ActiveRecord::Schema.define(version: 20160919125258) do
   add_foreign_key "admins", "users"
   add_foreign_key "course_scores", "qualifications"
   add_foreign_key "experiences", "candidates"
+<<<<<<< HEAD
   add_foreign_key "job_oppurtunity", "companies"
+=======
+  add_foreign_key "job_openings", "companies"
+>>>>>>> 39317746aa8c3148b565ce45aec13bbeaca707de
   add_foreign_key "links", "candidates"
   add_foreign_key "projects", "candidates"
   add_foreign_key "references", "candidates"
