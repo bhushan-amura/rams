@@ -11,17 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 20160919120725) do
-=======
-ActiveRecord::Schema.define(version: 20160919112258) do
->>>>>>> develop
+ActiveRecord::Schema.define(version: 20160919142604) do
 
   create_table "achievements", force: :cascade do |t|
-    t.string   "title",        limit: 255, null: false
-    t.string   "description",  limit: 255
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.string   "title",        limit: 255,   null: false
+    t.text     "description",  limit: 65535
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
     t.integer  "candidate_id", limit: 4
   end
 
@@ -57,6 +53,8 @@ ActiveRecord::Schema.define(version: 20160919112258) do
     t.text     "summary",        limit: 65535
     t.datetime "created_at",                                  null: false
     t.datetime "updated_at",                                  null: false
+    t.string   "contact",        limit: 15
+    t.text     "interests",      limit: 65535
   end
 
   create_table "candidates_qualifications", id: false, force: :cascade do |t|
@@ -103,21 +101,22 @@ ActiveRecord::Schema.define(version: 20160919112258) do
   end
 
   create_table "experiences", force: :cascade do |t|
-    t.string   "employer_name",   limit: 255,   null: false
-    t.string   "start_date",      limit: 255
-    t.string   "end_date",        limit: 255
-    t.text     "description",     limit: 65535
-    t.string   "experience_type", limit: 255
-    t.integer  "candidate_id",    limit: 4
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
+    t.string   "name",         limit: 20,    null: false
+    t.string   "start_date",   limit: 255
+    t.string   "end_date",     limit: 255
+    t.text     "description",  limit: 65535
+    t.string   "shift_type",   limit: 255
+    t.integer  "candidate_id", limit: 4
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.string   "email",        limit: 100
   end
 
   add_index "experiences", ["candidate_id"], name: "index_experiences_on_candidate_id", using: :btree
 
-  create_table "job_oppurtunity", force: :cascade do |t|
+  create_table "job_openings", force: :cascade do |t|
     t.string   "title",               limit: 255, null: false
-    t.string   "shift_type",          limit: 255, null: false
+    t.string   "shift",               limit: 255, null: false
     t.string   "description",         limit: 255, null: false
     t.integer  "number_of_positions", limit: 4,   null: false
     t.boolean  "status"
@@ -127,14 +126,14 @@ ActiveRecord::Schema.define(version: 20160919112258) do
     t.integer  "company_id",          limit: 4
   end
 
-  add_index "job_oppurtunity", ["company_id"], name: "index_job_oppurtunity_on_company_id", using: :btree
+  add_index "job_openings", ["company_id"], name: "index_job_openings_on_company_id", using: :btree
 
   create_table "links", force: :cascade do |t|
-    t.string   "type",         limit: 50,  null: false
-    t.string   "url",          limit: 255, null: false
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.string   "type",         limit: 50,    null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
     t.integer  "candidate_id", limit: 4
+    t.text     "url",          limit: 65535, null: false
   end
 
   add_index "links", ["candidate_id"], name: "index_links_on_candidate_id", using: :btree
@@ -191,14 +190,24 @@ ActiveRecord::Schema.define(version: 20160919112258) do
 
   add_index "references", ["candidate_id"], name: "index_references_on_candidate_id", using: :btree
 
+  create_table "reviews", force: :cascade do |t|
+    t.text     "text",         limit: 65535
+    t.integer  "rating",       limit: 4
+    t.integer  "candidate_id", limit: 4
+    t.integer  "company_id",   limit: 4
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
+
+  add_index "reviews", ["candidate_id"], name: "index_reviews_on_candidate_id", using: :btree
+  add_index "reviews", ["company_id"], name: "index_reviews_on_company_id", using: :btree
+
   create_table "skills", force: :cascade do |t|
     t.string   "skill",      limit: 15
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
   end
 
-<<<<<<< HEAD
-=======
   create_table "test_scores", id: false, force: :cascade do |t|
     t.integer  "candidate_id", limit: 4,  null: false
     t.integer  "test_id",      limit: 4,  null: false
@@ -215,9 +224,9 @@ ActiveRecord::Schema.define(version: 20160919112258) do
     t.string   "url",        limit: 255, null: false
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+    t.float    "max_score",  limit: 24
   end
 
->>>>>>> develop
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false
     t.string   "encrypted_password",     limit: 255, default: "", null: false
@@ -240,12 +249,10 @@ ActiveRecord::Schema.define(version: 20160919112258) do
   add_foreign_key "admins", "users"
   add_foreign_key "course_scores", "qualifications"
   add_foreign_key "experiences", "candidates"
-<<<<<<< HEAD
-  add_foreign_key "job_oppurtunity", "companies"
-=======
   add_foreign_key "job_openings", "companies"
->>>>>>> develop
   add_foreign_key "links", "candidates"
   add_foreign_key "projects", "candidates"
   add_foreign_key "references", "candidates"
+  add_foreign_key "reviews", "candidates"
+  add_foreign_key "reviews", "companies"
 end
