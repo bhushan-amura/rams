@@ -114,9 +114,9 @@ ActiveRecord::Schema.define(version: 20160919125258) do
 
   add_index "experiences", ["candidate_id"], name: "index_experiences_on_candidate_id", using: :btree
 
-create_table "job_oppurtunity", force: :cascade do |t|
+  create_table "job_oppurtunity", force: :cascade do |t|
     t.string   "title",               limit: 255, null: false
-    t.string   "shift_type",          limit: 255, null: false
+    t.string   "shift",               limit: 255, null: false
     t.string   "description",         limit: 255, null: false
     t.integer  "number_of_positions", limit: 4,   null: false
     t.boolean  "status"
@@ -189,6 +189,18 @@ create_table "job_oppurtunity", force: :cascade do |t|
 
   add_index "references", ["candidate_id"], name: "index_references_on_candidate_id", using: :btree
 
+  create_table "reviews", force: :cascade do |t|
+    t.text     "text",         limit: 65535
+    t.integer  "rating",       limit: 4
+    t.integer  "candidate_id", limit: 4
+    t.integer  "company_id",   limit: 4
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
+
+  add_index "reviews", ["candidate_id"], name: "index_reviews_on_candidate_id", using: :btree
+  add_index "reviews", ["company_id"], name: "index_reviews_on_company_id", using: :btree
+
   create_table "skills", force: :cascade do |t|
     t.string   "name",       limit: 15
     t.datetime "created_at",            null: false
@@ -240,4 +252,6 @@ create_table "job_oppurtunity", force: :cascade do |t|
   add_foreign_key "links", "candidates"
   add_foreign_key "projects", "candidates"
   add_foreign_key "references", "candidates"
+  add_foreign_key "reviews", "candidates"
+  add_foreign_key "reviews", "companies"
 end
