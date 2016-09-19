@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160919132036) do
+ActiveRecord::Schema.define(version: 20160919140127) do
 
   create_table "achievements", force: :cascade do |t|
     t.string   "title",        limit: 255,   null: false
@@ -208,10 +208,10 @@ ActiveRecord::Schema.define(version: 20160919132036) do
   add_index "test_scores", ["test_id"], name: "index_test_scores_on_test_id", using: :btree
 
   create_table "tests", force: :cascade do |t|
-    t.string   "name",       limit: 255, null: false
-    t.string   "url",        limit: 255, null: false
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.string   "name",       limit: 20,    null: false
+    t.text     "url",        limit: 65535, null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
   end
 
   create_table "users", force: :cascade do |t|
