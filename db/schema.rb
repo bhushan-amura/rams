@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160919070846) do
+ActiveRecord::Schema.define(version: 20160919095144) do
 
   create_table "achievements", force: :cascade do |t|
     t.string   "title",        limit: 255, null: false
@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(version: 20160919070846) do
 
   create_table "companies", force: :cascade do |t|
     t.string   "name",                limit: 255,              null: false
-    t.string   "type",                limit: 255,              null: false
+    t.string   "company_type",        limit: 255,              null: false
     t.string   "url",                 limit: 255,              null: false
     t.string   "tagline",             limit: 255
     t.string   "email",               limit: 255, default: "", null: false
@@ -62,7 +62,7 @@ ActiveRecord::Schema.define(version: 20160919070846) do
   end
 
   create_table "events", force: :cascade do |t|
-    t.string   "type",       limit: 255, null: false
+    t.string   "event_type", limit: 255, null: false
     t.date     "date",                   null: false
     t.string   "time",       limit: 255, null: false
     t.string   "organiser",  limit: 255
@@ -85,7 +85,7 @@ ActiveRecord::Schema.define(version: 20160919070846) do
 
   create_table "job_openings", force: :cascade do |t|
     t.string   "title",               limit: 255, null: false
-    t.string   "type_of_job",         limit: 255, null: false
+    t.string   "shift",               limit: 255, null: false
     t.string   "description",         limit: 255, null: false
     t.integer  "number_of_positions", limit: 4,   null: false
     t.boolean  "status"
