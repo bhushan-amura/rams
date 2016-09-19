@@ -2,6 +2,6 @@ log/*
 .byebug_history
 *.~
 *.swp
-db/schema.rb
+db/migrate/*
 tmp/*
 db/migrate/*
