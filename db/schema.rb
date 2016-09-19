@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160917110856) do
+ActiveRecord::Schema.define(version: 20160919051651) do
 
   create_table "achievements", force: :cascade do |t|
     t.string   "title",        limit: 255, null: false
@@ -69,8 +69,24 @@ ActiveRecord::Schema.define(version: 20160917110856) do
   add_index "experiences", ["candidate_id"], name: "index_experiences_on_candidate_id", using: :btree
 
   create_table "links", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "candidate_id", limit: 4
+    t.string   "type",         limit: 50,  null: false
+    t.string   "url",          limit: 255, null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  create_table "projects", force: :cascade do |t|
+    t.string   "title",        limit: 50,    null: false
+    t.string   "domain",       limit: 50
+    t.date     "start_date"
+    t.date     "end_date",                   null: false
+    t.string   "position",     limit: 35,    null: false
+    t.string   "organisation", limit: 35,    null: false
+    t.text     "information",  limit: 65535, null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.integer  "candidate_id", limit: 4
   end
 
   create_table "qualifications", force: :cascade do |t|
@@ -79,6 +95,13 @@ ActiveRecord::Schema.define(version: 20160917110856) do
     t.string   "domain",       limit: 255, null: false
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
+  end
+
+  create_table "skills", force: :cascade do |t|
+    t.integer  "candidate_id", limit: 4
+    t.string   "skill",        limit: 15
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
   create_table "references", force: :cascade do |t|
