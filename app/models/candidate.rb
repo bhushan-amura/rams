@@ -26,5 +26,5 @@ class Candidate < ActiveRecord::Base
   validates :status, :presence => true
 	validates :languages, length: { maximum: 65535 }
 	validates :summary, length: { maximum: 65535 }
-	validates :interests, length: { maximum: 65535 }
+	#validates :interests, length: { maximum: 65535 }
 end	
