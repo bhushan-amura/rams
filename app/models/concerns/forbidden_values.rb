@@ -9,4 +9,13 @@ module ForbiddenValues
 			errors.add(:email,"error! email has been restricted!")
 		end		
 	end
+
+  # after creation of event
+  # def send_email_to_candidates
+  # end
+  
+  # after creation of job oppurtunity
+  # def ask_for_candidates_from_agency
+  # end
+
 end
