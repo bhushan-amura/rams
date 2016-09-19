@@ -23,7 +23,7 @@ class Candidate < ActiveRecord::Base
 	validate :email_is_allowed
 	validates :gender, :presence => true, inclusion:{:in => ["M", "F", "T"]}
   validates :marital_status, :presence => true, inclusion:{:in => ["married", "unmarrired"]}
-  validates :status, :presence => true,  inclusion:{ :in => ["seeker", "non-seeker"]}
+  validates :status, :presence => true
 	validates :languages, length: { maximum: 65535 }
 	validates :summary, length: { maximum: 65535 }
 	validates :interests, length: { maximum: 65535 }
