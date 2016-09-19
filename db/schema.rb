@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160919124200) do
+ActiveRecord::Schema.define(version: 20160919125127) do
 
   create_table "achievements", force: :cascade do |t|
     t.string   "title",        limit: 255,   null: false
@@ -127,11 +127,11 @@ ActiveRecord::Schema.define(version: 20160919124200) do
   add_index "job_openings", ["company_id"], name: "index_job_openings_on_company_id", using: :btree
 
   create_table "links", force: :cascade do |t|
-    t.string   "type",         limit: 50,  null: false
-    t.string   "url",          limit: 255, null: false
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.string   "type",         limit: 50,    null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
     t.integer  "candidate_id", limit: 4
+    t.text     "url",          limit: 65535, null: false
   end
 
   add_index "links", ["candidate_id"], name: "index_links_on_candidate_id", using: :btree
