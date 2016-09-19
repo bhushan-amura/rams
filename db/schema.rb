@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160919065043) do
+ActiveRecord::Schema.define(version: 20160919070846) do
 
   create_table "achievements", force: :cascade do |t|
     t.string   "title",        limit: 255, null: false
@@ -115,10 +115,11 @@ ActiveRecord::Schema.define(version: 20160919065043) do
     t.string   "longitude",       limit: 255
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
-    t.integer  "company_id",      limit: 4
+    t.integer  "locatable_id",    limit: 4
+    t.string   "locatable_type",  limit: 255
   end
 
-  add_index "locations", ["company_id"], name: "index_locations_on_company_id", using: :btree
+  add_index "locations", ["locatable_type", "locatable_id"], name: "index_locations_on_locatable_type_and_locatable_id", using: :btree
 
   create_table "qualifications", force: :cascade do |t|
     t.integer  "candidate_id", limit: 4
@@ -160,6 +161,5 @@ ActiveRecord::Schema.define(version: 20160919065043) do
   add_foreign_key "achievements", "candidates"
   add_foreign_key "experiences", "candidates"
   add_foreign_key "job_openings", "companies"
-  add_foreign_key "locations", "companies"
   add_foreign_key "references", "candidates"
 end
