@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160919060836) do
+ActiveRecord::Schema.define(version: 20160919062912) do
 
   create_table "achievements", force: :cascade do |t|
     t.string   "title",        limit: 255, null: false
@@ -73,12 +73,14 @@ ActiveRecord::Schema.define(version: 20160919060836) do
   add_index "experiences", ["candidate_id"], name: "index_experiences_on_candidate_id", using: :btree
 
   create_table "links", force: :cascade do |t|
-    t.integer  "candidate_id", limit: 4
     t.string   "type",         limit: 50,  null: false
     t.string   "url",          limit: 255, null: false
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
+    t.integer  "candidate_id", limit: 4
   end
+
+  add_index "links", ["candidate_id"], name: "index_links_on_candidate_id", using: :btree
 
   create_table "projects", force: :cascade do |t|
     t.string   "title",        limit: 50,    null: false
@@ -143,10 +145,9 @@ ActiveRecord::Schema.define(version: 20160919060836) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
-  add_foreign_key "achievements", "candidates"
-  add_foreign_key "admins", "users"
   add_foreign_key "course_scores", "candidates"
   add_foreign_key "experiences", "candidates"
+  add_foreign_key "links", "candidates"
   add_foreign_key "projects", "candidates"
   add_foreign_key "qualifications", "candidates"
   add_foreign_key "references", "candidates"
