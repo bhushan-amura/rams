@@ -9,4 +9,10 @@ module ForbiddenValues
 			errors.add(:email,"error! email has been restricted!")
 		end		
 	end
+
+  def valid_score?
+    if !(Test.find(test_id).max_score >= score)
+      errors.add(:score,"score is greater than maximum score for this test")
+    end
+  end
 end
