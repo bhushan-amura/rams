@@ -10,7 +10,8 @@ class Candidate < ActiveRecord::Base
 	has_and_belongs_to_many :skills
 	has_and_belongs_to_many :qualifications
 	has_many :test_scores
-  has_many :tests, through: :test_scores 
+	has_many :tests, through: :test_scores 
+		
 	# has_many :skills
 
 
@@ -22,4 +23,10 @@ class Candidate < ActiveRecord::Base
 			 :format => EMAIL_REGEX, :confirmation => true, 
 			 :uniqueness => true
 	validate :email_is_allowed
-end
+	validates :gender, :presence => true, inclusion:{:in => ["M", "F", "T"]}
+  validates :marital_status, :presence => true, inclusion:{:in => ["married", "unmarrired"]}
+  validates :status, :presence => true
+	validates :languages, length: { maximum: 65535 }
+	validates :summary, length: { maximum: 65535 }
+	#validates :interests, length: { maximum: 65535 }
+end	
