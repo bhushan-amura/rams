@@ -1,5 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Qualification, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+	it { should belong_to(:candidate) 
+	should have_many(:course_scores) }
 end
