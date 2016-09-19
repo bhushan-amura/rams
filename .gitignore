@@ -4,3 +4,4 @@ log/*
 *.swp
 db/migrate/*
 tmp/*
+db/migrate/*
