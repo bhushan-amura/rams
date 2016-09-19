@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160919063817) do
+ActiveRecord::Schema.define(version: 20160919092305) do
 
   create_table "achievements", force: :cascade do |t|
     t.string   "title",        limit: 255, null: false
@@ -22,6 +22,24 @@ ActiveRecord::Schema.define(version: 20160919063817) do
   end
 
   add_index "achievements", ["candidate_id"], name: "index_achievements_on_candidate_id", using: :btree
+
+  create_table "admins", force: :cascade do |t|
+    t.integer  "user_id",    limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  add_index "admins", ["user_id"], name: "index_admins_on_user_id", using: :btree
+
+  create_table "candidate_skills", id: false, force: :cascade do |t|
+    t.integer  "candidate_id", limit: 4, null: false
+    t.integer  "skill_id",     limit: 4, null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "candidate_skills", ["candidate_id"], name: "index_candidate_skills_on_candidate_id", using: :btree
+  add_index "candidate_skills", ["skill_id"], name: "index_candidate_skills_on_skill_id", using: :btree
 
   create_table "candidates", force: :cascade do |t|
     t.string   "first_name",     limit: 20,                   null: false
@@ -110,21 +128,10 @@ ActiveRecord::Schema.define(version: 20160919063817) do
   add_index "references", ["candidate_id"], name: "index_references_on_candidate_id", using: :btree
 
   create_table "skills", force: :cascade do |t|
-    t.string   "skill",        limit: 15
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
-    t.integer  "candidate_id", limit: 4
+    t.string   "skill",      limit: 15
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
   end
-
-  add_index "skills", ["candidate_id"], name: "index_skills_on_candidate_id", using: :btree
-
-  create_table "admins", force: :cascade do |t|
-    t.integer  "user_id",    limit: 4
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
-  end
-
-  add_index "admins", ["user_id"], name: "index_admins_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false
@@ -145,12 +152,11 @@ ActiveRecord::Schema.define(version: 20160919063817) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   add_foreign_key "achievements", "candidates"
+  add_foreign_key "admins", "users"
   add_foreign_key "course_scores", "qualifications"
   add_foreign_key "experiences", "candidates"
   add_foreign_key "links", "candidates"
   add_foreign_key "projects", "candidates"
   add_foreign_key "qualifications", "candidates"
   add_foreign_key "references", "candidates"
-  add_foreign_key "skills", "candidates"
-  add_foreign_key "admins", "users"
 end
