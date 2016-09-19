@@ -56,6 +56,14 @@ ActiveRecord::Schema.define(version: 20160919092305) do
     t.text     "interests",      limit: 65535
   end
 
+  create_table "candidates_qualifications", id: false, force: :cascade do |t|
+    t.integer "candidate_id",     limit: 4, null: false
+    t.integer "qualification_id", limit: 4, null: false
+  end
+
+  add_index "candidates_qualifications", ["candidate_id"], name: "index_candidates_qualifications_on_candidate_id", using: :btree
+  add_index "candidates_qualifications", ["qualification_id"], name: "index_candidates_qualifications_on_qualification_id", using: :btree
+
   create_table "course_scores", force: :cascade do |t|
     t.string   "course",           limit: 255, null: false
     t.date     "start_year"
@@ -107,14 +115,11 @@ ActiveRecord::Schema.define(version: 20160919092305) do
   add_index "projects", ["candidate_id"], name: "index_projects_on_candidate_id", using: :btree
 
   create_table "qualifications", force: :cascade do |t|
-    t.string   "course",       limit: 255, null: false
-    t.string   "domain",       limit: 255, null: false
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
-    t.integer  "candidate_id", limit: 4
+    t.string   "course",     limit: 255, null: false
+    t.string   "domain",     limit: 255, null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
-
-  add_index "qualifications", ["candidate_id"], name: "index_qualifications_on_candidate_id", using: :btree
 
   create_table "references", force: :cascade do |t|
     t.string   "name",         limit: 255, null: false
@@ -157,6 +162,5 @@ ActiveRecord::Schema.define(version: 20160919092305) do
   add_foreign_key "experiences", "candidates"
   add_foreign_key "links", "candidates"
   add_foreign_key "projects", "candidates"
-  add_foreign_key "qualifications", "candidates"
   add_foreign_key "references", "candidates"
 end
