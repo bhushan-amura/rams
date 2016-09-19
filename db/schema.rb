@@ -11,12 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20160919125258) do
-=======
-ActiveRecord::Schema.define(version: 20160919125127) do
->>>>>>> 39317746aa8c3148b565ce45aec13bbeaca707de
-
   create_table "achievements", force: :cascade do |t|
     t.string   "title",        limit: 255,   null: false
     t.text     "description",  limit: 65535
@@ -57,8 +52,6 @@ ActiveRecord::Schema.define(version: 20160919125127) do
   add_index "candidates_qualifications", ["candidate_id"], name: "index_candidates_qualifications_on_candidate_id", using: :btree
   add_index "candidates_qualifications", ["qualification_id"], name: "index_candidates_qualifications_on_qualification_id", using: :btree
 
-<<<<<<< HEAD
-=======
   create_table "candidates_skills", id: false, force: :cascade do |t|
     t.integer  "candidate_id", limit: 4, null: false
     t.integer  "skill_id",     limit: 4, null: false
@@ -69,7 +62,6 @@ ActiveRecord::Schema.define(version: 20160919125127) do
   add_index "candidates_skills", ["candidate_id"], name: "index_candidates_skills_on_candidate_id", using: :btree
   add_index "candidates_skills", ["skill_id"], name: "index_candidates_skills_on_skill_id", using: :btree
 
->>>>>>> 39317746aa8c3148b565ce45aec13bbeaca707de
   create_table "companies", force: :cascade do |t|
     t.string   "name",                limit: 255,              null: false
     t.string   "company_type",        limit: 255,              null: false
@@ -119,15 +111,9 @@ ActiveRecord::Schema.define(version: 20160919125127) do
 
   add_index "experiences", ["candidate_id"], name: "index_experiences_on_candidate_id", using: :btree
 
-<<<<<<< HEAD
-  create_table "job_oppurtunity", force: :cascade do |t|
+create_table "job_oppurtunity", force: :cascade do |t|
     t.string   "title",               limit: 255, null: false
     t.string   "shift_type",          limit: 255, null: false
-=======
-  create_table "job_openings", force: :cascade do |t|
-    t.string   "title",               limit: 255, null: false
-    t.string   "shift",               limit: 255, null: false
->>>>>>> 39317746aa8c3148b565ce45aec13bbeaca707de
     t.string   "description",         limit: 255, null: false
     t.integer  "number_of_positions", limit: 4,   null: false
     t.boolean  "status"
@@ -137,12 +123,7 @@ ActiveRecord::Schema.define(version: 20160919125127) do
     t.integer  "company_id",          limit: 4
   end
 
-<<<<<<< HEAD
   add_index "job_oppurtunity", ["company_id"], name: "index_job_oppurtunity_on_company_id", using: :btree
-=======
-  add_index "job_openings", ["company_id"], name: "index_job_openings_on_company_id", using: :btree
->>>>>>> 39317746aa8c3148b565ce45aec13bbeaca707de
-
   create_table "links", force: :cascade do |t|
     t.string   "type",         limit: 50,    null: false
     t.datetime "created_at",                 null: false
@@ -251,11 +232,7 @@ ActiveRecord::Schema.define(version: 20160919125127) do
   add_foreign_key "admins", "users"
   add_foreign_key "course_scores", "qualifications"
   add_foreign_key "experiences", "candidates"
-<<<<<<< HEAD
   add_foreign_key "job_oppurtunity", "companies"
-=======
-  add_foreign_key "job_openings", "companies"
->>>>>>> 39317746aa8c3148b565ce45aec13bbeaca707de
   add_foreign_key "links", "candidates"
   add_foreign_key "projects", "candidates"
   add_foreign_key "references", "candidates"

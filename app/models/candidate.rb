@@ -12,6 +12,8 @@ class Candidate < ActiveRecord::Base
 	has_many :test_scores
 	has_many :tests, through: :test_scores 
 		
+	# has_many :skills
+
 
 	validates :first_name, :format => REGEX_NAME_FORMAT, 
 			:presence => true, length: {maximum: 20}
