@@ -1,5 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe JobOpening, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it {
+    should_have_many :events
+  }
 end
