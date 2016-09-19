@@ -21,4 +21,4 @@ production:
   <<: *default
   database: rams_production
   username: rams
-  password: <%= ENV['CMS_DATABASE_PASSWORD'] %>
+  password: <%= ENV['RAMS_DATABASE_PASSWORD'] %>
