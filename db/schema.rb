@@ -118,6 +118,14 @@ ActiveRecord::Schema.define(version: 20160919063817) do
 
   add_index "skills", ["candidate_id"], name: "index_skills_on_candidate_id", using: :btree
 
+  create_table "admins", force: :cascade do |t|
+    t.integer  "user_id",    limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  add_index "admins", ["user_id"], name: "index_admins_on_user_id", using: :btree
+
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false
     t.string   "encrypted_password",     limit: 255, default: "", null: false
@@ -144,4 +152,5 @@ ActiveRecord::Schema.define(version: 20160919063817) do
   add_foreign_key "qualifications", "candidates"
   add_foreign_key "references", "candidates"
   add_foreign_key "skills", "candidates"
+  add_foreign_key "admins", "users"
 end
