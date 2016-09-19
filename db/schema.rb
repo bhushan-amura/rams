@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160919092305) do
+ActiveRecord::Schema.define(version: 20160919093846) do
 
   create_table "achievements", force: :cascade do |t|
     t.string   "title",        limit: 255, null: false
@@ -30,16 +30,6 @@ ActiveRecord::Schema.define(version: 20160919092305) do
   end
 
   add_index "admins", ["user_id"], name: "index_admins_on_user_id", using: :btree
-
-  create_table "candidate_skills", id: false, force: :cascade do |t|
-    t.integer  "candidate_id", limit: 4, null: false
-    t.integer  "skill_id",     limit: 4, null: false
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-  end
-
-  add_index "candidate_skills", ["candidate_id"], name: "index_candidate_skills_on_candidate_id", using: :btree
-  add_index "candidate_skills", ["skill_id"], name: "index_candidate_skills_on_skill_id", using: :btree
 
   create_table "candidates", force: :cascade do |t|
     t.string   "first_name",     limit: 20,                   null: false
@@ -63,6 +53,16 @@ ActiveRecord::Schema.define(version: 20160919092305) do
 
   add_index "candidates_qualifications", ["candidate_id"], name: "index_candidates_qualifications_on_candidate_id", using: :btree
   add_index "candidates_qualifications", ["qualification_id"], name: "index_candidates_qualifications_on_qualification_id", using: :btree
+
+  create_table "candidates_skills", id: false, force: :cascade do |t|
+    t.integer  "candidate_id", limit: 4, null: false
+    t.integer  "skill_id",     limit: 4, null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "candidates_skills", ["candidate_id"], name: "index_candidates_skills_on_candidate_id", using: :btree
+  add_index "candidates_skills", ["skill_id"], name: "index_candidates_skills_on_skill_id", using: :btree
 
   create_table "course_scores", force: :cascade do |t|
     t.string   "course",           limit: 255, null: false

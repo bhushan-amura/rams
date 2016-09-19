@@ -5,8 +5,8 @@ RSpec.describe Candidate, type: :model do
 		should have_many(:experiences)
 		should have_many(:links)
 		should have_many(:projects)
-		should have_many(:qualifications)
+		should have_and_belong_to_many(:qualifications)
 		should have_many(:references)
-		should have_many(:skills)
+		should have_and_belong_to_many(:skills)
 	}
 end
