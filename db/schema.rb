@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160919125127) do
+ActiveRecord::Schema.define(version: 20160919132036) do
 
   create_table "achievements", force: :cascade do |t|
     t.string   "title",        limit: 255,   null: false
@@ -43,6 +43,8 @@ ActiveRecord::Schema.define(version: 20160919125127) do
     t.text     "summary",        limit: 65535
     t.datetime "created_at",                                  null: false
     t.datetime "updated_at",                                  null: false
+    t.string   "contact",        limit: 15
+    t.text     "interests",      limit: 65535
   end
 
   create_table "candidates_qualifications", id: false, force: :cascade do |t|
