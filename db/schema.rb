@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160919092305) do
+ActiveRecord::Schema.define(version: 20160919125258) do
 
   create_table "achievements", force: :cascade do |t|
     t.string   "title",        limit: 255, null: false
@@ -53,7 +53,6 @@ ActiveRecord::Schema.define(version: 20160919092305) do
     t.text     "summary",        limit: 65535
     t.datetime "created_at",                                  null: false
     t.datetime "updated_at",                                  null: false
-    t.text     "interests",      limit: 65535
   end
 
   create_table "candidates_qualifications", id: false, force: :cascade do |t|
@@ -63,6 +62,20 @@ ActiveRecord::Schema.define(version: 20160919092305) do
 
   add_index "candidates_qualifications", ["candidate_id"], name: "index_candidates_qualifications_on_candidate_id", using: :btree
   add_index "candidates_qualifications", ["qualification_id"], name: "index_candidates_qualifications_on_qualification_id", using: :btree
+
+  create_table "companies", force: :cascade do |t|
+    t.string   "name",                limit: 255,              null: false
+    t.string   "company_type",        limit: 255,              null: false
+    t.string   "url",                 limit: 255,              null: false
+    t.string   "tagline",             limit: 255
+    t.string   "email",               limit: 255, default: "", null: false
+    t.string   "phone",               limit: 255,              null: false
+    t.integer  "number_of_employees", limit: 4
+    t.string   "description",         limit: 255,              null: false
+    t.string   "logo",                limit: 255
+    t.datetime "created_at",                                   null: false
+    t.datetime "updated_at",                                   null: false
+  end
 
   create_table "course_scores", force: :cascade do |t|
     t.string   "course",           limit: 255, null: false
@@ -75,6 +88,15 @@ ActiveRecord::Schema.define(version: 20160919092305) do
   end
 
   add_index "course_scores", ["qualification_id"], name: "index_course_scores_on_qualification_id", using: :btree
+
+  create_table "events", force: :cascade do |t|
+    t.string   "event_type", limit: 255, null: false
+    t.date     "date",                   null: false
+    t.string   "time",       limit: 255, null: false
+    t.string   "organiser",  limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
 
   create_table "experiences", force: :cascade do |t|
     t.string   "employer_name",   limit: 255,   null: false
@@ -89,6 +111,20 @@ ActiveRecord::Schema.define(version: 20160919092305) do
 
   add_index "experiences", ["candidate_id"], name: "index_experiences_on_candidate_id", using: :btree
 
+  create_table "job_oppurtunity", force: :cascade do |t|
+    t.string   "title",               limit: 255, null: false
+    t.string   "shift_type",          limit: 255, null: false
+    t.string   "description",         limit: 255, null: false
+    t.integer  "number_of_positions", limit: 4,   null: false
+    t.boolean  "status"
+    t.string   "CTC",                 limit: 255
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.integer  "company_id",          limit: 4
+  end
+
+  add_index "job_oppurtunity", ["company_id"], name: "index_job_oppurtunity_on_company_id", using: :btree
+
   create_table "links", force: :cascade do |t|
     t.string   "type",         limit: 50,  null: false
     t.string   "url",          limit: 255, null: false
@@ -98,6 +134,25 @@ ActiveRecord::Schema.define(version: 20160919092305) do
   end
 
   add_index "links", ["candidate_id"], name: "index_links_on_candidate_id", using: :btree
+
+  create_table "locations", force: :cascade do |t|
+    t.string   "city",            limit: 255, null: false
+    t.string   "street_name",     limit: 255, null: false
+    t.string   "street_address",  limit: 255, null: false
+    t.string   "building_name",   limit: 255, null: false
+    t.string   "building_number", limit: 255, null: false
+    t.string   "zipcode",         limit: 255, null: false
+    t.string   "state",           limit: 255, null: false
+    t.string   "country",         limit: 255, null: false
+    t.string   "latitude",        limit: 255
+    t.string   "longitude",       limit: 255
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.integer  "locatable_id",    limit: 4
+    t.string   "locatable_type",  limit: 255
+  end
+
+  add_index "locations", ["locatable_type", "locatable_id"], name: "index_locations_on_locatable_type_and_locatable_id", using: :btree
 
   create_table "projects", force: :cascade do |t|
     t.string   "title",        limit: 50,    null: false
@@ -133,7 +188,7 @@ ActiveRecord::Schema.define(version: 20160919092305) do
   add_index "references", ["candidate_id"], name: "index_references_on_candidate_id", using: :btree
 
   create_table "skills", force: :cascade do |t|
-    t.string   "skill",      limit: 15
+    t.string   "name",       limit: 15
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
   end
@@ -160,6 +215,7 @@ ActiveRecord::Schema.define(version: 20160919092305) do
   add_foreign_key "admins", "users"
   add_foreign_key "course_scores", "qualifications"
   add_foreign_key "experiences", "candidates"
+  add_foreign_key "job_oppurtunity", "companies"
   add_foreign_key "links", "candidates"
   add_foreign_key "projects", "candidates"
   add_foreign_key "references", "candidates"
