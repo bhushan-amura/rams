@@ -23,6 +23,14 @@ ActiveRecord::Schema.define(version: 20160919060836) do
 
   add_index "achievements", ["candidate_id"], name: "index_achievements_on_candidate_id", using: :btree
 
+  create_table "admins", force: :cascade do |t|
+    t.integer  "user_id",    limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  add_index "admins", ["user_id"], name: "index_admins_on_user_id", using: :btree
+
   create_table "candidates", force: :cascade do |t|
     t.string   "first_name",     limit: 20,                   null: false
     t.string   "last_name",      limit: 25,                   null: false
@@ -136,6 +144,7 @@ ActiveRecord::Schema.define(version: 20160919060836) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   add_foreign_key "achievements", "candidates"
+  add_foreign_key "admins", "users"
   add_foreign_key "course_scores", "candidates"
   add_foreign_key "experiences", "candidates"
   add_foreign_key "projects", "candidates"
