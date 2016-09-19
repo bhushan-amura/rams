@@ -53,6 +53,8 @@ ActiveRecord::Schema.define(version: 20160919125225) do
     t.text     "summary",        limit: 65535
     t.datetime "created_at",                                  null: false
     t.datetime "updated_at",                                  null: false
+    t.string   "contact",        limit: 15
+    t.text     "interests",      limit: 65535
   end
 
   create_table "candidates_qualifications", id: false, force: :cascade do |t|
@@ -127,11 +129,11 @@ ActiveRecord::Schema.define(version: 20160919125225) do
   add_index "job_openings", ["company_id"], name: "index_job_openings_on_company_id", using: :btree
 
   create_table "links", force: :cascade do |t|
-    t.string   "type",         limit: 50,  null: false
-    t.string   "url",          limit: 255, null: false
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.string   "type",         limit: 50,    null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
     t.integer  "candidate_id", limit: 4
+    t.text     "url",          limit: 65535, null: false
   end
 
   add_index "links", ["candidate_id"], name: "index_links_on_candidate_id", using: :btree
