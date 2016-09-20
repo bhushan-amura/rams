@@ -1,6 +1,6 @@
 class Candidate < ActiveRecord::Base
 	
-	include ForbiddenValues
+  include ForbiddenValues
   include DatabaseStorageFormat
   
   before_save :lower_fields
@@ -25,8 +25,8 @@ class Candidate < ActiveRecord::Base
 			 :format => EMAIL_REGEX, :confirmation => true, 
 			 :uniqueness => true
 	validates :gender, :presence => true, inclusion:{:in => ["M", "F", "T"]}
-  validates :marital_status, :presence => true, inclusion:{:in => ["married", "unmarrired"]}
-  validates :status, :presence => true
+  	validates :marital_status, :presence => true, inclusion:{:in => ["married", "unmarrired"]}
+  	validates :status, :presence => true
 	validates :languages, length: { maximum: 65535 }
 	validates :summary, length: { maximum: 65535 }
 	#validates :interests, length: { maximum: 65535 }
