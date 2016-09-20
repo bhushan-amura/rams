@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(version: 20160920062956) do
     t.text     "summary",        limit: 65535
     t.datetime "created_at",                                  null: false
     t.datetime "updated_at",                                  null: false
-    t.string   "contact",        limit: 15
+    t.string   "phone",          limit: 15
     t.text     "interests",      limit: 65535
     t.integer  "user_id",        limit: 4
   end
@@ -118,19 +118,19 @@ ActiveRecord::Schema.define(version: 20160920062956) do
 
   add_index "experiences", ["candidate_id"], name: "index_experiences_on_candidate_id", using: :btree
 
-  create_table "job_oppurtunity", force: :cascade do |t|
-    t.string   "title",               limit: 255, null: false
-    t.string   "shift",               limit: 255, null: false
-    t.string   "description",         limit: 255, null: false
-    t.integer  "number_of_positions", limit: 4,   null: false
+  create_table "job_oppurtunities", force: :cascade do |t|
+    t.string   "title",               limit: 255,   null: false
+    t.string   "shift",               limit: 255,   null: false
+    t.text     "description",         limit: 65535, null: false
+    t.integer  "number_of_positions", limit: 4,     null: false
     t.boolean  "status"
     t.string   "CTC",                 limit: 255
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
     t.integer  "company_id",          limit: 4
   end
 
-  add_index "job_oppurtunity", ["company_id"], name: "index_job_oppurtunity_on_company_id", using: :btree
+ add_index "job_oppurtunities", ["company_id"], name: "index_job_oppurtunities_on_company_id", using: :btree
 
   create_table "links", force: :cascade do |t|
     t.string   "type",         limit: 50,    null: false
@@ -255,7 +255,7 @@ ActiveRecord::Schema.define(version: 20160920062956) do
   add_foreign_key "companies", "users"
   add_foreign_key "course_scores", "qualifications"
   add_foreign_key "experiences", "candidates"
-  add_foreign_key "job_oppurtunity", "companies"
+  add_foreign_key "job_oppurtunities", "companies"
   add_foreign_key "links", "candidates"
   add_foreign_key "projects", "candidates"
   add_foreign_key "references", "candidates"

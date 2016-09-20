@@ -1,6 +1,9 @@
 class Location < ActiveRecord::Base
 
-  include ForbiddenValues 
+  include ForbiddenValues
+  include DatabaseStorageFormat
+
+  before_save :lower_fields
 
   belongs_to :locatable, polymorphic: true
 
@@ -13,5 +16,5 @@ class Location < ActiveRecord::Base
   validates :state, presence:true
   validates :country, presence:true
 
-  
+
 end
