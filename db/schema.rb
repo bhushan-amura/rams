@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160920062610) do
+ActiveRecord::Schema.define(version: 20160920062956) do
 
   create_table "achievements", force: :cascade do |t|
     t.string   "title",        limit: 255,   null: false
@@ -68,18 +68,20 @@ ActiveRecord::Schema.define(version: 20160920062610) do
   add_index "candidates_skills", ["skill_id"], name: "index_candidates_skills_on_skill_id", using: :btree
 
   create_table "companies", force: :cascade do |t|
-    t.string   "name",                limit: 255,              null: false
-    t.string   "company_type",        limit: 255,              null: false
-    t.string   "url",                 limit: 255,              null: false
+    t.string   "name",                limit: 255, null: false
+    t.string   "company_type",        limit: 255, null: false
+    t.string   "url",                 limit: 255, null: false
     t.string   "tagline",             limit: 255
-    t.string   "email",               limit: 255, default: "", null: false
-    t.string   "phone",               limit: 255,              null: false
+    t.string   "phone",               limit: 255, null: false
     t.integer  "number_of_employees", limit: 4
-    t.string   "description",         limit: 255,              null: false
+    t.string   "description",         limit: 255, null: false
     t.string   "logo",                limit: 255
-    t.datetime "created_at",                                   null: false
-    t.datetime "updated_at",                                   null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.integer  "user_id",             limit: 4
   end
+
+  add_index "companies", ["user_id"], name: "index_companies_on_user_id", using: :btree
 
   create_table "course_scores", force: :cascade do |t|
     t.string   "course",           limit: 255, null: false
@@ -250,6 +252,7 @@ ActiveRecord::Schema.define(version: 20160920062610) do
   add_foreign_key "achievements", "candidates"
   add_foreign_key "admins", "users"
   add_foreign_key "candidates", "users"
+  add_foreign_key "companies", "users"
   add_foreign_key "course_scores", "qualifications"
   add_foreign_key "experiences", "candidates"
   add_foreign_key "job_oppurtunity", "companies"
