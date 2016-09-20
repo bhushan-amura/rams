@@ -1,4 +1,4 @@
-class JobOpening < ActiveRecord::Base
+class Company::JobOpening < ActiveRecord::Base
 
   include ForbiddenValues
   include DatabaseStorageFormat

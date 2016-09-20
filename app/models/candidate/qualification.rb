@@ -1,12 +1,8 @@
-class Qualification < ActiveRecord::Base
+class Candidate::Qualification < Qualification
 
-	include DatabaseStorageFormat
+  self.table_name = 'qualifications'
 
-  before_save :lower_fields
-	
-	has_and_belongs_to_many :candidates
-	has_many :course_scores
-
-	validates :course, :presence => true, :length => { maximum: 255 }
-	validates :domain, :presence => true, :length => { maximum: 255 }
+  def self.default_scope
+    #where all the qualifications metioned in candidates_qualifications
+  end
 end

@@ -1,4 +1,4 @@
-class Project < ActiveRecord::Base
+class Candidate::Project < ActiveRecord::Base
 
 	include DatabaseStorageFormat
 

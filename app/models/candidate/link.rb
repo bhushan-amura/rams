@@ -1,4 +1,4 @@
-class Link < ActiveRecord::Base
+class Candidate::Link < ActiveRecord::Base
 	include DatabaseStorageFormat
 
   before_save :lower_fields

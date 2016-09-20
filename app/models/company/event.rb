@@ -1,4 +1,4 @@
-class Event < ActiveRecord::Base
+class Company::Event < ActiveRecord::Base
 
   include ForbiddenValues
   include DatabaseStorageFormat

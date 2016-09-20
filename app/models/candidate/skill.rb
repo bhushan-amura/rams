@@ -1,11 +1,7 @@
-class Skill < ActiveRecord::Base
-	include DatabaseStorageFormat
+class Candidate::Skill < ActiveRecord::Base
+  self.table_name = 'skills'
 
-  before_save :lower_fields
-
-	has_and_belongs_to_many :candidates
-
-  validates_associated :candidates
-  validates :name, presence:true
-
+  def self.default_scope
+    #where all the skills metioned in candidate_skills
+  end
 end

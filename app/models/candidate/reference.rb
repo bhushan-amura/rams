@@ -1,4 +1,4 @@
-class Reference < ActiveRecord::Base
+class Candidate::Reference < ActiveRecord::Base
 	include ForbiddenValues
 	include DatabaseStorageFormat
 

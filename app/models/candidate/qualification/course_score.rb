@@ -1,4 +1,7 @@
-class CourseScore < ActiveRecord::Base
+class Candidate::Qualification::CourseScore < ActiveRecord::Base
+
+  self.table_name = 'candidate_qualification_course_scores'
+
   include DatabaseStorageFormat
   
   before_save :lower_fields
