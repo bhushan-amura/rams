@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160920131555) do
+ActiveRecord::Schema.define(version: 20160920132357) do
 
   create_table "admins", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
@@ -122,14 +122,6 @@ ActiveRecord::Schema.define(version: 20160920131555) do
 
   add_index "candidates", ["user_id"], name: "index_candidates_on_user_id", using: :btree
 
-  create_table "candidates_qualifications", id: false, force: :cascade do |t|
-    t.integer "candidate_id",     limit: 4, null: false
-    t.integer "qualification_id", limit: 4, null: false
-  end
-
-  add_index "candidates_qualifications", ["candidate_id"], name: "index_candidates_qualifications_on_candidate_id", using: :btree
-  add_index "candidates_qualifications", ["qualification_id"], name: "index_candidates_qualifications_on_qualification_id", using: :btree
-
   create_table "companies", force: :cascade do |t|
     t.string   "name",                limit: 255, null: false
     t.string   "company_type",        limit: 255, null: false
@@ -166,22 +158,6 @@ ActiveRecord::Schema.define(version: 20160920131555) do
 
   add_index "company_job_opportunities", ["company_id"], name: "index_company_job_opportunities_on_company_id", using: :btree
 
-  create_table "company_job_opportunities_qualifications", id: false, force: :cascade do |t|
-    t.integer "company_job_opportunity_id", limit: 4, null: false
-    t.integer "qualification_id",           limit: 4, null: false
-  end
-
-  add_index "company_job_opportunities_qualifications", ["company_job_opportunity_id"], name: "index_job_opportunity_id_cjo_table", using: :btree
-  add_index "company_job_opportunities_qualifications", ["qualification_id"], name: "index_qualification_id_cjo_table", using: :btree
-
-  create_table "company_job_opportunities_skills", id: false, force: :cascade do |t|
-    t.integer "company_job_opportunity_id", limit: 4, null: false
-    t.integer "skill_id",                   limit: 4, null: false
-  end
-
-  add_index "company_job_opportunities_skills", ["company_job_opportunity_id"], name: "index_job_opportunity_id_cjos_table", using: :btree
-  add_index "company_job_opportunities_skills", ["skill_id"], name: "index_skill_id_cjos_table", using: :btree
-
   create_table "locations", force: :cascade do |t|
     t.string   "city",            limit: 255, null: false
     t.string   "street_name",     limit: 255, null: false
@@ -200,6 +176,12 @@ ActiveRecord::Schema.define(version: 20160920131555) do
   end
 
   add_index "locations", ["locatable_type", "locatable_id"], name: "index_locations_on_locatable_type_and_locatable_id", using: :btree
+
+  create_table "qualification_assignments", force: :cascade do |t|
+    t.integer "qualification_id", limit: 4
+    t.integer "qualifiable_id",   limit: 4
+    t.string  "qualifiable_type", limit: 255
+  end
 
   create_table "qualifications", force: :cascade do |t|
     t.string   "course",     limit: 255, null: false
