@@ -3,10 +3,9 @@ class Qualification < ActiveRecord::Base
 
   before_save :lower_fields
 	
-	has_and_belongs_to_many :candidates
 	has_many :course_scores
+  has_many :qualification_assignments, as: :qualifiable
 
-  has_and_belongs_to_many :job_oppurtunities
 
 	validates :course, :presence => true, :length => { maximum: 255 }
 	validates :domain, :presence => true, :length => { maximum: 255 }
