@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160920132357) do
+ActiveRecord::Schema.define(version: 20160920132633) do
 
   create_table "admins", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
@@ -202,7 +202,7 @@ ActiveRecord::Schema.define(version: 20160920132357) do
   add_index "reviews", ["candidate_id"], name: "index_reviews_on_candidate_id", using: :btree
   add_index "reviews", ["company_id"], name: "index_reviews_on_company_id", using: :btree
 
-  create_table "skill_assignment", force: :cascade do |t|
+  create_table "skill_assignments", force: :cascade do |t|
     t.integer  "skill_id",       limit: 4
     t.integer  "skillable_id",   limit: 4
     t.string   "skillable_type", limit: 255
