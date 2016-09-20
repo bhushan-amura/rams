@@ -1,4 +1,4 @@
-class Achievement < ActiveRecord::Base
+class Candidate::Achievement < ActiveRecord::Base
   
   include DatabaseStorageFormat
   

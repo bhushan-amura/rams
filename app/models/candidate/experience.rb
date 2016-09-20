@@ -1,4 +1,4 @@
-class Experience < ActiveRecord::Base
+class Candidate::Experience < ActiveRecord::Base
   include ForbiddenValues
   include DatabaseStorageFormat
 
