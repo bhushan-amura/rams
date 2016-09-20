@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160919125258) do
+ActiveRecord::Schema.define(version: 20160920061056) do
 
   create_table "achievements", force: :cascade do |t|
     t.string   "title",        limit: 255,   null: false
@@ -43,7 +43,7 @@ ActiveRecord::Schema.define(version: 20160919125258) do
     t.text     "summary",        limit: 65535
     t.datetime "created_at",                                  null: false
     t.datetime "updated_at",                                  null: false
-    t.string   "contact",        limit: 15
+    t.string   "phone",          limit: 15
     t.text     "interests",      limit: 65535
   end
 
@@ -66,17 +66,17 @@ ActiveRecord::Schema.define(version: 20160919125258) do
   add_index "candidates_skills", ["skill_id"], name: "index_candidates_skills_on_skill_id", using: :btree
 
   create_table "companies", force: :cascade do |t|
-    t.string   "name",                limit: 255,              null: false
-    t.string   "company_type",        limit: 255,              null: false
-    t.string   "url",                 limit: 255,              null: false
+    t.string   "name",                limit: 255,                null: false
+    t.string   "company_type",        limit: 255,                null: false
+    t.string   "url",                 limit: 255,                null: false
     t.string   "tagline",             limit: 255
-    t.string   "email",               limit: 255, default: "", null: false
-    t.string   "phone",               limit: 255,              null: false
+    t.string   "email",               limit: 255,   default: "", null: false
+    t.string   "phone",               limit: 255,                null: false
     t.integer  "number_of_employees", limit: 4
-    t.string   "description",         limit: 255,              null: false
+    t.text     "description",         limit: 65535,              null: false
     t.string   "logo",                limit: 255
-    t.datetime "created_at",                                   null: false
-    t.datetime "updated_at",                                   null: false
+    t.datetime "created_at",                                     null: false
+    t.datetime "updated_at",                                     null: false
   end
 
   create_table "course_scores", force: :cascade do |t|
@@ -114,19 +114,20 @@ ActiveRecord::Schema.define(version: 20160919125258) do
 
   add_index "experiences", ["candidate_id"], name: "index_experiences_on_candidate_id", using: :btree
 
-  create_table "job_oppurtunity", force: :cascade do |t|
-    t.string   "title",               limit: 255, null: false
-    t.string   "shift",               limit: 255, null: false
-    t.string   "description",         limit: 255, null: false
-    t.integer  "number_of_positions", limit: 4,   null: false
+  create_table "job_oppurtunities", force: :cascade do |t|
+    t.string   "title",               limit: 255,   null: false
+    t.string   "shift",               limit: 255,   null: false
+    t.text     "description",         limit: 65535, null: false
+    t.integer  "number_of_positions", limit: 4,     null: false
     t.boolean  "status"
     t.string   "CTC",                 limit: 255
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
     t.integer  "company_id",          limit: 4
   end
 
-  add_index "job_oppurtunity", ["company_id"], name: "index_job_oppurtunity_on_company_id", using: :btree
+  add_index "job_oppurtunities", ["company_id"], name: "index_job_oppurtunities_on_company_id", using: :btree
+
   create_table "links", force: :cascade do |t|
     t.string   "type",         limit: 50,    null: false
     t.datetime "created_at",                 null: false
@@ -248,7 +249,7 @@ ActiveRecord::Schema.define(version: 20160919125258) do
   add_foreign_key "admins", "users"
   add_foreign_key "course_scores", "qualifications"
   add_foreign_key "experiences", "candidates"
-  add_foreign_key "job_oppurtunity", "companies"
+  add_foreign_key "job_oppurtunities", "companies"
   add_foreign_key "links", "candidates"
   add_foreign_key "projects", "candidates"
   add_foreign_key "references", "candidates"

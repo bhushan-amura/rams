@@ -1,4 +1,9 @@
 class Project < ActiveRecord::Base
+
+	include DatabaseStorageFormat
+
+  before_save :lower_fields
+
 	belongs_to :candidate
 
 	validates :title, :length => { maximum: 50 }, :presence => true
@@ -8,4 +13,5 @@ class Project < ActiveRecord::Base
 	validates :organisation, :length => { maximum: 35 }, :presence => true
 	validates :information, :length => { maximum: 65535 }, :presence => true
 
+  validates_associated :candidate
 end
