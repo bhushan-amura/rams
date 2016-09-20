@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160919125258) do
+ActiveRecord::Schema.define(version: 20160920062956) do
 
   create_table "achievements", force: :cascade do |t|
     t.string   "title",        limit: 255,   null: false
@@ -36,7 +36,6 @@ ActiveRecord::Schema.define(version: 20160919125258) do
     t.string   "last_name",      limit: 25,                   null: false
     t.date     "dob",                                         null: false
     t.string   "gender",         limit: 255,                  null: false
-    t.string   "email",          limit: 100,                  null: false
     t.string   "marital_status", limit: 255
     t.boolean  "status",                       default: true
     t.text     "languages",      limit: 65535
@@ -45,7 +44,10 @@ ActiveRecord::Schema.define(version: 20160919125258) do
     t.datetime "updated_at",                                  null: false
     t.string   "contact",        limit: 15
     t.text     "interests",      limit: 65535
+    t.integer  "user_id",        limit: 4
   end
+
+  add_index "candidates", ["user_id"], name: "index_candidates_on_user_id", using: :btree
 
   create_table "candidates_qualifications", id: false, force: :cascade do |t|
     t.integer "candidate_id",     limit: 4, null: false
@@ -66,18 +68,20 @@ ActiveRecord::Schema.define(version: 20160919125258) do
   add_index "candidates_skills", ["skill_id"], name: "index_candidates_skills_on_skill_id", using: :btree
 
   create_table "companies", force: :cascade do |t|
-    t.string   "name",                limit: 255,              null: false
-    t.string   "company_type",        limit: 255,              null: false
-    t.string   "url",                 limit: 255,              null: false
+    t.string   "name",                limit: 255, null: false
+    t.string   "company_type",        limit: 255, null: false
+    t.string   "url",                 limit: 255, null: false
     t.string   "tagline",             limit: 255
-    t.string   "email",               limit: 255, default: "", null: false
-    t.string   "phone",               limit: 255,              null: false
+    t.string   "phone",               limit: 255, null: false
     t.integer  "number_of_employees", limit: 4
-    t.string   "description",         limit: 255,              null: false
+    t.string   "description",         limit: 255, null: false
     t.string   "logo",                limit: 255
-    t.datetime "created_at",                                   null: false
-    t.datetime "updated_at",                                   null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.integer  "user_id",             limit: 4
   end
+
+  add_index "companies", ["user_id"], name: "index_companies_on_user_id", using: :btree
 
   create_table "course_scores", force: :cascade do |t|
     t.string   "course",           limit: 255, null: false
@@ -127,6 +131,7 @@ ActiveRecord::Schema.define(version: 20160919125258) do
   end
 
   add_index "job_oppurtunity", ["company_id"], name: "index_job_oppurtunity_on_company_id", using: :btree
+
   create_table "links", force: :cascade do |t|
     t.string   "type",         limit: 50,    null: false
     t.datetime "created_at",                 null: false
@@ -246,6 +251,8 @@ ActiveRecord::Schema.define(version: 20160919125258) do
 
   add_foreign_key "achievements", "candidates"
   add_foreign_key "admins", "users"
+  add_foreign_key "candidates", "users"
+  add_foreign_key "companies", "users"
   add_foreign_key "course_scores", "qualifications"
   add_foreign_key "experiences", "candidates"
   add_foreign_key "job_oppurtunity", "companies"
