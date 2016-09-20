@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160920092247) do
+ActiveRecord::Schema.define(version: 20160920111618) do
 
   create_table "admins", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
@@ -175,6 +175,14 @@ ActiveRecord::Schema.define(version: 20160920092247) do
   end
 
   add_index "company_job_opportunities", ["company_id"], name: "index_company_job_opportunities_on_company_id", using: :btree
+
+  create_table "company_job_opportunities_qualifications", id: false, force: :cascade do |t|
+    t.integer "company_job_opportunity_id", limit: 4, null: false
+    t.integer "qualification_id",           limit: 4, null: false
+  end
+
+  add_index "company_job_opportunities_qualifications", ["company_job_opportunity_id"], name: "index_job_opportunity_id_cjo_table", using: :btree
+  add_index "company_job_opportunities_qualifications", ["qualification_id"], name: "index_qualification_id_cjo_table", using: :btree
 
   create_table "locations", force: :cascade do |t|
     t.string   "city",            limit: 255, null: false

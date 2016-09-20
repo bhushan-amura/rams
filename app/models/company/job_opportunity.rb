@@ -1,4 +1,4 @@
-class Company::JobOpening < ActiveRecord::Base
+class Company::JobOpportunity < ActiveRecord::Base
 
   include ForbiddenValues
   include DatabaseStorageFormat
@@ -8,6 +8,8 @@ class Company::JobOpening < ActiveRecord::Base
 
   belongs_to :company
   has_many :events
+
+  has_and_belongs_to_many :qualifications
 
   validates :title, presence:true
   validates :shift, presence:true
