@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160920132633) do
+ActiveRecord::Schema.define(version: 20160920133818) do
 
   create_table "admins", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
@@ -30,6 +30,18 @@ ActiveRecord::Schema.define(version: 20160920132633) do
   end
 
   add_index "candidate_achievements", ["candidate_id"], name: "index_candidate_achievements_on_candidate_id", using: :btree
+
+  create_table "candidate_course_scores", force: :cascade do |t|
+    t.string   "course",           limit: 255, null: false
+    t.date     "start_year"
+    t.date     "end_year",                     null: false
+    t.float    "score",            limit: 24,  null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.integer  "qualification_id", limit: 4
+  end
+
+  add_index "candidate_course_scores", ["qualification_id"], name: "index_candidate_course_scores_on_qualification_id", using: :btree
 
   create_table "candidate_experiences", force: :cascade do |t|
     t.string   "name",         limit: 20,    null: false
@@ -69,18 +81,6 @@ ActiveRecord::Schema.define(version: 20160920132633) do
   end
 
   add_index "candidate_projects", ["candidate_id"], name: "index_candidate_projects_on_candidate_id", using: :btree
-
-  create_table "candidate_qualification_course_scores", force: :cascade do |t|
-    t.string   "course",           limit: 255, null: false
-    t.date     "start_year"
-    t.date     "end_year",                     null: false
-    t.float    "score",            limit: 24,  null: false
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
-    t.integer  "qualification_id", limit: 4
-  end
-
-  add_index "candidate_qualification_course_scores", ["qualification_id"], name: "index_candidate_qualification_course_scores_on_qualification_id", using: :btree
 
   create_table "candidate_references", force: :cascade do |t|
     t.string   "name",         limit: 255, null: false
@@ -244,10 +244,10 @@ ActiveRecord::Schema.define(version: 20160920132633) do
 
   add_foreign_key "admins", "users"
   add_foreign_key "candidate_achievements", "candidates"
+  add_foreign_key "candidate_course_scores", "qualifications"
   add_foreign_key "candidate_experiences", "candidates"
   add_foreign_key "candidate_links", "candidates"
   add_foreign_key "candidate_projects", "candidates"
-  add_foreign_key "candidate_qualification_course_scores", "qualifications"
   add_foreign_key "candidate_references", "candidates"
   add_foreign_key "candidates", "users"
   add_foreign_key "company_job_opportunities", "companies"
