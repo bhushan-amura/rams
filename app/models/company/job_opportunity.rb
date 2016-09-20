@@ -10,6 +10,7 @@ class Company::JobOpportunity < ActiveRecord::Base
   has_many :events
 
   has_and_belongs_to_many :qualifications
+  has_and_belongs_to_many :skills
 
   validates :title, presence:true
   validates :shift, presence:true
