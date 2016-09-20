@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160920114131) do
+ActiveRecord::Schema.define(version: 20160920131555) do
 
   create_table "admins", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
@@ -130,16 +130,6 @@ ActiveRecord::Schema.define(version: 20160920114131) do
   add_index "candidates_qualifications", ["candidate_id"], name: "index_candidates_qualifications_on_candidate_id", using: :btree
   add_index "candidates_qualifications", ["qualification_id"], name: "index_candidates_qualifications_on_qualification_id", using: :btree
 
-  create_table "candidates_skills", id: false, force: :cascade do |t|
-    t.integer  "candidate_id", limit: 4, null: false
-    t.integer  "skill_id",     limit: 4, null: false
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-  end
-
-  add_index "candidates_skills", ["candidate_id"], name: "index_candidates_skills_on_candidate_id", using: :btree
-  add_index "candidates_skills", ["skill_id"], name: "index_candidates_skills_on_skill_id", using: :btree
-
   create_table "companies", force: :cascade do |t|
     t.string   "name",                limit: 255, null: false
     t.string   "company_type",        limit: 255, null: false
@@ -229,6 +219,14 @@ ActiveRecord::Schema.define(version: 20160920114131) do
 
   add_index "reviews", ["candidate_id"], name: "index_reviews_on_candidate_id", using: :btree
   add_index "reviews", ["company_id"], name: "index_reviews_on_company_id", using: :btree
+
+  create_table "skill_assignment", force: :cascade do |t|
+    t.integer  "skill_id",       limit: 4
+    t.integer  "skillable_id",   limit: 4
+    t.string   "skillable_type", limit: 255
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "skills", force: :cascade do |t|
     t.string   "name",       limit: 15

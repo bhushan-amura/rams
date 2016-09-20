@@ -1,5 +1,4 @@
-class Candidate::Qualification < Qualification
-
+class Candidate::Qualification < ActiveRecord::Base
   self.table_name = 'candidates_qualifications'
 
   def self.default_scope
