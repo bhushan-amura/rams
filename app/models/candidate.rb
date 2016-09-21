@@ -22,9 +22,9 @@ class Candidate < ActiveRecord::Base
 	validates :last_name, :format => REGEX_NAME_FORMAT,
 			:presence => true, length: {maximum: 20}
 	validates :dob, :presence => true
-	validates :email, :presence => true, :length => { :maximum => 100 },
-			 :format => EMAIL_REGEX, :confirmation => true, 
-			 :uniqueness => true
+	# validates :email, :presence => true, :length => { :maximum => 100 },
+	# 		 :format => EMAIL_REGEX, :confirmation => true, 
+	# 		 :uniqueness => true
 	validates :gender, :presence => true, inclusion:{:in => ["M", "F", "T"]}
   	validates :marital_status, :presence => true, inclusion:{:in => ["married", "unmarrired"]}
   	validates :status, :presence => true
@@ -33,6 +33,6 @@ class Candidate < ActiveRecord::Base
 	validates :interests, length: { maximum: 65535 }
 
 
-	validate :vaid_email?
+	# validate :vaid_email?
 
 end	
