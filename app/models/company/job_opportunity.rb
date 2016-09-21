@@ -1,9 +1,10 @@
 class  Company::JobOpportunity < ActiveRecord::Base
 
   # concerns
-  
+
   # callbacks
     belongs_to :company
+    has_one :event
 
   # relationships
     has_many :skill_assignments, as: :skillable

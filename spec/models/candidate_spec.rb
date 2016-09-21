@@ -1,21 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe Candidate, type: :model do
-	# it { 
-    # should have_many(:achievements) 
-		# should have_many(:experiences)
-		# should have_many(:links)
-		# should have_many(:projects)
-		# should have_and_belong_to_many(:qualifications)
-		# should have_many(:references)
-		# should have_and_belong_to_many(:skills)
 
-	 #    should have_many(:test_scores)
-	 #    should have_many(:tests)
-	# }
-	let(:candidate) {Candidate.new(first_name:"abcd",last_name:"efgh",dob:'1992/03/15',gender:'M',marital_status:"married",status:true,languages:"HIBRU",summary:"dont know",phone:"12321442415",interests:"dddd")}
+	let(:candidate) {Candidate.new(first_name:"abcd",last_name:"efgh",dob:'1992/03/15',gender:'M',email:'jayesh@gmail.com',marital_status:"married",status:true,languages:"HIBRU",summary:"dont know",phone:"12321442415",interests:"dddd")}
 
-	context "model with attributes valid?" do	
+	context "model with attributes valid?" do
 		it "is valid with valid attributes" do
 		    expect(candidate).to be_valid
 		end
@@ -54,7 +43,7 @@ RSpec.describe Candidate, type: :model do
 	context "gender" do
 		it "invalid! field required." do
 			candidate.gender = ""
-			expect(candidate).to_not be_valid 
+			expect(candidate).to_not be_valid
 		end
 
 		it "invalid! values must be either M, F or T." do
@@ -66,9 +55,9 @@ RSpec.describe Candidate, type: :model do
 	context "marital status" do
 		it "invalid! field required." do
 			candidate.marital_status = ""
-			expect(candidate).to_not be_valid 
+			expect(candidate).to_not be_valid
 		end
-		
+
 		it "invalid! values must be either married or unmarried." do
 			candidate.marital_status = ([*('A'..'Z'),*('0'..'9')]-%w(married unmarried)).sample([7,9].sample).join
 			expect(candidate).to_not be_valid
@@ -104,4 +93,23 @@ RSpec.describe Candidate, type: :model do
 			expect(candidate).to_not be_valid
 		end
 	end
+
+
+	# validates :email, :presence => true, :length => { :maximum => 100 },
+	# 		 :format => EMAIL_REGEX, :confirmation => true,
+	# 		 :uniqueness => true
+
+	context "email" do
+		it "invalid! field required." do
+			candidate.email = ""
+			expect(candidate).to be_invalid
+		end
+
+		it "invalid! character limit 100 exceeded." do
+		 	candidate.email = Faker::Internet.email
+		 	# puts candidate.email
+		 	expect(candidate).to be_valid
+		end
+	end
+
 end

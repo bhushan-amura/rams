@@ -11,6 +11,7 @@ class Company::Event < ActiveRecord::Base
   # after_create :send_email_to_candidates
 
   # associations
+  belongs_to :job_opportunity
   has_one :location, as: :locatable
 
   # validations

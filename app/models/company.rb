@@ -18,5 +18,4 @@ class Company < ActiveRecord::Base
   validates :description, presence:true
   validates :url, presence:true, length: { :maximum => 255 }
 
-
 end
