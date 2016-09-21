@@ -2,9 +2,9 @@ class Candidate::Achievement < ActiveRecord::Base
   
   include DatabaseStorageFormat
   
-  before_save :lower_fields
+  	before_save :lower_fields
 
-	belongs_to :candidate
+  	belongs_to :candidate
 
 	validates :title, length: { maximum: 255 }
 	validates :description, length: { maximum: 65535 }

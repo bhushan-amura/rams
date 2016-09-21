@@ -39,6 +39,16 @@ group :development, :test do
   gem 'byebug'
   gem 'rspec-rails', '~> 3.5'
   gem 'shoulda-matchers', require: false
+  gem 'rspec-core', '~> 3.5', '>= 3.5.3'
+  gem 'rspec-expectations', '~> 3.5'
+  gem 'rspec-mocks', '~> 3.5'
+  # gem 'rspec-support', '~> 3.4', '>= 3.4.1'
+  gem 'rspec-matchers-matchers', '~> 1.0'
+ gem 'factory_girl', '~> 4.7'
+# gem 'activesupport', '~> 5.0', '>= 5.0.0.1'
+ gem 'database_cleaner', '~> 1.5', '>= 1.5.3'
+ gem 'faker', '~> 1.6', '>= 1.6.6'
+ gem 'i18n', '~> 0.7.0'
 end
 
 group :test do

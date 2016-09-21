@@ -1,5 +1,5 @@
 require 'rails_helper'
 
-RSpec.describe Achievement, type: :model do
-	 it { should belong_to(:candidate) }
+RSpec.describe Candidate::Achievement, type: :model do
+  pending "add some examples to (or delete) #{__FILE__}"
 end
