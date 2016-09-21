@@ -38,9 +38,4 @@ RSpec.describe Candidate::Link, type: :model do
 			expect(link).to_not be_valid
 		end
 	end
-
-
-
-
-
 end

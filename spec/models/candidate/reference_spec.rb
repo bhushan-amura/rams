@@ -40,9 +40,23 @@ RSpec.describe Candidate::Reference, type: :model do
 
 		it "invalid! character limit between 10-15 only." do
 			reference.contact = ([*('0'..'9')]).sample([9,16].sample).join
-			expect(reference).to be_valid
+			expect(reference).to be_invalid
 		end
 	end
 
+	# context "Association" do
+	# 	it "belongs to one candidate" do
+ #    	  assc = described_class.reflect_on_association(:job_opportunities)
+ #    	  expect(assc.macro).to_not eq :belong
+ #    	end
+
+
+		# it "belongs to a candidate" do
+		# 	candidate = Candidate.new
+		# 	reference = Candidate::Reference.new
+		# 	candidate.references << reference
+		# 	expect(reference.candidate).to be candidate
+		# end
+	# end
 
 end
