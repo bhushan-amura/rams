@@ -1,4 +1,4 @@
-class TestScore < ActiveRecord::Base
+class Candidate::TestScore < ActiveRecord::Base
   include ForbiddenValues
   include DatabaseStorageFormat
 

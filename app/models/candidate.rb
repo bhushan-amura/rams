@@ -10,10 +10,10 @@ class Candidate < ActiveRecord::Base
 	has_many :links
 	has_many :projects
 	has_many :references
-	has_and_belongs_to_many :skills
-	has_and_belongs_to_many :qualifications
 	has_many :test_scores
 	has_many :tests, through: :test_scores 
+  has_many :qualifications, through: :qualification_assignment
+  has_many :skills, through: :skill_assignment
 		
 	# has_many :skills
 

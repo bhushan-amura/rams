@@ -1,4 +1,5 @@
-class CourseScore < ActiveRecord::Base
+class Candidate::CourseScore < ActiveRecord::Base
+
   include DatabaseStorageFormat
   
   before_save :lower_fields

@@ -24,6 +24,7 @@ module Rams
     config.active_record.raise_in_transactional_callbacks = true
 
     # Autoload subdirectories in app/models/ 
+    config.autoload_paths += Dir[Rails.root.join('app','models')]
     config.autoload_paths += Dir[Rails.root.join('app','models','{*/}')]
 
 
