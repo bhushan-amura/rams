@@ -13,5 +13,5 @@ class Candidate::Experience < ActiveRecord::Base
   validates :email, :length => { :maximum => 100 },
 			 :format => EMAIL_REGEX
 
-  validates_associated :candidate
+  # validates_associated :candidate
 end

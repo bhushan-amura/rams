@@ -5,7 +5,7 @@ class Skill < ActiveRecord::Base
 
   has_many :skill_assignments, as: :skillable
 
-  validates_associated :candidates
+  # validates_associated :candidates
   validates :name, presence:true
 
 end
