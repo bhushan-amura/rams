@@ -1,11 +1,14 @@
 class Skill < ActiveRecord::Base
+
+  # concerns
 	include DatabaseStorageFormat
 
+  # callbacks
   before_save :lower_fields
 
-  has_many :skill_assignments, as: :skillable
+  # associations
+  has_many :skill_assignments
 
-  validates_associated :candidates
+  # validations
   validates :name, presence:true
-
 end
