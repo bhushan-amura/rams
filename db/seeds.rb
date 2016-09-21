@@ -7,6 +7,7 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 #
 
+# COMMON SEEDS :start
 def create_users(user_count=75)
   puts "Generating test users from seed.....(check out file in tmp/test_users.txt)"
   File.open(Rails.root.join('tmp','test_users.txt'),'w') do |file|
@@ -32,7 +33,6 @@ def create_admins(admin_count=5)
   end
 end
 
-
 def create_qualifications(qualification_count=20)
   puts "Generating qualifications from seed....."
   qualification_count.times do |count|
@@ -40,8 +40,6 @@ def create_qualifications(qualification_count=20)
     qualification.save!
   end
 end
-
-
 
 def create_skills(skill_count=50)
   puts "Generating skills from seed....."
@@ -51,6 +49,7 @@ def create_skills(skill_count=50)
   end
 end
 
+# COMMON SEEDS :end
 
 # COMPANY SEED :start 
 
@@ -78,7 +77,6 @@ def create_jobs
   end
 end
 
-
 def create_events
   puts "Generating events for job openings of companies from seed...."
   job_opportunities = Company::JobOpportunity.all
@@ -99,6 +97,7 @@ end
 
 # COMPANY SEED : end
 
+# TEST: start
 def create_tests(test_count=100)
   puts "Generating tests from seed...."
   test_count.times do |count|
@@ -106,6 +105,7 @@ def create_tests(test_count=100)
     test.save!
   end
 end
+# TEST: end
 
 # CANDIDATE SEED : start 
 def create_candidates(candidate_count=50)
@@ -136,7 +136,6 @@ def create_achievements
   end
 end
 
-
 def create_experiences
   puts "Generating experiences of candidates from seed...." 
   candidate_users = Candidate.all
@@ -161,7 +160,6 @@ def create_links
     end
   end
 end
-
 
 def create_projects
   puts "Generating projects of candidates from seed....."
@@ -234,6 +232,7 @@ def assign_test_scores
 end
 # CANDIDATE Seed : End
 
+# LOCATION SEED :start
 def create_location_candidate
   puts "Assigning locations to candidates...."
   candidates = Candidate.all
@@ -249,7 +248,10 @@ def create_location_company
     company.location = Location.new
   end
 end
+# LOCATION SEED :end
 
+
+# REVIEWS SEED :start
 def create_reviews(review_count=100)
   puts "Genrating reviews for companies by candidates from seed...."
   review_count.times do |count|
@@ -257,8 +259,11 @@ def create_reviews(review_count=100)
     review.save!
   end
 end
-
-create_users
-create_admins
-create_company
-create_candidates
+# REVIEWS SEED :end
+#
+if __FILE__ == $1
+  create_users
+  create_admins
+  create_company
+  create_candidates
+end
