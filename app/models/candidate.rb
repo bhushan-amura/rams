@@ -19,6 +19,7 @@ class Candidate < ActiveRecord::Base
   has_many :qualifications, through: :qualification_assignments
   has_many :skill_assignments, as: :skillable
   has_many :skills, through: :skill_assignments
+  has_one :location, as: :locatable
 		
 
   # validations
