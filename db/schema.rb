@@ -193,7 +193,7 @@ ActiveRecord::Schema.define(version: 20160921131347) do
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
     t.string   "institute",  limit: 255
-    t.string   "univercity", limit: 255
+    t.string   "university", limit: 255
   end
 
   create_table "reviews", force: :cascade do |t|
