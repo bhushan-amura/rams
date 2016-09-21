@@ -1,13 +1,14 @@
 class Candidate::Achievement < ActiveRecord::Base
-  
+  # concerns
   include DatabaseStorageFormat
   
-  	before_save :lower_fields
+  # callbacks  
+  before_save :lower_fields
 
-  	belongs_to :candidate
+  # associations 
+  belongs_to :candidate
 
+  # validations
 	validates :title, length: { maximum: 255 }
 	validates :description, length: { maximum: 65535 }
-
-  validates_associated :candidate
 end
