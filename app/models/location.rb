@@ -1,12 +1,16 @@
 class Location < ActiveRecord::Base
 
+  # concerns
   include ForbiddenValues
   include DatabaseStorageFormat
 
+  # callbacks
   before_save :lower_fields
 
+  # associations
   belongs_to :locatable, polymorphic: true
 
+  # validations
   validates :city, presence:true
   validates :street_name, presence:true
   validates :street_address, presence:true

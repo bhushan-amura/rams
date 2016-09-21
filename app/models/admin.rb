@@ -1,3 +1,11 @@
 class Admin < ActiveRecord::Base
-  belongs_to :user
+
+  # concerns
+
+  # callbacks
+
+  # associations
+    belongs_to :user
+
+  # validations
 end
