@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160921092738) do
+ActiveRecord::Schema.define(version: 20160921131347) do
 
   create_table "admins", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
@@ -136,13 +136,16 @@ ActiveRecord::Schema.define(version: 20160921092738) do
   end
 
   create_table "company_events", force: :cascade do |t|
-    t.string   "event_type", limit: 255, null: false
-    t.date     "date",                   null: false
-    t.string   "time",       limit: 255, null: false
-    t.string   "organiser",  limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.string   "event_type",                 limit: 255, null: false
+    t.date     "date",                                   null: false
+    t.string   "time",                       limit: 255, null: false
+    t.string   "organiser",                  limit: 255
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+    t.integer  "company_job_opportunity_id", limit: 4
   end
+
+  add_index "company_events", ["company_job_opportunity_id"], name: "index_company_events_on_company_job_opportunity_id", using: :btree
 
   create_table "company_job_opportunities", force: :cascade do |t|
     t.string   "title",               limit: 255,   null: false
@@ -154,6 +157,7 @@ ActiveRecord::Schema.define(version: 20160921092738) do
     t.datetime "created_at",                        null: false
     t.datetime "updated_at",                        null: false
     t.integer  "company_id",          limit: 4
+    t.integer  "experience",          limit: 4
   end
 
   add_index "company_job_opportunities", ["company_id"], name: "index_company_job_opportunities_on_company_id", using: :btree
@@ -188,6 +192,8 @@ ActiveRecord::Schema.define(version: 20160921092738) do
     t.string   "domain",     limit: 255, null: false
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+    t.string   "institute",  limit: 255
+    t.string   "university", limit: 255
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -250,6 +256,7 @@ ActiveRecord::Schema.define(version: 20160921092738) do
   add_foreign_key "candidate_projects", "candidates"
   add_foreign_key "candidate_references", "candidates"
   add_foreign_key "candidates", "users"
+  add_foreign_key "company_events", "company_job_opportunities"
   add_foreign_key "company_job_opportunities", "companies"
   add_foreign_key "reviews", "candidates"
   add_foreign_key "reviews", "companies"
