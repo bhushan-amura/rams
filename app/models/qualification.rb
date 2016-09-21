@@ -4,7 +4,7 @@ class Qualification < ActiveRecord::Base
   before_save :lower_fields
 	
 	has_many :course_scores
-  has_many :qualification_assignments, as: :qualifiable
+  has_many :qualification_assignments
 
 
 	validates :course, :presence => true, :length => { maximum: 255 }
