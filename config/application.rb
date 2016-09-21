@@ -26,7 +26,9 @@ module Rams
     # Autoload subdirectories in app/models/ 
     config.autoload_paths += Dir[Rails.root.join('app','models')]
     config.autoload_paths += Dir[Rails.root.join('app','models','{*/}')]
-
+    # config.generators do |g|
+    #     g.factory_girl dir: 'custom/dir/for/factories'
+    # end
 
   end
 end
