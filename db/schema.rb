@@ -69,7 +69,7 @@ ActiveRecord::Schema.define(version: 20160922072655) do
   create_table "candidate_projects", force: :cascade do |t|
     t.string   "title",        limit: 50,    null: false
     t.string   "domain",       limit: 50
-    t.date     "start_date"
+    t.date     "start_date",                 null: false
     t.date     "end_date",                   null: false
     t.string   "position",     limit: 35,    null: false
     t.string   "organisation", limit: 35,    null: false
