@@ -1,5 +1,5 @@
 class Candidate::Reference < ActiveRecord::Base
-  
+
   # concerns
 	include ForbiddenValues
 	include DatabaseStorageFormat

@@ -1,5 +1,32 @@
 require 'rails_helper'
 
 RSpec.describe Skill, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+	let(:candidate) {Candidate.new(first_name:"abcd",last_name:"efgh",dob:'1992/03/15',gender:'M',marital_status:"married",status:true,languages:"HIBRU",summary:"dont know",phone:"12321442415",interests:"dddd")}
+	let(:skill) {Skill.new(name:"C")}
+	let(:job_opportunity) {Company::JobOpportunity.new(title:"qq",shift:"q",description:"a",number_of_positions:12) }
+
+	context "model with attributes valid?" do	
+		it "is valid with valid attributes" do
+		    expect(candidate).to be_valid
+		    candidate.save!
+		    candidate.skills << skill
+		    expect(candidate.skills.first).to be_valid
+		    expect(job_opportunity).to be_valid
+		    job_opportunity.skills << skill
+		    expect(candidate.skills.first).to be_valid
+		 end
+	end
+
+	context "skill" do
+		it "invalid! field required." do
+			skill.name = ""
+			expect(skill).to be_invalid
+		end
+
+		it "invalid! character limit 15 exceeded." do
+			skill.name = "g"*16
+			expect(skill).to be_invalid
+		end
+	end
+
 end

@@ -15,7 +15,7 @@ class Company::Event < ActiveRecord::Base
   has_one :location, as: :locatable
 
   # validations
-  validates :event_type, presence:true
+  validates :event_type, presence:true, length: { :maximum => 255}
   validates :date_time, presence:true
   validates :duration, presence:true
 
