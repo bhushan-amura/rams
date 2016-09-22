@@ -10,11 +10,6 @@ RSpec.describe Company, type: :model do
       expect(company).to_not be_valid
     end
 
-    # it 'invalid if email is nil' do
-    #   company.email = "nil@email.com"
-    #   expect(company).to be_valid
-    # end
-
     it 'invalid if company type is nil' do
       company.company_type = nil
       expect(company).to_not be_valid
@@ -43,7 +38,7 @@ RSpec.describe Company, type: :model do
     end
 
     it "has one location" do
-      assc = described_class.reflect_on_association(:locations)
+      assc = described_class.reflect_on_association(:location)
       expect(assc.macro).to eq :has_one
     end
   end

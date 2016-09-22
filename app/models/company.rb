@@ -9,7 +9,7 @@ class Company < ActiveRecord::Base
 
   # associations
   has_many :job_opportunities
-  has_one :locations, as: :locatable
+  has_one :location, as: :locatable
   has_many :reviews
 
   # validations
