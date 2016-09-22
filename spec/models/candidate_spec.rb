@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Candidate, type: :model do
 
-	let(:candidate) {Candidate.new(first_name:"abcd",last_name:"efgh",dob:'1992/03/15',gender:'M',email:'jayesh@gmail.com',marital_status:"married",status:true,languages:"HIBRU",summary:"dont know",phone:"12321442415",interests:"dddd")}
+	let(:candidate) {Candidate.new(first_name:"abcd",last_name:"efgh",dob:'1992/03/15',gender:'M',marital_status:"married",status:true,languages:"HIBRU",summary:"dont know",phone:"12321442415",interests:"dddd")}
 
 	context "model with attributes valid?" do
 		it "is valid with valid attributes" do
@@ -99,17 +99,17 @@ RSpec.describe Candidate, type: :model do
 	# 		 :format => EMAIL_REGEX, :confirmation => true,
 	# 		 :uniqueness => true
 
-	context "email" do
-		it "invalid! field required." do
-			candidate.email = ""
-			expect(candidate).to be_invalid
-		end
+	# context "email" do
+	# 	it "invalid! field required." do
+	# 		candidate.email = ""
+	# 		expect(candidate).to be_invalid
+	# 	end
 
-		it "invalid! character limit 100 exceeded." do
-		 	candidate.email = Faker::Internet.email
-		 	# puts candidate.email
-		 	expect(candidate).to be_valid
-		end
-	end
+	# 	it "invalid! character limit 100 exceeded." do
+	# 	 	candidate.email = Faker::Internet.email
+	# 	 	# puts candidate.email
+	# 	 	expect(candidate).to be_valid
+	# 	end
+	# end
 
 end

@@ -44,7 +44,8 @@ group :development, :test do
   gem 'rspec-mocks', '~> 3.5'
   # gem 'rspec-support', '~> 3.4', '>= 3.4.1'
   gem 'rspec-matchers-matchers', '~> 1.0'
- gem 'factory_girl', '~> 4.7'
+ # gem 'factory_girl'#, '~> 4.7'
+ gem "factory_girl_rails", "~> 4.0"
 # gem 'activesupport', '~> 5.0', '>= 5.0.0.1'
  gem 'database_cleaner', '~> 1.5', '>= 1.5.3'
  gem 'faker', '~> 1.6', '>= 1.6.6'
