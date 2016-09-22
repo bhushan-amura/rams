@@ -3,12 +3,16 @@ require 'rails_helper'
 RSpec.describe Skill, type: :model do
 	let(:candidate) {Candidate.new(first_name:"abcd",last_name:"efgh",dob:'1992/03/15',gender:'M',marital_status:"married",status:true,languages:"HIBRU",summary:"dont know",phone:"12321442415",interests:"dddd")}
 	let(:skill) {Skill.new(name:"C")}
+	let(:job_opportunity) {Company::JobOpportunity.new(title:"qq",shift:"q",description:"a",number_of_positions:12) }
 
 	context "model with attributes valid?" do	
 		it "is valid with valid attributes" do
 		    expect(candidate).to be_valid
 		    candidate.save!
 		    candidate.skills << skill
+		    expect(candidate.skills.first).to be_valid
+		    expect(job_opportunity).to be_valid
+		    job_opportunity.skills << skill
 		    expect(candidate.skills.first).to be_valid
 		 end
 	end
