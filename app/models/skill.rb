@@ -10,5 +10,5 @@ class Skill < ActiveRecord::Base
   has_many :skill_assignments
 
   # validations
-  validates :name, presence:true
+  validates :name, presence:true, :length => {maximum: 15}
 end
