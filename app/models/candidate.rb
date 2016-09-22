@@ -14,6 +14,7 @@ class Candidate < ActiveRecord::Base
 	has_many :projects
 	has_many :references
 	has_many :test_scores
+  has_many :course_scores
   has_one :location, as: :locatable
 	# has_many :skills
 	has_many :tests, through: :test_scores
