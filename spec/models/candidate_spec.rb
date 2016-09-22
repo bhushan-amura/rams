@@ -99,17 +99,17 @@ RSpec.describe Candidate, type: :model do
 	# 		 :format => EMAIL_REGEX, :confirmation => true,
 	# 		 :uniqueness => true
 
-	context "email" do
-		it "invalid! field required." do
-			candidate.email = ""
-			expect(candidate).to be_invalid
-		end
+	# context "email" do
+	# 	it "invalid! field required." do
+	# 		candidate.email = ""
+	# 		expect(candidate).to be_invalid
+	# 	end
 
-		it "invalid! character limit 100 exceeded." do
-		 	candidate.email = Faker::Internet.email
-		 	# puts candidate.email
-		 	expect(candidate).to be_valid
-		end
-	end
+	# 	it "invalid! character limit 100 exceeded." do
+	# 	 	candidate.email = Faker::Internet.email
+	# 	 	# puts candidate.email
+	# 	 	expect(candidate).to be_valid
+	# 	end
+	# end
 
 end
