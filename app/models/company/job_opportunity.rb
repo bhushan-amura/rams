@@ -6,7 +6,7 @@ class  Company::JobOpportunity < ActiveRecord::Base
     belongs_to :company
 
   # relationships
-    has_many :events
+    has_many :events, foreign_key: :company_job_opportunity_id 
     has_many :skill_assignments, as: :skillable
     has_many :skills, through: :skill_assignments
     has_many :qualification_assignments, as: :qualifiable
