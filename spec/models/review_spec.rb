@@ -25,28 +25,30 @@ RSpec.describe Review, type: :model do
 			company.save!
 			candidate.reviews << review
 			company.reviews << review
-			expect(candidate.reviews.first).to eq: (company.reviews.first)
+			expect(candidate.reviews.first).to have_attributes(text:"satisfied with the process conducted",rating:5)
+			expect(company.reviews.first).to have_attributes(text:"satisfied with the process conducted",rating:5)
 		end
-
-#Person = Struct.new(:name, :age)
-  # person = Person.new("Jim", 32)
-
-  # expect(person).to have_attributes(:name => "Jim", :age => 32)
-  # expect(person).to have_attributes(:name => a_string_starting_with("J"), :age => (a_value > 30) )
-
-
-
 	end
 
-	# context "link type" do
-	# 	it "invalid! field required." do
-	# 		link.link_type = ""
-	# 		expect(link).to be_invalid
-	# 	end
+	context "text" do
+		it "invalid! field required." do
+			review.text = ""
+			expect(review).to be_invalid
+		end
 
-	# 	it "invalid! character limit 50 exceeded." do
-	# 		link.link_type = "g"*51
-	# 		expect(link).to be_invalid
-	# 	end
-	# end
+		it "invalid! character limit 50 exceeded." do
+			review.text = "g"*51
+			expect(review).to be_invalid
+		end
+	end
+
+	context "rating" do
+		it "invalid! must be in between 1-5." do
+			# review.rating = 4#(1..5).to_a.sample
+			# expect(review).to be_valid
+			# expect(2).to be_within(1).of(5)
+			# expect(review).to validate_inclusion_of(:rating).in_array((1..5).to_a)
+		end
+	end
+
 end
