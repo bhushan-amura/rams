@@ -16,7 +16,7 @@ class Company::Event < ActiveRecord::Base
 
   # validations
   validates :event_type, presence:true
-  validates :date, presence:true
-  validates :time, presence:true
+  validates :date_time, presence:true
+  validates :duration, presence:true
 
 end
