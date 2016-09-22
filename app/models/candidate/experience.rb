@@ -11,11 +11,12 @@ class Candidate::Experience < ActiveRecord::Base
   belongs_to :candidate
 
   #validations
-  validates :name, :format => REGEX_NAME_FORMAT, length: {maximum: 20}
+  validates :name, :format => REGEX_NAME_FORMAT, length: {maximum: 20},
+        :presence => true
   validates :end_date, :presence => true
   validates :description, :length => {maximum: 65535}
   validates :shift_type, :presence => true
-  validates :email, :length => { :maximum => 100 },
-			 :format => EMAIL_REGEX
+  # validates :email, :length => { :maximum => 100 },
+	# 		 :format => EMAIL_REGEX
 
 end
