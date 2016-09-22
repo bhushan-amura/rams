@@ -12,7 +12,6 @@ class Candidate::CourseScore < ActiveRecord::Base
 
 
   # validations
-	validates :course, :presence => true, length: { maximum: 255 }
 	validates :end_year, :presence => true
-	validates :score, :presence => true, :numericality => {:greater_than => 0, :less_than => 100}
+	validates :score, :presence => true 
 end

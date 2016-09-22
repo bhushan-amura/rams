@@ -15,6 +15,6 @@ class Candidate::Project < ActiveRecord::Base
 	validates :end_date, :presence => true
 	validates :position, :length => { maximum: 35 }, :presence => true
 	validates :organisation, :length => { maximum: 35 }, :presence => true
-	validates :information, :length => { maximum: 65535 }, :presence => true
+	validates :description, :length => { maximum: 65535 }, :presence => true
 
 end
