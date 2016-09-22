@@ -3,10 +3,10 @@ require 'rails_helper'
 RSpec.describe Candidate::Project, type: :model do
 	let(:candidate) {Candidate.new(first_name:"abcd",last_name:"efgh",dob:'1992/03/15',gender:'M',marital_status:"married",status:true,languages:"HIBRU",summary:"dont know",phone:"12321442415",interests:"dddd")}
 
-	let(:project) {Candidate::Project.new(title:"log analytics",domain:"Big DATA",end_date:Time.now,position:"intern",organisation:"BMC",information:"adkjjahsdkjh kjashdkj")}
+	let(:project) {Candidate::Project.new(title:"log analytics",domain:"Big DATA",end_date:Time.now,position:"intern",organisation:"BMC",description:"adkjjahsdkjh kjashdkj")}
 
 
-	context "model with attributes valid?" do	
+	context "model with attributes valid?" do
 		it "is valid with valid attributes" do
 		    expect(candidate).to be_valid
 		    candidate.save!
@@ -66,14 +66,14 @@ RSpec.describe Candidate::Project, type: :model do
 	end
 
 
-	context "information" do
+	context "description" do
 		it "invalid! field required." do
-			project.information = ""
+			project.description = ""
 			expect(project).to be_invalid
 		end
 
 		it "invalid! character limit 65535 exceeded." do
-			project.information = "g"*65536
+			project.description = "g"*65536
 			expect(project).to be_invalid
 		end
 	end
