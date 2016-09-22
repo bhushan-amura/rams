@@ -29,8 +29,7 @@ class Candidate < ActiveRecord::Base
 			:presence => true, length: {maximum: 20}
 	validates :dob, :presence => true
 	validates :gender, :presence => true, inclusion:{:in => ["M", "F", "T"]}
-  validates :marital_status, :presence => true, inclusion:{:in => ["married", "unmarrired"]}
-  validates :status, :presence => true
+  validates :marital_status, :presence => true, inclusion:{:in => ["married", "unmarried"]}
 	validates :languages, length: { maximum: 65535 }
 	validates :summary, length: { maximum: 65535 }
 	validates :interests, length: { maximum: 65535 }
