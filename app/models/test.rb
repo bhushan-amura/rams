@@ -7,7 +7,7 @@ class Test < ActiveRecord::Base
   before_save :lower_fields
   
   # associations
-  has_many :test_scores
+  has_many :test_scores, class_name: 'Candidate::TestScore'
 
   # validations
   validates :name, :presence => true, :length => { maximum: 20 }
