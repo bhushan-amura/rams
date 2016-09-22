@@ -39,7 +39,7 @@ RSpec.describe Candidate::Reference, type: :model do
 		end
 
 		it "invalid! character limit between 10-15 only." do
-			reference.contact = ([*('0'..'9')]).sample([9,16].sample).join
+			reference.contact = ([*('0'..'9'),*('0'..'9')]).sample([9,16].sample).join
 			expect(reference).to be_invalid
 		end
 	end
