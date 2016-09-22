@@ -1,5 +1,5 @@
 class Candidate::Experience < ActiveRecord::Base
-  
+
   # concerns
   include ForbiddenValues
   include DatabaseStorageFormat
@@ -15,6 +15,5 @@ class Candidate::Experience < ActiveRecord::Base
   validates :end_date, :presence => true
   validates :description, :length => {maximum: 65535}
   validates :shift_type, :presence => true
-  validates :email, :length => { :maximum => 100 },
-			 :format => EMAIL_REGEX
+
 end

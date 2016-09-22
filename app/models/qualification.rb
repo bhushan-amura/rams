@@ -1,13 +1,13 @@
 class Qualification < ActiveRecord::Base
-  
+
   # concerns
 	include DatabaseStorageFormat
 
   # callbacks
   before_save :lower_fields
-	
+
   # relationships
-	has_many :course_scores
+	has_many :course_scores,class_name: 'Candidate::CourseScore'
   has_many :qualification_assignments
 
 
@@ -16,4 +16,3 @@ class Qualification < ActiveRecord::Base
 	validates :domain, :presence => true, :length => { maximum: 255 }
 
 end
-

@@ -11,11 +11,12 @@ class Company::Event < ActiveRecord::Base
   # after_create :send_email_to_candidates
 
   # associations
+  belongs_to :job_opportunity
   has_one :location, as: :locatable
 
   # validations
   validates :event_type, presence:true
-  validates :date, presence:true
-  validates :time, presence:true
+  validates :date_time, presence:true
+  validates :duration, presence:true
 
 end
