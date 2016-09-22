@@ -11,6 +11,6 @@ class Review < ActiveRecord::Base
   belongs_to :company
 
   # validations
-  validates :text, length:{maximum: 500}
+  validates :text, length:{maximum: 65535}
   validates :rating,inclusion:{in:[*1..5], message:"out of range"}
 end

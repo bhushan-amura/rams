@@ -9,7 +9,7 @@ RSpec.describe Review, type: :model do
 
 
 
-	context "model with attributes valid?" do	
+	context "model with attributes valid?" do
 		it "is valid with candidate valid attributes" do
 		    expect(candidate).to be_valid
 		    candidate.save!
@@ -31,13 +31,13 @@ RSpec.describe Review, type: :model do
 	end
 
 	context "text" do
-		it "invalid! field required." do
-			review.text = ""
-			expect(review).to be_invalid
-		end
+		# it "invalid! field required." do
+		# 	review.text = ""
+		# 	expect(review).to be_invalid
+		# end
 
-		it "invalid! character limit 50 exceeded." do
-			review.text = "g"*51
+		it "invalid! character limit 65535 exceeded." do
+			review.text = "g"*65536
 			expect(review).to be_invalid
 		end
 	end
