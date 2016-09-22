@@ -26,10 +26,10 @@ class Candidate < ActiveRecord::Base
 
 
   # validations
-	validates :first_name, :format => REGEX_NAME_FORMAT,
-			:presence => true, length: {maximum: 20}
-	validates :last_name, :format => REGEX_NAME_FORMAT,
-			:presence => true, length: {maximum: 20}
+	#validates :first_name, :format => REGEX_NAME_FORMAT,
+			#:presence => true, length: {maximum: 50}
+	#validates :last_name, :format => REGEX_NAME_FORMAT,
+			#:presence => true, length: {maximum: 50}
 	validates :dob, :presence => true
 	validates :gender, :presence => true, inclusion:{:in => ["M", "F", "T"]}
   validates :marital_status, :presence => true, inclusion:{:in => ["married", "unmarried"]}
