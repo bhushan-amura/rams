@@ -7,7 +7,7 @@ class Qualification < ActiveRecord::Base
   before_save :lower_fields
 
   # relationships
-	has_one :course_scores
+	has_many :course_scores,class_name: 'Candidate::CourseScore'
   has_many :qualification_assignments
 
 
