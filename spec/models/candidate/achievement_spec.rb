@@ -17,10 +17,10 @@ RSpec.describe Candidate::Achievement, type: :model do
 	end
 
 	context "title" do
-		it "invalid! field required." do
-			achievement.title = ""
-			expect(achievement).to be_invalid
-		end
+		# it "invalid! field required." do
+		# 	achievement.title = ""
+		# 	expect(achievement).to be_invalid
+		# end
 
 		it "invalid! character limit 255 exceeded." do
 			achievement.title = "g"*256
