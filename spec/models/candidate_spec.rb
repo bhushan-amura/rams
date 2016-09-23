@@ -64,12 +64,6 @@ RSpec.describe Candidate, type: :model do
 		end
 	end
 
-	context "status" do
-		it "invalid! field required." do
-			candidate.status = ""
-			expect(candidate).to_not be_valid
-		end
-	end
 
 	context "languages" do
 		it "invalid! character limit 65535 exceeded." do
