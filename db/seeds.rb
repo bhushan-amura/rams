@@ -59,7 +59,7 @@ def create_companies(company_count=20)
   company_users = User.offset(Admin.count).limit(company_count)
   File.open(Rails.root.join('tmp','company_users.txt'),'w') do |file|
     company_count.times do |count|
-      company = Company.new(name:Faker::Company.name,company_type:Faker::Company.suffix,url:Faker::Internet.url,tagline:Faker::Company.catch_phrase,phone:Faker::PhoneNumber.phone_number,number_of_employees:rand(100),description:Faker::Lorem.paragraph(2),logo:Faker::Company.logo)
+      company = Company.new(name:Faker::Company.name,company_type:Faker::Company.suffix,url:Faker::Internet.url,tagline:Faker::Company.catch_phrase,phone:Faker::PhoneNumber.phone_number,number_of_employees:rand(100),description:Faker::Lorem.paragraph(2),logo:Faker::Company.logo,user_id:company_users[count].id)
       company.save!
       file.puts "#{count+1}) #{company_users[count].email}"
     end

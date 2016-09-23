@@ -16,7 +16,6 @@ class Candidate < ActiveRecord::Base
 	has_many :test_scores
   has_many :course_scores
   has_one :location, as: :locatable
-	# has_many :skills
 	has_many :tests, through: :test_scores
   has_many :qualification_assignments, as: :qualifiable
   has_many :qualifications, through: :qualification_assignments
@@ -24,13 +23,15 @@ class Candidate < ActiveRecord::Base
   has_many :skills, through: :skill_assignments
   has_many :reviews
   has_one :location, as: :locatable
+  belongs_to :user
 
 
   # validations
-	validates :first_name, :format => REGEX_NAME_FORMAT,
-			:presence => true
-	validates :last_name, :format => REGEX_NAME_FORMAT,
-			:presence => true
+  #
+	#validates :first_name, :format => REGEX_NAME_FORMAT,
+			#:presence => true
+	#validates :last_name, :format => REGEX_NAME_FORMAT,
+      #:presence => true
 	validates :dob, :presence => true
 	validates :gender, :presence => true, inclusion:{:in => ["M", "F", "T"]}
   validates :marital_status, :presence => true, inclusion:{:in => ["married", "unmarried"]}
