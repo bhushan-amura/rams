@@ -11,6 +11,7 @@ class Company < ActiveRecord::Base
   has_many :job_opportunities
   has_one :location, as: :locatable
   has_many :reviews
+  belongs_to :user
 
   # validations
   validates :name, presence:true, length: { :maximum => 255 }

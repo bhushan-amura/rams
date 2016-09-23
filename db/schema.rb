@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160922123134) do
+ActiveRecord::Schema.define(version: 20160923114835) do
 
   create_table "admins", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
@@ -133,7 +133,10 @@ ActiveRecord::Schema.define(version: 20160922123134) do
     t.string   "logo",                limit: 255
     t.datetime "created_at",                      null: false
     t.datetime "updated_at",                      null: false
+    t.integer  "user_id",             limit: 4
   end
+
+  add_index "companies", ["user_id"], name: "index_companies_on_user_id", using: :btree
 
   create_table "company_events", force: :cascade do |t|
     t.string   "event_type",                 limit: 255, null: false
@@ -257,6 +260,7 @@ ActiveRecord::Schema.define(version: 20160922123134) do
   add_foreign_key "candidate_projects", "candidates"
   add_foreign_key "candidate_references", "candidates"
   add_foreign_key "candidates", "users"
+  add_foreign_key "companies", "users"
   add_foreign_key "company_events", "company_job_opportunities"
   add_foreign_key "company_job_opportunities", "companies"
   add_foreign_key "reviews", "candidates"
