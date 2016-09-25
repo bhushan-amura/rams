@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160923130237) do
+ActiveRecord::Schema.define(version: 20160925074948) do
 
   create_table "admins", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
@@ -93,7 +93,7 @@ ActiveRecord::Schema.define(version: 20160923130237) do
 
   add_index "candidate_references", ["candidate_id"], name: "index_candidate_references_on_candidate_id", using: :btree
 
-  create_table "candidate_test_scores", id: false, force: :cascade do |t|
+  create_table "candidate_test_scores", force: :cascade do |t|
     t.integer  "candidate_id", limit: 4,  null: false
     t.integer  "test_id",      limit: 4,  null: false
     t.float    "score",        limit: 24
@@ -195,8 +195,6 @@ ActiveRecord::Schema.define(version: 20160923130237) do
     t.string   "domain",     limit: 255, null: false
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
-    t.string   "institute",  limit: 255
-    t.string   "university", limit: 255
   end
 
   create_table "reviews", force: :cascade do |t|
