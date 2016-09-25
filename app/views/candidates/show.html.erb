@@ -1,0 +1,38 @@
+<p id="notice"><%= notice %></p>
+
+<table>
+  <tr>
+    <th>First Name</th>
+    <td><%= @candidate.first_name%></td>
+  </tr>
+  <tr>
+    <th>Last Name</th>
+    <td><%= @candidate.last_name%></td>
+  </tr>
+  <tr>
+    <th>Date of Birth</th>
+    <td><%= @candidate.dob%></td>
+  </tr>
+  <tr>
+    <th>Gender</th>
+    <td><%= @candidate.gender%></td>
+  </tr>
+  <tr>
+    <th>Marital Status</th>
+    <td><%= @candidate.marital_status%></td>
+  </tr>
+  <tr>
+    <th>Job Status</th>
+    <td><%= @candidate.status%></td>
+  </tr>
+  <tr>
+    <th>Languages</th>
+    <td><%= @candidate.languages%></td>
+  </tr>
+  <tr>
+    <th>Summary</th>
+    <td><%= @candidate.summary%></td>
+  </tr>
+</table>
+<%= link_to 'Edit', edit_candidate_path(@candidate) %> |
+<%= link_to 'Back', candidates_path %>

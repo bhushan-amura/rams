@@ -38,4 +38,8 @@ class Candidate < ActiveRecord::Base
 	validates :languages, length: { maximum: 65535 }
 	validates :summary, length: { maximum: 65535 }
 	validates :interests, length: { maximum: 65535 }
+
+  # constants
+  GENDER = ["M", "F", "T"]
+  MARITAL = ["married", "unmarried"]
 end
