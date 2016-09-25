@@ -10,7 +10,10 @@ class Admin < ActiveRecord::Base
   # validations
 
   # instance methods
-  def shortlist_candidates(job_opening)
+  
+
+  # class methods
+  def self.shortlist_candidates(job_opening)
     # TODO : Figure out a way to incorporate experience in this
     # Maybe precompute columns of experience, achievements, qualifications,etc. in candidate table in order to 
     # sort the results 
