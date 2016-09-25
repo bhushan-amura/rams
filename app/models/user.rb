@@ -14,6 +14,10 @@ class User < ActiveRecord::Base
     self.admin||self.candidate||self.company
   end
 
+  def destroy
+    self.info.destroy
+  end
+
 
 
 end
