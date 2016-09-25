@@ -24,6 +24,7 @@ class Candidate < ActiveRecord::Base
   has_many :skill_assignments, as: :skillable, dependent: :destroy
   has_many :skills, through: :skill_assignments
   has_many :reviews, dependent: :destroy
+  has_and_belongs_to_many :institutes, join_table: 'candidate_institute_qualifications',association_foreign_key: 'candidate_institute_id' 
   belongs_to :user
 
 
