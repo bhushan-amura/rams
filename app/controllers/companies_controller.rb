@@ -5,11 +5,7 @@ class CompaniesController < ApplicationController
   # GET /companies
   # GET /companies.json
   def index
-    # @whichuser = current_user.class
-    # @whichuser = current_user.admin||current_user.candidate||current_user.company
-    # @whichuser = @whichuser.class
-    # @companies = user_signed_in? @user.companies : Company.all 
-    # @companies = Company.all
+
   end
 
   # GET /companies/1
