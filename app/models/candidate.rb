@@ -24,6 +24,7 @@ class Candidate < ActiveRecord::Base
   has_many :skill_assignments, as: :skillable, dependent: :destroy
   has_many :skills, through: :skill_assignments
   has_many :reviews, dependent: :destroy
+
   belongs_to :user
 
 
