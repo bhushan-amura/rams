@@ -12,6 +12,14 @@ Rails.application.routes.draw do
   end
 
 
+  scope '/candidates/:id/' do
+    resources :qualifications, as:'candidate_qualification'
+  end
+  
+  scope '/companies/:company_id/jobs/:job_id' do
+    resources :qualifications, as:'job_qualification'
+  end
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
