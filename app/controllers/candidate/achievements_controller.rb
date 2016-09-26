@@ -1,10 +1,12 @@
-class Candidate::AchievementsController < CandidatesController
-  before_action only: [:show, :edit, :update, :destroy,:index] do
-    set_candidate(params[:candidate_id])
-  end
-  before_action only: [:show, :edit, :update, :destroy] do
-    set_candidate_achievement
-  end
+class Candidate::AchievementsController < ApplicationController
+
+  # helpers
+  include Candidate::AchievementsHelper
+
+  # filters/callbacks
+  before_action :set_candidate
+  before_action :set_candidate_achievement, only: [:show, :edit, :update, :destroy]
+    
 
   # GET /candidate/:id/achievements
   # GET /candidate/:id/achievements.json
@@ -12,28 +14,28 @@ class Candidate::AchievementsController < CandidatesController
     @candidate_achievements = @candidate.achievements
   end
 
-  # GET /candidate/achievements/1
-  # GET /candidate/achievements/1.json
+  # GET /candidate/:id/achievements/1
+  # GET /candidate/:id/achievements/1.json
   def show
   end
 
-  # GET /candidate/achievements/new
+  # GET /candidate/:id/achievements/new
   def new
     @candidate_achievement = Candidate::Achievement.new
   end
 
-  # GET /candidate/achievements/1/edit
+  # GET /candidate/:id/achievements/1/edit
   def edit
   end
 
-  # POST /candidate/achievements
-  # POST /candidate/achievements.json
+  # POST /candidate/:id/achievements
+  # POST /candidate/:id/achievements.json
   def create
-    @candidate_achievement = Candidate::Achievement.new(candidate_achievement_params)
+    @candidate_achievement  = @candidate.achievements.build(candidate_achievement_params)
 
     respond_to do |format|
       if @candidate_achievement.save
-        format.html { redirect_to @candidate_achievement, notice: 'Achievement was successfully created.' }
+        format.html { redirect_to candidate_achievement_path(achievement_path_params), notice: 'Achievement was successfully created.' }
         format.json { render :show, status: :created, location: @candidate_achievement }
       else
         format.html { render :new }
@@ -42,12 +44,12 @@ class Candidate::AchievementsController < CandidatesController
     end
   end
 
-  # PATCH/PUT /candidate/achievements/1
-  # PATCH/PUT /candidate/achievements/1.json
+  # PATCH/PUT /candidate/:id/achievements/1
+  # PATCH/PUT /candidate/:id/achievements/1.json
   def update
     respond_to do |format|
       if @candidate_achievement.update(candidate_achievement_params)
-        format.html { redirect_to @candidate_achievement, notice: 'Achievement was successfully updated.' }
+        format.html { redirect_to candidate_achievement_path(achievement_path_params), notice: 'Achievement was successfully updated.' }
         format.json { render :show, status: :ok, location: @candidate_achievement }
       else
         format.html { render :edit }
@@ -56,8 +58,8 @@ class Candidate::AchievementsController < CandidatesController
     end
   end
 
-  # DELETE /candidate/achievements/1
-  # DELETE /candidate/achievements/1.json
+  # DELETE /candidate/:id/achievements/1
+  # DELETE /candidate/:id/achievements/1.json
   def destroy
     @candidate_achievement.destroy
     respond_to do |format|
@@ -68,11 +70,16 @@ class Candidate::AchievementsController < CandidatesController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+    def set_candidate
+      @candidate = Candidate.find(params[:candidate_id])
+    end
+
     def set_candidate_achievement
       @candidate_achievement = @candidate.achievements.find(params[:id])
     end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def candidate_achievement_params
-      params.fetch(:candidate_achievement, {})
+      params.require(:candidate_achievement).permit(:title,:description)
     end
 end

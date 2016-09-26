@@ -51,7 +51,7 @@ class Candidate::ProjectsController < CandidatesController
   def update
     respond_to do |format|
       if @candidate_project.update(candidate_project_params)
-        format.html { redirect_to @candidate_project, notice: 'Project was successfully updated.' }
+        format.html { redirect_to candidate_project_path(project_path_params), notice: 'Project was successfully updated.' }
         format.json { render :show, status: :ok, location: @candidate_project }
       else
         format.html { render :edit }

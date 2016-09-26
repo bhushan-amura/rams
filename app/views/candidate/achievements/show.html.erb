@@ -1,10 +1,7 @@
 <p id="notice"><%= notice %></p>
 
-<b><%= @candidate_achievement.title %></b><br>
-<p><%= @candidate_achievement.description %></p><br>
-
-
-<% achievement_path_params = { candidate_id:params[:candidate_id], id:@candidate_achievement.id } %>
+<h1>Showing candidate achievements</h1>
+<b><%= @candidate_achievement.title %></b>
 
 <%= link_to 'Edit', edit_candidate_achievement_path(achievement_path_params) %> |
 <%= link_to 'Back', candidate_achievements_path %>

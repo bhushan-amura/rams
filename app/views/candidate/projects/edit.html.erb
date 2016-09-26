@@ -1,6 +1,5 @@
 <h1>Editing Candidate Project</h1>
-<% project_path_params = { candidate_id:params[:candidate_id], id:@candidate_project.id } %>
-<%= render 'form', required_url: candidate_projects_path(project_path_params)%>
+<%= render 'form', required_url: candidate_project_path(project_path_params)%>
 
 <%= link_to 'Show', candidate_project_path(project_path_params) %> |
 <%= link_to 'Back', candidate_projects_path %>

@@ -1,7 +1,7 @@
 class CandidatesController < ApplicationController
-  before_action  only: [:show, :edit, :update, :destroy] do
-    set_candidate
-  end
+
+  # filters/callbacks
+  before_action :set_candidate, only: [:show, :edit, :update, :destroy]  
 
   # GET /candidates
   # GET /candidates.json
@@ -55,6 +55,7 @@ class CandidatesController < ApplicationController
 
   # DELETE /candidates/1
   # DELETE /candidates/1.json
+
   def destroy
     @candidate.destroy
     respond_to do |format|
@@ -65,7 +66,7 @@ class CandidatesController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_candidate
+    def set_candidate 
       @candidate = Candidate.find(params[:id])
     end
 
