@@ -1,0 +1,1 @@
+json.array! @candidate_achievements, partial: 'candidate_achievements/candidate_achievement', as: :candidate_achievement

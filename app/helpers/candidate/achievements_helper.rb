@@ -1,0 +1,2 @@
+module Candidate::AchievementsHelper
+end

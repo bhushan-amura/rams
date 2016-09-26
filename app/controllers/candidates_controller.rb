@@ -1,5 +1,7 @@
 class CandidatesController < ApplicationController
-  before_action :set_candidate, only: [:show, :edit, :update, :destroy]
+  before_action  only: [:show, :edit, :update, :destroy] do
+    set_candidate(params[:id])
+  end
 
   # GET /candidates
   # GET /candidates.json
@@ -10,7 +12,6 @@ class CandidatesController < ApplicationController
   # GET /candidates/1
   # GET /candidates/1.json
   def show
-    # @candidate = Candidate.find(params[:id])
   end
 
   # GET /candidates/new
@@ -20,7 +21,6 @@ class CandidatesController < ApplicationController
 
   # GET /candidates/1/edit
   def edit
-    # @candidate = Candidate.find(params[:id])
   end
 
   # POST /candidates
@@ -55,9 +55,6 @@ class CandidatesController < ApplicationController
 
   # DELETE /candidates/1
   # DELETE /candidates/1.json
-  # def delete
-  #   @candidate = Candidate.find(params[:id])
-  # end
   def destroy
     @candidate.destroy
     respond_to do |format|
@@ -68,8 +65,8 @@ class CandidatesController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_candidate
-      @candidate = Candidate.find(params[:id])
+    def set_candidate(id)
+      @candidate = Candidate.find(id)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

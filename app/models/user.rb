@@ -16,5 +16,6 @@ class User < ActiveRecord::Base
 
   def destroy
     self.info.destroy
+    super
   end
 end
