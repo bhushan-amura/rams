@@ -1,6 +1,6 @@
 <h1>Editing Candidate Achievement</h1>
 
-<%= render 'form' %>
+<%= render 'form',required_url: candidate_achievement_path(achievement_path_params) %>
 
-<%= link_to 'Show', @candidate_achievement %> |
+<%= link_to 'Show', candidate_achievement_path(achievement_path_params) %> |
 <%= link_to 'Back', candidate_achievements_path %>

@@ -1,4 +1,4 @@
-<%= form_for(@candidate_achievement) do |f| %>
+<%= form_for(@candidate_achievement, url: required_url ) do |f| %>
   <% if @candidate_achievement.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@candidate_achievement.errors.count, "error") %> prohibited this candidate_achievement from being saved:</h2>
@@ -10,6 +10,17 @@
       </ul>
     </div>
   <% end %>
+
+  <p>
+  <%=  f.label :title %>
+  <%=  f.text_field :title %>
+  </p>
+
+  <p>
+
+  <%=  f.label :description %>
+  <%=  f.text_area :description %>
+  </p>
 
   <div class="actions">
     <%= f.submit %>

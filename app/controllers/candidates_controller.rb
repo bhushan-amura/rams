@@ -1,7 +1,7 @@
 class CandidatesController < ApplicationController
-  before_action  only: [:show, :edit, :update, :destroy] do 
-    set_candidate(params[:id])
-  end
+
+  # filters/callbacks
+  before_action :set_candidate, only: [:show, :edit, :update, :destroy]  
 
   # GET /candidates
   # GET /candidates.json
@@ -66,8 +66,8 @@ class CandidatesController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_candidate(id)
-      @candidate = Candidate.find(id)
+    def set_candidate 
+      @candidate = Candidate.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

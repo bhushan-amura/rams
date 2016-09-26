@@ -1,4 +1,7 @@
 <p id="notice"><%= notice %></p>
 
-<%= link_to 'Edit', edit_candidate_achievement_path(@candidate_achievement) %> |
+<h1>Showing candidate achievements</h1>
+<b><%= @candidate_achievement.title %></b>
+
+<%= link_to 'Edit', edit_candidate_achievement_path(achievement_path_params) %> |
 <%= link_to 'Back', candidate_achievements_path %>
