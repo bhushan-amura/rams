@@ -8,9 +8,9 @@ class Company < ActiveRecord::Base
   before_save :lower_fields
 
   # associations
-  has_many :job_opportunities
-  has_one :location, as: :locatable
-  has_many :reviews
+  has_many :job_opportunities, dependent: :destroy
+  has_one :location, as: :locatable, dependent: :destroy
+  has_many :reviews, dependent: :destroy
   belongs_to :user
 
   # validations
