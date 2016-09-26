@@ -1,5 +1,5 @@
 class UserController < ApplicationController
- # before_filter :authenticate_user!
+ before_filter :authenticate_user!
 
  def index
     @user = current_user.info.class
@@ -8,7 +8,8 @@ class UserController < ApplicationController
  	elsif ( @user == Candidate )
  		redirect_to( candidates_path )
  	else
- 		redirect_to( companies_path )
+ 		@company = Company.find_by(user_id:current_user.id)
+ 		redirect_to( company_path(@company) )
  	end
  end
  
