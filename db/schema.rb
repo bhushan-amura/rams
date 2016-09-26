@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160925180738) do
+ActiveRecord::Schema.define(version: 20160926084737) do
 
   create_table "admins", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
@@ -56,23 +56,6 @@ ActiveRecord::Schema.define(version: 20160925180738) do
   end
 
   add_index "candidate_experiences", ["candidate_id"], name: "index_candidate_experiences_on_candidate_id", using: :btree
-
-  create_table "candidate_institute_qualifications", force: :cascade do |t|
-    t.integer "candidate_id",           limit: 4
-    t.integer "candidate_institute_id", limit: 4
-    t.integer "qualification_id",       limit: 4
-  end
-
-  add_index "candidate_institute_qualifications", ["candidate_id"], name: "index_candidate_institute_qualifications_on_candidate_id", using: :btree
-  add_index "candidate_institute_qualifications", ["candidate_institute_id"], name: "index_on_cand_ins_qual_on_ins_id", using: :btree
-  add_index "candidate_institute_qualifications", ["qualification_id"], name: "index_candidate_institute_qualifications_on_qualification_id", using: :btree
-
-  create_table "candidate_institutes", force: :cascade do |t|
-    t.string   "name",       limit: 255
-    t.string   "university", limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-  end
 
   create_table "candidate_links", force: :cascade do |t|
     t.string   "link_type",    limit: 50,    null: false
@@ -182,6 +165,13 @@ ActiveRecord::Schema.define(version: 20160925180738) do
 
   add_index "company_job_opportunities", ["company_id"], name: "index_company_job_opportunities_on_company_id", using: :btree
 
+  create_table "institutes", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.string   "university", limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
   create_table "locations", force: :cascade do |t|
     t.string   "city",            limit: 255, null: false
     t.string   "street_name",     limit: 255, null: false
@@ -266,8 +256,6 @@ ActiveRecord::Schema.define(version: 20160925180738) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
-  add_foreign_key "candidate_institute_qualifications", "candidate_institutes"
-  add_foreign_key "candidate_institute_qualifications", "qualifications"
   add_foreign_key "candidates", "users"
   add_foreign_key "companies", "users"
   add_foreign_key "company_events", "company_job_opportunities"
