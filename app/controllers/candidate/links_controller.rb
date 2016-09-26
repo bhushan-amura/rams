@@ -1,34 +1,34 @@
 class Candidate::LinksController < ApplicationController
-  
+
   # helpers
   include Candidate::LinksHelper
- 
+
   # filters/callbacks
   before_action :set_candidate
   before_action :set_candidate_link, only: [:show, :edit, :update, :destroy]
 
-  # GET /candidate/links
-  # GET /candidate/links.json
+  # GET /candidate/:id/links
+  # GET /candidate/:id/links.json
   def index
-    @candidate_links = @candidate.links 
+    @candidate_links = @candidate.links
   end
 
-  # GET /candidate/links/1
-  # GET /candidate/links/1.json
+  # GET /candidate/:id/links/1
+  # GET /candidate/:id/links/1.json
   def show
   end
 
-  # GET /candidate/links/new
+  # GET /candidate/:id/links/new
   def new
     @candidate_link = Candidate::Link.new
   end
 
-  # GET /candidate/links/1/edit
+  # GET /candidate/:id/links/1/edit
   def edit
   end
 
-  # POST /candidate/links
-  # POST /candidate/links.json
+  # POST /candidate/:id/links
+  # POST /candidate/:id/links.json
   def create
     @candidate_link = @candidate.links.build(candidate_link_params)
 
@@ -43,8 +43,8 @@ class Candidate::LinksController < ApplicationController
     end
   end
 
-  # PATCH/PUT /candidate/links/1
-  # PATCH/PUT /candidate/links/1.json
+  # PATCH/PUT /candidate/:id/links/1
+  # PATCH/PUT /candidate/:id/links/1.json
   def update
     respond_to do |format|
       if @candidate_link.update(candidate_link_params)
@@ -57,8 +57,8 @@ class Candidate::LinksController < ApplicationController
     end
   end
 
-  # DELETE /candidate/links/1
-  # DELETE /candidate/links/1.json
+  # DELETE /candidate/:id/links/1
+  # DELETE /candidate/:id/links/1.json
   def destroy
     @candidate_link.destroy
     respond_to do |format|
