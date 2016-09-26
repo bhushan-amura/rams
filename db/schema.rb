@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160923114835) do
+ActiveRecord::Schema.define(version: 20160926084737) do
 
   create_table "admins", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
@@ -93,7 +93,7 @@ ActiveRecord::Schema.define(version: 20160923114835) do
 
   add_index "candidate_references", ["candidate_id"], name: "index_candidate_references_on_candidate_id", using: :btree
 
-  create_table "candidate_test_scores", id: false, force: :cascade do |t|
+  create_table "candidate_test_scores", force: :cascade do |t|
     t.integer  "candidate_id", limit: 4,  null: false
     t.integer  "test_id",      limit: 4,  null: false
     t.float    "score",        limit: 24
@@ -165,6 +165,13 @@ ActiveRecord::Schema.define(version: 20160923114835) do
 
   add_index "company_job_opportunities", ["company_id"], name: "index_company_job_opportunities_on_company_id", using: :btree
 
+  create_table "institutes", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.string   "university", limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
   create_table "locations", force: :cascade do |t|
     t.string   "city",            limit: 255, null: false
     t.string   "street_name",     limit: 255, null: false
@@ -195,8 +202,6 @@ ActiveRecord::Schema.define(version: 20160923114835) do
     t.string   "domain",     limit: 255, null: false
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
-    t.string   "institute",  limit: 255
-    t.string   "univercity", limit: 255
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -251,14 +256,6 @@ ActiveRecord::Schema.define(version: 20160923114835) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
-  add_foreign_key "admins", "users"
-  add_foreign_key "candidate_achievements", "candidates"
-  add_foreign_key "candidate_course_scores", "candidates"
-  add_foreign_key "candidate_course_scores", "qualifications"
-  add_foreign_key "candidate_experiences", "candidates"
-  add_foreign_key "candidate_links", "candidates"
-  add_foreign_key "candidate_projects", "candidates"
-  add_foreign_key "candidate_references", "candidates"
   add_foreign_key "candidates", "users"
   add_foreign_key "companies", "users"
   add_foreign_key "company_events", "company_job_opportunities"
