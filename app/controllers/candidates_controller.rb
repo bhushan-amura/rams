@@ -10,7 +10,6 @@ class CandidatesController < ApplicationController
   # GET /candidates/1
   # GET /candidates/1.json
   def show
-    @candidate = Candidate.find(params[:id])
   end
 
   # GET /candidates/new
@@ -20,7 +19,6 @@ class CandidatesController < ApplicationController
 
   # GET /candidates/1/edit
   def edit
-    @candidate = Candidate.find(params[:id])
   end
 
   # POST /candidates
@@ -56,8 +54,9 @@ class CandidatesController < ApplicationController
   # DELETE /candidates/1
   # DELETE /candidates/1.json
   def delete
-    @candidate = Cndidate.find(params[:id])
+    @candidate = Candidate.find(params[:id])
   end
+
   def destroy
     @candidate.destroy
     respond_to do |format|
