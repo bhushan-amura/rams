@@ -1,4 +1,5 @@
 <!-- <p id="notice"><%= notice %></p> -->
+
 <table>
 	<tr>
 		<th>Name</th>
@@ -32,6 +33,13 @@
 		<th>logo</th>
 		<td><%= image_tag( @company.logo , size: "160x100", alt: @company.name) %></td>
 	</tr>
+	<tr>
+		<th>email</th>
+		<td><%= User.find_by(id:@company.user_id).email %></td>
+	</tr>
 </table>
 
 <%= link_to 'Edit Profile', edit_company_path(@company) %>
+<%= link_to 'job postings', company_jobs_path(@company) %>
+
+

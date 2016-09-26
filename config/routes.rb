@@ -1,9 +1,19 @@
 Rails.application.routes.draw do
   devise_for :users
   root to: 'user#index'
-  resources :companies
+
+  resources :companies do
+    resources :jobs, to: 'company/job_opportunities' do
+      resources :events, to: 'company/events'
+    end
+  end
+  
   resources :candidates
   resources :admins
+
+
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

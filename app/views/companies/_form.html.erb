@@ -12,6 +12,45 @@
     </div>
   <% end %>
 
+
+  <table>
+    <tr>
+      <th><%= f.label(:name) %></th>
+      <td><%= f.text_field(:name) %></td>
+    </tr>
+    <tr>
+      <th><%= f.label(:type) %></th>
+      <td><%= f.text_field(:company_type) %></td>
+    </tr>
+    <tr>
+      <th><%= f.label(:url) %></th>
+      <td><%= f.text_field(:url) %></td>
+    </tr>
+    <tr>
+      <th><%= f.label(:tagline) %></th>
+      <td><%= f.text_field(:tagline) %></td>
+    </tr>
+    <tr>
+      <th><%= f.label(:phone) %></th>
+      <td><%= f.phone_field(:phone) %></td>
+    </tr>
+    <tr>
+      <th><%= f.label(:number_of_employees) %></th>
+      <td><%= f.number_field(:number_of_employees) %></td>
+    </tr>
+    <tr>
+      <th><%= f.label(:description) %></th>
+      <td><%= f.text_field(:description) %></td>
+    </tr>
+    <tr>
+      <th><%= f.label(:logo) %></th>
+      <td><%= f.text_field(:logo) %></td>
+    </tr>
+
+  </table>
+
+
+
   <div class="actions">
     <%= f.submit %>
   </div>

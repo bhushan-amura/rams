@@ -1,6 +1,8 @@
 <h1>Editing Company</h1>
 
-<%= render 'form' %>
+<%= form_for @company do |f| %>
+  <%= render 'form', :locals => {:f => f} %>
+<% end %>
 
 <%= link_to 'Show', @company %> |
 <%= link_to 'Back', companies_path %>

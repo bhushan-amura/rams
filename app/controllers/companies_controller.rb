@@ -5,13 +5,11 @@ class CompaniesController < ApplicationController
   # GET /companies
   # GET /companies.json
   def index
-
   end
 
   # GET /companies/1
   # GET /companies/1.json
   def show
-
   end
 
   # GET /companies/new
@@ -21,7 +19,7 @@ class CompaniesController < ApplicationController
 
   # GET /companies/1/edit
   def edit
-    
+    @company = Company.find(params[:id])
   end
 
 
@@ -73,6 +71,6 @@ class CompaniesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def company_params
-      params.fetch(:company, {})
+      params.require(:company).permit(:id,:name,:type,:url,:tagline,:phone,:number_of_employees,:description,:logo)
     end
 end
