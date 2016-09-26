@@ -225,15 +225,6 @@ def assign_qualification_candidate(max_qualifications_per_candidate=5)
 end
 
 def create_institutes(institute_count=4,institute_qual_count=5)
-  candidates = Candidate.all
-  qualifications = Qualification.all
-  institute_count.each do |ins_count|
-    institute = Candidate::Institute.new(name:Faker::Educator.campus,university:Faker::Educator.university)
-    qual_count = rand(institute_qual_count)
-    qual_count.times do |ins_qual_count|
-      institute.qualifications << qualifications[rand(Qualification.count)]
-    end
-  end
 end
 
 def create_course_scores
