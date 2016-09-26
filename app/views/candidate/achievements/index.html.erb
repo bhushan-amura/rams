@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Candidate Achievements</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @candidate_achievements.each do |candidate_achievement| %>
+      <% achievement_path_params = {candidate_id:params[:candidate_id],id:candidate_achievement.id} %>
+      <tr>
+        <td><b><%= candidate_achievement.title %></b></td>
+        <td><%= link_to 'Show', candidate_achievement_path(achievement_path_params) %></td>
+        <td><%= link_to 'Edit', edit_candidate_achievement_path(achievement_path_params) %></td>
+        <td><%= link_to 'Destroy', candidate_achievement_path(achievement_path_params), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Achievement', new_candidate_achievement_path %>

@@ -11,7 +11,6 @@ class Company::JobOpportunitiesController < ApplicationController
   # GET /company/job_opportunities/1
   # GET /company/job_opportunities/1.json
   def show
-    @company_job_opportunity = Company::JobOpportunity.find(params[:id])
   end
 
   # GET /company/job_opportunities/new

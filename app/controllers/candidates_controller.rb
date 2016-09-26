@@ -1,5 +1,7 @@
 class CandidatesController < ApplicationController
-  before_action :set_candidate, only: [:show, :edit, :update, :destroy]
+
+  # filters/callbacks
+  before_action :set_candidate, only: [:show, :edit, :update, :destroy]  
 
   # GET /candidates
   # GET /candidates.json
@@ -10,7 +12,6 @@ class CandidatesController < ApplicationController
   # GET /candidates/1
   # GET /candidates/1.json
   def show
-    @candidate = Candidate.find(params[:id])
   end
 
   # GET /candidates/new
@@ -20,7 +21,6 @@ class CandidatesController < ApplicationController
 
   # GET /candidates/1/edit
   def edit
-    @candidate = Candidate.find(params[:id])
   end
 
   # POST /candidates
@@ -55,9 +55,7 @@ class CandidatesController < ApplicationController
 
   # DELETE /candidates/1
   # DELETE /candidates/1.json
-  def delete
-    @candidate = Cndidate.find(params[:id])
-  end
+
   def destroy
     @candidate.destroy
     respond_to do |format|
@@ -68,7 +66,7 @@ class CandidatesController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_candidate
+    def set_candidate 
       @candidate = Candidate.find(params[:id])
     end
 

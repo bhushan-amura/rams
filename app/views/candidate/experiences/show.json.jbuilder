@@ -1,0 +1,1 @@
+json.partial! "candidate_experiences/candidate_experience", candidate_experience: @candidate_experience

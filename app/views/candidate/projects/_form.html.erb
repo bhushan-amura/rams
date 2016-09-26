@@ -1,0 +1,46 @@
+<%= form_for(@candidate_project, url: required_url) do |f| %>
+  <% if @candidate_project.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@candidate_project.errors.count, "error") %> prohibited this candidate_project from being saved:</h2>
+
+      <ul>
+      <% @candidate_project.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <table>
+    <tr>
+      <th><%= f.label :title %></th>
+      <td><%= f.text_field :title %></td>
+    </tr>
+    <tr>
+      <th><%= f.label :domain %></th>
+      <td><%= f.text_field :domain %></td>
+    </tr>
+    <tr>
+      <th><%= f.label :description %></th>
+      <td><%= f.text_field :description %></td>
+    </tr>
+    <tr>
+      <th><%= f.label :start_date %></th>
+      <td><%= f.date_select :start_date %></td>
+    </tr>
+    <tr>
+      <th><%= f.label :end_date %></th>
+      <td><%= f.date_select :end_date %></td>
+    </tr>
+    <tr>
+      <th><%= f.label :position %></th>
+      <td><%= f.text_field :position %></td>
+    </tr>
+    <tr>
+      <th><%= f.label :organisation %></th>
+      <td><%= f.text_field :organisation %></td>
+    </tr>
+  </table>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

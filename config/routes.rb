@@ -8,11 +8,14 @@ Rails.application.routes.draw do
     end
   end
   
-  resources :candidates
   resources :admins
 
-
-
+  resources :candidates do
+    resources :achievements,module: "candidate"
+    resources :projects,module: "candidate"
+    resources :experiences,module:"candidate"
+    resources  :links, module:"candidate"
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

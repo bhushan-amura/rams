@@ -1,4 +1,4 @@
-<%= form_for(@company_job_opportunity) do |f| %>
+<%= form_for(@company_job_opportunity,url: required_url) do |f| %>
   <% if @company_job_opportunity.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@company_job_opportunity.errors.count, "error") %> prohibited this company_job_opportunity from being saved:</h2>
