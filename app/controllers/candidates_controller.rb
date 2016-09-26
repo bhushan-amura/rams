@@ -56,7 +56,7 @@ class CandidatesController < ApplicationController
   # DELETE /candidates/1
   # DELETE /candidates/1.json
   def delete
-    @candidate = Cndidate.find(params[:id])
+    @candidate = Candidate.find(params[:id])
   end
   def destroy
     @candidate.destroy
