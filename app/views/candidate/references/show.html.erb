@@ -1,0 +1,9 @@
+<p id="notice"><%= notice %></p>
+
+<b><%= @candidate_reference.name %></b><br>
+<p><%= @candidate_reference.email %></p><br>
+<p><%= @candidate_reference.contact %></p><br>
+
+<% reference_path_params = { candidate_id:params[:candidate_id], id:@candidate_reference.id } %>
+<%= link_to 'Edit', edit_candidate_reference_path(reference_path_params) %> |
+<%= link_to 'Back', candidate_references_path %>

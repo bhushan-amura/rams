@@ -1,0 +1,1 @@
+json.partial! "candidate_references/candidate_reference", candidate_reference: @candidate_reference

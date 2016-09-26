@@ -1,0 +1,8 @@
+<p id="notice"><%= notice %></p>
+
+<b><%= @candidate_course_score.score %></b><br>
+<p><%= @candidate_course_score.start_year %></p><br>
+<p><%= @candidate_course_score.end_year %></p><br>
+
+<%= link_to 'Edit', edit_candidate_course_score_path(course_scores_path_params) %> |
+<%= link_to 'Back', candidate_course_scores_path %>
