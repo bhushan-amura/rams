@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Candidate Projects</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @candidate_projects.each do |candidate_project| %>
+      <tr>
+        <td><b><%= candidate_project.title %></b> </td>
+        <td><i><%= candidate_project.domain %></i></td>
+        <td><%= link_to 'Show', candidate_project_path(candidate_id:params[:candidate_id], id:candidate_project.id) %></td>
+        <td><%= link_to 'Edit', edit_candidate_project_path(candidate_id:params[:candidate_id], id:candidate_project.id) %></td>
+        <td><%= link_to 'Destroy', candidate_project_path(candidate_id:params[:candidate_id], id:candidate_project.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Project', new_candidate_project_path %>
