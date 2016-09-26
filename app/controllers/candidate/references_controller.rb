@@ -49,7 +49,7 @@ class Candidate::ReferencesController < ApplicationController
   def update
     respond_to do |format|
       if @candidate_reference.update(candidate_reference_params)
-        format.html { redirect_to candidate_reference(reference_path_params), notice: 'Reference was successfully updated.' }
+        format.html { redirect_to candidate_reference_path(reference_path_params), notice: 'Reference was successfully updated.' }
         format.json { render :show, status: :ok, location: @candidate_reference }
       else
         format.html { render :edit }
