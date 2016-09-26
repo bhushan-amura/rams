@@ -8,28 +8,28 @@ class Candidate::ReferencesController < ApplicationController
 
   before_action :set_candidate_reference, only: [:show, :edit, :update, :destroy]
 
-  # GET /candidate/references
-  # GET /candidate/references.json
+  # GET /candidate/:id/references
+  # GET /candidate/:id/references.json
   def index
     @candidate_references = @candidate.references
   end
 
-  # GET /candidate/references/1
-  # GET /candidate/references/1.json
+  # GET /candidate/:id/references/1
+  # GET /candidate/:id/references/1.json
   def show
   end
 
-  # GET /candidate/references/new
+  # GET /candidate/:id/references/new
   def new
     @candidate_reference = Candidate::Reference.new
   end
 
-  # GET /candidate/references/1/edit
+  # GET /candidate/:id/references/1/edit
   def edit
   end
 
-  # POST /candidate/references
-  # POST /candidate/references.json
+  # POST /candidate/:id/references
+  # POST /candidate/:id/references.json
   def create
     @candidate_reference = @candidate.references.build(candidate_reference_params)
 
@@ -44,8 +44,8 @@ class Candidate::ReferencesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /candidate/references/1
-  # PATCH/PUT /candidate/references/1.json
+  # PATCH/PUT /candidate/:id/references/1
+  # PATCH/PUT /candidate/:id/references/1.json
   def update
     respond_to do |format|
       if @candidate_reference.update(candidate_reference_params)
@@ -58,8 +58,8 @@ class Candidate::ReferencesController < ApplicationController
     end
   end
 
-  # DELETE /candidate/references/1
-  # DELETE /candidate/references/1.json
+  # DELETE /candidate/:id/references/1
+  # DELETE /candidate/:id/references/1.json
   def destroy
     @candidate_reference.destroy
     respond_to do |format|
