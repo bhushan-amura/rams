@@ -1,5 +1,5 @@
 class UserController < ApplicationController
- before_filter :authenticate_user!
+ # before_filter :authenticate_user!
 
  def index
     @whichuser = current_user.admin||current_user.candidate||current_user.company
@@ -8,10 +8,10 @@ class UserController < ApplicationController
  		@useris = @whichuser
  	elsif @whichuser == Candidate
  		@useris = @whichuser
- 		redirect_to(:controller => 'company', :action => 'index')
+ 		redirect_to(candidates_path)
  	else
  		@useris = @whichuser
- 		redirect_to(:controller => 'company', :action => 'index')
+ 		redirect_to(companies_path)
  	end
  end
 end

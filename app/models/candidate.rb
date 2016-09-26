@@ -28,7 +28,6 @@ class Candidate < ActiveRecord::Base
 
 
   # validations
-  #
 	#validates :first_name, :format => REGEX_NAME_FORMAT,
 			#:presence => true
 	#validates :last_name, :format => REGEX_NAME_FORMAT,
@@ -39,4 +38,8 @@ class Candidate < ActiveRecord::Base
 	validates :languages, length: { maximum: 65535 }
 	validates :summary, length: { maximum: 65535 }
 	validates :interests, length: { maximum: 65535 }
+
+  # constants
+  GENDER = [["M","M"], ["F","F"], ["T","T"]]
+  MARITAL = ["married", "unmarried"]
 end
