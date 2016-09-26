@@ -1,0 +1,10 @@
+<p id="notice"><%= notice %></p>
+
+<b><%= @candidate_project.title %></b><br>
+<p><%= @candidate_project.domain %></p><br>
+<p><%= @candidate_project.description %></p><br>
+
+
+<% project_path_params = { candidate_id:params[:candidate_id], id:@candidate_project.id } %>
+<%= link_to 'Edit', edit_candidate_project_path(project_path_params) %> |
+<%= link_to 'Back', candidate_projects_path %>
