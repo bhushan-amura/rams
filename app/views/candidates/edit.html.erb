@@ -1,0 +1,9 @@
+<h1>Editing Candidate</h1>
+
+<%= form_for @candidate do |f| %>
+  <%= render 'form', :locals => {:f => f} %>
+<% end %>
+
+
+<%= link_to 'Show', @candidate %> |
+<%= link_to 'Back', candidates_path %>
