@@ -25,11 +25,11 @@
     </tr>
     <tr>
       <th>Gender</th>
-      <td><%= f.select :gender, Candidate::GENDER %></td>
+      <td><%= f.select :gender, options_for_select(Candidate::GENDER, selected_key = f.object.gender) %></td>
     </tr>
     <tr>
       <th>Marital Status</th>
-      <td><%= f.select :gender,  Candidate::MARITAL %></td>
+      <td><%= f.select :marital_status, options_for_select(Candidate::MARITAL, selected_key = f.object.marital_status) %></td>
     </tr>
     <tr>
       <th>Have Job?</th>
