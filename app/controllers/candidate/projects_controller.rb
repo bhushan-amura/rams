@@ -1,36 +1,43 @@
 class Candidate::ProjectsController < CandidatesController
-  before_action only: [:show, :edit, :update, :destroy, :index] do
-    set_candidate(params[:candidate_id])
+
+  include Candidate::ProjectsHelper
+
+  before_action only: [:show, :edit, :update, :destroy, :index, :create] do
+    set_candidate
   end
 
-  # GET /candidate/projects
-  # GET /candidate/projects.json
+  before_action only: [:show, :edit, :update, :destroy] do
+    set_candidate_project
+  end
+
+  # GET /candidate/:id/projects
+  # GET /candidate/:id/projects.json
   def index
-    @candidate_projects = Candidate::Project.all
+    @candidate_projects = @candidate.projects
   end
 
-  # GET /candidate/projects/1
-  # GET /candidate/projects/1.json
+  # GET /candidate/:id/projects/1
+  # GET /candidate/:id/projects/1.json
   def show
   end
 
-  # GET /candidate/projects/new
+  # GET /candidate/:id/projects/new
   def new
     @candidate_project = Candidate::Project.new
   end
 
-  # GET /candidate/projects/1/edit
+  # GET /candidate/:id/projects/1/edit
   def edit
   end
 
-  # POST /candidate/projects
-  # POST /candidate/projects.json
+  # POST /candidate/:id/projects
+  # POST /candidate/:id/projects.json
   def create
-    @candidate_project = Candidate::Project.new(candidate_project_params)
+    @candidate_project = @candidate.projects.build(candidate_project_params)
 
     respond_to do |format|
       if @candidate_project.save
-        format.html { redirect_to @candidate_project, notice: 'Project was successfully created.' }
+        format.html { redirect_to candidate_project_path(project_path_params), notice: 'Project was successfully created.' }
         format.json { render :show, status: :created, location: @candidate_project }
       else
         format.html { render :new }
@@ -39,8 +46,8 @@ class Candidate::ProjectsController < CandidatesController
     end
   end
 
-  # PATCH/PUT /candidate/projects/1
-  # PATCH/PUT /candidate/projects/1.json
+  # PATCH/PUT /candidate/:id/projects/1
+  # PATCH/PUT /candidate/:id/projects/1.json
   def update
     respond_to do |format|
       if @candidate_project.update(candidate_project_params)
@@ -53,8 +60,8 @@ class Candidate::ProjectsController < CandidatesController
     end
   end
 
-  # DELETE /candidate/projects/1
-  # DELETE /candidate/projects/1.json
+  # DELETE /candidate/:id/projects/1
+  # DELETE /candidate/:id/projects/1.json
   def destroy
     @candidate_project.destroy
     respond_to do |format|
@@ -65,12 +72,15 @@ class Candidate::ProjectsController < CandidatesController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    # def set_candidate
-    #   @candidate = Candidate.find(params[:candidate_id])
-    # end
+    def set_candidate
+      @candidate = Candidate.find(params[:candidate_id])
+    end
+    def set_candidate_project
+      @candidate_project = @candidate.projects.find(params[:id])
+    end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def candidate_project_params
-      params.require(:candidate_achievements).permit(:title,:domain,:description,:organisation,:position)
+      params.require(:candidate_project).permit(:title,:domain,:description,:organisation,:position,:start_date,:end_date)
     end
 end

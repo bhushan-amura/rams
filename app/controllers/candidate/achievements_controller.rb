@@ -2,6 +2,9 @@ class Candidate::AchievementsController < CandidatesController
   before_action only: [:show, :edit, :update, :destroy,:index] do
     set_candidate(params[:candidate_id])
   end
+  before_action only: [:show, :edit, :update, :destroy] do
+    set_candidate_achievement
+  end
 
   # GET /candidate/:id/achievements
   # GET /candidate/:id/achievements.json
@@ -65,7 +68,9 @@ class Candidate::AchievementsController < CandidatesController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-
+    def set_candidate_achievement
+      @candidate_achievement = @candidate.achievements.find(params[:id])
+    end
     # Never trust parameters from the scary internet, only allow the white list through.
     def candidate_achievement_params
       params.fetch(:candidate_achievement, {})
