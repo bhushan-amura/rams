@@ -3,14 +3,19 @@ Rails.application.routes.draw do
   root to: 'user#index'
 
   resources :companies do
-    resources :jobs, to: 'company/job_opportunities' do
-      resources :events, to: 'company/events'
+    scope module:'company' do
+    resources :jobs  do
+      resources :events
+    end
     end
   end
   
   resources :admins
 
   resources :candidates do
+    member do
+      get 'home'
+    end
     scope module:'candidate' do
       resources :achievements
       resources :projects

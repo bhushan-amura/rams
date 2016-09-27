@@ -1,7 +1,9 @@
 class CandidatesController < ApplicationController
 
+  # layouts
+  layout 'candidate/layout'
   # filters/callbacks
-  before_action :set_candidate, only: [:show, :edit, :update, :destroy]  
+  before_action :set_candidate, only: [:show, :edit, :update, :destroy, :home]  
 
   # GET /candidates
   # GET /candidates.json
@@ -62,6 +64,10 @@ class CandidatesController < ApplicationController
       format.html { redirect_to candidates_url, notice: 'Candidate was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  # HOME /candidate/1/home
+  def home
   end
 
   private
