@@ -1,5 +1,8 @@
 <p id="notice"><%= notice %></p>
 <h1>Showing skills</h1>
-
-<%= link_to 'Edit', edit_skill_path(@skill) %> |
-<%= link_to 'Back', skills_path %>
+<p>
+  <b>Name : </b>
+  <%= @skill.name %>
+</p>
+<%= link_to 'Edit', self.send(skill_path('edit'),skill_path_params(@skill)) %> |
+<%= link_to 'Back', self.send(skill_path('index')) %>

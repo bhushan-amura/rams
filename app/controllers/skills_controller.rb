@@ -1,4 +1,8 @@
 class SkillsController < ApplicationController
+
+  #helpers
+  include SkillsHelper
+
   before_action :set_entity
   before_action :set_skill, only: [:show, :edit, :update, :destroy]
 
@@ -43,7 +47,7 @@ class SkillsController < ApplicationController
   def update
     respond_to do |format|
       if @skill.update(skill_params)
-        format.html { redirect_to @skill, notice: 'Skill was successfully updated.' }
+        format.html { redirect_to self.send(skill_path,skill_path_params(@skill)), notice: 'Skill was successfully updated.' }
         format.json { render :show, status: :ok, location: @skill }
       else
         format.html { render :edit }
@@ -57,7 +61,7 @@ class SkillsController < ApplicationController
   def destroy
     @skill.destroy
     respond_to do |format|
-      format.html { redirect_to skills_url, notice: 'Skill was successfully destroyed.' }
+      format.html { redirect_to self.send(skill_path('index')), notice: 'Skill was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

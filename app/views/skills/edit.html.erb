@@ -1,6 +1,7 @@
 <h1>Editing Skill</h1>
 
-<%= render 'form' %>
+<%= render 'form', required_url: self.send(skill_path, skill_path_params(@skill)) %>
 
-<%= link_to 'Show', @skill %> |
-<%= link_to 'Back', skills_path %>
+<%= link_to 'Show', self.send(skill_path,skill_path_params(@skill))
+ %> |
+<%= link_to 'Back', self.send(skill_path('index')) %>
