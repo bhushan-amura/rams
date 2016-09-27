@@ -21,7 +21,7 @@ Rails.application.routes.draw do
     resources :qualifications, as:'job_qualification'
   end
 
-  scope '/candidates/:id/' do
+  scope '/candidates/:candidate_id/' do
     resources :skills, as:'candidate_skill'
   end
 

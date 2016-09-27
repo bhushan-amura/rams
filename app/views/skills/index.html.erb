@@ -12,9 +12,10 @@
   <tbody>
     <% @skills.each do |skill| %>
       <tr>
-        <td><%= link_to 'Show', skill %></td>
-        <td><%= link_to 'Edit', edit_skill_path(skill) %></td>
-        <td><%= link_to 'Destroy', skill, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= skill.name %></td>
+        <td><%= link_to 'Show', self.send(skill_path, skill_path_params(skill)) %></td>
+        <td><%= link_to 'Edit', self.send(skill_path('edit'), skill_path_params(skill)) %></td>
+        <td><%= link_to 'Destroy', self.send(skill_path, skill_path_params(skill)), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -22,4 +23,4 @@
 
 <br>
 
-<%= link_to 'New Skill', new_skill_path %>
+<%= link_to 'New Skill', self.send(skill_path('new')) %>
