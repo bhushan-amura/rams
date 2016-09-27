@@ -38,30 +38,23 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
   gem 'rspec-rails', '~> 3.5'
-  gem 'shoulda-matchers', require: false
-  gem 'rspec-core', '~> 3.5', '>= 3.5.3'
-  gem 'rspec-expectations', '~> 3.5'
-  gem 'rspec-mocks', '~> 3.5'
-  # gem 'rspec-support', '~> 3.4', '>= 3.4.1'
-  gem 'rspec-matchers-matchers', '~> 1.0'
- # gem 'factory_girl'#, '~> 4.7'
- gem "factory_girl_rails", "~> 4.0"
-# gem 'activesupport', '~> 5.0', '>= 5.0.0.1'
- gem 'database_cleaner', '~> 1.5', '>= 1.5.3'
- gem 'faker', '~> 1.6', '>= 1.6.6'
- gem 'i18n', '~> 0.7.0'
+  # gem 'rspec-core', '~> 3.5', '>= 3.5.3'
+  # gem 'rspec-expectations', '~> 3.5'
+  # gem 'rspec-mocks', '~> 3.5'
+  # gem 'rspec-matchers-matchers', '~> 1.0'
+  gem "factory_girl_rails", "~> 4.0"
+  gem 'database_cleaner', '~> 1.5', '>= 1.5.3'
+  gem 'faker', '~> 1.6', '>= 1.6.6'
+  gem 'i18n', '~> 0.7.0'
 end
 
 group :test do
-	gem 'shoulda'
-	gem 'shoulda-context'
 end
 
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
-
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'html_routes', '~> 1.0'
