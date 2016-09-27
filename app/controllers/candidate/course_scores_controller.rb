@@ -35,7 +35,7 @@ class Candidate::CourseScoresController < CandidatesController
 
     respond_to do |format|
       if @candidate_course_score.save
-        format.html { redirect_to candidate_course_score_path(course_scores_path_params), notice: 'Course score was successfully created.' }
+        format.html { redirect_to candidate_course_score_path(course_score_path_params(@candidate_course_score)), notice: 'Course score was successfully created.' }
         format.json { render :show, status: :created, location: @candidate_course_score }
       else
         format.html { render :new }
@@ -49,7 +49,7 @@ class Candidate::CourseScoresController < CandidatesController
   def update
     respond_to do |format|
       if @candidate_course_score.update(candidate_course_score_params)
-        format.html { redirect_to candidate_course_score_path(course_scores_path_params), notice: 'Course score was successfully updated.' }
+        format.html { redirect_to candidate_course_score_path(course_score_path_params(@candidate_course_score)), notice: 'Course score was successfully updated.' }
         format.json { render :show, status: :ok, location: @candidate_course_score }
       else
         format.html { render :edit }
