@@ -7,7 +7,7 @@ Rails.application.routes.draw do
       resources :events, to: 'company/events'
     end
   end
-  
+
   resources :admins
 
   resources :candidates do
@@ -26,8 +26,9 @@ Rails.application.routes.draw do
   scope '/candidates/:candidate_id/' do
     resources :qualifications, as:'candidate_qualification'
     resources :skills, as:'candidate_skill'
-    resource :location, as:'candidate_location'
     resources :reviews, as:'review', except:[:edit,:update]
+
+    resource :location , as:'candidate_location'
   end
 
   scope '/companies/:company_id/' do
