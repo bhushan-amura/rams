@@ -1,13 +1,32 @@
 Rails.application.routes.draw do
   devise_for :users
   resources :candidates do
-    resources :achievements,      module: "candidate"
-    resources :projects,          module: "candidate"
-    resources :course_scores,     module: "candidate"
-    resources :references,        module: "candidate"
-    resources :experiences,       module:"candidate"
-    resources :links,             module:"candidate"
-    resources :skills,            module:"candidate"
+    scope module:'candidate' do
+      resources :achievements
+      resources :projects
+      resources :course_scores
+      resources :references
+      resources :experiences
+      resources  :links
+      resources :references
+    end
+  end
+
+
+  scope '/candidates/:id/' do
+    resources :qualifications, as:'candidate_qualification'
+  end
+
+  scope '/companies/:company_id/jobs/:job_id' do
+    resources :qualifications, as:'job_qualification'
+  end
+
+  scope '/candidates/:id/' do
+    resources :skills, as:'candidate_skill'
+  end
+
+  scope '/companies/:company_id/jobs/:job_id' do
+    resources :skills, as:'job_skill'
   end
 
   # The priority is based upon order of creation: first created -> highest priority.
