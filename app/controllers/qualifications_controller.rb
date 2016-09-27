@@ -30,10 +30,11 @@ class QualificationsController < ApplicationController
   # POST /qualifications
   # POST /qualifications.json
   def create
-    @qualification = @entity.qualifications.build(qualification_params)
+    @qualification = Qualification.new(qualification_params)
 
     respond_to do |format|
       if @qualification.save
+        @entity.qualifications << @qualification
         format.html { redirect_to self.send(qualification_path,qualification_path_params(@qualification)), notice: 'Qualification was successfully created.' }
         format.json { render :show, status: :created, location: @qualification }
       else
@@ -60,7 +61,7 @@ class QualificationsController < ApplicationController
   # DELETE /qualifications/1
   # DELETE /qualifications/1.json
   def destroy
-    @qualification.destroy
+    @entity.qualifications.destroy(@qualification)
     respond_to do |format|
       format.html { redirect_to self.send(qualification_path('index')), notice: 'Qualification was successfully destroyed.' }
       format.json { head :no_content }
