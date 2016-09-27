@@ -1,11 +1,15 @@
 class ReviewsController < ApplicationController
+
+  #helpers
+  include ReviewsHelper
+
   before_action :set_entity
   before_action :set_review, only: [:show, :edit, :update, :destroy]
 
   # GET /reviews
   # GET /reviews.json
   def index
-    @reviews = @entity.reviews.all
+    @reviews = @entity.reviews
   end
 
   # GET /reviews/1
@@ -16,6 +20,7 @@ class ReviewsController < ApplicationController
   # GET /reviews/new
   def new
     @review = Review.new
+    @company = Company.all
   end
 
   # GET /reviews/1/edit
@@ -29,7 +34,9 @@ class ReviewsController < ApplicationController
 
     respond_to do |format|
       if @review.save
-        format.html { redirect_to @review, notice: 'Review was successfully created.' }
+        @candidate.reviews << @review
+        # @company.reviews << @review
+        format.html { redirect_to review_path(review_path_params(@review)), notice: 'Review was successfully created.' }
         format.json { render :show, status: :created, location: @review }
       else
         format.html { render :new }
@@ -57,7 +64,7 @@ class ReviewsController < ApplicationController
   def destroy
     @review.destroy
     respond_to do |format|
-      format.html { redirect_to reviews_url, notice: 'Review was successfully destroyed.' }
+      format.html { redirect_to review_index_path, notice: 'Review was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -67,8 +74,10 @@ class ReviewsController < ApplicationController
     def set_entity
       if params.has_key?(:candidate_id)
         @entity = Candidate.find(params[:candidate_id])
+        @candidate = @entity
       elsif params.has_key?(:job_id)
-         @entity = Company::JobOpportunity.find(params[:job_id])
+         @entity = Company.find(params[:job_id])
+         @company = @entity
       end
     end
 

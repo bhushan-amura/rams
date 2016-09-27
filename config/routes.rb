@@ -7,7 +7,7 @@ Rails.application.routes.draw do
       resources :course_scores
       resources :references
       resources :experiences
-      resources  :links
+      resources :links
       resources :references
     end
   end
@@ -17,10 +17,12 @@ Rails.application.routes.draw do
     resources :qualifications, as:'candidate_qualification'
     resources :skills, as:'candidate_skill'
     resource :location, as:'candidate_location'
+    resources :reviews, as:'review', except:[:edit,:update]
   end
 
   scope '/companies/:company_id/' do
     resource :location, as:'company_location'
+    resources :reviews, as:'reviews', only:[:index,:show]
     scope 'jobs/:job_id' do
       resources :qualifications, as:'job_qualification'
       resources :skills, as:'job_skill'
