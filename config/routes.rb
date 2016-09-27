@@ -26,14 +26,13 @@ Rails.application.routes.draw do
   scope '/candidates/:candidate_id/' do
     resources :qualifications, as:'candidate_qualification'
     resources :skills, as:'candidate_skill'
-    resources :reviews, as:'review', except:[:edit,:update]
-
+    resources :reviews, as:'candidate_reviews', except:[:update,:edit]
     resource :location , as:'candidate_location'
   end
 
   scope '/companies/:company_id/' do
     resource :location, as:'company_location'
-    resources :reviews, as:'reviews', only:[:index,:show]
+    resources :reviews, as:'company_reviews', only:[:index,:show]
     scope 'jobs/:job_id' do
       resources :qualifications, as:'job_qualification'
       resources :skills, as:'job_skill'

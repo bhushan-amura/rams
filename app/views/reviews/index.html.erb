@@ -14,15 +14,17 @@
       <tr>
         <td><%= review.rating %></td>
         <td><%= review.text %></td>
-        <td><%#= review.company.name %></td>
-        <td><%#= review.company.tagline %></td>
-        <td><%= link_to 'Show', review_path(review_path_params(review)) %></td>
-        <td><%= link_to 'Destroy', review_path(review_path_params(review)), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show',self.send(review_path,review_path_params(review))%></td>
+        <% if @entity.instance_of?(Candidate) %>
+        <td><%= link_to 'Destroy', self.send(review_path, review_path_params(review)), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
+<% if @entity.instance_of?(Candidate) %>
+  <%= link_to 'New Review', new_candidate_review_path %>
 
-<%= link_to 'New Review', new_review_path %>
+<% end %>
