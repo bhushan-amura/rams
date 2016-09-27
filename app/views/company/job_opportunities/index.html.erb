@@ -1,0 +1,37 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Company Job Opportunities</h1>
+<h3><%= link_to 'new posting', new_company_job_path(@company) %></h3>
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @company_job_opportunities.each do |company_job_opportunity| %>
+      <tr>
+        <h4>title</h4><p> <%= company_job_opportunity.title %></p>
+        <h4>shift</h4><p> <%= company_job_opportunity.shift %></p>
+        <h4>description</h4><p> <%= company_job_opportunity.description %></p>
+        <h4>positions available</h4><p> <%= company_job_opportunity.number_of_positions %></p>
+        <h4>status</h4><p> <%= company_job_opportunity.status %></p>
+        <h4>ctc</h4><p> <%= company_job_opportunity.ctc %></p>
+        <h4>minimum experience</h4><p> <%= company_job_opportunity.experience %></p>
+        <h4>posted on:</h4><p> <%= company_job_opportunity.updated_at %></p>
+        <p><%#= link_to 'Show events',  company_job_events(job_opportunity_path_params(company_job_opportunity)) %></p>
+        
+        <p><%= link_to 'Show',  company_job_path(job_opportunity_path_params(company_job_opportunity)) %></p>
+        
+        <p><%= link_to 'Edit', edit_company_job_path(job_opportunity_path_params(company_job_opportunity)) %></p>
+        <h4><%= link_to 'Destroy', company_job_path(job_opportunity_path_params(company_job_opportunity)), method: :delete, data: { confirm: 'Are you sure?' } %></h4>
+        <hr>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Job opportunity', new_company_job_path %>

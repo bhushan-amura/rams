@@ -1,0 +1,45 @@
+<!-- <p id="notice"><%= notice %></p> -->
+
+<table>
+	<tr>
+		<th>Name</th>
+		<td><%= @company.name %></td>
+	</tr>
+	<tr>
+		<th>Type</th>
+		<td><%= @company.company_type %></td>
+	</tr>
+	<tr>
+		<th>url</th>
+		<td><%= link_to "Visit", @company.url %></td>
+	</tr>
+	<tr>
+		<th>tagline</th>
+		<td><%= @company.tagline %></td>
+	</tr>
+	<tr>
+		<th>Contact</th>
+		<td><%= @company.phone %></td>
+	</tr>
+	<tr>
+		<th>number_of_employees</th>
+		<td><%= @company.number_of_employees %></td>
+	</tr>
+	<tr>
+		<th>description</th>
+		<td><%= @company.description %></td>
+	</tr>
+	<tr>
+		<th>logo</th>
+		<td><%= image_tag( @company.logo , size: "160x100", alt: @company.name) %></td>
+	</tr>
+	<tr>
+		<th>email</th>
+		<td><%= User.find_by(id:@company.user_id).email %></td>
+	</tr>
+</table>
+
+<%= link_to 'Edit Profile', edit_company_path(@company) %>
+<%= link_to 'job postings', company_jobs_path(@company) %>
+
+

@@ -1,5 +1,15 @@
 Rails.application.routes.draw do
   devise_for :users
+  root to: 'user#index'
+
+  resources :companies do
+    resources :jobs, to: 'company/job_opportunities' do
+      resources :events, to: 'company/events'
+    end
+  end
+  
+  resources :admins
+
   resources :candidates do
     scope module:'candidate' do
       resources :achievements
