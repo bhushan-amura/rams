@@ -11,7 +11,6 @@
 
   <tbody>
     <% @candidate_course_scores.each do |candidate_course_score| %>
-    <% course_scores_path_params = { candidate_id:params[:candidate_id], id:candidate_course_score.id } %>
       <tr>
         <td>
           <%= candidate_course_score.qualification.course %>
@@ -19,9 +18,9 @@
         <td><%= candidate_course_score.score %></td>
         <td><%= candidate_course_score.start_year%></td>
         <td><%= candidate_course_score.end_year%></td>
-        <td><%= link_to 'Show', candidate_course_score_path(course_scores_path_params) %></td>
-        <td><%= link_to 'Edit', edit_candidate_course_score_path(course_scores_path_params) %></td>
-        <td><%= link_to 'Destroy', candidate_course_score_path(course_scores_path_params), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', candidate_course_score_path(course_score_path_params(candidate_course_score)) %></td>
+        <td><%= link_to 'Edit', edit_candidate_course_score_path(course_score_path_params(candidate_course_score)) %></td>
+        <td><%= link_to 'Destroy', candidate_course_score_path(course_score_path_params(candidate_course_score)), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

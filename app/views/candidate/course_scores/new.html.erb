@@ -1,6 +1,6 @@
 <h1>New Candidate Course Score</h1>
 
-<% course_scores_path_params = { candidate_id:params[:candidate_id], id:@candidate_course_score.id } %>
-<%= render 'form', required_url: candidate_course_scores_path(course_scores_path_params) %>
+<% course_score_path_params(@candidate_course_score) = { candidate_id:params[:candidate_id], id:@candidate_course_score.id } %>
+<%= render 'form', required_url: candidate_course_scores_path(course_score_path_params(@candidate_course_score)) %>
 
 <%= link_to 'Back', candidate_course_scores_path %>

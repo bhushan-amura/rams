@@ -8,6 +8,7 @@ Rails.application.routes.draw do
       resources :references
       resources :experiences
       resources  :links
+      resources :references
     end
   end
 
@@ -15,9 +16,17 @@ Rails.application.routes.draw do
   scope '/candidates/:candidate_id/' do
     resources :qualifications, as:'candidate_qualification'
   end
-  
+
   scope '/companies/:company_id/jobs/:job_id' do
     resources :qualifications, as:'job_qualification'
+  end
+
+  scope '/candidates/:candidate_id/' do
+    resources :skills, as:'candidate_skill'
+  end
+
+  scope '/companies/:company_id/jobs/:job_id' do
+    resources :skills, as:'job_skill'
   end
 
   # The priority is based upon order of creation: first created -> highest priority.
