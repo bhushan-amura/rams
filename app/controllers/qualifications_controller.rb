@@ -7,28 +7,36 @@ class QualificationsController < ApplicationController
   before_action :set_entity
   before_action :set_qualification, only: [:show, :edit, :update, :destroy]
 
-  # GET /qualifications
-  # GET /qualifications.json
+  # GET /candidates/:candidate_id/qualifications
+  # GET /candidates/:candidate_id/qualifications.json
+  # GET /companies/:company_id/jobs/:job_id/qualifications
+  # GET /companies/:company_id/jobs/:job_id/qualifications.json
   def index
     @qualifications = @entity.qualifications
   end
 
-  # GET /qualifications/1
-  # GET /qualifications/1.json
+  # GET /candidates/:candidate_id/qualifications/1
+  # GET /candidates/:candidate_id/qualifications/1.json
+  # GET /companies/:company_id/jobs/:job_id/qualifications/1
+  # GET /companies/:company_id/jobs/:job_id/qualifications/1.json
   def show
   end
 
-  # GET /qualifications/new
+  # GET /candidates/:candidate_id/qualifications/new
+  # GET /companies/:company_id/jobs/:job_id/qualifications/new
   def new
     @qualification = Qualification.new
   end
 
-  # GET /qualifications/1/edit
+  # GET /candidates/:candidate_id/qualifications/1/edit
+  # GET /companies/:company_id/jobs/:job_id/qualifications/1/edit
   def edit
   end
 
-  # POST /qualifications
-  # POST /qualifications.json
+  # POST /candidates/:candidate_id/qualifications
+  # POST /candidates/:candidate_id/qualifications.json
+  # POST /companies/:company_id/jobs/:job_id/qualifications
+  # POST /companies/:company_id/jobs/:job_id/qualifications.json
   def create
     @qualification = Qualification.new(qualification_params)
 
@@ -44,8 +52,10 @@ class QualificationsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /qualifications/1
-  # PATCH/PUT /qualifications/1.json
+  # PATCH/PUT /candidates/:candidate_id/qualifications/1
+  # PATCH/PUT /candidates/:candidate_id/qualifications/1.json
+  # PATCH/PUT /companies/:company_id/jobs/:job_id/qualifications/1
+  # PATCH/PUT /companies/:company_id/jobs/:job_id/qualifications/1.json
   def update
     respond_to do |format|
       if @qualification.update(qualification_params)
@@ -58,8 +68,10 @@ class QualificationsController < ApplicationController
     end
   end
 
-  # DELETE /qualifications/1
-  # DELETE /qualifications/1.json
+  # DELETE /candidates/:candidate_id/qualifications/1
+  # DELETE /candidates/:candidate_id/qualifications/1.json
+  # DELETE /companies/:company_id/jobs/:job_id/qualifications/1
+  # DELETE /companies/:company_id/jobs/:job_id/qualifications/1.json
   def destroy
     @entity.qualifications.destroy(@qualification)
     respond_to do |format|

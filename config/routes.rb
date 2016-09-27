@@ -25,19 +25,21 @@ Rails.application.routes.draw do
 
   scope '/candidates/:candidate_id/' do
     resources :qualifications, as:'candidate_qualification'
-  end
-
-  scope '/companies/:company_id/jobs/:job_id' do
-    resources :qualifications, as:'job_qualification'
-  end
-
-  scope '/candidates/:candidate_id/' do
     resources :skills, as:'candidate_skill'
+    resource :location , as:'candidate_location'
   end
 
-  scope '/companies/:company_id/jobs/:job_id' do
-    resources :skills, as:'job_skill'
+  scope '/companies/:company_id/' do
+    resource :location, as:'company_location'
+    scope 'jobs/:job_id' do
+      resources :qualifications, as:'job_qualification'
+      resources :skills, as:'job_skill'
+      scope '/events/:event_id' do
+        resource :location, as: 'event_location'
+      end
+    end
   end
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
