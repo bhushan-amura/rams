@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Candidate References</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @candidate_references.each do |candidate_reference| %>
+      <% reference_path_params = { candidate_id:params[:candidate_id], id:candidate_reference.id } %>
+      <tr>
+        <td><%= candidate_reference.name %></td>
+        <td><%= candidate_reference.email%></td>
+        <td><%= candidate_reference.contact%></td>
+        <td><%= link_to 'Show', candidate_reference_path(reference_path_params) %></td>
+        <td><%= link_to 'Edit', edit_candidate_reference_path(reference_path_params) %></td>
+        <td><%= link_to 'Destroy', candidate_reference_path(reference_path_params), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Reference', new_candidate_reference_path %>

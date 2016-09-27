@@ -1,0 +1,6 @@
+<h1>New Candidate Reference</h1>
+
+<% reference_path_params = { candidate_id:params[:candidate_id], id:@candidate_reference.id } %>
+<%= render 'form', required_url: candidate_references_path(reference_path_params) %>
+
+<%= link_to 'Back', candidate_references_path %>
