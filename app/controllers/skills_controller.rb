@@ -29,10 +29,11 @@ class SkillsController < ApplicationController
   # POST /skills
   # POST /skills.json
   def create
-    @skill = @entity.skills.build(skill_params)
+    @skill = Skill.new(skill_params)
 
     respond_to do |format|
       if @skill.save
+        @entity.skills << @skill
         format.html { redirect_to self.send(skill_path,skill_path_params(@skill)), notice: 'Skill was successfully created.' }
         format.json { render :show, status: :created, location: @skill }
       else
@@ -59,7 +60,7 @@ class SkillsController < ApplicationController
   # DELETE /skills/1
   # DELETE /skills/1.json
   def destroy
-    @skill.destroy
+    @entity.skills.destroy(@skill)
     respond_to do |format|
       format.html { redirect_to self.send(skill_path('index')), notice: 'Skill was successfully destroyed.' }
       format.json { head :no_content }
