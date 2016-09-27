@@ -1,0 +1,34 @@
+<%= form_for(@candidate_course_score, url: required_url ) do |f| %>
+  <% if @candidate_course_score.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@candidate_course_score.errors.count, "error") %> prohibited this candidate_course_score from being saved:</h2>
+
+      <ul>
+      <% @candidate_course_score.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <table>
+    <tr>
+      <th><%= f.label :score %></th>
+      <td><%= f.text_field :score %></td>
+    </tr>
+    <tr>
+      <th><%= f.label :start_year %></th>
+      <td><%= f.date_select(:start_year,:start_year => Time.now.year, :end_year => Time.now.year - 95, :field_name => 'start_year') %></td>
+    </tr>
+    <tr>
+      <th><%= f.label :end_year %></th>
+      <td><%= f.date_select(:end_year,:start_year => Time.now.year, :end_year => Time.now.year - 95, :field_name => 'end_year') %></td>
+    </tr>
+    <tr>
+      <th><%= f.label :qualification %></th>
+      <td><%= f.select :qualification_id, options_for_select(@qualifications.map{ |x| [x.course, x.id] }, selected_key = f.object.qualification_id) %></td>
+    </tr>
+  </table>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

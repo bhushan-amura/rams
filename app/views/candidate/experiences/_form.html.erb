@@ -1,0 +1,42 @@
+<%= form_for @candidate_experience, url: required_url do |f| %>
+  <% if @candidate_experience.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@candidate_experience.errors.count, "error") %> prohibited this candidate_experience from being saved:</h2>
+
+      <ul>
+      <% @candidate_experience.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <p>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+  </p>
+
+  <p>
+  <%= f.label :start_date %>
+  <%= f.date_field :start_date %>
+  </p>
+
+  <p>
+  <%= f.label :end_date %>
+  <%= f.date_field :end_date %>
+  </p>
+
+  <p>
+  <%= f.label :description %>
+  <%= f.text_area :description %>
+  </p>
+
+  <p>
+  <%= f.label :shift_type %>
+  <%= f.text_field :shift_type %>
+  </p>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

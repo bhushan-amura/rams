@@ -18,4 +18,7 @@ class  Company::JobOpportunity < ActiveRecord::Base
   validates :description, presence:true, length: { maximum: 65535 }
   validates :number_of_positions, presence:true
 
+  #constants
+  STATUS = ["OPEN","CLOSED"]
+
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160925074948) do
+ActiveRecord::Schema.define(version: 20160927054900) do
 
   create_table "admins", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
@@ -151,14 +151,14 @@ ActiveRecord::Schema.define(version: 20160925074948) do
   add_index "company_events", ["company_job_opportunity_id"], name: "index_company_events_on_company_job_opportunity_id", using: :btree
 
   create_table "company_job_opportunities", force: :cascade do |t|
-    t.string   "title",               limit: 255,   null: false
-    t.string   "shift",               limit: 255,   null: false
-    t.text     "description",         limit: 65535, null: false
-    t.integer  "number_of_positions", limit: 4,     null: false
-    t.boolean  "status"
+    t.string   "title",               limit: 255,                         null: false
+    t.string   "shift",               limit: 255,                         null: false
+    t.text     "description",         limit: 65535,                       null: false
+    t.integer  "number_of_positions", limit: 4,                           null: false
+    t.string   "status",              limit: 255,   default: "available"
     t.string   "ctc",                 limit: 255
-    t.datetime "created_at",                        null: false
-    t.datetime "updated_at",                        null: false
+    t.datetime "created_at",                                              null: false
+    t.datetime "updated_at",                                              null: false
     t.integer  "company_id",          limit: 4
     t.integer  "experience",          limit: 4
   end

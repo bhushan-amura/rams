@@ -224,6 +224,9 @@ def assign_qualification_candidate(max_qualifications_per_candidate=5)
   end
 end
 
+def create_institutes(institute_count=4,institute_qual_count=5)
+end
+
 def create_course_scores
   puts "Assigning course scores to candidate qualifications....."
   candidates = Candidate.all

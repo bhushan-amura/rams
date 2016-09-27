@@ -5,8 +5,9 @@ class QualificationAssignment < ActiveRecord::Base
   # callbacks
   
   # associations
-    belongs_to  :qualification
-    belongs_to  :qualifiable, polymorphic: true
+  belongs_to  :qualification
+  belongs_to  :qualifiable, polymorphic: true
+
 
   # validations
 end

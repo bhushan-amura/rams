@@ -1,0 +1,6 @@
+<h1>Editing Candidate Link</h1>
+
+<%= render 'form',required_url: candidate_link_path(link_path_params(@candidate_link)) %>
+
+<%= link_to 'Show', candidate_link_path(link_path_params(@candidate_link)) %> |
+<%= link_to 'Back', candidate_links_path %>
