@@ -11,14 +11,13 @@
 
   <tbody>
     <% @candidate_experiences.each do |candidate_experience| %>
-      <% experience_path_params = {candidate_id:params[:candidate_id],id:candidate_experience.id} %>
       <tr>
         <td>
           <b><%= candidate_experience.name %></b>
         </td>
-        <td><%= link_to 'Show', candidate_experience_path(experience_path_params) %></td>
-        <td><%= link_to 'Edit', edit_candidate_experience_path(experience_path_params) %></td>
-        <td><%= link_to 'Destroy', candidate_experience_path(experience_path_params), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', candidate_experience_path(experience_path_params(candidate_experience)) %></td>
+        <td><%= link_to 'Edit', edit_candidate_experience_path(experience_path_params(candidate_experience)) %></td>
+        <td><%= link_to 'Destroy', candidate_experience_path(experience_path_params(candidate_experience)), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
