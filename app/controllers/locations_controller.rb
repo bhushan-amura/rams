@@ -1,14 +1,12 @@
 class LocationsController < ApplicationController
 
+  # helpers
+  include LocationsHelper
+
   # filters/callbacks
   before_action :set_entity
   before_action :set_location, only: [:show, :edit, :update, :destroy]
 
-  # GET /locations
-  # GET /locations.json
-  def index
-    @locations = @entity.location
-  end
 
   # GET /locations/1
   # GET /locations/1.json
@@ -27,11 +25,11 @@ class LocationsController < ApplicationController
   # POST /locations
   # POST /locations.json
   def create
-    @location = Location.new(location_params)
+    @location = @entity.build_location(location_params)
 
     respond_to do |format|
       if @location.save
-        format.html { redirect_to @location, notice: 'Location was successfully created.' }
+        format.html { redirect_to self.send(location_path), notice: 'Location was successfully created.' }
         format.json { render :show, status: :created, location: @location }
       else
         format.html { render :new }
@@ -45,7 +43,7 @@ class LocationsController < ApplicationController
   def update
     respond_to do |format|
       if @location.update(location_params)
-        format.html { redirect_to @location, notice: 'Location was successfully updated.' }
+        format.html { redirect_to self.send(location_path), notice: 'Location was successfully updated.' }
         format.json { render :show, status: :ok, location: @location }
       else
         format.html { render :edit }
@@ -77,11 +75,11 @@ class LocationsController < ApplicationController
     end
 
     def set_location
-      @location = Location.find(params[:id])
+      @location = @entity.location 
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def location_params
-      params.fetch(:location, {})
+      params.require(:location).permit(:city,:street_address,:street_name,:building_name,:building_number,:zipcode,:state,:country,:latitude,:longitute)
     end
 end
