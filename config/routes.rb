@@ -6,7 +6,8 @@ Rails.application.routes.draw do
     resources :course_scores,     module: "candidate"
     resources :references,        module: "candidate"
     resources :experiences,       module:"candidate"
-    resources  :links,            module:"candidate"
+    resources :links,             module:"candidate"
+    resources :skills,            module:"candidate"
   end
 
   # The priority is based upon order of creation: first created -> highest priority.
