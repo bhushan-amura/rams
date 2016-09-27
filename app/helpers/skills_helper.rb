@@ -1,7 +1,7 @@
 module SkillsHelper
 
   def skill_path(*prefix_or_suffix)
-    prefix_or_suffix = prefix_or_suffix[0]
+    prefix_or_suffix = prefix_or_suffix[0] if prefix_or_suffix.length == 1
     path = @entity.instance_of?(Candidate) ? 'candidate_skill' : 'job_skill'
     path = prefix_or_suffix.nil? ? path : (prefix_or_suffix == 'index') ? path+'_'+prefix_or_suffix : prefix_or_suffix+'_'+path
     path+'_path'
