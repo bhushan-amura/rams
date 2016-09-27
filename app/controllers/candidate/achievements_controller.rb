@@ -35,7 +35,7 @@ class Candidate::AchievementsController < ApplicationController
 
     respond_to do |format|
       if @candidate_achievement.save
-        format.html { redirect_to candidate_achievement_path(achievement_path_params), notice: 'Achievement was successfully created.' }
+        format.html { redirect_to candidate_achievement_path(achievement_path_params(@candidate_achievement)), notice: 'Achievement was successfully created.' }
         format.json { render :show, status: :created, location: @candidate_achievement }
       else
         format.html { render :new }
@@ -49,7 +49,7 @@ class Candidate::AchievementsController < ApplicationController
   def update
     respond_to do |format|
       if @candidate_achievement.update(candidate_achievement_params)
-        format.html { redirect_to candidate_achievement_path(achievement_path_params), notice: 'Achievement was successfully updated.' }
+        format.html { redirect_to candidate_achievement_path(achievement_path_params(@candidate_achievement)), notice: 'Achievement was successfully updated.' }
         format.json { render :show, status: :ok, location: @candidate_achievement }
       else
         format.html { render :edit }
