@@ -1,6 +1,6 @@
 <h1>Editing Candidate Experience</h1>
 
-<%= render 'form',required_url: candidate_experience_path(experience_path_params) %>
+<%= render 'form',required_url: candidate_experience_path(experience_path_params(@candidate_experience)) %>
 
-<%= link_to 'Show', candidate_experience_path(experience_path_params) %> |
+<%= link_to 'Show', candidate_experience_path(experience_path_params(@candidate_experience)) %> |
 <%= link_to 'Back', candidate_experiences_path %>

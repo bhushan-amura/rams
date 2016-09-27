@@ -34,7 +34,7 @@ class Candidate::LinksController < ApplicationController
 
     respond_to do |format|
       if @candidate_link.save
-        format.html { redirect_to candidate_link_path(link_path_params), notice: 'Link was successfully created.' }
+        format.html { redirect_to candidate_link_path(link_path_params(@candidate_link)), notice: 'Link was successfully created.' }
         format.json { render :show, status: :created, location: @candidate_link }
       else
         format.html { render :new }
@@ -48,7 +48,7 @@ class Candidate::LinksController < ApplicationController
   def update
     respond_to do |format|
       if @candidate_link.update(candidate_link_params)
-        format.html { redirect_to candidate_link_path(link_path_params), notice: 'Link was successfully updated.' }
+        format.html { redirect_to candidate_link_path(link_path_params(@candidate_link)), notice: 'Link was successfully updated.' }
         format.json { render :show, status: :ok, location: @candidate_link }
       else
         format.html { render :edit }

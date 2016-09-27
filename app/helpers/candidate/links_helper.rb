@@ -1,5 +1,5 @@
 module Candidate::LinksHelper
-  def link_path_params
-    {candidate_id: params[:candidate_id],id: @candidate_link.id}
+  def link_path_params(link)
+    {candidate_id: params[:candidate_id],id: link.id}
   end
 end
