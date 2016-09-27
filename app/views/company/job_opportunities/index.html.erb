@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Listing Company Job Opportunities</h1>
-
+<h3><%= link_to 'new posting', new_company_job_path(@company) %></h3>
 <table>
   <thead>
     <tr>
@@ -22,7 +22,7 @@
         <h4>posted on:</h4><p> <%= company_job_opportunity.updated_at %></p>
         <p><%= link_to 'Show',  company_job_path(job_opportunity_path_params(company_job_opportunity)) %></p>
         <p><%= link_to 'Edit', edit_company_job_path(job_opportunity_path_params(company_job_opportunity)) %></p>
-        <td><%#= link_to 'Destroy', company_job_opportunity, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <h4><%= link_to 'Destroy', company_job_path(job_opportunity_path_params(company_job_opportunity)), method: :delete, data: { confirm: 'Are you sure?' } %></h4>
         <hr>
       </tr>
     <% end %>
