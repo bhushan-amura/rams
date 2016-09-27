@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   end
 
 
-  scope '/candidates/:id/' do
+  scope '/candidates/:candidate_id/' do
     resources :qualifications, as:'candidate_qualification'
   end
   
