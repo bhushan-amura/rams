@@ -1,0 +1,1 @@
+json.array! @candidate_course_scores, partial: 'candidate_course_scores/candidate_course_score', as: :candidate_course_score

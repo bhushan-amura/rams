@@ -1,0 +1,51 @@
+<%= form_for @location,url: required_url do |f| %>
+  <% if @location.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@location.errors.count, "error") %> prohibited this location from being saved:</h2>
+
+      <ul>
+      <% @location.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <p>
+  <%= f.label :street_name %>
+  <%= f.text_field :street_name %>
+  </p>
+  <p>
+  <%= f.label :street_address %>
+  <%= f.text_field :street_address %>
+  </p>
+  <p>
+  <%= f.label :building_name %>
+  <%= f.text_field :building_name %>
+  </p>
+  <p>
+  <%= f.label :building_number %>
+  <%= f.text_field :building_number %>
+  </p>
+  <p>
+  <%= f.label :zipcode %>
+  <%= f.text_field :zipcode %>
+  </p>
+  <p>
+  <%= f.label :city %>
+  <%= f.text_field :city %>
+  </p>
+  <p>
+  <%= f.label :state %>
+  <%= f.text_field :state %>
+  </p>
+  <p>
+  <%= f.label :country %>
+  <%= f.text_field :country %>
+  </p>
+
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,10 @@
+<p id="notice"><%= notice %></p>
+<h1>Showing candidate experience</h1>
+
+<p><b>Name:</b><%= @candidate_experience.name %></p>
+<p><b>Description:</b><%= @candidate_experience.description %></p>
+<p><b>Start date:</b><%= @candidate_experience.start_date %></p>
+<p><b>End date:</b><%= @candidate_experience.end_date %></p>
+<p><b>Shift type:</b><%= @candidate_experience.shift_type %></p>
+<%= link_to 'Edit', edit_candidate_experience_path(experience_path_params(@candidate_experience)) %> |
+<%= link_to 'Back', candidate_experiences_path %>
