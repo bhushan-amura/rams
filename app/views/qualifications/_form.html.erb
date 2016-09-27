@@ -1,4 +1,4 @@
-<%= form_for(@qualification) do |f| %>
+<%= form_for @qualification, url: required_url do |f| %>
   <% if @qualification.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@qualification.errors.count, "error") %> prohibited this qualification from being saved:</h2>
@@ -10,6 +10,15 @@
       </ul>
     </div>
   <% end %>
+
+  <p>
+  <%= f.label :course %>
+  <%= f.text_field :course %>
+  </p>
+  <p>
+  <%= f.label :domain %>
+  <%= f.text_field :domain %>
+  </p>
 
   <div class="actions">
     <%= f.submit %>
