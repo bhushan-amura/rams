@@ -11,15 +11,40 @@
 
   <tbody>
     <% @company_events.each do |company_event| %>
+      
       <tr>
-        <td><%= link_to 'Show', company_event %></td>
-        <td><%= link_to 'Edit', edit_company_event_path(company_event) %></td>
-        <td><%= link_to 'Destroy', company_event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th>event_type</th>
+        <td><%= company_event.event_type %></td>
       </tr>
+      <tr>
+        <th>organiser</th>
+        <td><%= company_event.organiser %></td>
+      </tr>
+      <tr>
+        <th>updated at</th>
+        <td><%= company_event.updated_at %></td>
+      </tr>
+      <tr>
+        <th>venue</th>
+        <td><%= company_event.date_time %></td>
+      </tr>
+      <tr>
+        <th>duration</th>
+        <td><%= company_event.duration %></td>
+      </tr>
+      <tr>
+        <td><%= link_to 'Edit', 
+        edit_company_job_event_path( 
+            job_events_path_params( 
+              company_event
+              ) ) %></td>
+        <td><%= link_to 'Destroy', company_job_event_path(job_events_path_params(company_event)), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+
     <% end %>
   </tbody>
 </table>
 
 <br>
 
-<%= link_to 'New Event', new_company_event_path %>
+<%#= link_to 'New Event', new_company_event_path %>

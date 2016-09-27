@@ -20,9 +20,10 @@
         <h4>ctc</h4><p> <%= company_job_opportunity.ctc %></p>
         <h4>minimum experience</h4><p> <%= company_job_opportunity.experience %></p>
         <h4>posted on:</h4><p> <%= company_job_opportunity.updated_at %></p>
-        <p><%#= link_to 'Show events',  company_job_events(job_opportunity_path_params(company_job_opportunity)) %></p>
+        <p><%= link_to 'Show events',  company_job_events_path(events_path_params(job_opportunity_path_params(company_job_opportunity))) %></p>
+        <p><%= link_to 'create event', new_company_job_event_path(events_path_params(company_job_opportunity)) %></p>
         
-        <p><%= link_to 'Show',  company_job_path(job_opportunity_path_params(company_job_opportunity)) %></p>
+        <p><%#= link_to 'Show',  company_job_path(job_opportunity_path_params(company_job_opportunity)) %></p>
         
         <p><%= link_to 'Edit', edit_company_job_path(job_opportunity_path_params(company_job_opportunity)) %></p>
         <h4><%= link_to 'Destroy', company_job_path(job_opportunity_path_params(company_job_opportunity)), method: :delete, data: { confirm: 'Are you sure?' } %></h4>

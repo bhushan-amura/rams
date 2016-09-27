@@ -1,4 +1,4 @@
-<%= form_for(@company_event) do |f| %>
+<%= form_for(@company_event, url: required_url) do |f| %>
   <% if @company_event.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@company_event.errors.count, "error") %> prohibited this company_event from being saved:</h2>
@@ -10,6 +10,25 @@
       </ul>
     </div>
   <% end %>
+
+  <table>
+    <tr>
+      <th><%= f.label(:event_type) %></th>
+      <td><%= f.text_field(:event_type) %></td>
+    </tr>
+    <tr>
+      <th><%= f.label(:organiser) %></th>
+      <td><%= f.text_field(:organiser) %></td>
+    </tr>
+    <tr>
+      <th><%= f.label(:date_time) %></th>
+      <td><%= f.text_field :date_time %></td>
+    </tr>
+    <tr>
+      <th><%= f.label(:duration) %></th>
+      <td><%= f.number_field(:duration) %></td>
+    </tr>
+  </table>
 
   <div class="actions">
     <%= f.submit %>

@@ -1,6 +1,6 @@
 <h1>Editing Company Event</h1>
 
-<%= render 'form' %>
+<%= render 'form', required_url: company_job_event_path(job_events_path_params(@company_event)) %>
 
-<%= link_to 'Show', @company_event %> |
-<%= link_to 'Back', company_events_path %>
+<%#= link_to 'Show', @company_event %> |
+<%#= link_to 'Back', company_events_path %>
