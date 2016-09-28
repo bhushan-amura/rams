@@ -1,6 +1,7 @@
 class CompaniesController < ApplicationController
   before_filter :authenticate_user!
   before_action :set_company, only: [:show, :edit, :update, :destroy]
+  layout 'company'
 
   # GET /companies
   # GET /companies.json

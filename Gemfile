@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 
 gem 'bootstrap-sass', '~> 3.3', '>= 3.3.7'
-gem 'bootstrap', '~> 4.0.0.alpha4'
+# gem 'bootstrap', '~> 4.0.0.alpha4'
 
 gem 'mysql2', '>= 0.3.13', '< 0.5'
 gem 'devise'
@@ -32,7 +32,6 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Use Unicorn as the app server
 # gem 'unicorn'
-
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
@@ -40,18 +39,18 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
   gem 'rspec-rails', '~> 3.5'
-  gem 'shoulda-matchers', require: false
-  gem 'rspec-core', '~> 3.5', '>= 3.5.3'
-  gem 'rspec-expectations', '~> 3.5'
-  gem 'rspec-mocks', '~> 3.5'
+  # gem 'shoulda-matchers', require: false
+  # gem 'rspec-core', '~> 3.5', '>= 3.5.3'
+  # gem 'rspec-expectations', '~> 3.5'
+  # gem 'rspec-mocks', '~> 3.5'
   # gem 'rspec-support', '~> 3.4', '>= 3.4.1'
-  gem 'rspec-matchers-matchers', '~> 1.0'
- # gem 'factory_girl'#, '~> 4.7'
- gem "factory_girl_rails", "~> 4.0"
-# gem 'activesupport', '~> 5.0', '>= 5.0.0.1'
- gem 'database_cleaner', '~> 1.5', '>= 1.5.3'
- gem 'faker', '~> 1.6', '>= 1.6.6'
- gem 'i18n', '~> 0.7.0'
+  # gem 'rspec-matchers-matchers', '~> 1.0'
+  # gem 'factory_girl'#, '~> 4.7'
+  gem "factory_girl_rails", "~> 4.0"
+  # gem 'activesupport', '~> 5.0', '>= 5.0.0.1'
+  gem 'database_cleaner', '~> 1.5', '>= 1.5.3'
+  gem 'faker', '~> 1.6', '>= 1.6.6'
+  gem 'i18n', '~> 0.7.0'
 end
 
 group :test do
