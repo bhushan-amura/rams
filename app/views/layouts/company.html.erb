@@ -7,15 +7,6 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>
-    <style>
-      /* Set black background color, white text and some padding */
-      footer {
-        background-color: #555;
-        color: white;
-        padding: 15px;
-      }
-
-    </style>
   </head>
   <body>
 
@@ -59,10 +50,23 @@
       </div>
     </nav>
 
-    <%= yield %>
+    <div class="container text-center">
+      <div class="row">
+
+        <!-- left================== -->
+        <%= render 'layouts/company/left_container' %>
+
+        <!-- center================ -->
+        <%= render 'layouts/company/center_container' %>
+
+        <!-- right================= -->
+        <%= render 'layouts/company/right_container' %>
+
+      </div>
+    </div>
 
     <footer class="container-fluid text-center">
-      <p>Footer Text</p>
+      <p>Footer Text says : "Hello World!!"</p>
     </footer>
 
   </body>

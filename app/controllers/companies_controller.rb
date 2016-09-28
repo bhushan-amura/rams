@@ -1,7 +1,11 @@
 class CompaniesController < ApplicationController
+
+  # layout
+  layout 'company'
+
+  # callbacks
   before_filter :authenticate_user!
   before_action :set_company, only: [:show, :edit, :update, :destroy]
-  layout 'company'
 
   # GET /companies
   # GET /companies.json
