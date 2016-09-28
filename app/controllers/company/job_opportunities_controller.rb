@@ -57,7 +57,7 @@ class Company::JobOpportunitiesController < ApplicationController
   def destroy
     @company_job_opportunity.destroy
     respond_to do |format|
-      format.html { redirect_to company_jobs_path(@company), notice: 'Job opportunity was successfully destroyed.' }
+      format.html { redirect_to home_company_path(@company), notice: 'Job opportunity was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

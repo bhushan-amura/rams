@@ -10,7 +10,7 @@ class UserController < ApplicationController
  		redirect_to( candidate_path(@candidate) )
  	else
  		@company = Company.find_by(user_id:current_user.id)
- 		redirect_to( company_path(@company) )
+ 		redirect_to( home_company_path(@company) )
  	end
  end
 

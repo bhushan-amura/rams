@@ -2,7 +2,11 @@ Rails.application.routes.draw do
   devise_for :users
   root to: 'user#index'
 
+
   resources :companies do
+    member do
+        get :home
+    end
     resources :jobs, to: 'company/job_opportunities' do
       resources :events, to: 'company/events'
     end
