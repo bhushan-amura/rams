@@ -1,16 +1,14 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Rams</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
+  <head>
+    <title>Rams</title>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
 
-<%#= link_to 'logout',  destroy_user_session_path %>
+    <%= yield %>
 
-<%= yield %>
-
-</body>
+  </body>
 </html>
