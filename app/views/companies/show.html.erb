@@ -1,5 +1,109 @@
-<!-- <p id="notice"><%= notice %></p> -->
+<p id="notice"><%= notice %></p>
 
-<%= render "profile" %>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-3">
+      <b class="text-center">Name</b>
+    </div>
+    <div class="col-sm-9">
+      <p class="text-left"><%= @company.name %></p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-3">
+      <b class="text-center">Company Type</b>
+    </div>
+    <div class="col-sm-9">
+      <p class="text-left"><%= @company.company_type %></p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-3">
+      <b class="text-center">URL</b>
+    </div>
+    <div class="col-sm-9">
+      <p class="text-left"><%= @company.url %></p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-3">
+      <b class="text-center">Tagline</b>
+    </div>
+    <div class="col-sm-9">
+      <p class="text-left"><%= @company.tagline %></p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-3">
+      <b class="text-center">Phone</b>
+    </div>
+    <div class="col-sm-9">
+      <p class="text-left"><%= @company.phone %></p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-3">
+      <b class="text-center">Description</b>
+    </div>
+    <div class="col-sm-9">
+      <p class="text-left"><%= @company.description %></p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-3">
+      <b class="text-center">Number of Employees</b>
+    </div>
+    <div class="col-sm-9">
+      <p class="text-left"><%= @company.number_of_employees %></p>
+    </div>
+  </div>
+
+</div>
+
+<!-- <table>
+  <tr>
+    <th>Name</th>
+    <td><%= @company.name %></td>
+  </tr>
+  <tr>
+    <th>Type</th>
+    <td><%= @company.company_type %></td>
+  </tr>
+  <tr>
+    <th>url</th>
+    <td><%= link_to @company.url, @company.url %></td>
+  </tr>
+  <tr>
+    <th>tagline</th>
+    <td><%= @company.tagline %></td>
+  </tr>
+  <tr>
+    <th>Contact</th>
+    <td><%= @company.phone %></td>
+  </tr>
+  <tr>
+    <th>number_of_employees</th>
+    <td><%= @company.number_of_employees %></td>
+  </tr>
+  <tr>
+    <th>description</th>
+    <td><%= @company.description %></td>
+  </tr>
+  <tr>
+    <th>logo</th>
+    <td><%= image_tag( @company.logo , size: "160x100", alt: @company.name) %></td>
+  </tr>
+  <tr>
+    <th>email</th>
+    <td><%= User.find_by(id:@company.user_id).email %></td>
+  </tr>
+</table> -->
+
 <%= link_to 'Edit Profile', edit_company_path(@company) %>
 <%= link_to 'job postings', company_jobs_path(@company) %>

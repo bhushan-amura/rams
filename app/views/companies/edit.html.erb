@@ -1,8 +1,8 @@
-<h1>Editing Company</h1>
+<h1 class="text-center">Editing Company</h1>
 
-<%= form_for @company do |f| %>
-<%= render 'form', :locals => {:f => f} %>
-<% end %>
+<!-- <%= form_for @company do |f| %> -->
+<%= render 'form', :locals => {:f => @company} %>
+<!-- <% end %> -->
 
 <%= link_to 'Show', @company %>
 |

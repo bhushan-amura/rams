@@ -1,9 +1,9 @@
 <div class="col-sm-3 well">
   <div class="well">
     <p>
-      <a href="#">My Profile</a>
+      <%= link_to @company.name %>
     </p>
-    <img src="bird.jpg" class="img-circle" height="65" width="65" alt="Avatar">
+    <%= image_tag( @company.logo , size: "120x70", alt: @company.name) %>
   </div>
   <div class="well">
     <p>
