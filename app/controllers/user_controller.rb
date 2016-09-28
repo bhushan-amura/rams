@@ -13,7 +13,7 @@ class UserController < ApplicationController
  		redirect_to( company_path(@company) )
  	end
  end
- 
+
  # def destroy
  #    current_user.destroy
  #    respond_to do |format|
