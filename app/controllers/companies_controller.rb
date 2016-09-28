@@ -1,11 +1,13 @@
 class CompaniesController < ApplicationController
 
-  # layout
-  layout 'company'
-
   # callbacks
   before_filter :authenticate_user!
-  before_action :set_company, only: [:show, :edit, :update, :destroy]
+  # before_action :home
+  before_action :set_company, only: [:show, :edit, :update, :destroy, :home]
+
+  include Company::JobOpportunitiesHelper
+  # layout
+  layout 'company'
 
   # GET /companies
   # GET /companies.json
@@ -66,6 +68,11 @@ class CompaniesController < ApplicationController
       format.html { redirect_to companies_url, notice: 'Company was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+
+  def home
+    
   end
 
   private
