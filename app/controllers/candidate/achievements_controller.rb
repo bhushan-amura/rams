@@ -1,11 +1,12 @@
 class Candidate::AchievementsController < ApplicationController
 
+  layout 'candidate/layout'
   # helpers
   include Candidate::AchievementsHelper
 
   # filters/callbacks
   before_action :set_candidate
-  before_action :set_candidate_achievement, only: [:show, :edit, :update, :destroy]
+  before_action :set_candidate_achievement, only: [:show, :update, :destroy]
     
 
   # GET /candidate/:id/achievements
@@ -24,8 +25,10 @@ class Candidate::AchievementsController < ApplicationController
     @candidate_achievement = Candidate::Achievement.new
   end
 
-  # GET /candidate/:id/achievements/1/edit
+  # GET /candidate/:id/achievements/edit
   def edit
+    @candidate_achievements = @candidate.achievements
+    @new_candidate_achievement = Candidate::Achievement.new
   end
 
   # POST /candidate/:id/achievements
@@ -35,7 +38,7 @@ class Candidate::AchievementsController < ApplicationController
 
     respond_to do |format|
       if @candidate_achievement.save
-        format.html { redirect_to candidate_achievement_path(achievement_path_params(@candidate_achievement)), notice: 'Achievement was successfully created.' }
+        format.html { redirect_to edit_candidate_achievements_path(params[:candidate_id]), notice: 'Achievement was successfully created.' }
         format.json { render :show, status: :created, location: @candidate_achievement }
       else
         format.html { render :new }
@@ -49,7 +52,7 @@ class Candidate::AchievementsController < ApplicationController
   def update
     respond_to do |format|
       if @candidate_achievement.update(candidate_achievement_params)
-        format.html { redirect_to candidate_achievement_path(achievement_path_params(@candidate_achievement)), notice: 'Achievement was successfully updated.' }
+        format.html { redirect_to edit_candidate_achievements_path(params[:candidate_id]), notice: 'Achievement was successfully updated.' }
         format.json { render :show, status: :ok, location: @candidate_achievement }
       else
         format.html { render :edit }
@@ -63,7 +66,7 @@ class Candidate::AchievementsController < ApplicationController
   def destroy
     @candidate_achievement.destroy
     respond_to do |format|
-      format.html { redirect_to candidate_achievements_url, notice: 'Achievement was successfully destroyed.' }
+      format.html { redirect_to edit_candidate_achievements_path(params[:candidate_id]), notice: 'Achievement was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
