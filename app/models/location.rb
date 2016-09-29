@@ -15,7 +15,7 @@ class Location < ActiveRecord::Base
   validates :street_name, presence:true, length: { maximum:255 }
   validates :street_address, presence:true, length: { maximum:255 }
   validates :building_name, presence:true, length: { maximum:255 }
-  validates :building_number, presence:true
+  # validates :building_number, presence:true
   validates :zipcode, presence:true, length: { maximum:255 }
   validates :state, presence:true, length: { maximum:255 }
   validates :country, presence:true, length: { maximum:255 }
