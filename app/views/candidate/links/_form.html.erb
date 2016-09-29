@@ -1,26 +1,54 @@
-<%= form_for(@candidate_link,url: required_url) do |f| %>
-  <% if @candidate_link.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@candidate_link.errors.count, "error") %> prohibited this candidate_link from being saved:</h2>
+<div class="row">
+  <div class="col-sm-9">
 
-      <ul>
-      <% @candidate_link.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+    <%= form_for(candidate_link,url: required_url) do |f| %>
+      <% if candidate_link.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(candidate_link.errors.count, "error") %> prohibited this candidate_link from being saved:</h2>
+
+          <ul>
+          <% candidate_link.errors.full_messages.each do |message| %>
+            <li><%# message %></li>
+          <% end %>
+          </ul>
+        </div>
       <% end %>
-      </ul>
+
+       <div class="form-group">
+          <%= f.label(:link_type, class: "control-label col-sm-3")  %>
+          <div class="col-sm-9">
+            <%= f.text_field(:link_type, class: "form-control",placeholder:"Enter the type of link") %>
+          </div>
+       </div>
+
+       <div class="form-group">
+          <%= f.label(:url, class: "control-label col-sm-3")  %>
+          <div class="col-sm-9">
+            <%= f.text_field(:url, class: "form-control",placeholder:"Enter the url  of link") %>
+          </div>
+       </div>
+
+  </div>
+
+  <div class="form-group">
+    <% if !new_link %>
+      <div class="col-sm-2">
+        <%= f.submit "Update",class: "btn btn-default update-button btn-md" %>
+      </div>
+    <% else %>
+      <div class="col-sm-offset-2 create-button">
+        <%= f.submit "Create",class:"btn btn-default" %>
+      </div>
+    <% end %>
+  </div>
+
+<% end %>
+<% if !new_link %>
+  <div class="form-group">
+    <div class="col-sm-1">
+      <%= link_to "Delete",candidate_link_path(link_path_params(candidate_link)),method: :delete, class:"btn btn-danger btn-md active", role:"button" %>
+
     </div>
-  <% end %>
-
-  <p>
-  <%= f.label :link_type %>
-  <%= f.text_field :link_type %>
-  </p>
-
-  <p>
-  <%= f.label :url %>
-  <%= f.text_field :url %>
-  </p>
-  <div class="actions">
-    <%= f.submit %>
   </div>
 <% end %>
+</div>

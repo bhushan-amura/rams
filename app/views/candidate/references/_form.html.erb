@@ -1,30 +1,59 @@
-<%= form_for(@candidate_reference, url: required_url) do |f| %>
-  <% if @candidate_reference.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@candidate_reference.errors.count, "error") %> prohibited this candidate_reference from being saved:</h2>
+<div class="row">
+  <div class="col-sm-9">
 
-      <ul>
-      <% @candidate_reference.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+    <%= form_for(candidate_reference, url: required_url) do |f| %>
+      <% if candidate_reference.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(candidate_reference.errors.count, "error") %> prohibited this candidate_reference from being saved:</h2>
+
+          <ul>
+          <% candidate_reference.errors.full_messages.each do |message| %>
+            <li><%#= message %></li>
+          <% end %>
+          </ul>
+        </div>
       <% end %>
-      </ul>
-    </div>
-  <% end %>
-  <table>
-    <tr>
-      <th><%= f.label :name %></th>
-      <td><%= f.text_field :name %></td>
-    </tr>
-    <tr>
-      <th><%= f.label :email %></th>
-      <td><%= f.text_field :email %></td>
-    </tr>
-    <tr>
-      <th><%= f.label :contact %></th>
-      <td><%= f.text_field :contact %></td>
-    </tr>
-  </table>
-  <div class="actions">
-    <%= f.submit %>
+     
+      <div class="form-group">
+        <%= f.label(:name, class: "control-label col-sm-3")  %>
+        <div class="col-sm-9">
+          <%= f.text_field(:name, class: "form-control",placeholder:"Enter name of the person") %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= f.label(:email, class: "control-label col-sm-3")  %>
+        <div class="col-sm-9">
+          <%= f.text_field(:email, class: "form-control",placeholder:"Enter email") %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= f.label(:contact, class: "control-label col-sm-3")  %>
+        <div class="col-sm-9">
+          <%= f.text_field(:contact, class: "form-control",placeholder:"Enter contact") %>
+        </div>
+      </div>
+
+  </div>
+  <div class="form-group">
+    <% if !new_reference %>
+      <div class="col-sm-2">
+        <%= f.submit "Update",class: "btn btn-default update-button btn-md" %>
+      </div>
+    <% else %>
+      <div class="col-sm-offset-2 create-button">
+        <%= f.submit "Create",class:"btn btn-default" %>
+      </div>
+    <% end %>
   </div>
 <% end %>
+<% if !new_reference %>
+  <div class="form-group">
+    <div class="col-sm-1">
+      <%= link_to "Delete",candidate_reference_path(reference_path_params(candidate_reference)),method: :delete, class:"btn btn-danger btn-md active", role:"button" %>
+
+    </div>
+  </div>
+<% end %>
+</div>
