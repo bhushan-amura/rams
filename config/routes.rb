@@ -17,7 +17,11 @@ Rails.application.routes.draw do
       get 'home'
     end
     scope module:'candidate' do
-      resources :achievements
+      resources :achievements, except:[:edit,:show] do
+        collection do
+          get 'edit'
+        end
+      end
       resources :projects
       resources :course_scores
       resources :references
