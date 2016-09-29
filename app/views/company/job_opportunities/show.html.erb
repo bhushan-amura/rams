@@ -1,19 +1,19 @@
 <!-- <p id="notice"><%= notice %></p> -->
 
-<div class="container-fluid">
-  <!-- <div class="row">
-    <div class="col-sm-3">
+<div class="form-horizontal">
+  <!-- <div class="field form-group">
+    <div class="col-sm-2 col-sm-offset-1">
       <b class="text-center">Title</b>
     </div>
     <div class="col-sm-9">
       <p class="text-left"><%= @company_job_opportunity.title %></p>
     </div>
   </div> -->
-  <h3 class="h4formpadd">
-    <%= @company_job_opportunity.title %></h3>
+  <h2 class="h4formpadd text-capitalize text-center">
+    <%= @company_job_opportunity.title %></h2>
 
-  <div class="row">
-    <div class="col-sm-3">
+  <div class="field form-group">
+    <div class="col-sm-2 col-sm-offset-1">
       <b class="text-center">Shift</b>
     </div>
     <div class="col-sm-9">
@@ -21,8 +21,8 @@
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-sm-3">
+  <div class="field form-group">
+    <div class="col-sm-2 col-sm-offset-1">
       <b class="text-center">Description</b>
     </div>
     <div class="col-sm-9">
@@ -30,8 +30,8 @@
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-sm-3">
+  <div class="field form-group">
+    <div class="col-sm-2 col-sm-offset-1">
       <b class="text-center">Number of Positions</b>
     </div>
     <div class="col-sm-9">
@@ -39,8 +39,8 @@
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-sm-3">
+  <div class="field form-group">
+    <div class="col-sm-2 col-sm-offset-1">
       <b class="text-center">Status</b>
     </div>
     <div class="col-sm-9">
@@ -48,8 +48,8 @@
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-sm-3">
+  <div class="field form-group">
+    <div class="col-sm-2 col-sm-offset-1">
       <b class="text-center">Experiance</b>
     </div>
     <div class="col-sm-9">
@@ -57,18 +57,18 @@
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-sm-3">
+  <div class="field form-group">
+    <div class="col-sm-2 col-sm-offset-1">
       <b class="text-center">CTC</b>
     </div>
     <div class="col-sm-9">
       <p class="text-left"><%= @company_job_opportunity.ctc %></p>
     </div>
   </div>
-  <h4 class="h4formpadd">Qualifications</h4>
+  <h4 class="h4formpadd">Qualifications Required</h4>
   <% @company_job_opportunity.qualifications.each do |f| %>
-  <div class="row">
-    <div class="col-sm-3">
+  <div class="field form-group">
+    <div class="col-sm-2 col-sm-offset-1">
       <b class="text-center">Course</b>
     </div>
     <div class="col-sm-9">
@@ -76,19 +76,20 @@
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-sm-3">
+  <div class="field form-group">
+    <div class="col-sm-2 col-sm-offset-1">
       <b class="text-center">Domain</b>
     </div>
     <div class="col-sm-9">
       <p class="text-left"><%= f.domain %></p>
     </div>
   </div>
+  <div class="field form-group"></div>
   <% end %>
-  <h4 class="h4formpadd">Skills</h4>
+  <h4 class="h4formpadd">Skills Required</h4>
   <% @company_job_opportunity.skills.each do |f| %>
-  <div class="row">
-    <div class="col-sm-3">
+  <div class="field form-group">
+    <div class="col-sm-2 col-sm-offset-1">
       <b class="text-center">Name</b>
     </div>
     <div class="col-sm-9">
