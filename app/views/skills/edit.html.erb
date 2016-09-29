@@ -1,7 +1,6 @@
-<h1>Editing Skill</h1>
+<% content_for :edit_content do %>
+  <h2>Skill</h2>
+  <%= render "form" %>
+<% end %>
 
-<%= render 'form', required_url: self.send(skill_path, skill_path_params(@skill)) %>
-
-<%= link_to 'Show', self.send(skill_path,skill_path_params(@skill))
- %> |
-<%= link_to 'Back', self.send(skill_path('index')) %>
+<%= render 'candidates/edit_navbar' %>

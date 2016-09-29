@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   devise_for :users
   root to: 'user#index'
 
+  get 'typeahead' => 'skills#all_skills'
+
   resources :companies do
     scope module:'company' do
     resources :jobs  do
@@ -49,7 +51,12 @@ Rails.application.routes.draw do
 
   scope '/candidates/:candidate_id/' do
     resources :qualifications, as:'candidate_qualification'
-    resources :skills, as:'candidate_skill'
+    resources :skills, as:'candidate_skill', except:[:edit,:show,:new,:update,:create,:destroy] do
+      collection do
+        get 'edit'
+        put 'update'
+      end
+    end
     resource :location , as:'candidate_location'
   end
 

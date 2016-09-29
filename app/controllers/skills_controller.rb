@@ -1,10 +1,14 @@
 class SkillsController < ApplicationController
 
-  #helpers
+  # layout 
+  layout 'candidate/layout'
+
+  # helpers
   include SkillsHelper
 
+  # filter/callbacks
   before_action :set_entity
-  before_action :set_skill, only: [:show, :edit, :update, :destroy]
+  before_action :set_skill, only: [:show, :destroy]
 
   # GET /skills
   # GET /skills.json
@@ -12,58 +16,38 @@ class SkillsController < ApplicationController
     @skills = @entity.skills
   end
 
-  # GET /skills/1
-  # GET /skills/1.json
-  def show
+  def all_skills
+    @skills = Skill.all
+    respond_to do |format|
+      format.json{ render :json => @skills }
+    end
   end
 
-  # GET /skills/new
-  def new
-    @skill = Skill.new
-  end
 
   # GET /skills/1/edit
   def edit
+    @entity_skill = Skill.new
+    @entity_skills = @entity.skills
   end
 
-  # POST /skills
-  # POST /skills.json
-  def create
-    @skill = Skill.new(skill_params)
-
-    respond_to do |format|
-      if @skill.save
-        @entity.skills << @skill
-        format.html { redirect_to self.send(skill_path,skill_path_params(@skill)), notice: 'Skill was successfully created.' }
-        format.json { render :show, status: :created, location: @skill }
-      else
-        format.html { render :new }
-        format.json { render json: @skill.errors, status: :unprocessable_entity }
-      end
-    end
-  end
 
   # PATCH/PUT /skills/1
   # PATCH/PUT /skills/1.json
   def update
+    skill_names = skill_params[:names].split(',')
+    entity_skills = skill_names.each_with_object([]) do |skill,skills|
+      skill = Skill.find_or_create_by(name:skill)
+      skills << skill
+    end
+
     respond_to do |format|
-      if @skill.update(skill_params)
-        format.html { redirect_to self.send(skill_path,skill_path_params(@skill)), notice: 'Skill was successfully updated.' }
+      if @entity.skills = entity_skills 
+        format.html { redirect_to edit_candidate_skill_index_path(params[:candidate_id]),notice: 'Skill was successfully updated.' }
         format.json { render :show, status: :ok, location: @skill }
       else
         format.html { render :edit }
         format.json { render json: @skill.errors, status: :unprocessable_entity }
       end
-    end
-  end
-
-  # DELETE /skills/1
-  # DELETE /skills/1.json
-  def destroy
-    @entity.skills.destroy(@skill)
-    respond_to do |format|
-      format.html { redirect_to self.send(skill_path('index')), notice: 'Skill was successfully destroyed.' }
-      format.json { head :no_content }
     end
   end
 
@@ -76,12 +60,13 @@ class SkillsController < ApplicationController
          @entity = Company::JobOpportunity.find(params[:job_id])
       end
     end
+
     def set_skill
       @skill = @entity.skills.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def skill_params
-      params.require(:skill).permit(:name)
+      params.require(:skills).permit(:names)
     end
 end

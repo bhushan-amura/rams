@@ -1,6 +1,8 @@
 source 'http://rubygems.org'
 
-
+gem 'bootstrap-multiselect-rails'
+gem 'twitter-typeahead-rails'
+gem 'bootstrap-tagsinput-rails'
 gem 'mysql2', '>= 0.3.13', '< 0.5'
 gem 'devise'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

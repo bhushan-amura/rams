@@ -22,7 +22,7 @@
               <li><%= link_to "Links", edit_candidate_links_path(candidate_id: params[:id]||params[:candidate_id]), onclick: "javascript:window.location.reload()" %></li>
               <li><%= link_to "References", edit_candidate_references_path(candidate_id: params[:id]||params[:candidate_id]), onclick: "javascript:window.location.reload()" %></li>
               <li><a href="#">Tests</a></li>
-              <li><a href="#">Skills</a></li>
+              <li><%= link_to "Skills", edit_candidate_skill_index_path(candidate_id: params[:id]||params[:candidate_id]), onclick: "javascript:window.location.reload()" %></li>
               <li><a href="#">Qualifications</a></li>
             </ul>
           </div><!--/.nav-collapse -->

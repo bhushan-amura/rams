@@ -43,9 +43,13 @@ GEM
     bcrypt (3.1.11)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
+    bootstrap-multiselect-rails (0.9.9)
+      rails (>= 4.0.0)
     bootstrap-sass (3.3.7)
       autoprefixer-rails (>= 5.2.1)
       sass (>= 3.3.4)
+    bootstrap-tagsinput-rails (0.4.2.1)
+      railties (>= 3.1)
     builder (3.2.2)
     byebug (9.0.5)
     coffee-rails (4.1.1)
@@ -185,6 +189,10 @@ GEM
     turbolinks (5.0.1)
       turbolinks-source (~> 5)
     turbolinks-source (5.0.0)
+    twitter-typeahead-rails (0.11.1)
+      actionpack (>= 3.1)
+      jquery-rails
+      railties (>= 3.1)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
     uglifier (3.0.2)
@@ -201,7 +209,9 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bootstrap-multiselect-rails
   bootstrap-sass (~> 3.3.6)
+  bootstrap-tagsinput-rails
   byebug
   coffee-rails (~> 4.1.0)
   database_cleaner (~> 1.5, >= 1.5.3)
@@ -226,6 +236,7 @@ DEPENDENCIES
   shoulda-matchers
   spring
   turbolinks
+  twitter-typeahead-rails
   uglifier (>= 1.3.0)
   web-console (~> 2.0)
 

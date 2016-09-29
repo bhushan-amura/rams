@@ -1,5 +1,7 @@
 class Candidate::ExperiencesController < ApplicationController
 
+  #layout 
+  layout 'candidate/layout'
   # helpers
   include Candidate::ExperiencesHelper
 
