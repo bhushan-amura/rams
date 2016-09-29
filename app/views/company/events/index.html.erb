@@ -1,50 +1,105 @@
 <p id="notice"><%= notice %></p>
+    
+<% @company_events.each do |company_event| %>
+<div class="well text-capitalize" style="background-color: rgba(116, 82, 82, 0.17)">
+  <div class="container-fluid">
+    <div class="row">
+     <div class="col-sm-3">
+       <b class="text-center">Event Type</b>
+     </div>
+     <div class="col-sm-9">
+       <p class="text-left"><%= company_event.event_type %></p>
+     </div>
+   </div>
+  </div>
 
-<h1>Listing Company Events</h1>
+  <div class="container-fluid">
+    <div class="row">
+     <div class="col-sm-3">
+       <b class="text-center">organiser</b>
+     </div>
+     <div class="col-sm-9">
+       <p class="text-left"><%= company_event.organiser %></p>
+     </div>
+   </div>
+  </div>
 
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+  <div class="container-fluid">
+    <div class="row">
+     <div class="col-sm-3">
+       <b class="text-center">venue</b>
+     </div>
+     <div class="col-sm-9">
+       <p class="text-left"><%= company_event.date_time.to_formatted_s(:long_ordinal) %>         
+       </p>
+     </div>
+   </div>
+  </div>
 
-  <tbody>
-    <% @company_events.each do |company_event| %>
-      
-      <tr>
-        <th>event_type</th>
-        <td><%= company_event.event_type %></td>
-      </tr>
-      <tr>
-        <th>organiser</th>
-        <td><%= company_event.organiser %></td>
-      </tr>
-      <tr>
-        <th>updated at</th>
-        <td><%= company_event.updated_at %></td>
-      </tr>
-      <tr>
-        <th>venue</th>
-        <td><%= company_event.date_time %></td>
-      </tr>
-      <tr>
-        <th>duration</th>
-        <td><%= company_event.duration %></td>
-      </tr>
-      <tr>
-        <td><%= link_to 'Edit', 
-        edit_company_job_event_path( 
-            job_events_path_params( 
-              company_event
-              ) ) %></td>
-        <td><%= link_to 'Destroy', company_job_event_path(job_events_path_params(company_event)), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+  <div class="container-fluid">
+    <div class="row">
+     <div class="col-sm-3">
+       <b class="text-center">duration</b>
+     </div>
+     <div class="col-sm-9">
+       <p class="text-left"><%= company_event.duration %> hr</p>
+     </div>
+   </div>
+  </div>
 
-    <% end %>
-  </tbody>
-</table>
 
-<br>
+  <div class="container-fluid">
+    <div class="row">
+     <div class="col-sm-3">
+       <b class="text-center">location</b>
+     </div>
 
-<%#= link_to 'New Event', new_company_event_path %>
+     <div class="col-sm-9">
+      <p class="text-left">
+          <%= company_event.location.building_number %>-<%= company_event.location.building_name %>
+        </br>
+        <%= company_event.location.street_address %>, <%= company_event.location.street_name %>
+        </br>
+        <%= company_event.location.city %>, <%= company_event.location.state %>, <%= company_event.location.country %>
+        </br>
+        ZipCode: <%= company_event.location.zipcode %>
+      </p>
+     </div>
+   </div>
+  </div>
+
+  <div class="container-fluid">
+    <div class="row">
+
+     <div class="col-sm-2">
+       <b class="text-center">
+          
+          <%= link_to 'Edit', edit_company_job_event_path( job_events_path_params( company_event ) ),class:"btn btn-success", role:"button" %>
+
+       </b>
+     </div>
+     <div class="col-sm-2">
+       <p class="text-left">
+          <%= link_to 'Destroy', company_job_event_path(job_events_path_params(company_event)), method: :delete, data: { confirm: 'Are you sure?' } ,class:"btn btn-danger", role:"button"%>             
+       </p>
+     </div>
+
+     <div class="col-sm-8 text-right event-font-size">
+       <!-- <div class="row-sm-1"> -->
+        <%= company_event.updated_at.strftime("%B, %d - %Y") %><br/>
+        <%= company_event.updated_at.strftime("%I:%M %p") %>
+      <!-- </div> -->
+     </div>
+
+   </div>
+  </div>
+
+
+
+</div>
+<% end %>
+    
+        
+
+
+

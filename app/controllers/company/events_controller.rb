@@ -1,11 +1,13 @@
 class Company::EventsController < ApplicationController
   before_action :set_company
+  before_action :set_company_job
   before_action :set_company_event, only: [:show, :edit, :update, :destroy]
   include Company::EventsHelper
+  layout 'company'
   # GET /company/events
   # GET /company/events.json
   def index
-    @company_events = @company.events
+    @company_events = @company_job.events
   end
 
   # GET /company/events/1
@@ -25,7 +27,7 @@ class Company::EventsController < ApplicationController
   # POST /company/events
   # POST /company/events.json
   def create
-    @company_event = @company.events.build(company_event_params)
+    @company_event = @company_job.events.build(company_event_params)
 
     respond_to do |format|
       if @company_event.save
@@ -57,7 +59,7 @@ class Company::EventsController < ApplicationController
   def destroy
     @company_event.destroy
     respond_to do |format|
-      format.html { redirect_to company_job_events_path(events_path_params(@company)), notice: 'Event was successfully destroyed.' }
+      format.html { redirect_to company_job_events_path , notice: 'Event was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -65,12 +67,16 @@ class Company::EventsController < ApplicationController
   private
 
     def set_company
-      @company = Company.find(params[:company_id]).job_opportunities.find(params[:job_id])
+      @company = Company.find(params[:company_id])
+    end
+
+    def set_company_job
+      @company_job = Company.find(params[:company_id]).job_opportunities.find(params[:job_id])
     end
     
     # Use callbacks to share common setup or constraints between actions.
     def set_company_event
-      @company_event = Company::Event.find(params[:id])
+      @company_event = @company_job.events.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
