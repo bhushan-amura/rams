@@ -1,6 +1,7 @@
 source 'http://rubygems.org'
 
 gem 'bootstrap-sass', '~> 3.3', '>= 3.3.7'
+gem 'nested_form'
 # gem 'bootstrap', '~> 4.0.0.alpha4'
 
 gem 'mysql2', '>= 0.3.13', '< 0.5'

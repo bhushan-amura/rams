@@ -1,4 +1,7 @@
 class Company::JobOpportunitiesController < ApplicationController
+  #layout
+  layout 'company'
+
   before_action :set_company
   before_action :set_company_job_opportunity, only: [:show, :edit, :update, :destroy]
   include Company::JobOpportunitiesHelper
@@ -20,6 +23,8 @@ class Company::JobOpportunitiesController < ApplicationController
 
   # GET /company/job_opportunities/1/edit
   def edit
+    # @job_quaifications = @company.job_opportunities.qualifications
+    # @job_skills = @company.job_opportunities.kills
   end
 
   # POST /company/job_opportunities
@@ -43,7 +48,7 @@ class Company::JobOpportunitiesController < ApplicationController
   def update
     respond_to do |format|
       if @company_job_opportunity.update(company_job_opportunity_params)
-        format.html { redirect_to  company_jobs_path(job_opportunity_path_params(@company_job_opportunity)), notice: 'Job opportunity was successfully updated.' }
+        format.html { redirect_to  home_company_path(@company), notice: 'Job opportunity was successfully updated.' }
         format.json { render :show, status: :ok, location: @company_job_opportunity }
       else
         format.html { render :edit }
@@ -75,6 +80,6 @@ class Company::JobOpportunitiesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def company_job_opportunity_params
-      params.require(:company_job_opportunity).permit(:id,:title,:shift,:description,:number_of_positions,:company_id,:status,:ctc,:experience)
+      params.require(:company_job_opportunity).permit(:id,:title,:shift,:description,:number_of_positions,:company_id,:status,:ctc,:experience, qualifications_attributes: [:id, :course, :domain], skills_attributes: [:name])
     end
 end

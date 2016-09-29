@@ -1,50 +1,108 @@
-<%= form_for(@company_job_opportunity,url: required_url) do |f| %>
-  <% if @company_job_opportunity.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@company_job_opportunity.errors.count, "error") %> prohibited this company_job_opportunity from being saved:</h2>
+<%= nested_form_for @company_job_opportunity, url: required_url, html: {class: 'form-horizontal'} do |f| %>
+<% if @company_job_opportunity.errors.any? %>
+<div id="error_explanation">
+  <h2><%= pluralize(@company_job_opportunity.errors.count, "error") %>
+    prohibited this company_job_opportunity from being saved:</h2>
 
-      <ul>
-      <% @company_job_opportunity.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <ul>
+    <% @company_job_opportunity.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
 
-  <table>
-    <tr>
-      <th><%= f.label(:title) %></th>
-      <td><%= f.text_field(:title) %></td>
-    </tr>
-    <tr>
-      <th><%= f.label(:shift) %></th>
-      <td><%= f.text_field(:shift) %></td>
-    </tr>
-    <tr>
-      <th><%= f.label(:description) %></th>
-      <td><%= f.text_field :description, :size => '40x10' %></td>
-    </tr>
-    <tr>
-      <th><%= f.label(:number_of_positions) %></th>
-      <td><%= f.number_field(:number_of_positions) %></td>
-    </tr>
-    <tr>
-      <th><%= f.label(:status) %></th>
-      <td><%= f.select :status, options_for_select(Company::JobOpportunity::STATUS ,selected_key = f.object.status) %></td>
-    </tr>
-    <tr>
-      <th><%= f.label(:experience) %></th>
-      <td><%= f.range_field(:experience) %></td>
-    </tr>
-    <tr>
-      <th><%= f.label :ctc,id:"ctc_label" %></th>
-      <td><%= f.range_field :ctc, :in => 1..100, :step => ".1" %></td>
-    </tr>
-
-  </table>
-
-      
-  <div class="actions">
-    <%= f.submit %>
+<div class="field form-group">
+  <%= f.label :title, class:'col-sm-2 control-label' %>
+  <div class="col-sm-10">
+    <%= f.text_field :title, class: 'form-control', placeholder: 'Job title' %>
   </div>
+</div>
+
+<div class="field form-group">
+  <%= f.label :shift, class:'col-sm-2 control-label' %>
+  <div class="col-sm-10">
+    <%= f.text_field :shift, class: 'form-control', placeholder: 'Part-time, Intern etc' %>
+  </div>
+</div>
+
+<div class="field form-group">
+  <%= f.label :description, class:'col-sm-2 control-label' %>
+  <div class="col-sm-10">
+    <%= f.text_field :description, class: 'form-control', placeholder: 'URL of your company' %>
+  </div>
+</div>
+
+<div class="field form-group">
+  <%= f.label :number_of_positions, class:'col-sm-2 control-label' %>
+  <div class="col-sm-10">
+    <%= f.text_field :number_of_positions, class: 'form-control', placeholder: 'Phone number' %>
+  </div>
+</div>
+
+<div class="field form-group">
+  <%= f.label :status, class:'col-sm-2 control-label' %>
+  <div class="col-sm-10">
+    <%= f.select :status, options_for_select(Company::JobOpportunity::STATUS ,selected_key = f.object.status), class: 'form-control' %>
+  </div>
+</div>
+
+<div class="field form-group">
+  <%= f.label :experience, class:'col-sm-2 control-label' %>
+  <div class="col-sm-10">
+    <%= f.number_field :experience, class: 'form-control', placeholder: 'Experiance in years' %>
+  </div>
+</div>
+
+<div class="field form-group">
+  <%= f.label :ctc, class:'col-sm-2 control-label' %>
+  <div class="col-sm-10">
+    <%= f.number_field :ctc, class: 'form-control', placeholder: 'CTC in lacks' %>
+  </div>
+</div>
+<!--------------->
+<h4 class="h4formpadd"><%= f.label :qualifications %></h4>
+<%= f.fields_for :qualifications do |t| %>
+<div class="field form-group">
+  <div class="field form-group">
+    <%= t.label :course, class:'col-sm-2 control-label' %>
+    <div class="col-sm-9">
+      <%= t.text_field :course, class: 'form-control paddingbottom', placeholder: 'Course' %>
+    </div>
+  </div>
+  <div class="field form-group">
+    <%= t.label :domain, class:'col-sm-2 control-label' %>
+    <div class="col-sm-7">
+      <%= t.text_field :domain, class: 'form-control', placeholder: 'Domain' %>
+    </div>
+    <div class="col-sm-3">
+      <%= t.link_to_remove "Remove", class:"btn btn-danger", role:"button"  %>
+    </div>
+  </div>
+</div>
+<!-- <p><%= f.link_to_add "Add a task", :qualifications %></p> -->
+<% end %>
+<p><%= f.link_to_add "Add new Qualification", :qualifications, class:"btn btn-success", role:"button" %></p>
+
+<h4 class="h4formpadd"><%= f.label :skills %></h4>
+<%= f.fields_for :skills do |t| %>
+<div class="field form-group">
+  <%= t.label :name, class:'col-sm-2 control-label' %>
+  <div class="col-sm-7">
+    <%= t.text_field :name, class: 'form-control', placeholder: 'C,Cpp,CSS etc' %>
+  </div>
+  <div class="col-sm-3">
+    <%= t.link_to_remove "Remove ", class:"btn btn-danger", role:"button" %>
+  </div>
+</div>
+<% end %>
+<p><%= f.link_to_add "Add new Skill", :skills, class:"btn btn-success", role:"button" %></p>
+
+<!--  -->
+<div class="actions form-group">
+  <div class="col-sm-offset-2 col-sm-10">
+    <%= f.submit class:"btn btn-default" %>
+  </div>
+</div>
+<!--  -->
 <% end %>

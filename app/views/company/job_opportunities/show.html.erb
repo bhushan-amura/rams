@@ -1,4 +1,101 @@
-<p id="notice"><%= notice %></p>
-asdkjnjdks
-<%= link_to 'Edit', edit_company_job_path(job_opportunity_path_params(@company_job_opportunity)) %> |
-<%= link_to 'Back', company_job_path %>
+<!-- <p id="notice"><%= notice %></p> -->
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-3">
+      <b class="text-center">Title</b>
+    </div>
+    <div class="col-sm-9">
+      <p class="text-left"><%= @company_job_opportunity.title %></p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-3">
+      <b class="text-center">Shift</b>
+    </div>
+    <div class="col-sm-9">
+      <p class="text-left"><%= @company_job_opportunity.shift %></p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-3">
+      <b class="text-center">Description</b>
+    </div>
+    <div class="col-sm-9">
+      <p class="text-left"><%= @company_job_opportunity.description %></p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-3">
+      <b class="text-center">Number of Positions</b>
+    </div>
+    <div class="col-sm-9">
+      <p class="text-left"><%= @company_job_opportunity.number_of_positions %></p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-3">
+      <b class="text-center">Status</b>
+    </div>
+    <div class="col-sm-9">
+      <p class="text-left"><%= @company_job_opportunity.status %></p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-3">
+      <b class="text-center">Experiance</b>
+    </div>
+    <div class="col-sm-9">
+      <p class="text-left"><%= @company_job_opportunity.experience %></p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-3">
+      <b class="text-center">CTC</b>
+    </div>
+    <div class="col-sm-9">
+      <p class="text-left"><%= @company_job_opportunity.ctc %></p>
+    </div>
+  </div>
+  <h4 class="h4formpadd">Qualifications</h4>
+  <% @company_job_opportunity.qualifications.each do |f| %>
+  <div class="row">
+    <div class="col-sm-3">
+      <b class="text-center">Course</b>
+    </div>
+    <div class="col-sm-9">
+      <p class="text-left"><%= f.course %></p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-3">
+      <b class="text-center">Domain</b>
+    </div>
+    <div class="col-sm-9">
+      <p class="text-left"><%= f.domain %></p>
+    </div>
+  </div>
+  <% end %>
+  <h4 class="h4formpadd">Skills</h4>
+  <% @company_job_opportunity.skills.each do |f| %>
+  <div class="row">
+    <div class="col-sm-3">
+      <b class="text-center">Name</b>
+    </div>
+    <div class="col-sm-9">
+      <p class="text-left"><%= f.name %></p>
+    </div>
+  </div>
+  <% end %>
+
+</div>
+
+<%= link_to 'Edit',edit_company_job_path(job_opportunity_path_params(@company_job_opportunity)), class:"btn btn-default" %>
+<!-- <%= link_to 'Back', company_job_path %> -->
