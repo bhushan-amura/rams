@@ -1,42 +1,74 @@
-<%= form_for @candidate_experience, url: required_url do |f| %>
-  <% if @candidate_experience.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@candidate_experience.errors.count, "error") %> prohibited this candidate_experience from being saved:</h2>
+<div class="row">
+  <div class="col-sm-9">
 
-      <ul>
-      <% @candidate_experience.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+    <%= form_for candidate_experience, url: required_url do |f| %>
+      <% if candidate_experience.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(candidate_experience.errors.count, "error") %> prohibited this candidate_experience from being saved:</h2>
+
+          <ul>
+          <% candidate_experience.errors.full_messages.each do |message| %>
+            <li><%# message %></li>
+          <% end %>
+          </ul>
+        </div>
       <% end %>
-      </ul>
-    </div>
-  <% end %>
 
-  <p>
-  <%= f.label :name %>
-  <%= f.text_field :name %>
-  </p>
 
-  <p>
-  <%= f.label :start_date %>
-  <%= f.date_field :start_date %>
-  </p>
+      <div class="form-group">
+        <%= f.label(:name, class: "control-label col-sm-3")  %>
+        <div class="col-sm-9">
+          <%= f.text_field(:name, class: "form-control",placeholder:"Enter title") %>
+        </div>
+      </div>
 
-  <p>
-  <%= f.label :end_date %>
-  <%= f.date_field :end_date %>
-  </p>
+      <div class="form-group">
+        <%= f.label(:start_date, class: "control-label col-sm-3")  %>
+        <div class="col-sm-9">
+          <%= f.date_field(:start_date, class: "form-control") %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label(:end_date, class: "control-label col-sm-3")  %>
+        <div class="col-sm-9">
+          <%= f.date_field(:end_date, class: "form-control") %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label(:description, class: "control-label col-sm-3")  %>
+        <div class="col-sm-9">
+          <%= f.text_area(:description, class: "form-control", placeholder:"Write something about this experience",rows:4) %>
+        </div>
+      </div>
 
-  <p>
-  <%= f.label :description %>
-  <%= f.text_area :description %>
-  </p>
+      <div class="form-group">
+        <%= f.label(:shift_type, class: "control-label col-sm-3")  %>
+        <div class="col-sm-9">
+          <%= f.text_field(:shift_type, class: "form-control",placeholder:"What type of job it was?") %>
+        </div>
+      </div>
 
-  <p>
-  <%= f.label :shift_type %>
-  <%= f.text_field :shift_type %>
-  </p>
+  </div>
 
-  <div class="actions">
-    <%= f.submit %>
+  
+  <div class="form-group">
+    <% if !new_experience %>
+      <div class="col-sm-2">
+        <%= f.submit "Update",class: "btn btn-default update-button btn-md" %>
+      </div>
+    <% else %>
+      <div class="col-sm-offset-2 create-button">
+        <%= f.submit "Create",class:"btn btn-default" %>
+      </div>
+    <% end %>
   </div>
 <% end %>
+<% if !new_experience %>
+  <div class="form-group">
+    <div class="col-sm-1">
+      <%= link_to "Delete",candidate_experience_path(experience_path_params(candidate_experience)),method: :delete, class:"btn btn-danger btn-md active", role:"button" %>
+
+    </div>
+  </div>
+<% end %>
+</div>

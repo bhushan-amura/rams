@@ -29,7 +29,11 @@ Rails.application.routes.draw do
       end
       resources :course_scores
       resources :references
-      resources :experiences
+      resources :experiences, except:[:edit,:show,:new] do
+        collection do
+          get 'edit'
+        end
+      end
       resources  :links
       resources :references
     end

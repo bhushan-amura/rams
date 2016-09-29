@@ -15,10 +15,10 @@
           </div>
           <div class="navbar-collapse collapse sidebar-navbar-collapse">
             <ul class="nav navbar-nav">
-              <li><%= link_to "Profile", edit_candidate_path(params[:id]||params[:candidate_id]) %></li>
-              <li><%= link_to "Achievements", edit_candidate_achievements_path(candidate_id: params[:id]||params[:candidate_id]) %></li>
-              <li><%= link_to "Projects", edit_candidate_projects_path(candidate_id: params[:id]||params[:candidate_id]) %></li>
-              <li><a href="#">Experiences</a></li>
+              <li><%= link_to "Profile", edit_candidate_path(params[:id]||params[:candidate_id]),onclick: "javascript:window.location.reload()" %></li>
+              <li><%= link_to "Achievements", edit_candidate_achievements_path(candidate_id: params[:id]||params[:candidate_id]) , onclick: "javascript:window.location.reload()"%></li>
+              <li><%= link_to "Projects", edit_candidate_projects_path(candidate_id: params[:id]||params[:candidate_id]), onclick: "javascript:window.location.reload()" %></li>
+              <li><%= link_to "Experiences", edit_candidate_experiences_path(candidate_id: params[:id]||params[:candidate_id]), onclick: "javascript:window.location.reload()" %></li>
               <li><a href="#">Links</a></li>
               <li><a href="#">References</a></li>
               <li><a href="#">Tests</a></li>
