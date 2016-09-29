@@ -1,0 +1,34 @@
+@media (min-width: 768px) {
+  .sidebar-nav .navbar .navbar-collapse {
+    padding: 0;
+    max-height: none;
+  }
+  .sidebar-nav .navbar ul {
+    float: none;
+    display: block;
+  }
+  .sidebar-nav .navbar li {
+    float: none;
+    display: block;
+  }
+  .sidebar-nav .navbar li a {
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+}
+
+.update-button{
+  margin-top:16%;
+}
+
+.create-button{
+  margin-top:3%;
+}
+
+.add-button-achievement{
+  margin-top:2%;
+}
+
+.achievement-title{
+  padding-bottom:2.5%;
+}

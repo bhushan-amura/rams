@@ -1,1 +1,23 @@
-<h1>Home</h1>
+
+<div class="container">
+  <div class="jumbotron" id="jobs">
+    <h2>Recent Jobs</h2>
+    <div class="list-group">
+    <% @recent_jobs.each do |job|%>
+      <a href="#" class="list-group-item"><b><%= job.title.capitalize %></b> at <b><%= job.name.capitalize %></b></a>
+    <% end  %>
+    </div>
+  </div>
+
+  <div class="jumbotron" id="tests">
+    <h2>Tests</h2>
+  </div>
+
+  <div class="jumbotron" id="profile">
+    <h2>Improve your profile</h2>
+  </div>
+
+  <div class="jumbotron" id="review">
+    <h2>Write a review</h2>
+  </div>
+</div>
