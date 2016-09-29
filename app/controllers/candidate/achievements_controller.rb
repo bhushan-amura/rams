@@ -1,6 +1,8 @@
 class Candidate::AchievementsController < ApplicationController
 
+  # layouts 
   layout 'candidate/layout'
+
   # helpers
   include Candidate::AchievementsHelper
 
@@ -15,15 +17,6 @@ class Candidate::AchievementsController < ApplicationController
     @candidate_achievements = @candidate.achievements
   end
 
-  # GET /candidate/:id/achievements/1
-  # GET /candidate/:id/achievements/1.json
-  def show
-  end
-
-  # GET /candidate/:id/achievements/new
-  def new
-    @candidate_achievement = Candidate::Achievement.new
-  end
 
   # GET /candidate/:id/achievements/edit
   def edit
