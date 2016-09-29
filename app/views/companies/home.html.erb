@@ -65,16 +65,16 @@
 		<table style="width:100%">
 			<tr>
 				<td>
-					<medium class="btn btn-success" role="button"><%= link_to 'Edit Post', edit_company_job_path(job_opportunity_path_params(company_job_opportunity)) %></medium>
+					<%= link_to 'Edit Post', edit_company_job_path(job_opportunity_path_params(company_job_opportunity)),class:"btn btn-warning", role:"button" %>
 				</td>
 				<td>
-					<medium class="btn btn-danger" role="button"><%= link_to 'Remove Post', company_job_path(job_opportunity_path_params(company_job_opportunity)), method: :delete, data: { confirm: 'Are you sure?' } %></medium>
+					<%= link_to 'Remove Post', company_job_path(job_opportunity_path_params(company_job_opportunity)), method: :delete, data: { confirm: 'Are you sure?' },class:"btn btn-danger", role:"button" %>
 				</td>
 				<td>
-					<medium class="btn btn-info" role="button"><%= link_to 'Related Events',  company_job_events_path(events_path_params(job_opportunity_path_params(company_job_opportunity))) %></medium>
+					<%= link_to 'Related Events',  company_job_events_path(events_path_params(job_opportunity_path_params(company_job_opportunity))),class:"btn btn-success", role:"button" %>
 				</td>
 				<td>
-					<small class="btn btn-info" role="button"><%= link_to 'View Full Post',  company_job_path(job_opportunity_path_params(company_job_opportunity)) %></small>
+					<%= link_to 'View Full Post',  company_job_path(job_opportunity_path_params(company_job_opportunity)),class:"btn btn-info", role:"button" %>
 				</td>
 			</tr>
 		</table>

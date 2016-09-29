@@ -23,8 +23,8 @@ class Company::JobOpportunitiesController < ApplicationController
 
   # GET /company/job_opportunities/1/edit
   def edit
-    @job_quaifications = @company.job_opportunities.qualifications
-    @job_skills = @company.job_opportunities.kills
+    # @job_quaifications = @company.job_opportunities.qualifications
+    # @job_skills = @company.job_opportunities.kills
   end
 
   # POST /company/job_opportunities
@@ -80,6 +80,6 @@ class Company::JobOpportunitiesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def company_job_opportunity_params
-      params.require(:company_job_opportunity).permit(:id,:title,:shift,:description,:number_of_positions,:company_id,:status,:ctc,:experience)
+      params.require(:company_job_opportunity).permit(:id,:title,:shift,:description,:number_of_positions,:company_id,:status,:ctc,:experience, qualifications_attributes: [:id, :course, :domain], skills_attributes: [:name])
     end
 end
