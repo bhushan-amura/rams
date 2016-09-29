@@ -2,6 +2,7 @@ class CandidatesController < ApplicationController
 
   # layouts
   layout 'candidate/layout'
+
   # filters/callbacks
   before_action :set_candidate, only: [:show, :edit, :update, :destroy, :home]  
 
@@ -68,6 +69,7 @@ class CandidatesController < ApplicationController
 
   # HOME /candidate/1/home
   def home
+    @recent_jobs = Company::JobOpportunity.get_recent_jobs(5) 
   end
 
   private
