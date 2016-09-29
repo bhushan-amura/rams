@@ -3,7 +3,6 @@
 <div id="error_explanation">
   <h2><%= pluralize(@company_job_opportunity.errors.count, "error") %>
     prohibited this company_job_opportunity from being saved:</h2>
-
   <ul>
     <% @company_job_opportunity.errors.full_messages.each do |message| %>
     <li><%= message %></li>
@@ -11,6 +10,7 @@
   </ul>
 </div>
 <% end %>
+
 
 <div class="field form-group">
   <%= f.label :title, class:'col-sm-2 control-label' %>
@@ -57,7 +57,7 @@
 <div class="field form-group">
   <%= f.label :ctc, class:'col-sm-2 control-label' %>
   <div class="col-sm-10">
-    <%= f.number_field :ctc, class: 'form-control', placeholder: 'CTC in lacks' %>
+    <%= f.number_field :ctc, class: 'form-control', placeholder: 'CTC in lakh' %>
   </div>
 </div>
 <!--------------->

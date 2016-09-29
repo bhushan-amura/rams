@@ -45,7 +45,7 @@ class Company::EventsController < ApplicationController
   def update
     respond_to do |format|
       if @company_event.update(company_event_params)
-        format.html { redirect_to  company_job_events_path(events_path_params(@company)), notice: 'Event was successfully updated.' }
+        format.html { redirect_to  company_job_events_path, notice: 'Event was successfully updated.' }
         # format.json { render :show, status: :ok, location: @company_event }
       else
         format.html { render :edit }
@@ -81,6 +81,6 @@ class Company::EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def company_event_params
-      params.require(:company_event).permit(:event_type,:organiser,:date_time,:duration)
+      params.require(:company_event).permit(:event_type,:organiser,:date_time,:duration, :location_attributes => [:building_number,:building_name,:street_address,:street_name,:city,:state,:country,:zipcode])
     end
 end
