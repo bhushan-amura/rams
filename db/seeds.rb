@@ -74,7 +74,7 @@ def create_jobs(max_job_count_per_company=10)
     shifts = ["full-time","part-time","internship"]
     statuses = [true,false]
     job_count.times do |j|
-      job = Company::JobOpportunity.new(title:Faker::Lorem.word,shift:shifts[rand(shifts.length)],description:Faker::Lorem.paragraph(2),number_of_positions:rand(10),status:statuses[rand(statuses.length)],ctc: rand(10000..50000),experience:rand(10)) # TODO : Fill in the fields
+      job = Company::JobOpportunity.new(title:Faker::Company.profession,shift:shifts[rand(shifts.length)],description:Faker::Lorem.paragraph(2),number_of_positions:rand(10),status:statuses[rand(statuses.length)],ctc: rand(10000..50000),experience:rand(10)) # TODO : Fill in the fields
       company.job_opportunities << job
     end
   end
