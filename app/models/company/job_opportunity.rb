@@ -12,6 +12,8 @@ class  Company::JobOpportunity < ActiveRecord::Base
     has_many :qualification_assignments, as: :qualifiable, dependent: :destroy
     has_many :qualifications, through: :qualification_assignments
 
+    # accepts_nested_attributes_for :qualifications
+
   # validations
   validates :title, presence:true, length: { maximum: 255 }
   validates :shift, presence:true, length: { maximum: 255 }
