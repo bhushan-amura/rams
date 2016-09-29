@@ -23,8 +23,8 @@ class Company::JobOpportunitiesController < ApplicationController
 
   # GET /company/job_opportunities/1/edit
   def edit
-    # @job_quaifications = @company.job_opportunities.qualifications
-    # @job_skills = @company.job_opportunities.kills
+    @qualifications = Qualification.all
+    @skills = Skill.all
   end
 
   # POST /company/job_opportunities
