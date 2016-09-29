@@ -100,4 +100,4 @@
 </div>
 
 <%= link_to 'Edit',edit_company_job_path(job_opportunity_path_params(@company_job_opportunity)), class:"btn btn-default" %>
-<!-- <%= link_to 'Back', company_job_path %> -->
+<%= link_to 'New Event', new_company_job_event_path(events_path_params(@company_job_opportunity)), class:"btn btn-default" %>
