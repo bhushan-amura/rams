@@ -1,20 +1,12 @@
 <div class="col-sm-2 well">
-  <div class="thumbnail">
-    <p>Upcoming Events:</p>
-    <img src="paris.jpg" alt="Paris" width="400" height="300">
-    <p>
-      <strong>Paris</strong>
-    </p>
-    <p>Fri. 27 November 2015</p>
-    <button class="btn btn-primary">Info</button>
-  </div>
+  <p>Recent or Upcoming Events:</p>
+  <% @company.recent_events(5).each do |e| %>
+  <%#= link_to  %>
   <div class="well">
-    <p>ADS</p>
+    <%= e.event_type %><br>
+    <%= e.date_time.strftime("%b, %d - %Y") %><br/>
+    <%= e.date_time.strftime("%I:%M %p") %>
+    <%= e.location.city %><br/>
   </div>
-  <div class="well">
-    <p>ADS</p>
-  </div>
+  <% end %>
 </div>
-
-
-

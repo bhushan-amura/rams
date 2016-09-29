@@ -1,10 +1,14 @@
 <div class="col-sm-3 well">
-  <div class="well">
+  <%= link_to @company.url do %>
+  <div class="well nounderline">
     <p>
-      <%= link_to @company.name %>
+      <div class="nounderline">
+        <h3><%= @company.name %></h3>
+      </div>
     </p>
     <%= image_tag( @company.logo , size: "120x70", alt: @company.name) %>
   </div>
+  <% end %>
   <div class="well">
     <p>
       <span class="label label-default">Tagline</span>
@@ -23,7 +27,7 @@
     People are looking at your profile. Find out who.
   </div> -->
 <p>
-  <a href="#">Link</a>
+  <%= link_to "Post Job Opening", new_company_job_path(@company) %>
 </p>
 <p>
   <a href="#">Link</a>
