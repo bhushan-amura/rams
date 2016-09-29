@@ -31,7 +31,7 @@ class Company::EventsController < ApplicationController
 
     respond_to do |format|
       if @company_event.save
-        format.html { redirect_to company_job_events_path(events_path_params(@company)), notice: 'Event was successfully created.' }
+        format.html { redirect_to company_job_events_path, notice: 'Event was successfully created.' }
         format.json { render :show, status: :created, location: @company_event }
       else
         format.html { render :new }

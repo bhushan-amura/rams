@@ -8,7 +8,7 @@ class Company::JobOpportunitiesController < ApplicationController
   # GET /company/job_opportunities
   # GET /company/job_opportunities.json
   def index
-    @company_job_opportunities = @company.job_opportunities
+    @company_job_opportunities = @company.job_opportunities.sorted
   end
 
   # GET /company/job_opportunities/1
@@ -34,7 +34,7 @@ class Company::JobOpportunitiesController < ApplicationController
 
     respond_to do |format|
       if @company_job_opportunity.save
-        format.html { redirect_to company_jobs_path(@company), notice: 'Job opportunity was successfully created.' }
+        format.html { redirect_to home_company_path(@company), notice: 'Job opportunity was successfully created.' }
         format.json { render :show, status: :created, location: @company_job_opportunity }
       else
         format.html { render :new }
