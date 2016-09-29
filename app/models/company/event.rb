@@ -4,6 +4,9 @@ class Company::Event < ActiveRecord::Base
   include ForbiddenValues
   include DatabaseStorageFormat
 
+  #scopes
+  # scope :sorted_events, lambda { order("created_at ")}
+
   # callbacks
   before_save :lower_fields
 

@@ -66,5 +66,7 @@
 
 </div>
 
-<%= link_to 'Edit Profile', edit_company_path(@company) %>
-<%= link_to 'job postings', company_jobs_path(@company) %>
+<div class="col-sm-offset-3">
+  <%= link_to 'Edit Profile', edit_company_path(@company),class:"btn btn-default" %>
+  <%= link_to 'Job Postings', company_jobs_path(@company),class:"btn btn-default" %>
+</div>
