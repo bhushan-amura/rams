@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160927054900) do
+ActiveRecord::Schema.define(version: 20160929175230) do
 
   create_table "admins", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
@@ -122,6 +122,16 @@ ActiveRecord::Schema.define(version: 20160927054900) do
 
   add_index "candidates", ["user_id"], name: "index_candidates_on_user_id", using: :btree
 
+  create_table "candidates_qualification_assignments", id: false, force: :cascade do |t|
+    t.integer  "candidate_id",                limit: 4, null: false
+    t.integer  "qualification_assignment_id", limit: 4, null: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+  end
+
+  add_index "candidates_qualification_assignments", ["candidate_id"], name: "index_candidate_cqa", using: :btree
+  add_index "candidates_qualification_assignments", ["qualification_assignment_id"], name: "index_qa_cqa", using: :btree
+
   create_table "companies", force: :cascade do |t|
     t.string   "name",                limit: 255, null: false
     t.string   "company_type",        limit: 255, null: false
@@ -164,6 +174,13 @@ ActiveRecord::Schema.define(version: 20160927054900) do
   end
 
   add_index "company_job_opportunities", ["company_id"], name: "index_company_job_opportunities_on_company_id", using: :btree
+
+  create_table "institutes", force: :cascade do |t|
+    t.string   "university", limit: 255
+    t.string   "campus",     limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
 
   create_table "locations", force: :cascade do |t|
     t.string   "city",            limit: 255, null: false

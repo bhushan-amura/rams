@@ -19,11 +19,13 @@ class Candidate < ActiveRecord::Base
   has_many :course_scores, dependent: :destroy
   has_one :location, as: :locatable, dependent: :destroy
 	has_many :tests, through: :test_scores
-  has_many :qualification_assignments, as: :qualifiable, dependent: :destroy
-  has_many :qualifications, through: :qualification_assignments
   has_many :skill_assignments, as: :skillable, dependent: :destroy
   has_many :skills, through: :skill_assignments
   has_many :reviews, dependent: :destroy
+  has_many :candidate_qualification_assignments
+  has_many :qualification_assignments, through: :candidate_qualification_assignments
+  has_many :qualifications, through: :qualification_assignments 
+  has_many :institutes, through: :qualification_assignments, source: :qualifiable, source_type: "Institute"
 
   belongs_to :user
 
@@ -43,4 +45,14 @@ class Candidate < ActiveRecord::Base
   # constants
   GENDER = [["M","M"], ["F","F"], ["T","T"]]
   MARITAL = ["married", "unmarried"]
+
+
+  # instance methods
+  def add_institute_with_qualification(institute,qualification)
+    qa = QualificationAssignment.new(qualification_id:qualification.id,qualifiable_id:institute.id,qualifiable_type:institute.class.to_s)
+    if qa.save
+      x =  CandidateQualificationAssignment.new(qualification_assignment_id:qa.id)
+      self.candidate_qualification_assignments << x 
+    end
+  end
 end
