@@ -8,7 +8,8 @@ class Company::JobOpportunitiesController < ApplicationController
   # GET /company/job_opportunities
   # GET /company/job_opportunities.json
   def index
-    @company_job_opportunities = @company.job_opportunities.sorted
+    @company_job_opportunities = @company.job_opportunities
+    # @company_job_opportunities = sorted_jobs(@company)
   end
 
   # GET /company/job_opportunities/1
