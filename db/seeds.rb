@@ -74,7 +74,7 @@ def create_jobs(max_job_count_per_company=10)
     shifts = ["full-time","part-time","internship"]
     statuses = [true,false]
     job_count.times do |j|
-      job = Company::JobOpportunity.new(title:Faker::Lorem.word,shift:shifts[rand(shifts.length)],description:Faker::Lorem.paragraph(2),number_of_positions:rand(10),status:statuses[rand(statuses.length)],ctc: rand(10000..50000)) # TODO : Fill in the fields
+      job = Company::JobOpportunity.new(title:Faker::Lorem.word,shift:shifts[rand(shifts.length)],description:Faker::Lorem.paragraph(2),number_of_positions:rand(10),status:statuses[rand(statuses.length)],ctc: rand(10000..50000),experience:rand(10)) # TODO : Fill in the fields
       company.job_opportunities << job
     end
   end
@@ -167,7 +167,8 @@ def create_experiences(experience_count=5)
   candidate_users.each do |candidate|
     ec = rand(experience_count)
     ec.times do |e|
-      experience = Candidate::Experience.new(name:Faker::Company.name,description:Faker::Lorem.paragraph(2),start_date:Faker::Date.between(10.years.ago,Date.today),end_date:Faker::Date.between(10.years.ago,Date.today),shift_type: shift_types[rand(shift_types.length)]) #TODO : Fill in the values
+      experience = Candidate::Experience.new(name:Faker::Company.name,description:Faker::Lorem.paragraph(2),start_date:Faker::Date.between(10.years.ago,Date.today),shift_type: shift_types[rand(shift_types.length)]) #TODO : Fill in the values
+     experience.end_date = Faker::Date.between(experience.start_date,Date.today)
       candidate.experiences << experience
     end
   end
@@ -192,7 +193,8 @@ def create_projects(project_count=5)
   candidate_users.each do |candidate|
     pc = rand(project_count)
     pc.times do |p|
-      project = Candidate::Project.new(title:Faker::Lorem.word,domain:Faker::Lorem.word,start_date:Faker::Date.between(5.years.ago,Date.today),end_date:Faker::Date.between(5.years.ago,Date.today),position:Faker::Company.profession,organisation:Faker::Company.name,description:Faker::Lorem.paragraph(2)) # TODO : Fill in the values
+      project = Candidate::Project.new(title:Faker::Lorem.word,domain:Faker::Lorem.word,start_date:Faker::Date.between(5.years.ago,Date.today),position:Faker::Company.profession,organisation:Faker::Company.name,description:Faker::Lorem.paragraph(2)) # TODO : Fill in the values
+      project.end_date = Faker::Date.between(5.years.ago,Date.today)
       candidate.projects << project
     end
   end

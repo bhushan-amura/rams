@@ -17,4 +17,12 @@ class Candidate::Experience < ActiveRecord::Base
   validates :description, :length => {maximum: 65535}
   validates :shift_type, :presence => true
 
+  # instance methods
+
+
+  # class methods
+  def self.in_days
+    Candidate.joins(:experiences).select('SUM(DATEDIFF(candidate_experiences.end_date,candidate_experiences.start_date)) AS days,candidates.id').group(:candidate_id).order('1 DESC')
+  end
+
 end
