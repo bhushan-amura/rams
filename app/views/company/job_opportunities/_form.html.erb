@@ -66,13 +66,13 @@
   <div class="field form-group">
     <%= t.label :course, class:'col-sm-2 control-label' %>
     <div class="col-sm-9">
-      <%= t.select :course, options_for_select(@qualifications.map{ |x| [x.course, x.id] }, selected_key = t.object.course),{}, class: 'form-control paddingbottom', placeholder: 'Course' %>
+      <%= t.select :course, options_for_select(@qualifications.map{|x|[x.course, x.id]}, selected_key = t.object.id),{}, class: 'form-control', placeholder: 'Course' %>
     </div>
   </div>
   <div class="field form-group">
     <%= t.label :domain, class:'col-sm-2 control-label' %>
     <div class="col-sm-7">
-      <%= t.select :domain, options_for_select(Qualification.all.map {|x| [x.domain,x.id]}, selected_key = t.object.id),{}, class: 'form-control', placeholder: 'Domain' %>
+      <%= t.select :domain, options_for_select(@qualifications.map {|x| [x.domain,x.id]}, selected_key = t.object.id),{}, class: 'form-control', placeholder: 'Domain' %>
     </div>
     <div class="col-sm-3">
       <%= t.link_to_remove "Remove", class:"btn btn-danger", role:"button"  %>
