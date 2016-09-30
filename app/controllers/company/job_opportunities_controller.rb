@@ -4,13 +4,14 @@ class Company::JobOpportunitiesController < ApplicationController
 
   # callbacks
   before_action :set_company
-  before_action :set_qaulifaications
+  before_action :set_qualifications
   before_action :set_skills
-  before_action :get_candidates
-  before_action :set_company_job_opportunity
+  before_action :set_company_job_opportunity, only: [:show,:index,:edit,:update]
+  before_action :get_candidates, only: [:show,:edit,:update]
 
   # helpers
   include Company::JobOpportunitiesHelper
+
   # GET /company/job_opportunities
   # GET /company/job_opportunities.json
   def index
@@ -81,7 +82,7 @@ class Company::JobOpportunitiesController < ApplicationController
       @company = Company.find(params[:company_id])
     end
 
-    def set_qaulifaications
+    def set_qualifications
       @qualifications = Qualification.all
     end
 
@@ -90,12 +91,11 @@ class Company::JobOpportunitiesController < ApplicationController
     end
 
     def get_candidates
-      j = @company.job_opportunities.find(params[:id])
-      @shortlisted_candidates = Admin.shortlist_candidates(j)
+      @shortlisted_candidates = Admin.shortlist_candidates(@company_job_opportunity)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def company_job_opportunity_params
-      params.require(:company_job_opportunity).permit(:id,:title,:shift,:description,:number_of_positions,:company_id,:status,:ctc,:experience, qualifications_attributes: [:id, :course, :domain], skills_attributes: [:id,:name])
+      params.require(:company_job_opportunity).permit(:id, :title, :shift, :description, :number_of_positions, :company_id, :status, :ctc, :experience, qualifications_attributes: [:id, :course, :domain, :_destroy], skills_attributes: [:id, :name, :_destroy])
     end
 end

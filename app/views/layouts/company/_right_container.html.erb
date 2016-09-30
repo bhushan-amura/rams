@@ -3,10 +3,18 @@
   <% @company.recent_events(5).each do |e| %>
   <%#= link_to  %>
   <div class="well">
-    <%= e.event_type %><br>
-    <%= e.date_time.strftime("%b, %d - %Y") %><br/>
-    <%= e.date_time.strftime("%I:%M %p") %>
-    <%= e.location.city %><br/>
+    <div class="row">
+      <b><%= e.event_type.capitalize %></b>
+    </div>
+    <div class="row">
+      <%= e.date_time.strftime("%b, %d - %Y") %>
+    </div>
+    <div class="row">
+      <%= e.date_time.strftime("%I:%M %p") %>
+    </div>
+    <div class="row">
+      <%= e.location.city %>
+    </div>
   </div>
   <% end %>
 </div>

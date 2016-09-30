@@ -2,16 +2,21 @@
   <form>
     <% @shortlisted_candidates.each do |sc| %>
     <div class="form-group">
-      <div class="col-sm-1 col-sm-offset-1">
-        <div class="checkbox">
-          <label>
-            <input type="checkbox">
-          </label>
+      <div class="row">
+        <div class="col-sm-1 col-sm-offset-1">
+          <div class="checkbox">
+            <label>
+              <input type="checkbox">
+            </label>
+          </div>
         </div>
-      </div>
-      <div class="col-sm-3">
-        <p class="text-left"><%= sc.first_name %>
-          <%= sc.last_name %></p>
+        <!-- link to is not working -->
+        <%= link_to candidate_path do %>
+        <div class="col-sm-3">
+          <p class="text-left"><%= sc.first_name %>
+            <%= sc.last_name %></p>
+        </div>
+        <% end %>
       </div>
     </div>
     <% end %>

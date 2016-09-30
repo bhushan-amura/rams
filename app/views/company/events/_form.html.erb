@@ -1,111 +1,107 @@
 <%= form_for @company_event, url: required_url, html: {class: 'form-horizontal'} do |f| %>
-  <% if @company_event.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@company_event.errors.count, "error") %> prohibited this company_event from being saved:</h2>
-      <ul>
-      <% @company_event.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+<% if @company_event.errors.any? %>
+<div id="error_explanation">
+  <h2><%= pluralize(@company_event.errors.count, "error") %>
+    prohibited this company_event from being saved:</h2>
+  <ul>
+    <% @company_event.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
 
-  <div class="field form-group">
-      <%= f.label :event_type, class:'col-sm-3 control-label' %>
-      <div class="col-sm-9">
-        <%= f.text_field :event_type, class: 'form-control', placeholder: 'Presentation, Interview etc' %>
-      </div>
+<div class="field form-group">
+  <%= f.label :event_type, class:'col-sm-3 control-label' %>
+  <div class="col-sm-9">
+    <%= f.text_field :event_type, class: 'form-control', placeholder: 'Presentation, Interview etc' %>
   </div>
+</div>
 
-  <div class="field form-group">
-    <%= f.label :organiser, class:'col-sm-3 control-label' %>
-    <div class="col-sm-9">
-      <%= f.text_field :organiser, class: 'form-control', placeholder: 'orgaiser' %>
-    </div>
+<div class="field form-group">
+  <%= f.label :organiser, class:'col-sm-3 control-label' %>
+  <div class="col-sm-9">
+    <%= f.text_field :organiser, class: 'form-control', placeholder: 'orgaiser' %>
   </div>
+</div>
 
-  <div class="field form-group">
-    <%= f.label :duration, class:'col-sm-3 control-label' %>
-    <div class="col-sm-9">
-      <%= f.text_field :duration, class: 'form-control', placeholder: 'in hrs' %>
-    </div>
+<div class="field form-group">
+  <%= f.label :duration, class:'col-sm-3 control-label' %>
+  <div class="col-sm-9">
+    <%= f.text_field :duration, class: 'form-control', placeholder: 'in hrs' %>
   </div>
+</div>
 
-
-  <div class="field form-group">
-    <%= f.label :date_time, class:'col-sm-3 control-label' %>
-    <div class="col-sm-9">
-      <%= f.text_field :date_time, class: 'form-control', placeholder: '' %>
-    </div>
+<div class="field form-group">
+  <%= f.label :date_time, class:'col-sm-3 control-label' %>
+  <div class="col-sm-9">
+    <%= f.datetime_select :date_time, class: 'form-control' %>
   </div>
+</div>
 
-  <%= f.fields_for :location_attributes, @company_event.location do |l| %>
-      <div class="field form-group">
-        <%= l.label :building_number, class:'col-sm-3 control-label' %>
-        <div class="col-sm-9">
-          <%= l.number_field :building_number, class: 'form-control', placeholder: '123' %>
-        </div>
-      </div>
-
-      <div class="field form-group">
-        <%= l.label :building_name, class:'col-sm-3 control-label' %>
-        <div class="col-sm-9">
-          <%= l.text_field :building_name, class: 'form-control', placeholder: 'Elite Premio' %>
-        </div>
-      </div>
-
-      <div class="field form-group">
-        <%= l.label :street_address, class:'col-sm-3 control-label' %>
-        <div class="col-sm-9">
-          <%= l.text_field :street_address, class: 'form-control', placeholder: "11 Baker's street" %>
-        </div>
-      </div>
-
-      <div class="field form-group">
-        <%= l.label :street_name, class:'col-sm-3 control-label' %>
-        <div class="col-sm-9">
-          <%= l.text_field :street_name, class: 'form-control', placeholder: 'crossword street' %>
-        </div>
-      </div>
-    
-      <div class="field form-group">
-        <%= l.label :city, class:'col-sm-3 control-label' %>
-        <div class="col-sm-9">
-          <%= l.text_field :city, class: 'form-control', placeholder: 'new york' %>
-        </div>
-      </div>
-
-      <div class="field form-group">
-        <%= l.label :state, class:'col-sm-3 control-label' %>
-        <div class="col-sm-9">
-          <%= l.text_field :state, class: 'form-control', placeholder: 'CA' %>
-        </div>
-      </div>
-
-      <div class="field form-group">
-        <%= l.label :country, class:'col-sm-3 control-label' %>
-        <div class="col-sm-9">
-          <%= l.text_field :country, class: 'form-control', placeholder: 'USA' %>
-        </div>
-      </div>
-
-      <div class="field form-group">
-        <%= l.label :zipcode, class:'col-sm-3 control-label' %>
-        <div class="col-sm-9">
-          <%= l.text_field :zipcode, class: 'form-control', placeholder: '99511-4589' %>
-        </div>
-      </div>
-
-
-  <% end %>
-
-
-
-
-  <div class="actions form-group">
-    <div class="col-sm-offset-2 col-sm-10">
-     <%= f.submit class:"btn btn-default" %>
-    </div>
+<%= f.fields_for :location_attributes, @company_event.location do |l| %>
+<div class="field form-group">
+  <%= l.label :building_number, class:'col-sm-3 control-label' %>
+  <div class="col-sm-9">
+    <%= l.number_field :building_number, class: 'form-control', placeholder: '123' %>
   </div>
+</div>
+
+<div class="field form-group">
+  <%= l.label :building_name, class:'col-sm-3 control-label' %>
+  <div class="col-sm-9">
+    <%= l.text_field :building_name, class: 'form-control', placeholder: 'Elite Premio' %>
+  </div>
+</div>
+
+<div class="field form-group">
+  <%= l.label :street_address, class:'col-sm-3 control-label' %>
+  <div class="col-sm-9">
+    <%= l.text_field :street_address, class: 'form-control', placeholder: "11 Baker's street" %>
+  </div>
+</div>
+
+<div class="field form-group">
+  <%= l.label :street_name, class:'col-sm-3 control-label' %>
+  <div class="col-sm-9">
+    <%= l.text_field :street_name, class: 'form-control', placeholder: 'crossword street' %>
+  </div>
+</div>
+
+<div class="field form-group">
+  <%= l.label :city, class:'col-sm-3 control-label' %>
+  <div class="col-sm-9">
+    <%= l.text_field :city, class: 'form-control', placeholder: 'Mumbai' %>
+  </div>
+</div>
+
+<div class="field form-group">
+  <%= l.label :state, class:'col-sm-3 control-label' %>
+  <div class="col-sm-9">
+    <%= l.text_field :state, class: 'form-control', placeholder: 'Maharashtra' %>
+  </div>
+</div>
+
+<div class="field form-group">
+  <%= l.label :country, class:'col-sm-3 control-label' %>
+  <div class="col-sm-9">
+    <%= l.text_field :country, class: 'form-control', placeholder: 'INDIA' %>
+  </div>
+</div>
+
+<div class="field form-group">
+  <%= l.label :zipcode, class:'col-sm-3 control-label' %>
+  <div class="col-sm-9">
+    <%= l.text_field :zipcode, class: 'form-control', placeholder: '99511-4589' %>
+  </div>
+</div>
+
+<% end %>
+
+<div class="actions form-group">
+  <div class="col-sm-offset-2 col-sm-10">
+    <%= f.submit class:"btn btn-default" %>
+  </div>
+</div>
 
 <% end %>

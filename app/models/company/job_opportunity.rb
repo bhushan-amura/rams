@@ -12,8 +12,8 @@ class  Company::JobOpportunity < ActiveRecord::Base
   has_many :qualification_assignments, as: :qualifiable, dependent: :destroy
   has_many :qualifications, through: :qualification_assignments
 
-  accepts_nested_attributes_for :qualifications, :allow_destroy => false
-  accepts_nested_attributes_for :skills, :allow_destroy => false
+  accepts_nested_attributes_for :qualifications, :allow_destroy => true
+  accepts_nested_attributes_for :skills, :allow_destroy => true
 
   # validations
   validates :title, presence:true, length: { maximum: 255 }
@@ -22,7 +22,7 @@ class  Company::JobOpportunity < ActiveRecord::Base
   validates :number_of_positions, presence:true
 
   #constants
-  STATUS = ["OPEN","CLOSED"] 
+  STATUS = ["OPEN","CLOSED"]
 
   # def sorted_jobs(company)
   #   company.job_opportunities.all.order("updated_at DESC")
