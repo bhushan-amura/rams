@@ -22,6 +22,12 @@ class  Company::JobOpportunity < ActiveRecord::Base
   validates :number_of_positions, presence:true
 
   #constants
-  STATUS = ["OPEN","CLOSED"]
+  STATUS = ["OPEN","CLOSED"] 
+
+  # def sorted_jobs(company)
+  #   company.job_opportunities.all.order("updated_at DESC")
+  # end
+
+  # scope :sorted, lambda { order("created_at DESC") }
 
 end
