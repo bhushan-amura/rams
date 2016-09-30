@@ -40,34 +40,41 @@
             </div>
           </form>
           <ul class="nav navbar-nav navbar-right">
-            <li>
-              <a href="#">
+            <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown">
                 <span class="glyphicon glyphicon-user"></span>
-                Logout</a>
-            </li>
-          </ul>
+                <%= current_user.info.name %></a>
+              <ul class="dropdown-menu">
+                <li>
+                  <%= link_to 'Edit Profile', edit_company_path(@company) %>
+                </li>
+                <li>
+                  <%= link_to 'Log out', destroy_user_session_path, method: :delete %>
+                </li>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      <div class="container text-center">
+        <div class="row">
+
+          <!-- left================== -->
+          <%= render 'layouts/company/left_container' %>
+
+          <!-- center================ -->
+          <%= render 'layouts/company/center_container' %>
+
+          <!-- right================= -->
+          <%= render 'layouts/company/right_container' %>
+
         </div>
       </div>
-    </nav>
 
-    <div class="container text-center">
-      <div class="row">
+      <footer class="container-fluid text-center">
+        <p>Footer Text says : "Hello World!!"</p>
+      </footer>
 
-        <!-- left================== -->
-        <%= render 'layouts/company/left_container' %>
-
-        <!-- center================ -->
-        <%= render 'layouts/company/center_container' %>
-
-        <!-- right================= -->
-        <%= render 'layouts/company/right_container' %>
-
-      </div>
-    </div>
-
-    <footer class="container-fluid text-center">
-      <p>Footer Text says : "Hello World!!"</p>
-    </footer>
-
-  </body>
-</html>
+    </body>
+  </html>
