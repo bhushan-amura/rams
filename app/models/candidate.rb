@@ -22,7 +22,8 @@ class Candidate < ActiveRecord::Base
   has_many :skill_assignments, as: :skillable, dependent: :destroy
   has_many :skills, through: :skill_assignments
   has_many :reviews, dependent: :destroy
-  has_many :candidate_qualification_assignments
+
+  has_many :candidate_qualification_assignments,dependent: :destroy
   has_many :qualification_assignments, through: :candidate_qualification_assignments
   has_many :qualifications, through: :qualification_assignments 
   has_many :institutes, through: :qualification_assignments, source: :qualifiable, source_type: "Institute"
@@ -31,9 +32,9 @@ class Candidate < ActiveRecord::Base
 
 
   # validations
-	#validates :first_name, :format => REGEX_NAME_FORMAT,
-			#:presence => true
-	#validates :last_name, :format => REGEX_NAME_FORMAT,
+  #validates :first_name, :format => REGEX_NAME_FORMAT,
+      #:presence => true
+  #validates :last_name, :format => REGEX_NAME_FORMAT,
       #:presence => true
 	validates :dob, :presence => true
 	validates :gender, :presence => true, inclusion:{:in => ["M", "F", "T"]}
@@ -54,5 +55,16 @@ class Candidate < ActiveRecord::Base
       x =  CandidateQualificationAssignment.new(qualification_assignment_id:qa.id)
       self.candidate_qualification_assignments << x 
     end
+  end
+
+  def get_institute_with_qualification
+    institutes_with_qualifications = []
+    assignments = self.candidate_qualification_assignments.pluck(:qualification_assignment_id)
+    assignments.each do |assignment|
+      institute = QualificationAssignment.joins('INNER JOIN institutes ON qualification_assignments.qualifiable_id = institutes.id AND qualification_assignments.qualifiable_type="Institute"').select('institutes.*').where(id:assignment).first
+      qualification =  QualificationAssignment.joins('INNER JOIN qualifications ON qualification_assignments.qualification_id = qualifications.id').select('qualifications.*').where(id:assignment).first
+      institutes_with_qualifications << {institute: institute, qualification: qualification}
+    end
+    institutes_with_qualifications
   end
 end

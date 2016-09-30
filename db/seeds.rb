@@ -212,19 +212,26 @@ def create_references(reference_count=3)
   end
 end
 
+
+def create_institutes(institute_count=20)
+  puts "Generating institutes...."
+  institute_count.times do |count|
+    institute = Institute.new(university:Faker::Educator.university,campus:Faker::Educator.campus)
+    institute.save!
+  end
+end
+
 def assign_qualification_candidate(max_qualifications_per_candidate=5)
   puts "Assigning qualification to candidates....."
   qualifications = Qualification.all
+  institutes = Institute.all
   candidates = Candidate.all
   candidates.each do |candidate|
     qualification_count = rand(max_qualifications_per_candidate)
     qualification_count.times do |count|
-      candidate.qualifications << qualifications[rand(qualifications.length)]
+      candidate.add_institute_with_qualification(institutes[rand(Institute.count)],qualifications[rand(qualifications.length)])
     end
   end
-end
-
-def create_institutes(institute_count=4,institute_qual_count=5)
 end
 
 def create_course_scores
@@ -321,6 +328,7 @@ create_experiences
 create_projects
 create_links
 create_references
+create_institutes
 assign_qualification_candidate
 create_course_scores
 assign_skill_candidate
