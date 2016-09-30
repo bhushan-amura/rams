@@ -50,20 +50,30 @@ class Candidate < ActiveRecord::Base
 
   # instance methods
   def add_institute_with_qualification(institute,qualification)
-    qa = QualificationAssignment.new(qualification_id:qualification.id,qualifiable_id:institute.id,qualifiable_type:institute.class.to_s)
-    if qa.save
-      x =  CandidateQualificationAssignment.new(qualification_assignment_id:qa.id)
-      self.candidate_qualification_assignments << x 
-    end
+    qa = QualificationAssignment.find_or_create_by(qualification_id:qualification.id,qualifiable_id:institute.id,qualifiable_type:institute.class.to_s)
+
+    cqa =  CandidateQualificationAssignment.new(candidate_id:self.id,qualification_assignment_id:qa.id)
+
+    self.candidate_qualification_assignments << cqa
+
   end
 
-  def get_institute_with_qualification
+  def update_institute_with_qualification(institute,qualification,candidate_id,qa_id)
+    qa = QualificationAssignment.find_or_create_by(qualification_id:qualification.id,qualifiable_id:institute.id,qualifiable_type:institute.class.to_s)
+
+    cqa_id = CandidateQualificationAssignment.find_by(candidate_id:candidate_id,qualification_assignment_id: qa_id).id
+
+    CandidateQualificationAssignment.update(cqa_id, qualification_assignment_id:qa.id)
+
+  end
+
+  def get_institutes_with_qualifications
     institutes_with_qualifications = []
     assignments = self.candidate_qualification_assignments.pluck(:qualification_assignment_id)
     assignments.each do |assignment|
-      institute = QualificationAssignment.joins('INNER JOIN institutes ON qualification_assignments.qualifiable_id = institutes.id AND qualification_assignments.qualifiable_type="Institute"').select('institutes.*').where(id:assignment).first
-      qualification =  QualificationAssignment.joins('INNER JOIN qualifications ON qualification_assignments.qualification_id = qualifications.id').select('qualifications.*').where(id:assignment).first
-      institutes_with_qualifications << {institute: institute, qualification: qualification}
+      institute = Institute.joins('INNER JOIN qualification_assignments ON qualification_assignments.qualifiable_id = institutes.id AND qualification_assignments.qualifiable_type="Institute"').select('institutes.*').where('qualification_assignments.id = ?', assignment).first
+      qualification =  Qualification.joins('INNER JOIN qualification_assignments ON qualification_assignments.qualification_id = qualifications.id').select('qualifications.*').where('qualification_assignments.id = ?',assignment).first
+      institutes_with_qualifications << {institute: institute, qualification: qualification,qual_ass_id: assignment}
     end
     institutes_with_qualifications
   end
