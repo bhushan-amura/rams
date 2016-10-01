@@ -51,7 +51,7 @@
 <% if !new_reference %>
   <div class="form-group">
     <div class="col-sm-1">
-      <%= link_to "Delete",candidate_reference_path(reference_path_params(candidate_reference)),method: :delete, class:"btn btn-danger btn-md active", role:"button" %>
+      <%= link_to "Delete",candidate_reference_path(reference_path_params(candidate_reference)),method: :delete,data:{confirm: 'Are you sure?'} ,class:"btn btn-danger btn-md active", role:"button" %>
 
     </div>
   </div>

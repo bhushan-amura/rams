@@ -66,7 +66,7 @@
 <% if !new_experience %>
   <div class="form-group">
     <div class="col-sm-1">
-      <%= link_to "Delete",candidate_experience_path(experience_path_params(candidate_experience)),method: :delete, class:"btn btn-danger btn-md active", role:"button" %>
+      <%= link_to "Delete",candidate_experience_path(experience_path_params(candidate_experience)),method: :delete,data:{confirm:'Are you sure?'}, class:"btn btn-danger btn-md active", role:"button" %>
 
     </div>
   </div>

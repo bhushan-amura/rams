@@ -47,7 +47,7 @@
 <% if !new_achievement %>
   <div class="form-group">
     <div class="col-sm-1">
-      <%= link_to "Delete",candidate_achievement_path(achievement_path_params(candidate_achievement)),method: :delete, class:"btn btn-danger btn-md active", role:"button" %>
+      <%= link_to "Delete",candidate_achievement_path(achievement_path_params(candidate_achievement)),method: :delete, data:{confirm:'Are you sure?'},class:"btn btn-danger btn-md active", role:"button" %>
 
     </div>
   </div>
