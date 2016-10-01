@@ -29,10 +29,12 @@ class Candidate::ReferencesController < ApplicationController
 
     respond_to do |format|
       if @candidate_reference.save
-        format.html { redirect_to edit_candidate_references_path(params[:candidate_id]), notice: 'Reference was successfully created.' }
+        flash[:success] = 'Reference was successfully created.' 
+        format.html { redirect_to edit_candidate_references_path(params[:candidate_id])}
         format.json { render :show, status: :created, location: @candidate_reference }
       else
-        format.html { render :new }
+        flash[:failure] = 'Reference creation unsuccessful.' 
+        format.html { redirect_to edit_candidate_references_path(params[:candidate_id]) }
         format.json { render json: @candidate_reference.errors, status: :unprocessable_entity }
       end
     end
@@ -43,9 +45,13 @@ class Candidate::ReferencesController < ApplicationController
   def update
     respond_to do |format|
       if @candidate_reference.update(candidate_reference_params)
-        format.html { redirect_to edit_candidate_references_path(params[:candidate_id]), notice: 'Reference was successfully updated.' }
+        flash[:success] = 'Reference was successfully updated.' 
+        format.html { redirect_to edit_candidate_references_path(params[:candidate_id])}
         format.json { render :show, status: :ok, location: @candidate_reference }
       else
+        flash[:failure] = 'Reference updation unsuccessful.' 
+        @candidate_references = [@candidate_reference]
+        @new_candidate_reference = Candidate::Reference.new
         format.html { render :edit }
         format.json { render json: @candidate_reference.errors, status: :unprocessable_entity }
       end
@@ -57,7 +63,8 @@ class Candidate::ReferencesController < ApplicationController
   def destroy
     @candidate_reference.destroy
     respond_to do |format|
-      format.html { redirect_to edit_candidate_references_path(params[:candidate_id]), notice: 'Reference was successfully destroyed.' }
+      flash[:success] = 'Reference was successfully deleted' 
+      format.html { redirect_to edit_candidate_references_path(params[:candidate_id])}
       format.json { head :no_content }
     end
   end

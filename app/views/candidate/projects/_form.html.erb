@@ -3,14 +3,16 @@
 
     <%= form_for(candidate_project, url: required_url) do |f| %>
       <% if candidate_project.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(candidate_project.errors.count, "error") %> prohibited this candidate_project from being saved:</h2>
+        <div class="alert alert-danger">
+          <div id="error_explanation">
+            <h3><%= pluralize(candidate_project.errors.count, "error") %> prohibited this candidate_project from being saved:</h3>
 
-          <ul>
-          <% candidate_project.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-          <%  end %>
-          </ul>
+            <ul>
+              <% candidate_project.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <%  end %>
+            </ul>
+          </div>
         </div>
       <% end %>
 

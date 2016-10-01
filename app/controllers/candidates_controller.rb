@@ -47,9 +47,11 @@ class CandidatesController < ApplicationController
   def update
     respond_to do |format|
       if @candidate.update(candidate_params)
+        flash[:success] = 'Candidate was successfully updated'
         format.html { redirect_to edit_candidate_path(@candidate), notice: 'Candidate was successfully updated.' }
         format.json { render :show, status: :ok, location: @candidate }
       else
+        flash[:failure] = 'Candidate updation unsuccessful'
         format.html { render :edit }
         format.json { render json: @candidate.errors, status: :unprocessable_entity }
       end

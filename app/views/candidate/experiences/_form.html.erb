@@ -1,16 +1,18 @@
-<div class="row well">
+<div class="row">
   <div class="col-sm-9">
 
     <%= form_for candidate_experience, url: required_url do |f| %>
       <% if candidate_experience.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(candidate_experience.errors.count, "error") %> prohibited this candidate_experience from being saved:</h2>
+        <div class="alert alert-danger">
+          <div id="error_explanation">
+            <h3><%= pluralize(candidate_experience.errors.count, "error") %> prohibited this experience from being saved:</h3>
 
-          <ul>
-          <% candidate_experience.errors.full_messages.each do |message| %>
-            <li><%# message %></li>
-          <% end %>
-          </ul>
+            <ul>
+            <% candidate_experience.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+            </ul>
+          </div>
         </div>
       <% end %>
 
@@ -37,7 +39,7 @@
       <div class="form-group">
         <%= f.label(:description, class: "control-label col-sm-3")  %>
         <div class="col-sm-9">
-          <%= f.text_area(:description, class: "form-control", placeholder:"Write something about this experience",rows:4) %>
+          <%= f.text_area(:description, class: "form-control", placeholder:"Write something about this experience",rows:3) %>
         </div>
       </div>
 
@@ -66,7 +68,7 @@
 <% if !new_experience %>
   <div class="form-group">
     <div class="col-sm-1">
-      <%= link_to "Delete",candidate_experience_path(experience_path_params(candidate_experience)),method: :delete,data:{confirm:'Are you sure?'}, class:"btn btn-danger btn-md active", role:"button" %>
+      <%= link_to "Delete",candidate_experience_path(experience_path_params(candidate_experience)),method: :delete, class:"btn btn-danger btn-md active", role:"button",data:{confirm:'Are you sure?'} %>
 
     </div>
   </div>

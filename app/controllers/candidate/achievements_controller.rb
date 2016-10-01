@@ -31,10 +31,12 @@ class Candidate::AchievementsController < ApplicationController
 
     respond_to do |format|
       if @candidate_achievement.save
-        format.html { redirect_to edit_candidate_achievements_path(params[:candidate_id]), notice: 'Achievement was successfully created.' }
+        flash[:success] =  'Achievement was successfully created.' 
+        format.html { redirect_to edit_candidate_achievements_path(params[:candidate_id])}
         format.json { render :show, status: :created, location: @candidate_achievement }
       else
-        format.html { render :new }
+        flash[:failure] = 'Achievement creation  unsuccessful'
+        format.html { render edit_candidate_achievements_path(params[:candidate_id])}
         format.json { render json: @candidate_achievement.errors, status: :unprocessable_entity }
       end
     end
@@ -45,9 +47,13 @@ class Candidate::AchievementsController < ApplicationController
   def update
     respond_to do |format|
       if @candidate_achievement.update(candidate_achievement_params)
-        format.html { redirect_to edit_candidate_achievements_path(params[:candidate_id]), notice: 'Achievement was successfully updated.' }
+        flash[:success] =  'Achievement was successfully updated.' 
+        format.html { redirect_to edit_candidate_achievements_path(params[:candidate_id]) }
         format.json { render :show, status: :ok, location: @candidate_achievement }
       else
+        flash[:failure] = 'Achievement updation unsuccessful'
+        @candidate_achievements = [@candidate_achievement]
+        @new_candidate_achievement = Candidate::Achievement.new
         format.html { render :edit }
         format.json { render json: @candidate_achievement.errors, status: :unprocessable_entity }
       end
@@ -59,7 +65,8 @@ class Candidate::AchievementsController < ApplicationController
   def destroy
     @candidate_achievement.destroy
     respond_to do |format|
-      format.html { redirect_to edit_candidate_achievements_path(params[:candidate_id]), notice: 'Achievement was successfully destroyed.' }
+      flash[:success] =  'Achievement was successfully deleted.' 
+      format.html { redirect_to edit_candidate_achievements_path(params[:candidate_id]) }
       format.json { head :no_content }
     end
   end
