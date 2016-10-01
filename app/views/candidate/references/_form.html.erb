@@ -3,15 +3,18 @@
 
     <%= form_for(candidate_reference, url: required_url) do |f| %>
       <% if candidate_reference.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(candidate_reference.errors.count, "error") %> prohibited this candidate_reference from being saved:</h2>
+        <div class="alert alert-danger">
+          <div id="error_explanation">
+            <h3><%= pluralize(candidate_reference.errors.count, "error") %> prohibited this candidate_reference from being saved:</h3>
 
-          <ul>
-          <% candidate_reference.errors.full_messages.each do |message| %>
-            <li><%#= message %></li>
-          <% end %>
-          </ul>
+            <ul>
+              <% candidate_reference.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
         </div>
+        
       <% end %>
      
       <div class="form-group">

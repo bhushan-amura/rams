@@ -42,7 +42,6 @@ class QualificationsController < ApplicationController
       @qualification = Qualification.find_or_create_by(qualification_params)
       @entity.add_institute_with_qualification(@institute,@qualification)
       redirect_to edit_candidate_qualification_index_path(candidate_id:params[:candidate_id])
-
     elsif @entity.class == Comapany::JobOpportunity
     end
   end

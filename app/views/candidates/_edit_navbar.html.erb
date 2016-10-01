@@ -30,6 +30,20 @@
       </div>
     </div>
     <div class="col-sm-9">
+      <% if flash[:success] %>
+        <div class="alert alert-success" role="alert">
+          <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span>
+          <span class="sr-only">Success:</span>
+          <%= flash[:success]%>
+        </div>
+
+      <% elsif flash[:failure] %>
+        <div class="alert alert-danger" role="alert">
+          <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
+          <span class="sr-only">Error:</span>
+          <%= flash[:failure] %>
+        </div>
+      <% end %>
       <%= yield :edit_content %>
     </div>
   </div>

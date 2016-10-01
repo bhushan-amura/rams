@@ -1,13 +1,15 @@
 <%= form_for @candidate,html:{ class: 'form-horizontal'} do |f| %>
   <% if @candidate.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@candidate.errors.count, "error") %> prohibited this candidate from being saved:</h2>
+    <div class="alert alert-danger">
+      <div id="error_explanation">
+        <h3><%= pluralize(@candidate.errors.count, "error") %> prohibited this candidate from being saved:</h3>
 
-      <ul>
-      <% @candidate.errors.full_messages.each do |message| %>
-        <li><%# message %></li>
-      <% end %>
-      </ul>
+        <ul>
+          <% @candidate.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
     </div>
   <% end %>
 

@@ -55,7 +55,6 @@ class Candidate < ActiveRecord::Base
     cqa =  CandidateQualificationAssignment.new(candidate_id:self.id,qualification_assignment_id:qa.id)
 
     self.candidate_qualification_assignments << cqa
-
   end
 
   def update_institute_with_qualification(institute,qualification,candidate_id,qa_id)
