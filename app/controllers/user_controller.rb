@@ -1,26 +1,14 @@
 class UserController < ApplicationController
- before_filter :authenticate_user!
-
- def index
+  def switch
     @user = current_user.info.class
- 	if( @user == Admin )
- 		redirect_to( admins_path )
- 	elsif ( @user == Candidate )
- 		@candidate = Candidate.find_by(user_id:current_user.id)
- 		redirect_to( candidate_path(@candidate) )
- 	else
- 		@company = Company.find_by(user_id:current_user.id)
- 		redirect_to( home_company_path(@company) )
- 	end
- end
-
- # def destroy
- #    current_user.destroy
- #    flash[:notice] = 'user was successfully logged out.' 
- #    respond_to do |format|
- #      format.html { redirect_to new_user_session_path}
- #      format.json { head :no_content }
- #    end
- # end
-
+ 	  if( @user == Admin )
+ 		  redirect_to( admins_path )
+ 	  elsif ( @user == Candidate )
+ 		  @candidate = Candidate.find_by(user_id:current_user.id)
+ 		  redirect_to( candidate_path(@candidate) )
+ 	  else
+ 		  @company = Company.find_by(user_id:current_user.id)
+ 		  redirect_to( home_company_path(@company) )
+    end
+  end
 end

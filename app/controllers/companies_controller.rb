@@ -2,12 +2,11 @@ class CompaniesController < ApplicationController
 
   # callbacks
   before_filter :authenticate_user!
-  # before_action :home
   before_action :set_company, only: [:show, :edit, :update, :destroy, :home]
 
   include Company::JobOpportunitiesHelper
   # layout
-  layout 'company'
+  layout :resolve_layout
 
   # GET /companies
   # GET /companies.json
@@ -34,15 +33,15 @@ class CompaniesController < ApplicationController
   # POST /companies.json
   def create
     @company = Company.new(company_params)
-
+    @company.user_id = current_user.id
     respond_to do |format|
       if @company.save
         flash[:notice] = 'Company was successfully created.'
-        format.html { redirect_to @company}
+        format.html { redirect_to home_company_path(@company)}
         format.json { render :show, status: :created, location: @company }
       else
         format.html { render :new }
-        format.json { render json: @company.errors, status: :unprocessable_entity }
+        # format.json { render json: @company.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -53,11 +52,11 @@ class CompaniesController < ApplicationController
     respond_to do |format|
       if @company.update(company_params)
         flash[:notice] = 'Company was successfully updated.'
-        format.html { redirect_to @company }
+        format.html { redirect_to home_company_path(@company) }
         format.json { render :show, status: :ok, location: @company }
       else
         format.html { render :edit }
-        format.json { render json: @company.errors, status: :unprocessable_entity }
+        # format.json { render json: @company.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -67,7 +66,7 @@ class CompaniesController < ApplicationController
   def destroy
     @company.destroy
     respond_to do |format|
-      flash[:notice] = 'Company was successfully destroyed.' 
+      flash[:notice] = 'Company was successfully destroyed.'
       format.html { redirect_to companies_url}
       format.json { head :no_content }
     end
@@ -86,6 +85,16 @@ class CompaniesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def company_params
-      params.require(:company).permit(:id,:name,:type,:url,:tagline,:phone,:number_of_employees,:description,:logo)
+      params.require(:company).permit(:id,:name,:company_type,:url,:tagline,:phone,:number_of_employees,:description,:logo)
     end
+
+    def resolve_layout
+      case action_name
+       when "new", "create"
+        'application'
+       else
+        'company'
+       end
+    end
+
 end
