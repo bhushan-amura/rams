@@ -6,8 +6,8 @@ class Company::JobOpportunitiesController < ApplicationController
   before_action :set_company
   before_action :set_qualifications
   before_action :set_skills
-  before_action :set_company_job_opportunity, only: [:show,:index,:edit,:update,:select_candidates]
-  before_action :get_candidates, only: [:show,:edit,:update]
+  before_action :set_company_job_opportunity, only: [:show, :index, :edit, :update, :select_candidates,:destroy]
+  before_action :get_candidates, only: [:show, :edit, :update]
   before_action :selected_candidates, only: [:show]
 
   # helpers
@@ -109,6 +109,6 @@ class Company::JobOpportunitiesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def company_job_opportunity_params
-      params.require(:company_job_opportunity).permit(:id, :title, :shift, :description, :number_of_positions, :company_id, :status, :ctc, :experience, qualifications_attributes: [:id, :course, :domain, :_destroy], skills_attributes: [:id, :name, :_destroy])
+       params.require(:company_job_opportunity).permit(:id, :title, :shift, :description, :number_of_positions, :company_id, :status, :ctc, :experience, qualifications_attributes: [:id, :course, :domain, :_destroy], skills_attributes: [:id, :name, :_destroy])
     end
 end

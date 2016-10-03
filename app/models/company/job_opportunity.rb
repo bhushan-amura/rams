@@ -5,10 +5,7 @@ class  Company::JobOpportunity < ActiveRecord::Base
   # callbacks
   belongs_to :company
 
-
-
   # relationships
-
   has_many :events, foreign_key: :company_job_opportunity_id, dependent: :destroy
   has_many :skill_assignments, as: :skillable, dependent: :destroy
   has_many :skills, through: :skill_assignments
@@ -28,9 +25,10 @@ class  Company::JobOpportunity < ActiveRecord::Base
   #constants
   STATUS = ["OPEN","CLOSED"]
 
-  # class methods/scope
-  def self.get_recent_jobs(job_count=5)
-    Company.joins(:job_opportunities).select('companies.name','company_job_opportunities.title','company_job_opportunities.id','company_job_opportunities.created_at').distinct.order(:created_at).limit(job_count)
-  end
+  # def sorted_jobs(company)
+  #   company.job_opportunities.all.order("updated_at DESC")
+  # end
+
+  # scope :sorted, lambda { order("created_at DESC") }
 
 end

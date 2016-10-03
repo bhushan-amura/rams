@@ -21,9 +21,7 @@
 //= require twitter/typeahead.min
 //= require twitter/typeahead/bloodhound
 //= require_tree .
-<<<<<<< HEAD
 //= require jquery_nested_form
-=======
 var bloodhound = new Bloodhound({
   datumTokenizer: function (d) {
     return Bloodhound.tokenizers.whitespace(d.value);
@@ -43,4 +41,3 @@ $('#typeahead').tagsinput({
     source: bloodhound.ttAdapter()
   }
 });
->>>>>>> feature/candidate-controller
