@@ -52,7 +52,7 @@ class Candidate::ProjectsController < ApplicationController
         format.json { render :show, status: :ok, location: @candidate_project }
       else
         flash[:failure] ='Project updation unsuccessful.' 
-        format.html { render :edit }
+        format.html { redirect_to edit_candidate_projects_path(params[:candidate_id]) }
         format.json { render json: @candidate_project.errors, status: :unprocessable_entity }
       end
     end

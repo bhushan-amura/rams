@@ -36,7 +36,7 @@ class Candidate::AchievementsController < ApplicationController
         format.json { render :show, status: :created, location: @candidate_achievement }
       else
         flash[:failure] = 'Achievement creation  unsuccessful'
-        format.html { render edit_candidate_achievements_path(params[:candidate_id])}
+        format.html { redirect_to edit_candidate_achievements_path(params[:candidate_id])}
         format.json { render json: @candidate_achievement.errors, status: :unprocessable_entity }
       end
     end
@@ -54,7 +54,7 @@ class Candidate::AchievementsController < ApplicationController
         flash[:failure] = 'Achievement updation unsuccessful'
         @candidate_achievements = [@candidate_achievement]
         @new_candidate_achievement = Candidate::Achievement.new
-        format.html { render :edit }
+        format.html { redirect edit_candidate_achievements_path(params[:candidate_id]) }
         format.json { render json: @candidate_achievement.errors, status: :unprocessable_entity }
       end
     end

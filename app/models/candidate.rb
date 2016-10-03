@@ -52,9 +52,11 @@ class Candidate < ActiveRecord::Base
   def add_institute_with_qualification(institute,qualification)
     qa = QualificationAssignment.find_or_create_by(qualification_id:qualification.id,qualifiable_id:institute.id,qualifiable_type:institute.class.to_s)
 
-    cqa =  CandidateQualificationAssignment.new(candidate_id:self.id,qualification_assignment_id:qa.id)
+    if !qa
+      return false
+    end
 
-    self.candidate_qualification_assignments << cqa
+    self.candidate_qualification_assignments.create(qualification_assignment_id:qa.id)
   end
 
   def update_institute_with_qualification(institute,qualification,candidate_id,qa_id)
@@ -63,7 +65,6 @@ class Candidate < ActiveRecord::Base
     cqa_id = CandidateQualificationAssignment.find_by(candidate_id:candidate_id,qualification_assignment_id: qa_id).id
 
     CandidateQualificationAssignment.update(cqa_id, qualification_assignment_id:qa.id)
-
   end
 
   def get_institutes_with_qualifications
