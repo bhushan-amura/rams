@@ -1,29 +1,28 @@
-<!-- <p id="notice"><%= notice %></p> -->
+<% @candidate_links.each do |candidate_link| %>
+<div class="well">
+  <div class="row">
+    <div class="col-sm-3">
+      <p>
+        <b>Link Type</b>
+      </p>
+    </div>
+    <div class="col-sm-9">
+      <p><%= candidate_link.link_type %></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-3">
+      <p>
+        <b>Url</b>
+      </p>
+    </div>
+    <div class="col-sm-9">
+      <p><%= link_to candidate_link.url %></p>
+    </div>
+  </div>
+</div>
+<% end %>
+<%= link_to "Edit Links",edit_candidate_links_path(params[:id]||params[:candidate_id]),class:"btn btn-default",onclick: "javascript:window.location.reload()" %>
+<%# end %>
 
-<h1>Listing Candidate Links</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @candidate_links.each do |candidate_link| %>
-    <% link_path_params = {candidate_id:params[:candidate_id],id:candidate_link.id} %>
-    <tr>
-      <td>
-        <b><%= candidate_link.link_type %></b>
-      </td>
-      <td><%= link_to 'Show', candidate_link_path(link_path_params) %></td>
-      <td><%= link_to 'Edit', edit_candidate_link_path(link_path_params) %></td>
-      <td><%= link_to 'Destroy', candidate_link_path(link_path_params), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Link', new_candidate_link_path %>
+<%= render "candidates/show_navbar" %>

@@ -1,26 +1,48 @@
-<!-- <p id="notice"><%= notice %></p> -->
-
-<h1>Listing Qualifications</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @qualifications.each do |qualification| %>
-    <tr>
-      <td><%= qualification.course %></td>
-      <td><%= link_to 'Show', self.send(qualification_path,qualification_path_params(qualification)) %></td>
-      <td><%= link_to 'Edit', self.send(qualification_path('edit'),qualification_path_params(qualification)) %></td>
-      <td><%= link_to 'Destroy', self.send(qualification_path,qualification_path_params(qualification)), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Qualification', self.send(qualification_path('new')) %>
+<% content_for :show_content do %>
+<% @entity_institutes_with_qualifications.each do |entity| %>
+<div class="well">
+  <div class="row">
+    <div class="col-sm-3">
+      <p>
+        <b>Course</b>
+      </p>
+    </div>
+    <div class="col-sm-9">
+      <p><%= entity[:qualification].course %></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-3">
+      <p>
+        <b>Domain</b>
+      </p>
+    </div>
+    <div class="col-sm-9">
+      <p><%= entity[:qualification].domain %></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-3">
+      <p>
+        <b>Campus</b>
+      </p>
+    </div>
+    <div class="col-sm-9">
+      <p><%= entity[:institute].campus %></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-3">
+      <p>
+        <b>University</b>
+      </p>
+    </div>
+    <div class="col-sm-9">
+      <p><%= entity[:institute].university  %></p>
+    </div>
+  </div>
+</div>
+<% end %>
+<%= link_to "Edit qualifications",edit_candidate_qualification_index_path(params[:id]||params[:candidate_id]),class:"btn btn-default",onclick:"javascript:window.location.reload()" %>
+<% end %>
+<%= render "candidates/show_navbar" %>

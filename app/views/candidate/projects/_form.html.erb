@@ -1,46 +1,87 @@
-<%= form_for(@candidate_project, url: required_url) do |f| %>
-  <% if @candidate_project.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@candidate_project.errors.count, "error") %> prohibited this candidate_project from being saved:</h2>
+<div class="row well">
+  <div class="col-sm-9">
 
-      <ul>
-      <% @candidate_project.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+    <%= form_for(candidate_project, url: required_url) do |f| %>
+      <% if candidate_project.errors.any? %>
+        <div class="alert alert-danger">
+          <div id="error_explanation">
+            <h3><%= pluralize(candidate_project.errors.count, "error") %> prohibited this candidate_project from being saved:</h3>
+
+            <ul>
+              <% candidate_project.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <%  end %>
+            </ul>
+          </div>
+        </div>
       <% end %>
-      </ul>
-    </div>
-  <% end %>
-  <table>
-    <tr>
-      <th><%= f.label :title %></th>
-      <td><%= f.text_field :title %></td>
-    </tr>
-    <tr>
-      <th><%= f.label :domain %></th>
-      <td><%= f.text_field :domain %></td>
-    </tr>
-    <tr>
-      <th><%= f.label :description %></th>
-      <td><%= f.text_field :description %></td>
-    </tr>
-    <tr>
-      <th><%= f.label :start_date %></th>
-      <td><%= f.date_select :start_date %></td>
-    </tr>
-    <tr>
-      <th><%= f.label :end_date %></th>
-      <td><%= f.date_select :end_date %></td>
-    </tr>
-    <tr>
-      <th><%= f.label :position %></th>
-      <td><%= f.text_field :position %></td>
-    </tr>
-    <tr>
-      <th><%= f.label :organisation %></th>
-      <td><%= f.text_field :organisation %></td>
-    </tr>
-  </table>
-  <div class="actions">
-    <%= f.submit %>
+
+      <div class="form-group">
+        <%= f.label(:title, class: "control-label col-sm-3")  %>
+        <div class="col-sm-9">
+          <%= f.text_field(:title, class: "form-control",placeholder:"Enter title") %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label(:domain, class: "control-label col-sm-3")  %>
+        <div class="col-sm-9">
+          <%= f.text_field(:domain, class: "form-control",placeholder:"Enter domain of project") %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= f.label(:description, class: "control-label col-sm-3")  %>
+        <div class="col-sm-9">
+          <%= f.text_area(:description, class: "form-control",placeholder:"Write description of the project",rows:5) %>
+
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label(:start_date, class: "control-label col-sm-3")  %>
+        <div class="col-sm-9">
+          <%= f.date_field(:start_date, class: "form-control",placeholder:"Enter start date of prject") %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label(:end_date, class: "control-label col-sm-3")  %>
+        <div class="col-sm-9">
+          <%= f.date_field(:end_date, class: "form-control",placeholder:"Enter end date of project") %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label(:position, class: "control-label col-sm-3")  %>
+        <div class="col-sm-9">
+          <%= f.text_field(:position, class: "form-control",placeholder:"What was your role in this") %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label(:organisation, class: "control-label col-sm-3")  %>
+        <div class="col-sm-9">
+          <%= f.text_field(:organisation, class: "form-control",placeholder:"For which organization was this for") %>
+        </div>
+      </div>
   </div>
+
+  <div class="form-group">
+    <% if !new_project %>
+      <div class="col-sm-2">
+        <%= f.submit "Update",class: "btn btn-default update-button btn-md" %>
+      </div>
+    <% else %>
+      <div class="col-sm-offset-2 create-button">
+        <%= f.submit "Create",class:"btn btn-default" %>
+      </div>
+    <% end %>
+  </div>
+
 <% end %>
+<% if !new_project %>
+  <div class="form-group">
+    <div class="col-sm-1">
+      <%= link_to "Delete",candidate_project_path(project_path_params(candidate_project)),method: :delete,data:{confirm: 'Are you sure?'} ,class:"btn btn-danger btn-md active", role:"button" %>
+
+    </div>
+  </div>
+ 
+<% end %>
+</div>

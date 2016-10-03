@@ -1,10 +1,14 @@
 class SkillsController < ApplicationController
 
-  #helpers
+  # layout 
+  layout 'candidate/layout'
+
+  # helpers
   include SkillsHelper
 
+  # filter/callbacks
   before_action :set_entity
-  before_action :set_skill, only: [:show, :edit, :update, :destroy]
+  before_action :set_skill, only: [:show, :destroy]
 
   # GET /skills
   # GET /skills.json
@@ -12,20 +16,21 @@ class SkillsController < ApplicationController
     @skills = @entity.skills
   end
 
-  # GET /skills/1
-  # GET /skills/1.json
-  def show
+  def all_skills
+    @skills = Skill.all
+    respond_to do |format|
+      format.json{ render :json => @skills }
+    end
   end
 
-  # GET /skills/new
-  def new
-    @skill = Skill.new
-  end
 
   # GET /skills/1/edit
   def edit
+    @entity_skill = Skill.new
+    @entity_skills = @entity.skills
   end
 
+<<<<<<< HEAD
   # POST /skills
   # POST /skills.json
   def create
@@ -43,14 +48,27 @@ class SkillsController < ApplicationController
       end
     end
   end
+=======
+>>>>>>> feature/candidate-controller
 
   # PATCH/PUT /skills/1
   # PATCH/PUT /skills/1.json
   def update
+    skill_names = skill_params[:names].split(',')
+    entity_skills = skill_names.each_with_object([]) do |skill,skills|
+      skill = Skill.find_or_create_by(name:skill)
+      skills << skill
+    end
+
     respond_to do |format|
+<<<<<<< HEAD
       if @skill.update(skill_params)
         flash[:notice] = 'Skill was successfully updated.'
         format.html { redirect_to self.send(skill_path,skill_path_params(@skill)) }
+=======
+      if @entity.skills = entity_skills 
+        format.html { redirect_to edit_candidate_skill_index_path(params[:candidate_id]),notice: 'Skill was successfully updated.' }
+>>>>>>> feature/candidate-controller
         format.json { render :show, status: :ok, location: @skill }
       else
         format.html { render :edit }
@@ -59,6 +77,7 @@ class SkillsController < ApplicationController
     end
   end
 
+<<<<<<< HEAD
   # DELETE /skills/1
   # DELETE /skills/1.json
   def destroy
@@ -70,6 +89,8 @@ class SkillsController < ApplicationController
     end
   end
 
+=======
+>>>>>>> feature/candidate-controller
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_entity
@@ -79,12 +100,13 @@ class SkillsController < ApplicationController
          @entity = Company::JobOpportunity.find(params[:job_id])
       end
     end
+
     def set_skill
       @skill = @entity.skills.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def skill_params
-      params.require(:skill).permit(:name)
+      params.require(:skills).permit(:names)
     end
 end

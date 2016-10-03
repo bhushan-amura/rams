@@ -1,7 +1,14 @@
 class CandidatesController < ApplicationController
 
+  # layouts
+  layout 'candidate/layout'
+
   # filters/callbacks
+<<<<<<< HEAD
   before_action :set_candidate, only: [:show, :edit, :update, :destroy]
+=======
+  before_action :set_candidate, only: [:show, :edit, :update, :destroy, :home]  
+>>>>>>> feature/candidate-controller
 
   # GET /candidates
   # GET /candidates.json
@@ -45,10 +52,16 @@ class CandidatesController < ApplicationController
   def update
     respond_to do |format|
       if @candidate.update(candidate_params)
+<<<<<<< HEAD
         flash[:notice] = 'Candidate was successfully updated.'
         format.html { redirect_to @candidate }
+=======
+        flash[:success] = 'Candidate was successfully updated'
+        format.html { redirect_to edit_candidate_path(@candidate), notice: 'Candidate was successfully updated.' }
+>>>>>>> feature/candidate-controller
         format.json { render :show, status: :ok, location: @candidate }
       else
+        flash[:failure] = 'Candidate updation unsuccessful'
         format.html { render :edit }
         format.json { render json: @candidate.errors, status: :unprocessable_entity }
       end
@@ -66,6 +79,11 @@ class CandidatesController < ApplicationController
       format.html { redirect_to candidates_url }
       format.json { head :no_content }
     end
+  end
+
+  # HOME /candidate/1/home
+  def home
+    @recent_jobs = Company::JobOpportunity.get_recent_jobs(5) 
   end
 
   private

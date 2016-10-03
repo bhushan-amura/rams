@@ -1,12 +1,14 @@
 class Candidate::ReferencesController < ApplicationController
 
+  # layouts 
+  layout 'candidate/layout'
+
+  # helpers
   include Candidate::ReferencesHelper
 
-  before_action only: [:show, :edit, :update, :destroy, :index, :create] do
-    set_candidate
-  end
-
-  before_action :set_candidate_reference, only: [:show, :edit, :update, :destroy]
+  # filters/callbacks
+  before_action :set_candidate
+  before_action :set_candidate_reference, only: [:update, :destroy]
 
   # GET /candidate/:id/references
   # GET /candidate/:id/references.json
@@ -14,18 +16,10 @@ class Candidate::ReferencesController < ApplicationController
     @candidate_references = @candidate.references
   end
 
-  # GET /candidate/:id/references/1
-  # GET /candidate/:id/references/1.json
-  def show
-  end
-
-  # GET /candidate/:id/references/new
-  def new
-    @candidate_reference = Candidate::Reference.new
-  end
-
   # GET /candidate/:id/references/1/edit
   def edit
+    @candidate_references = @candidate.references
+    @new_candidate_reference = Candidate::Reference.new
   end
 
   # POST /candidate/:id/references
@@ -35,11 +29,17 @@ class Candidate::ReferencesController < ApplicationController
 
     respond_to do |format|
       if @candidate_reference.save
+<<<<<<< HEAD
         flash[:notice] = 'Reference was successfully created.'
         format.html { redirect_to candidate_reference_path(reference_path_params(@candidate_reference)) }
+=======
+        flash[:success] = 'Reference was successfully created.' 
+        format.html { redirect_to edit_candidate_references_path(params[:candidate_id])}
+>>>>>>> feature/candidate-controller
         format.json { render :show, status: :created, location: @candidate_reference }
       else
-        format.html { render :new }
+        flash[:failure] = 'Reference creation unsuccessful.' 
+        format.html { redirect_to edit_candidate_references_path(params[:candidate_id]) }
         format.json { render json: @candidate_reference.errors, status: :unprocessable_entity }
       end
     end
@@ -50,11 +50,19 @@ class Candidate::ReferencesController < ApplicationController
   def update
     respond_to do |format|
       if @candidate_reference.update(candidate_reference_params)
+<<<<<<< HEAD
         flash[:notice] = 'Reference was successfully updated.'
         format.html { redirect_to candidate_reference_path(reference_path_params(@candidate_reference)) }
+=======
+        flash[:success] = 'Reference was successfully updated.' 
+        format.html { redirect_to edit_candidate_references_path(params[:candidate_id])}
+>>>>>>> feature/candidate-controller
         format.json { render :show, status: :ok, location: @candidate_reference }
       else
-        format.html { render :edit }
+        flash[:failure] = 'Reference updation unsuccessful.' 
+        @candidate_references = [@candidate_reference]
+        @new_candidate_reference = Candidate::Reference.new
+        format.html { redirect_to edit_candidate_references_path(params[:candidate_id]) }
         format.json { render json: @candidate_reference.errors, status: :unprocessable_entity }
       end
     end
@@ -66,7 +74,12 @@ class Candidate::ReferencesController < ApplicationController
     @candidate_reference.destroy
     flash[:notice] = 'Reference was successfully destroyed.'
     respond_to do |format|
+<<<<<<< HEAD
       format.html { redirect_to candidate_references_url }
+=======
+      flash[:success] = 'Reference was successfully deleted' 
+      format.html { redirect_to edit_candidate_references_path(params[:candidate_id])}
+>>>>>>> feature/candidate-controller
       format.json { head :no_content }
     end
   end
@@ -76,6 +89,7 @@ class Candidate::ReferencesController < ApplicationController
     def set_candidate
       @candidate = Candidate.find(params[:candidate_id])
     end
+    
     def set_candidate_reference
       @candidate_reference = @candidate.references.find(params[:id])
     end

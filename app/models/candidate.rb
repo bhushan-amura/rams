@@ -19,21 +19,26 @@ class Candidate < ActiveRecord::Base
   has_many :course_scores, dependent: :destroy
   has_one :location, as: :locatable, dependent: :destroy
 	has_many :tests, through: :test_scores
-  has_many :qualification_assignments, as: :qualifiable, dependent: :destroy
-  has_many :qualifications, through: :qualification_assignments
   has_many :skill_assignments, as: :skillable, dependent: :destroy
   has_many :skills, through: :skill_assignments
   has_many :reviews, dependent: :destroy
 
+<<<<<<< HEAD
   has_and_belongs_to_many :job_opportunities, join_table: 'candidates_job_opportunities', class_name:'Company::JobOpportunity'
+=======
+  has_many :candidate_qualification_assignments,dependent: :destroy
+  has_many :qualification_assignments, through: :candidate_qualification_assignments
+  has_many :qualifications, through: :qualification_assignments 
+  has_many :institutes, through: :qualification_assignments, source: :qualifiable, source_type: "Institute"
+>>>>>>> feature/candidate-controller
 
   belongs_to :user
 
 
   # validations
-	#validates :first_name, :format => REGEX_NAME_FORMAT,
-			#:presence => true
-	#validates :last_name, :format => REGEX_NAME_FORMAT,
+  #validates :first_name, :format => REGEX_NAME_FORMAT,
+      #:presence => true
+  #validates :last_name, :format => REGEX_NAME_FORMAT,
       #:presence => true
 	validates :dob, :presence => true
 	validates :gender, :presence => true, inclusion:{:in => ["M", "F", "T"]}
@@ -46,7 +51,39 @@ class Candidate < ActiveRecord::Base
   GENDER = [["M","M"], ["F","F"], ["T","T"]]
   MARITAL = ["married", "unmarried"]
 
+<<<<<<< HEAD
   def name_with_initial
     "  #{first_name} #{last_name}"
+=======
+
+  # instance methods
+  def add_institute_with_qualification(institute,qualification)
+    qa = QualificationAssignment.find_or_create_by(qualification_id:qualification.id,qualifiable_id:institute.id,qualifiable_type:institute.class.to_s)
+
+    if !qa
+      return false
+    end
+
+    self.candidate_qualification_assignments.create(qualification_assignment_id:qa.id)
+  end
+
+  def update_institute_with_qualification(institute,qualification,candidate_id,qa_id)
+    qa = QualificationAssignment.find_or_create_by(qualification_id:qualification.id,qualifiable_id:institute.id,qualifiable_type:institute.class.to_s)
+
+    cqa_id = CandidateQualificationAssignment.find_by(candidate_id:candidate_id,qualification_assignment_id: qa_id).id
+
+    CandidateQualificationAssignment.update(cqa_id, qualification_assignment_id:qa.id)
+  end
+
+  def get_institutes_with_qualifications
+    institutes_with_qualifications = []
+    assignments = self.candidate_qualification_assignments.pluck(:qualification_assignment_id)
+    assignments.each do |assignment|
+      institute = Institute.joins('INNER JOIN qualification_assignments ON qualification_assignments.qualifiable_id = institutes.id AND qualification_assignments.qualifiable_type="Institute"').select('institutes.*').where('qualification_assignments.id = ?', assignment).first
+      qualification =  Qualification.joins('INNER JOIN qualification_assignments ON qualification_assignments.qualification_id = qualifications.id').select('qualifications.*').where('qualification_assignments.id = ?',assignment).first
+      institutes_with_qualifications << {institute: institute, qualification: qualification,qual_ass_id: assignment}
+    end
+    institutes_with_qualifications
+>>>>>>> feature/candidate-controller
   end
 end

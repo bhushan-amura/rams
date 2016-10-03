@@ -1,28 +1,29 @@
-<!-- <p id="notice"><%= notice %></p> -->
+<% content_for :show_content do %>
+<% @candidate_achievements.each do |candidate_achievement| %>
+<div class="well">
 
-<h1>Listing Candidate Achievements</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @candidate_achievements.each do |candidate_achievement| %>
-    <tr>
-      <td>
-        <b><%= candidate_achievement.title %></b>
-      </td>
-      <td><%= link_to 'Show', candidate_achievement_path(achievement_path_params(candidate_achievement)) %></td>
-      <td><%= link_to 'Edit', edit_candidate_achievement_path(achievement_path_params(candidate_achievement)) %></td>
-      <td><%= link_to 'Destroy', candidate_achievement_path(achievement_path_params(candidate_achievement)), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Achievement', new_candidate_achievement_path %>
+  <div class="row">
+    <div class="col-sm-3">
+      <p>
+        <b>Title</b>
+      </p>
+    </div>
+    <div class="col-sm-6">
+      <p><%= candidate_achievement.title%></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-3">
+      <p>
+        <b>Description</b>
+      </p>
+    </div>
+    <div class="col-sm-6">
+      <p><%= candidate_achievement.description %></p>
+    </div>
+  </div>
+</div>
+<% end %>
+<%= link_to "Edit Achievements", edit_candidate_achievements_path(params[:id]||params[:candidate_id]),class:"btn btn-default text-center",onclick: "javascript:window.location.reload()" %>
+<% end %>
+<%= render "candidates/show_navbar" %>

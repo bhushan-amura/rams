@@ -1,28 +1,59 @@
-<!-- <p id="notice"><%= notice %></p> -->
+<% content_for :show_content do %>
+<% @candidate_experiences.each do |candidate_experience| %>
+<div class="well">
+  <div class="row">
+    <div class="col-sm-3">
+      <p>
+        <b>Name</b>
+      </p>
+    </div>
+    <div class="col-sm-6">
+      <p><%= candidate_experience.name %></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-3">
+      <p>
+        <b>Start Date</b>
+      </p>
+    </div>
+    <div class="col-sm-6">
+      <p><%= candidate_experience.start_date %></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-3">
+      <p>
+        <b>End Date</b>
+      </p>
+    </div>
+    <div class="col-sm-6">
+      <p><%= candidate_experience.end_date %></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-3">
+      <p>
+        <b>Shift Type</b>
+      </p>
+    </div>
+    <div class="col-sm-6">
+      <p><%= candidate_experience.shift_type %></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-3">
+      <p>
+        <b>Description</b>
+      </p>
+    </div>
+    <div class="col-sm-6">
+      <p><%= candidate_experience.description %></p>
+    </div>
+  </div>
+</div>
+<% end %>
+<%=  link_to "Edit Experiences", edit_candidate_experiences_path(params[:id]||params[:candidate_id]),class:"btn btn-default", onclick: "javascript:window.location.reload()"%>
+<% end %>
 
-<h1>Listing Candidate Experiences</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @candidate_experiences.each do |candidate_experience| %>
-    <tr>
-      <td>
-        <b><%= candidate_experience.name %></b>
-      </td>
-      <td><%= link_to 'Show', candidate_experience_path(experience_path_params(candidate_experience)) %></td>
-      <td><%= link_to 'Edit', edit_candidate_experience_path(experience_path_params(candidate_experience)) %></td>
-      <td><%= link_to 'Destroy', candidate_experience_path(experience_path_params(candidate_experience)), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Experience', new_candidate_experience_path %>
+<%= render "candidates/show_navbar" %>

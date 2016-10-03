@@ -1,9 +1,15 @@
 source 'http://rubygems.org'
 
+<<<<<<< HEAD
 gem 'bootstrap-sass', '~> 3.3', '>= 3.3.7'
 gem 'nested_form'
 # gem 'bootstrap', '~> 4.0.0.alpha4'
 
+=======
+gem 'bootstrap-multiselect-rails'
+gem 'twitter-typeahead-rails'
+gem 'bootstrap-tagsinput-rails'
+>>>>>>> feature/candidate-controller
 gem 'mysql2', '>= 0.3.13', '< 0.5'
 gem 'devise'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -27,6 +33,9 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
+
+#bootstrap
+gem 'bootstrap-sass', '~> 3.3.6'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

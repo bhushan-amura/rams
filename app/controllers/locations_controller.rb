@@ -8,22 +8,22 @@ class LocationsController < ApplicationController
   before_action :set_location, only: [:show, :edit, :update, :destroy]
 
 
-  # GET /locations/1
-  # GET /locations/1.json
+  # GET /location
+  # GET /location.json
   def show
   end
 
-  # GET /locations/new
+  # GET /location/new
   def new
     @location = Location.new
   end
 
-  # GET /locations/1/edit
+  # GET /location/edit
   def edit
   end
 
-  # POST /locations
-  # POST /locations.json
+  # POST /location
+  # POST /location.json
   def create
     @location = @entity.build_location(location_params)
 
@@ -39,8 +39,8 @@ class LocationsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /locations/1
-  # PATCH/PUT /locations/1.json
+  # PATCH/PUT /location
+  # PATCH/PUT /location.json
   def update
     respond_to do |format|
       if @location.update(location_params)
@@ -54,8 +54,8 @@ class LocationsController < ApplicationController
     end
   end
 
-  # DELETE /locations/1
-  # DELETE /locations/1.json
+  # DELETE /location
+  # DELETE /location.json
   def destroy
     @location.destroy
     flash[:notice] = 'Location was successfully destroyed.' 

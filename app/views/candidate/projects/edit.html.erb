@@ -1,5 +1,31 @@
-<h1>Editing Candidate Project</h1>
-<%= render 'form', required_url: candidate_project_path(project_path_params(@candidate_project))%>
+<% content_for :edit_content do %>
 
-<%= link_to 'Show', candidate_project_path(project_path_params(@candidate_project)) %> |
-<%= link_to 'Back', candidate_projects_path %>
+  <div class="row project-title">
+    <h2 class="col-sm-5">Projects</h2>
+    <button class="btn btn-default col-sm-1 add-button-project" data-toggle="modal" data-target="#myModal">Add</button>
+  </div>
+  <div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Add project</h4>
+        </div>
+        <div class="modal-body">
+          <%= render partial: 'form', locals:{candidate_project: @new_candidate_project,required_url:candidate_projects_path,new_project: true} %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <% @candidate_projects.each do |candidate_project| %>
+    <%= render partial: 'form', locals:{candidate_project: candidate_project, required_url: candidate_project_path(project_path_params(candidate_project)), new_project: false}%>
+  <% end %>
+<% end  %>
+
+<%= render 'candidates/edit_navbar' %>
