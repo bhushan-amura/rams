@@ -1,15 +1,10 @@
 source 'http://rubygems.org'
 
-<<<<<<< HEAD
 gem 'bootstrap-sass', '~> 3.3', '>= 3.3.7'
 gem 'nested_form'
-# gem 'bootstrap', '~> 4.0.0.alpha4'
-
-=======
 gem 'bootstrap-multiselect-rails'
 gem 'twitter-typeahead-rails'
 gem 'bootstrap-tagsinput-rails'
->>>>>>> feature/candidate-controller
 gem 'mysql2', '>= 0.3.13', '< 0.5'
 gem 'devise'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
