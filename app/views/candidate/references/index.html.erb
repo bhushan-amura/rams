@@ -1,4 +1,4 @@
-<p id="notice"><%= notice %></p>
+<!-- <p id="notice"><%= notice %></p> -->
 
 <h1>Listing Candidate References</h1>
 
@@ -11,14 +11,14 @@
 
   <tbody>
     <% @candidate_references.each do |candidate_reference| %>
-      <tr>
-        <td><%= candidate_reference.name %></td>
-        <td><%= candidate_reference.email%></td>
-        <td><%= candidate_reference.contact%></td>
-        <td><%= link_to 'Show', candidate_reference_path(reference_path_params(candidate_reference)) %></td>
-        <td><%= link_to 'Edit', edit_candidate_reference_path(reference_path_params(candidate_reference)) %></td>
-        <td><%= link_to 'Destroy', candidate_reference_path(reference_path_params(candidate_reference)), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+    <tr>
+      <td><%= candidate_reference.name %></td>
+      <td><%= candidate_reference.email%></td>
+      <td><%= candidate_reference.contact%></td>
+      <td><%= link_to 'Show', candidate_reference_path(reference_path_params(candidate_reference)) %></td>
+      <td><%= link_to 'Edit', edit_candidate_reference_path(reference_path_params(candidate_reference)) %></td>
+      <td><%= link_to 'Destroy', candidate_reference_path(reference_path_params(candidate_reference)), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
     <% end %>
   </tbody>
 </table>

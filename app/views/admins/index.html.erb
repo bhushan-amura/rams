@@ -1,4 +1,4 @@
-<p id="notice"><%= notice %></p>
+<!-- <p id="notice"><%= notice %></p> -->
 
 <h1>Listing Admins</h1>
 
@@ -11,11 +11,11 @@
 
   <tbody>
     <% @admins.each do |admin| %>
-      <tr>
-        <td><%= link_to 'Show', admin %></td>
-        <td><%= link_to 'Edit', edit_admin_path(admin) %></td>
-        <td><%= link_to 'Destroy', admin, #method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+    <tr>
+      <td><%= link_to 'Show', admin %></td>
+      <td><%= link_to 'Edit', edit_admin_path(admin) %></td>
+      <td><%= link_to 'Destroy', admin #method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
     <% end %>
   </tbody>
 </table>

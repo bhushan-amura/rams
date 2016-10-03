@@ -1,4 +1,4 @@
-<p id="notice"><%= notice %></p>
+<!-- <p id="notice"><%= notice %></p> -->
 
 <h1>Listing Qualifications</h1>
 
@@ -11,12 +11,12 @@
 
   <tbody>
     <% @qualifications.each do |qualification| %>
-      <tr>
-        <td><%= qualification.course %></td>
-        <td><%= link_to 'Show', self.send(qualification_path,qualification_path_params(qualification)) %></td>
-        <td><%= link_to 'Edit', self.send(qualification_path('edit'),qualification_path_params(qualification)) %></td>
-        <td><%= link_to 'Destroy', self.send(qualification_path,qualification_path_params(qualification)), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+    <tr>
+      <td><%= qualification.course %></td>
+      <td><%= link_to 'Show', self.send(qualification_path,qualification_path_params(qualification)) %></td>
+      <td><%= link_to 'Edit', self.send(qualification_path('edit'),qualification_path_params(qualification)) %></td>
+      <td><%= link_to 'Destroy', self.send(qualification_path,qualification_path_params(qualification)), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
     <% end %>
   </tbody>
 </table>

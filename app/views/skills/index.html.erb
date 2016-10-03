@@ -1,4 +1,4 @@
-<p id="notice"><%= notice %></p>
+<!-- <p id="notice"><%= notice %></p> -->
 
 <h1>Listing Skills</h1>
 
@@ -11,12 +11,12 @@
 
   <tbody>
     <% @skills.each do |skill| %>
-      <tr>
-        <td><%= skill.name %></td>
-        <td><%= link_to 'Show', self.send(skill_path, skill_path_params(skill)) %></td>
-        <td><%= link_to 'Edit', self.send(skill_path('edit'), skill_path_params(skill)) %></td>
-        <td><%= link_to 'Destroy', self.send(skill_path, skill_path_params(skill)), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+    <tr>
+      <td><%= skill.name %></td>
+      <td><%= link_to 'Show', self.send(skill_path, skill_path_params(skill)) %></td>
+      <td><%= link_to 'Edit', self.send(skill_path('edit'), skill_path_params(skill)) %></td>
+      <td><%= link_to 'Destroy', self.send(skill_path, skill_path_params(skill)), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
     <% end %>
   </tbody>
 </table>

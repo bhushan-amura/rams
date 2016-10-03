@@ -1,4 +1,4 @@
-<p id="notice"><%= notice %></p>
+<!-- <p id="notice"><%= notice %></p> -->
 
 <h1>Listing Candidate Course Scores</h1>
 
@@ -11,17 +11,17 @@
 
   <tbody>
     <% @candidate_course_scores.each do |candidate_course_score| %>
-      <tr>
-        <td>
-          <%= candidate_course_score.qualification.course %>
-        </td>
-        <td><%= candidate_course_score.score %></td>
-        <td><%= candidate_course_score.start_year%></td>
-        <td><%= candidate_course_score.end_year%></td>
-        <td><%= link_to 'Show', candidate_course_score_path(course_score_path_params(candidate_course_score)) %></td>
-        <td><%= link_to 'Edit', edit_candidate_course_score_path(course_score_path_params(candidate_course_score)) %></td>
-        <td><%= link_to 'Destroy', candidate_course_score_path(course_score_path_params(candidate_course_score)), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+    <tr>
+      <td>
+        <%= candidate_course_score.qualification.course %>
+      </td>
+      <td><%= candidate_course_score.score %></td>
+      <td><%= candidate_course_score.start_year%></td>
+      <td><%= candidate_course_score.end_year%></td>
+      <td><%= link_to 'Show', candidate_course_score_path(course_score_path_params(candidate_course_score)) %></td>
+      <td><%= link_to 'Edit', edit_candidate_course_score_path(course_score_path_params(candidate_course_score)) %></td>
+      <td><%= link_to 'Destroy', candidate_course_score_path(course_score_path_params(candidate_course_score)), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
     <% end %>
   </tbody>
 </table>

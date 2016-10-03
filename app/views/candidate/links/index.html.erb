@@ -1,4 +1,4 @@
-<p id="notice"><%= notice %></p>
+<!-- <p id="notice"><%= notice %></p> -->
 
 <h1>Listing Candidate Links</h1>
 
@@ -11,15 +11,15 @@
 
   <tbody>
     <% @candidate_links.each do |candidate_link| %>
-      <% link_path_params = {candidate_id:params[:candidate_id],id:candidate_link.id} %>
-      <tr>
-        <td>
-          <b><%= candidate_link.link_type %></b>
-        </td>
-        <td><%= link_to 'Show', candidate_link_path(link_path_params) %></td>
-        <td><%= link_to 'Edit', edit_candidate_link_path(link_path_params) %></td>
-        <td><%= link_to 'Destroy', candidate_link_path(link_path_params), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+    <% link_path_params = {candidate_id:params[:candidate_id],id:candidate_link.id} %>
+    <tr>
+      <td>
+        <b><%= candidate_link.link_type %></b>
+      </td>
+      <td><%= link_to 'Show', candidate_link_path(link_path_params) %></td>
+      <td><%= link_to 'Edit', edit_candidate_link_path(link_path_params) %></td>
+      <td><%= link_to 'Destroy', candidate_link_path(link_path_params), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
     <% end %>
   </tbody>
 </table>

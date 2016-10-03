@@ -1,4 +1,4 @@
-<p id="notice"><%= notice %></p>
+<!-- <p id="notice"><%= notice %></p> -->
 
 <h1>Listing Candidate Experiences</h1>
 
@@ -11,14 +11,14 @@
 
   <tbody>
     <% @candidate_experiences.each do |candidate_experience| %>
-      <tr>
-        <td>
-          <b><%= candidate_experience.name %></b>
-        </td>
-        <td><%= link_to 'Show', candidate_experience_path(experience_path_params(candidate_experience)) %></td>
-        <td><%= link_to 'Edit', edit_candidate_experience_path(experience_path_params(candidate_experience)) %></td>
-        <td><%= link_to 'Destroy', candidate_experience_path(experience_path_params(candidate_experience)), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+    <tr>
+      <td>
+        <b><%= candidate_experience.name %></b>
+      </td>
+      <td><%= link_to 'Show', candidate_experience_path(experience_path_params(candidate_experience)) %></td>
+      <td><%= link_to 'Edit', edit_candidate_experience_path(experience_path_params(candidate_experience)) %></td>
+      <td><%= link_to 'Destroy', candidate_experience_path(experience_path_params(candidate_experience)), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
     <% end %>
   </tbody>
 </table>
