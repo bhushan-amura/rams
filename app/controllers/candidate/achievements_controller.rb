@@ -6,7 +6,7 @@ class Candidate::AchievementsController < ApplicationController
   # filters/callbacks
   before_action :set_candidate
   before_action :set_candidate_achievement, only: [:show, :edit, :update, :destroy]
-    
+
 
   # GET /candidate/:id/achievements
   # GET /candidate/:id/achievements.json
@@ -35,7 +35,8 @@ class Candidate::AchievementsController < ApplicationController
 
     respond_to do |format|
       if @candidate_achievement.save
-        format.html { redirect_to candidate_achievement_path(achievement_path_params(@candidate_achievement)), notice: 'Achievement was successfully created.' }
+        flash[:notice] = 'Achievement was successfully created.'
+        format.html { redirect_to candidate_achievement_path(achievement_path_params(@candidate_achievement)) }
         format.json { render :show, status: :created, location: @candidate_achievement }
       else
         format.html { render :new }
@@ -49,7 +50,8 @@ class Candidate::AchievementsController < ApplicationController
   def update
     respond_to do |format|
       if @candidate_achievement.update(candidate_achievement_params)
-        format.html { redirect_to candidate_achievement_path(achievement_path_params(@candidate_achievement)), notice: 'Achievement was successfully updated.' }
+        flash[:notice] = 'Achievement was successfully updated.'
+        format.html { redirect_to candidate_achievement_path(achievement_path_params(@candidate_achievement)) }
         format.json { render :show, status: :ok, location: @candidate_achievement }
       else
         format.html { render :edit }
@@ -63,7 +65,8 @@ class Candidate::AchievementsController < ApplicationController
   def destroy
     @candidate_achievement.destroy
     respond_to do |format|
-      format.html { redirect_to candidate_achievements_url, notice: 'Achievement was successfully destroyed.' }
+      flash[:notice] = 'Achievement was successfully destroyed.'
+      format.html { redirect_to candidate_achievements_url }
       format.json { head :no_content }
     end
   end

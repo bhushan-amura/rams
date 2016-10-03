@@ -9,7 +9,7 @@ class Candidate < ActiveRecord::Base
 
   # associations
   # TODO : Consider adding a count field in candidate table for achievement,experiences,links,....,etc.
-  # in order to give better matches for job opportunity 
+  # in order to give better matches for job opportunity
   has_many :achievements, dependent: :destroy
 	has_many :experiences, dependent: :destroy
 	has_many :links, dependent: :destroy
@@ -24,6 +24,8 @@ class Candidate < ActiveRecord::Base
   has_many :skill_assignments, as: :skillable, dependent: :destroy
   has_many :skills, through: :skill_assignments
   has_many :reviews, dependent: :destroy
+
+  has_and_belongs_to_many :job_opportunities, join_table: 'candidates_job_opportunities', class_name:'Company::JobOpportunity'
 
   belongs_to :user
 

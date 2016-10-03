@@ -8,10 +8,11 @@ Rails.application.routes.draw do
         get :home
     end
     resources :jobs, to: 'company/job_opportunities' do
+      patch :select_candidates
       resources :events, to: 'company/events'
     end
   end
-  
+
   resources :admins
 
   resources :candidates do

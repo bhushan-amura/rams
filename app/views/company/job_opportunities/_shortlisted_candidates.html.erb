@@ -1,25 +1,15 @@
-<div class="well form-horizontal">
-  <form>
-    <% @shortlisted_candidates.each do |sc| %>
-    <div class="form-group">
-      <div class="row">
-        <div class="col-sm-1 col-sm-offset-1">
-          <div class="checkbox">
-            <label>
-              <input type="checkbox">
-            </label>
-          </div>
-        </div>
-        <!-- link to is not working -->
-        <%= link_to candidate_path do %>
-        <div class="col-sm-3">
-          <p class="text-left"><%= sc.first_name %>
-            <%= sc.last_name %></p>
-        </div>
-        <% end %>
-      </div>
-    </div>
+<div class="form-group">
+  <!--  -->
+  <h3 class="text-center">Candidates matching your requirments
+  </h3>
+  <%= form_tag company_job_select_candidates_path(company_id:params[:company_id],job_id:params[:id]), method: :patch, class: "navbar-form navbar-left search-form" do  %>
+  <div class="well col-sm-12">
+    <%= collection_check_boxes :shortlist,:candidate_ids,@shortlisted_candidates,:id,:first_name do |b| %>
+    <p><%= link_to b.label(:"data-value" => b.value) { b.check_box + b.text } %></p>
+    <%# TODO: link_to b.label(:"data-value" => b.value) { b.check_box + b.text }, xyz_path %>
     <% end %>
-    <button type="submit" class="btn btn-success">Submit</button>
-  </form>
+  </div>
+  <p>
+    <%= submit_tag "Add to shortlist" %></p>
+  <% end %>
 </div>

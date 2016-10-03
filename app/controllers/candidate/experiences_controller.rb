@@ -34,7 +34,8 @@ class Candidate::ExperiencesController < ApplicationController
 
     respond_to do |format|
       if @candidate_experience.save
-        format.html { redirect_to candidate_experience_path(experience_path_params(@candidate_experience)), notice: 'Experience was successfully created.' }
+        flash[:notice] = 'Experience was successfully created.'
+        format.html { redirect_to candidate_experience_path(experience_path_params(@candidate_experience)) }
         format.json { render :show, status: :created, location: @candidate_experience }
       else
         format.html { render :new }
@@ -48,7 +49,8 @@ class Candidate::ExperiencesController < ApplicationController
   def update
     respond_to do |format|
       if @candidate_experience.update(candidate_experience_params)
-        format.html { redirect_to candidate_experience_path(experience_path_params(@candidate_experience)), notice: 'Experience was successfully updated.' }
+        flash[:notice] = 'Experience was successfully updated.'
+        format.html { redirect_to candidate_experience_path(experience_path_params(@candidate_experience)) }
         format.json { render :show, status: :ok, location: @candidate_experience }
       else
         format.html { render :edit }
@@ -61,15 +63,16 @@ class Candidate::ExperiencesController < ApplicationController
   # DELETE /candidate/:id/experiencess/1.json
   def destroy
     @candidate_experience.destroy
+    flash[:notice] = 'Experience was successfully destroyed.'
     respond_to do |format|
-      format.html { redirect_to candidate_experiences_url, notice: 'Experience was successfully destroyed.' }
+      format.html { redirect_to candidate_experiences_url }
       format.json { head :no_content }
     end
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
-  
+
     def set_candidate
       @candidate = Candidate.find(params[:candidate_id])
     end

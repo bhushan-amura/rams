@@ -16,8 +16,9 @@ class UserController < ApplicationController
 
  # def destroy
  #    current_user.destroy
+ #    flash[:notice] = 'user was successfully logged out.' 
  #    respond_to do |format|
- #      format.html { redirect_to new_user_session_path, notice: 'user was successfully logged out.' }
+ #      format.html { redirect_to new_user_session_path}
  #      format.json { head :no_content }
  #    end
  # end

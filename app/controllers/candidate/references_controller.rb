@@ -35,7 +35,8 @@ class Candidate::ReferencesController < ApplicationController
 
     respond_to do |format|
       if @candidate_reference.save
-        format.html { redirect_to candidate_reference_path(reference_path_params(@candidate_reference)), notice: 'Reference was successfully created.' }
+        flash[:notice] = 'Reference was successfully created.'
+        format.html { redirect_to candidate_reference_path(reference_path_params(@candidate_reference)) }
         format.json { render :show, status: :created, location: @candidate_reference }
       else
         format.html { render :new }
@@ -49,7 +50,8 @@ class Candidate::ReferencesController < ApplicationController
   def update
     respond_to do |format|
       if @candidate_reference.update(candidate_reference_params)
-        format.html { redirect_to candidate_reference_path(reference_path_params(@candidate_reference)), notice: 'Reference was successfully updated.' }
+        flash[:notice] = 'Reference was successfully updated.'
+        format.html { redirect_to candidate_reference_path(reference_path_params(@candidate_reference)) }
         format.json { render :show, status: :ok, location: @candidate_reference }
       else
         format.html { render :edit }
@@ -62,8 +64,9 @@ class Candidate::ReferencesController < ApplicationController
   # DELETE /candidate/:id/references/1.json
   def destroy
     @candidate_reference.destroy
+    flash[:notice] = 'Reference was successfully destroyed.'
     respond_to do |format|
-      format.html { redirect_to candidate_references_url, notice: 'Reference was successfully destroyed.' }
+      format.html { redirect_to candidate_references_url }
       format.json { head :no_content }
     end
   end

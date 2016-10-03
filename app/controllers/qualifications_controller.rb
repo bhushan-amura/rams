@@ -43,7 +43,8 @@ class QualificationsController < ApplicationController
     respond_to do |format|
       if @qualification.save
         @entity.qualifications << @qualification
-        format.html { redirect_to self.send(qualification_path,qualification_path_params(@qualification)), notice: 'Qualification was successfully created.' }
+        flash[:notice] = 'Qualification was successfully created.'
+        format.html { redirect_to self.send(qualification_path,qualification_path_params(@qualification)) }
         format.json { render :show, status: :created, location: @qualification }
       else
         format.html { render :new }
@@ -59,7 +60,8 @@ class QualificationsController < ApplicationController
   def update
     respond_to do |format|
       if @qualification.update(qualification_params)
-        format.html { redirect_to self.send(qualification_path,qualification_path_params(@qualification)), notice: 'Qualification was successfully updated.' }
+        flash[:notice] = 'Qualification was successfully updated.'
+        format.html { redirect_to self.send(qualification_path,qualification_path_params(@qualification)) }
         format.json { render :show, status: :ok, location: @qualification }
       else
         format.html { render :edit }
@@ -74,8 +76,9 @@ class QualificationsController < ApplicationController
   # DELETE /companies/:company_id/jobs/:job_id/qualifications/1.json
   def destroy
     @entity.qualifications.destroy(@qualification)
+    flash[:notice] = 'Qualification was successfully destroyed.'
     respond_to do |format|
-      format.html { redirect_to self.send(qualification_path('index')), notice: 'Qualification was successfully destroyed.' }
+      format.html { redirect_to self.send(qualification_path('index')) }
       format.json { head :no_content }
     end
   end

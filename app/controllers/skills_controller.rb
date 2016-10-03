@@ -34,7 +34,8 @@ class SkillsController < ApplicationController
     respond_to do |format|
       if @skill.save
         @entity.skills << @skill
-        format.html { redirect_to self.send(skill_path,skill_path_params(@skill)), notice: 'Skill was successfully created.' }
+        flash[:notice] = 'Skill was successfully created.'
+        format.html { redirect_to self.send(skill_path,skill_path_params(@skill)) }
         format.json { render :show, status: :created, location: @skill }
       else
         format.html { render :new }
@@ -48,7 +49,8 @@ class SkillsController < ApplicationController
   def update
     respond_to do |format|
       if @skill.update(skill_params)
-        format.html { redirect_to self.send(skill_path,skill_path_params(@skill)), notice: 'Skill was successfully updated.' }
+        flash[:notice] = 'Skill was successfully updated.'
+        format.html { redirect_to self.send(skill_path,skill_path_params(@skill)) }
         format.json { render :show, status: :ok, location: @skill }
       else
         format.html { render :edit }
@@ -61,8 +63,9 @@ class SkillsController < ApplicationController
   # DELETE /skills/1.json
   def destroy
     @entity.skills.destroy(@skill)
+    flash[:notice] = 'Skill was successfully destroyed.'
     respond_to do |format|
-      format.html { redirect_to self.send(skill_path('index')), notice: 'Skill was successfully destroyed.' }
+      format.html { redirect_to self.send(skill_path('index')) }
       format.json { head :no_content }
     end
   end

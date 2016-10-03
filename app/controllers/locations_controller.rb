@@ -29,7 +29,8 @@ class LocationsController < ApplicationController
 
     respond_to do |format|
       if @location.save
-        format.html { redirect_to self.send(location_path), notice: 'Location was successfully created.' }
+        flash[:notice] = 'Location was successfully created.'
+        format.html { redirect_to self.send(location_path) }
         format.json { render :show, status: :created, location: @location }
       else
         format.html { render :new }
@@ -43,7 +44,8 @@ class LocationsController < ApplicationController
   def update
     respond_to do |format|
       if @location.update(location_params)
-        format.html { redirect_to self.send(location_path), notice: 'Location was successfully updated.' }
+        flash[:notice] = 'Location was successfully updated.'
+        format.html { redirect_to self.send(location_path) }
         format.json { render :show, status: :ok, location: @location }
       else
         format.html { render :edit }
@@ -56,8 +58,9 @@ class LocationsController < ApplicationController
   # DELETE /locations/1.json
   def destroy
     @location.destroy
+    flash[:notice] = 'Location was successfully destroyed.' 
     respond_to do |format|
-      format.html { redirect_to locations_url, notice: 'Location was successfully destroyed.' }
+      format.html { redirect_to locations_url}
       format.json { head :no_content }
     end
   end
@@ -75,7 +78,7 @@ class LocationsController < ApplicationController
     end
 
     def set_location
-      @location = @entity.location 
+      @location = @entity.location
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

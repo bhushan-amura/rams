@@ -6,8 +6,9 @@ class Company::JobOpportunitiesController < ApplicationController
   before_action :set_company
   before_action :set_qualifications
   before_action :set_skills
-  before_action :set_company_job_opportunity, only: [:show,:index,:edit,:update]
+  before_action :set_company_job_opportunity, only: [:show,:index,:edit,:update,:select_candidates]
   before_action :get_candidates, only: [:show,:edit,:update]
+  before_action :selected_candidates, only: [:show]
 
   # helpers
   include Company::JobOpportunitiesHelper
@@ -39,7 +40,8 @@ class Company::JobOpportunitiesController < ApplicationController
 
     respond_to do |format|
       if @company_job_opportunity.save
-        format.html { redirect_to home_company_path(@company), notice: 'Job opportunity was successfully created.' }
+        flash[:notice] = 'Job opportunity was successfully created.'
+        format.html { redirect_to home_company_path(@company) }
         format.json { render :show, status: :created, location: @company_job_opportunity }
       else
         format.html { render :new }
@@ -53,7 +55,8 @@ class Company::JobOpportunitiesController < ApplicationController
   def update
     respond_to do |format|
       if @company_job_opportunity.update(company_job_opportunity_params)
-        format.html { redirect_to  home_company_path(@company), notice: 'Job opportunity was successfully updated.' }
+        flash[:notice] = 'Job opportunity was successfully updated.'
+        format.html { redirect_to  home_company_path(@company) }
         format.json { render :show, status: :ok, location: @company_job_opportunity }
       else
         format.html { render :edit }
@@ -66,16 +69,22 @@ class Company::JobOpportunitiesController < ApplicationController
   # DELETE /company/job_opportunities/1.json
   def destroy
     @company_job_opportunity.destroy
+    flash[:notice] = 'Job opportunity was successfully destroyed.'
     respond_to do |format|
-      format.html { redirect_to home_company_path(@company), notice: 'Job opportunity was successfully destroyed.' }
+      format.html { redirect_to home_company_path(@company) }
       format.json { head :no_content }
     end
+  end
+
+  def select_candidates
+    @company_job_opportunity.candidates << Candidate.find(params[:shortlist][:candidate_ids].reverse.drop(1))
+    redirect_to company_job_path(company_id:params[:company_id],id: params[:job_id])
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_company_job_opportunity
-      @company_job_opportunity = @company.job_opportunities.find(params[:id])
+      @company_job_opportunity = @company.job_opportunities.find(params[:id]||params[:job_id])
     end
 
     def set_company
@@ -92,6 +101,10 @@ class Company::JobOpportunitiesController < ApplicationController
 
     def get_candidates
       @shortlisted_candidates = Admin.shortlist_candidates(@company_job_opportunity)
+    end
+
+    def selected_candidates
+      @selected_candidates = @company_job_opportunity.candidates
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

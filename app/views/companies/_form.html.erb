@@ -16,21 +16,21 @@
 <div class="field form-group">
   <%= f.label :name, class:'col-sm-2 control-label' %>
   <div class="col-sm-10">
-    <%= f.text_field :name, class: 'form-control', placeholder: 'Company name' %>
+    <%= f.text_field :name, class: 'form-control', placeholder: 'Company name', required: 'required' %>
   </div>
 </div>
 
 <div class="field form-group">
   <%= f.label :company_type, class:'col-sm-2 control-label' %>
   <div class="col-sm-10">
-    <%= f.text_field :company_type, class: 'form-control', placeholder: 'MNC, LLC etc' %>
+    <%= f.text_field :company_type, class: 'form-control', placeholder: 'MNC, LLC etc', required: 'required' %>
   </div>
 </div>
 
 <div class="field form-group">
   <%= f.label :visit_us_at, class:'col-sm-2 control-label' %>
   <div class="col-sm-10">
-    <%= f.text_field :url, class: 'form-control', placeholder: 'URL of your company' %>
+    <%= f.text_field :url, class: 'form-control', placeholder: 'URL of your company', required: 'required' %>
   </div>
 </div>
 
@@ -44,7 +44,7 @@
 <div class="field form-group">
   <%= f.label :phone_number, class:'col-sm-2 control-label' %>
   <div class="col-sm-10">
-    <%= f.text_field :phone, class: 'form-control', placeholder: 'Phone number' %>
+    <%= f.text_field :phone, class: 'form-control', placeholder: 'Phone number', required: 'required' %>
   </div>
 </div>
 
@@ -58,7 +58,7 @@
 <div class="field form-group">
   <%= f.label :description, class:'col-sm-2 control-label' %>
   <div class="col-sm-10">
-    <%= f.text_area :description, class: 'form-control', placeholder: 'Short but informative description about your company' %>
+    <%= f.text_area :description, class: 'form-control', placeholder: 'Short but informative description about your company', required: 'required' %>
   </div>
 </div>
 

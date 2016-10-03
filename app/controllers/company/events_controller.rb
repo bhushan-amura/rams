@@ -31,7 +31,8 @@ class Company::EventsController < ApplicationController
 
     respond_to do |format|
       if @company_event.save
-        format.html { redirect_to company_job_events_path, notice: 'Event was successfully created.' }
+        flash[:notice] = 'Event was successfully created.'
+        format.html { redirect_to company_job_events_path }
         format.json { render :show, status: :created, location: @company_event }
       else
         format.html { render :new }
@@ -45,7 +46,8 @@ class Company::EventsController < ApplicationController
   def update
     respond_to do |format|
       if @company_event.update(company_event_params)
-        format.html { redirect_to  company_job_events_path, notice: 'Event was successfully updated.' }
+        flash[:notice] = 'Event was successfully updated.'
+        format.html { redirect_to  company_job_events_path }
         # format.json { render :show, status: :ok, location: @company_event }
       else
         format.html { render :edit }
@@ -58,8 +60,9 @@ class Company::EventsController < ApplicationController
   # DELETE /company/events/1.json
   def destroy
     @company_event.destroy
+    flash[:notice] = 'Event was successfully destroyed.'
     respond_to do |format|
-      format.html { redirect_to company_job_events_path , notice: 'Event was successfully destroyed.' }
+      format.html { redirect_to company_job_events_path  }
       format.json { head :no_content }
     end
   end
@@ -73,7 +76,7 @@ class Company::EventsController < ApplicationController
     def set_company_job
       @company_job = Company.find(params[:company_id]).job_opportunities.find(params[:job_id])
     end
-    
+
     # Use callbacks to share common setup or constraints between actions.
     def set_company_event
       @company_event = @company_job.events.find(params[:id])

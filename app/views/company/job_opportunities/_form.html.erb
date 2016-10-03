@@ -15,14 +15,14 @@
   <div class="field form-group">
     <%= f.label :title, class:'col-sm-2 control-label' %>
     <div class="col-sm-10">
-      <%= f.text_field :title, class: 'form-control', placeholder: 'Job title' %>
+      <%= f.text_field :title, class: 'form-control', placeholder: 'Job title', required: 'required' %>
     </div>
   </div>
 
   <div class="field form-group">
     <%= f.label :shift, class:'col-sm-2 control-label' %>
     <div class="col-sm-10">
-      <%= f.text_field :shift, class: 'form-control', placeholder: 'Part-time, Intern etc' %>
+      <%= f.text_field :shift, class: 'form-control', placeholder: 'Part-time, Intern etc', required: 'required' %>
     </div>
   </div>
 
@@ -36,14 +36,14 @@
   <div class="field form-group">
     <%= f.label :number_of_positions, class:'col-sm-2 control-label' %>
     <div class="col-sm-10">
-      <%= f.text_field :number_of_positions, class: 'form-control', placeholder: 'Phone number' %>
+      <%= f.text_field :number_of_positions, class: 'form-control', placeholder: 'Phone number', required: 'required' %>
     </div>
   </div>
 
   <div class="field form-group">
     <%= f.label :status, class:'col-sm-2 control-label' %>
     <div class="col-sm-10">
-      <%= f.select :status, options_for_select(Company::JobOpportunity::STATUS ,selected_key = f.object.status),{}, class: 'form-control' %>
+      <%= f.select :status, options_for_select(Company::JobOpportunity::STATUS ,selected_key = f.object.status),{}, class: 'form-control', required: 'required' %>
     </div>
   </div>
 
@@ -67,13 +67,13 @@
     <div class="field form-group">
       <%= t.label :course, class:'col-sm-2 control-label' %>
       <div class="col-sm-9">
-        <%= t.select :course, options_for_select(@qualifications.map{|x|[x.course]}, selected_key = t.object.course),{}, class: 'form-control', placeholder: 'Course' %>
+        <%= t.select :course, options_for_select(@qualifications.map{|x|[x.course]}, selected_key = t.object.course),{}, class: 'form-control', placeholder: 'Course', required: 'required' %>
       </div>
     </div>
     <div class="field form-group">
       <%= t.label :domain, class:'col-sm-2 control-label' %>
       <div class="col-sm-7">
-        <%= t.select :domain, options_for_select(@qualifications.map{|x|[x.domain]}, selected_key = t.object.domain),{}, class: 'form-control', placeholder: 'Domain' %>
+        <%= t.select :domain, options_for_select(@qualifications.map{|x|[x.domain]}, selected_key = t.object.domain),{}, class: 'form-control', placeholder: 'Domain', required: 'required' %>
       </div>
       <div class="col-sm-3">
         <%= t.link_to_remove "Remove", class:"btn btn-danger", role:"button"  %>
@@ -89,7 +89,7 @@
   <div class="field form-group">
     <%= t.label :name, class:'col-sm-2 control-label' %>
     <div class="col-sm-7">
-      <%= t.select :name, options_for_select(@skills.map{|x|[x.name]},selected_key = t.object.name),{}, class: 'form-control', placeholder: 'C,Cpp,CSS etc' %>
+      <%= t.select :name, options_for_select(@skills.map{|x|[x.name]},selected_key = t.object.name),{}, class: 'form-control', placeholder: 'C,Cpp,CSS etc', required: 'required' %>
     </div>
     <div class="col-sm-3">
       <%= t.link_to_remove "Remove ", class:"btn btn-danger", role:"button" %>

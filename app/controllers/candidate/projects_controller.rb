@@ -37,7 +37,8 @@ class Candidate::ProjectsController < CandidatesController
 
     respond_to do |format|
       if @candidate_project.save
-        format.html { redirect_to candidate_project_path(project_path_params(@candidate_project)), notice: 'Project was successfully created.' }
+        flash[:notice] = 'Project was successfully created.'
+        format.html { redirect_to candidate_project_path(project_path_params(@candidate_project)) }
         format.json { render :show, status: :created, location: @candidate_project }
       else
         format.html { render :new }
@@ -51,7 +52,8 @@ class Candidate::ProjectsController < CandidatesController
   def update
     respond_to do |format|
       if @candidate_project.update(candidate_project_params)
-        format.html { redirect_to candidate_project_path(project_path_params(@candidate_project)), notice: 'Project was successfully updated.' }
+        flash[:notice] = 'Project was successfully updated.'
+        format.html { redirect_to candidate_project_path(project_path_params(@candidate_project)) }
         format.json { render :show, status: :ok, location: @candidate_project }
       else
         format.html { render :edit }
@@ -64,8 +66,9 @@ class Candidate::ProjectsController < CandidatesController
   # DELETE /candidate/:id/projects/1.json
   def destroy
     @candidate_project.destroy
+    flash[:notice] = 'Project was successfully destroyed.'
     respond_to do |format|
-      format.html { redirect_to candidate_projects_url, notice: 'Project was successfully destroyed.' }
+      format.html { redirect_to candidate_projects_url }
       format.json { head :no_content }
     end
   end

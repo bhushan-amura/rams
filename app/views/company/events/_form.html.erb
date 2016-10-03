@@ -14,7 +14,7 @@
 <div class="field form-group">
   <%= f.label :event_type, class:'col-sm-3 control-label' %>
   <div class="col-sm-9">
-    <%= f.text_field :event_type, class: 'form-control', placeholder: 'Presentation, Interview etc' %>
+    <%= f.text_field :event_type, class: 'form-control', placeholder: 'Presentation, Interview etc', required: 'required' %>
   </div>
 </div>
 
@@ -28,14 +28,14 @@
 <div class="field form-group">
   <%= f.label :duration, class:'col-sm-3 control-label' %>
   <div class="col-sm-9">
-    <%= f.text_field :duration, class: 'form-control', placeholder: 'in hrs' %>
+    <%= f.text_field :duration, class: 'form-control', placeholder: 'in hrs', required: 'required' %>
   </div>
 </div>
 
 <div class="field form-group">
   <%= f.label :date_time, class:'col-sm-3 control-label' %>
   <div class="col-sm-9">
-    <%= f.datetime_select :date_time, class: 'form-control' %>
+    <%= f.datetime_select :date_time, class: 'form-control', required: 'required' %>
   </div>
 </div>
 
@@ -43,56 +43,56 @@
 <div class="field form-group">
   <%= l.label :building_number, class:'col-sm-3 control-label' %>
   <div class="col-sm-9">
-    <%= l.number_field :building_number, class: 'form-control', placeholder: '123' %>
+    <%= l.number_field :building_number, class: 'form-control', placeholder: '123', required: 'required' %>
   </div>
 </div>
 
 <div class="field form-group">
   <%= l.label :building_name, class:'col-sm-3 control-label' %>
   <div class="col-sm-9">
-    <%= l.text_field :building_name, class: 'form-control', placeholder: 'Elite Premio' %>
+    <%= l.text_field :building_name, class: 'form-control', placeholder: 'Elite Premio', required: 'required' %>
   </div>
 </div>
 
 <div class="field form-group">
   <%= l.label :street_address, class:'col-sm-3 control-label' %>
   <div class="col-sm-9">
-    <%= l.text_field :street_address, class: 'form-control', placeholder: "11 Baker's street" %>
+    <%= l.text_field :street_address, class: 'form-control', placeholder: "11 Baker's street", required: 'required' %>
   </div>
 </div>
 
 <div class="field form-group">
   <%= l.label :street_name, class:'col-sm-3 control-label' %>
   <div class="col-sm-9">
-    <%= l.text_field :street_name, class: 'form-control', placeholder: 'crossword street' %>
+    <%= l.text_field :street_name, class: 'form-control', placeholder: 'crossword street', required: 'required' %>
   </div>
 </div>
 
 <div class="field form-group">
   <%= l.label :city, class:'col-sm-3 control-label' %>
   <div class="col-sm-9">
-    <%= l.text_field :city, class: 'form-control', placeholder: 'Mumbai' %>
+    <%= l.text_field :city, class: 'form-control', placeholder: 'Mumbai', required: 'required' %>
   </div>
 </div>
 
 <div class="field form-group">
   <%= l.label :state, class:'col-sm-3 control-label' %>
   <div class="col-sm-9">
-    <%= l.text_field :state, class: 'form-control', placeholder: 'Maharashtra' %>
+    <%= l.text_field :state, class: 'form-control', placeholder: 'Maharashtra', required: 'required' %>
   </div>
 </div>
 
 <div class="field form-group">
   <%= l.label :country, class:'col-sm-3 control-label' %>
   <div class="col-sm-9">
-    <%= l.text_field :country, class: 'form-control', placeholder: 'INDIA' %>
+    <%= l.text_field :country, class: 'form-control', placeholder: 'INDIA', required: 'required' %>
   </div>
 </div>
 
 <div class="field form-group">
   <%= l.label :zipcode, class:'col-sm-3 control-label' %>
   <div class="col-sm-9">
-    <%= l.text_field :zipcode, class: 'form-control', placeholder: '99511-4589' %>
+    <%= l.text_field :zipcode, class: 'form-control', placeholder: '99511-4589', required: 'required' %>
   </div>
 </div>
 

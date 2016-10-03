@@ -34,7 +34,8 @@ class Candidate::LinksController < ApplicationController
 
     respond_to do |format|
       if @candidate_link.save
-        format.html { redirect_to candidate_link_path(link_path_params(@candidate_link)), notice: 'Link was successfully created.' }
+        flash[:notice] = 'Link was successfully created.'
+        format.html { redirect_to candidate_link_path(link_path_params(@candidate_link)) }
         format.json { render :show, status: :created, location: @candidate_link }
       else
         format.html { render :new }
@@ -48,7 +49,8 @@ class Candidate::LinksController < ApplicationController
   def update
     respond_to do |format|
       if @candidate_link.update(candidate_link_params)
-        format.html { redirect_to candidate_link_path(link_path_params(@candidate_link)), notice: 'Link was successfully updated.' }
+        flash[:notice] = 'Link was successfully updated.'
+        format.html { redirect_to candidate_link_path(link_path_params(@candidate_link)) }
         format.json { render :show, status: :ok, location: @candidate_link }
       else
         format.html { render :edit }
@@ -61,8 +63,9 @@ class Candidate::LinksController < ApplicationController
   # DELETE /candidate/:id/links/1.json
   def destroy
     @candidate_link.destroy
+    flash[:notice] = 'Link was successfully destroyed.' 
     respond_to do |format|
-      format.html { redirect_to candidate_links_url, notice: 'Link was successfully destroyed.' }
+      format.html { redirect_to candidate_links_url }
       format.json { head :no_content }
     end
   end

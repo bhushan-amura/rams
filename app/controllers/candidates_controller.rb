@@ -1,7 +1,7 @@
 class CandidatesController < ApplicationController
 
   # filters/callbacks
-  before_action :set_candidate, only: [:show, :edit, :update, :destroy]  
+  before_action :set_candidate, only: [:show, :edit, :update, :destroy]
 
   # GET /candidates
   # GET /candidates.json
@@ -30,7 +30,8 @@ class CandidatesController < ApplicationController
 
     respond_to do |format|
       if @candidate.save
-        format.html { redirect_to @candidate, notice: 'Candidate was successfully created.' }
+        flash[:notice] = 'Candidate was successfully created.'
+        format.html { redirect_to @candidate }
         format.json { render :show, status: :created, location: @candidate }
       else
         format.html { render :new }
@@ -44,7 +45,8 @@ class CandidatesController < ApplicationController
   def update
     respond_to do |format|
       if @candidate.update(candidate_params)
-        format.html { redirect_to @candidate, notice: 'Candidate was successfully updated.' }
+        flash[:notice] = 'Candidate was successfully updated.'
+        format.html { redirect_to @candidate }
         format.json { render :show, status: :ok, location: @candidate }
       else
         format.html { render :edit }
@@ -60,14 +62,15 @@ class CandidatesController < ApplicationController
   def destroy
     @candidate.destroy
     respond_to do |format|
-      format.html { redirect_to candidates_url, notice: 'Candidate was successfully destroyed.' }
+      flash[:notice] = 'Candidate was successfully destroyed.'
+      format.html { redirect_to candidates_url }
       format.json { head :no_content }
     end
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_candidate 
+    def set_candidate
       @candidate = Candidate.find(params[:id])
     end
 
