@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-sm-9">
-    <%= form_for :skills, url: edit_candidate_skill_index_path(params[:candidate_id]), method: :put do |f|%>
+    <%= form_for :skills, url: update_candidate_skill_index_path(params[:candidate_id]), method: :put do |f|%>
       <div class="form-group">
         <%= f.label :skills,class:"control-label col-sm-2" %>
         <div class="col-sm-10">
