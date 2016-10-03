@@ -55,8 +55,8 @@ Rails.application.routes.draw do
     end
     resources :skills, as:'candidate_skill', except:[:edit,:show,:new,:update,:create,:destroy] do
       collection do
-        get 'edit'
-        put 'update'
+        get 'edit',as: 'edit'
+        put 'update',as: 'update'
       end
     end
     resource :location , as:'candidate_location'

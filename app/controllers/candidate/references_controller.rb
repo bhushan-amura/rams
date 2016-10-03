@@ -52,7 +52,7 @@ class Candidate::ReferencesController < ApplicationController
         flash[:failure] = 'Reference updation unsuccessful.' 
         @candidate_references = [@candidate_reference]
         @new_candidate_reference = Candidate::Reference.new
-        format.html { render :edit }
+        format.html { redirect_to edit_candidate_references_path(params[:candidate_id]) }
         format.json { render json: @candidate_reference.errors, status: :unprocessable_entity }
       end
     end

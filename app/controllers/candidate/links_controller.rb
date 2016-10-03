@@ -51,7 +51,7 @@ class Candidate::LinksController < ApplicationController
         format.json { render :show, status: :ok, location: @candidate_link }
       else
         flash[:failure] =  'Link updation unsuccessful.' 
-        format.html { render :edit }
+        format.html { redirect_to edit_candidate_links_path(params[:candidate_id]) }
         format.json { render json: @candidate_link.errors, status: :unprocessable_entity }
       end
     end

@@ -14,7 +14,11 @@ class QualificationsController < ApplicationController
   # GET /companies/:company_id/jobs/:job_id/qualifications
   # GET /companies/:company_id/jobs/:job_id/qualifications.json
   def index
-    @qualifications = @entity.qualifications
+    if @entity.class == Company::JobOpportunity
+      @qualifications = @entity.qualifications
+    else @entity.class == Candidate
+      @entity_institutes_with_qualifications = @entity.get_institutes_with_qualifications
+    end
   end
 
   # GET /candidates/:candidate_id/qualifications/1/edit
@@ -40,8 +44,13 @@ class QualificationsController < ApplicationController
     if @entity.class == Candidate
       @institute = Institute.find_or_create_by(institute_params)
       @qualification = Qualification.find_or_create_by(qualification_params)
-      @entity.add_institute_with_qualification(@institute,@qualification)
-      redirect_to edit_candidate_qualification_index_path(candidate_id:params[:candidate_id])
+      if @institute.id && @qualification.id && @entity.add_institute_with_qualification(@institute,@qualification)
+        flash[:success] = 'Qualification was successfully created'
+        redirect_to edit_candidate_qualification_index_path(candidate_id:params[:candidate_id])
+      else 
+        flash[:failure] = 'Qualification creation unsuccessful'
+        redirect_to edit_candidate_qualification_index_path(candidate_id:params[:candidate_id])
+      end
     elsif @entity.class == Comapany::JobOpportunity
     end
   end
@@ -54,8 +63,13 @@ class QualificationsController < ApplicationController
     if @entity.class == Candidate
       @institute = Institute.find_or_create_by(institute_params)
       @qualification = Qualification.find_or_create_by(qualification_params)
-      @entity.update_institute_with_qualification(@institute,@qualification,params[:candidate_id],params[:id])
-      redirect_to edit_candidate_qualification_index_path(candidate_id:params[:candidate_id])
+      if @institute.id && @qualification.id && @entity.update_institute_with_qualification(@institute,@qualification,params[:candidate_id],params[:id])
+        flash[:success] = 'Qualification successfully updated'
+        redirect_to edit_candidate_qualification_index_path(candidate_id:params[:candidate_id])
+      else 
+        flash[:failure] = 'Qualification updation unsuccessful'
+        redirect_to edit_candidate_qualification_index_path(candidate_id:params[:candidate_id])
+      end
     elsif @entity.class == Company::JobOpportunity 
     end
 
@@ -69,6 +83,7 @@ class QualificationsController < ApplicationController
     if @entity.class == Candidate
       cqa = CandidateQualificationAssignment.find_by(candidate_id: params[:candidate_id],qualification_assignment_id:params[:id])
       if cqa.destroy
+        flash[:success] = 'Qualification successfully deleted'
         redirect_to edit_candidate_qualification_index_path(candidate_id:params[:candidate_id]) 
       end
     elsif @entity.class == Company::JobOpportunity

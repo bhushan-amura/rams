@@ -52,7 +52,7 @@ class Candidate::ExperiencesController < ApplicationController
         flash[:failure] =  'Experience updation unsuccessful.'
         @new_candidate_experience = Candidate::Experience.new
         @candidate_experiences = [@candidate_experience]
-        format.html { render :edit }
+        format.html { redirect_to edit_candidate_experiences_path(params[:candidate_id]) }
         format.json { render json: @candidate_experience.errors, status: :unprocessable_entity }
       end
     end

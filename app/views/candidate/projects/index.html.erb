@@ -1,27 +1,65 @@
-<p id="notice"><%= notice %></p>
+<% content_for :show_content do %>
+  <% @candidate_projects.each do |candidate_project| %>
+    <div class="well">
+      <div class="row">
+        <div class="col-sm-3">
+          <p><b>Title</b></p>
+        </div>
+        <div class="col-sm-6">
+          <p><%= candidate_project.title %></p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-3">
+          <p><b>Domain</b></p>
+        </div>
+        <div class="col-sm-6">
+          <p><%= candidate_project.domain %></p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-3">
+          <p><b>Start date</b></p>
+        </div>
+        <div class="col-sm-6">
+          <p><%= candidate_project.start_date %></p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-3">
+          <p><b>End date</b></p>
+        </div>
+        <div class="col-sm-6">
+          <p><%= candidate_project.end_date %></p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-3">
+          <p><b>Position</b></p>
+        </div>
+        <div class="col-sm-6">
+          <p><%= candidate_project.position %></p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-3">
+          <p><b>Organisation</b></p>
+        </div>
+        <div class="col-sm-6">
+          <p><%= candidate_project.organisation%></p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-3">
+          <p><b>Description</b></p>
+        </div>
+        <div class="col-sm-6">
+          <p><%= candidate_project.description %></p>
+        </div>
+      </div>
+    </div>
+  <% end %>
+  <%= link_to "Edit Projects", edit_candidate_projects_path(params[:id]||params[:candidate_id]),class:"btn btn-default text-center",onclick: "javascript:window.location.reload()" %>
+<%  end %>
 
-<h1>Listing Candidate Projects</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @candidate_projects.each do |candidate_project| %>
-      <tr>
-        <td><b><%= candidate_project.title %></b> </td>
-        <td><i><%= candidate_project.domain %></i></td>
-        <td><%= link_to 'Show', candidate_project_path(project_path_params(candidate_project)) %></td>
-        <td><%= link_to 'Edit', edit_candidate_project_path(project_path_params(candidate_project)) %></td>
-        <td><%= link_to 'Destroy', candidate_project_path(project_path_params(candidate_project)), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Project', new_candidate_project_path %>
+<%= render "candidates/show_navbar" %>
