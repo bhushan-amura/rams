@@ -1,11 +1,12 @@
 class Candidate::LinksController < ApplicationController
 
+  layout 'candidate/layout'
   # helpers
   include Candidate::LinksHelper
 
   # filters/callbacks
   before_action :set_candidate
-  before_action :set_candidate_link, only: [:show, :edit, :update, :destroy]
+  before_action :set_candidate_link, only: [:show, :update, :destroy]
 
   # GET /candidate/:id/links
   # GET /candidate/:id/links.json
@@ -13,19 +14,13 @@ class Candidate::LinksController < ApplicationController
     @candidate_links = @candidate.links
   end
 
-  # GET /candidate/:id/links/1
-  # GET /candidate/:id/links/1.json
-  def show
-  end
 
-  # GET /candidate/:id/links/new
-  def new
-    @candidate_link = Candidate::Link.new
-  end
-
-  # GET /candidate/:id/links/1/edit
+  # GET /candidate/:id/links/edit
   def edit
+    @candidate_links = @candidate.links
+    @new_candidate_link = Candidate::Link.new
   end
+
 
   # POST /candidate/:id/links
   # POST /candidate/:id/links.json
@@ -34,23 +29,28 @@ class Candidate::LinksController < ApplicationController
 
     respond_to do |format|
       if @candidate_link.save
-        format.html { redirect_to candidate_link_path(link_path_params(@candidate_link)), notice: 'Link was successfully created.' }
+        flash[:success] =  'Link was successfully created.' 
+        format.html { redirect_to edit_candidate_links_path(params[:candidate_id])}
         format.json { render :show, status: :created, location: @candidate_link }
       else
-        format.html { render :new }
+        flash[:failure] =  'Link creation unsuccessful.' 
+        format.html { redirect_to  edit_candidate_links_path(params[:candidate_id]) }
         format.json { render json: @candidate_link.errors, status: :unprocessable_entity }
       end
     end
   end
+
 
   # PATCH/PUT /candidate/:id/links/1
   # PATCH/PUT /candidate/:id/links/1.json
   def update
     respond_to do |format|
       if @candidate_link.update(candidate_link_params)
-        format.html { redirect_to candidate_link_path(link_path_params(@candidate_link)), notice: 'Link was successfully updated.' }
+        flash[:success] =  'Link was successfully updated.' 
+        format.html { redirect_to edit_candidate_links_path(params[:candidate_id])}
         format.json { render :show, status: :ok, location: @candidate_link }
       else
+        flash[:failure] =  'Link updation unsuccessful.' 
         format.html { render :edit }
         format.json { render json: @candidate_link.errors, status: :unprocessable_entity }
       end
@@ -62,7 +62,8 @@ class Candidate::LinksController < ApplicationController
   def destroy
     @candidate_link.destroy
     respond_to do |format|
-      format.html { redirect_to candidate_links_url, notice: 'Link was successfully destroyed.' }
+      flash[:success] =  'Link was successfully deleted.' 
+      format.html { redirect_to edit_candidate_links_path(params[:candidate_id])}
       format.json { head :no_content }
     end
   end
@@ -72,6 +73,7 @@ class Candidate::LinksController < ApplicationController
     def set_candidate
       @candidate = Candidate.find(params[:candidate_id])
     end
+
     def set_candidate_link
       @candidate_link = @candidate.links.find(params[:id])
     end

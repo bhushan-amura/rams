@@ -1,6 +1,33 @@
-<h1>Editing Candidate Experience</h1>
+<% content_for :edit_content do %>
+  <div class="row experirence-title">
+    <h2 class="col-sm-5">Experiences</h2>
+    <button class="btn btn-default col-sm-1 add-button-experience" data-toggle="modal" data-target="#myModal"> Add</button>
+  </div>
+  <div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
 
-<%= render 'form',required_url: candidate_experience_path(experience_path_params(@candidate_experience)) %>
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Add experience</h4>
+        </div>
+        <div class="modal-body">
+          <%= render partial: 'form', locals:{candidate_experience: @new_candidate_experience,required_url:candidate_experiences_path,new_experience: true} %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
 
-<%= link_to 'Show', candidate_experience_path(experience_path_params(@candidate_experience)) %> |
-<%= link_to 'Back', candidate_experiences_path %>
+    </div>
+  </div>
+
+  <% @candidate_experiences.each do |candidate_experience| %>
+    <%= render partial: 'form',locals:{ candidate_experience: candidate_experience ,required_url: candidate_experience_path(experience_path_params(candidate_experience)),new_experience: false} %>
+  <% end %>
+<% end %>
+
+<%= render 'candidates/edit_navbar' %>
+
+

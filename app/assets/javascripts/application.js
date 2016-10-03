@@ -11,6 +11,31 @@
 // about supported directives.
 //
 //= require jquery
+//= require bootstrap-sprockets 
+//= require bootstrap-tagsinput
+//= require bootstrap-multiselect
 //= require jquery_ujs
 //= require turbolinks
+//= require twitter/typeahead
+//= require twitter/typeahead.min
+//= require twitter/typeahead/bloodhound
 //= require_tree .
+var bloodhound = new Bloodhound({
+  datumTokenizer: function (d) {
+    return Bloodhound.tokenizers.whitespace(d.value);
+  },
+  queryTokenizer: Bloodhound.tokenizers.whitespace,
+
+  // sends ajax request to /typeahead/%QUERY
+  // where %QUERY is user input
+  remote: {url:'/typeahead'}, 
+  limit: 50
+});
+bloodhound.initialize();
+
+$('#typeahead').tagsinput({
+  typeaheadjs: {
+    displayKey: 'name',
+    source: bloodhound.ttAdapter()
+  }
+});

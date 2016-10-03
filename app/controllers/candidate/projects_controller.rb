@@ -1,14 +1,15 @@
-class Candidate::ProjectsController < CandidatesController
+class Candidate::ProjectsController < ApplicationController
 
+  # layouts 
+  layout 'candidate/layout'
+
+  # helpers
   include Candidate::ProjectsHelper
 
-  before_action only: [:show, :edit, :update, :destroy, :index, :create] do
-    set_candidate
-  end
-
-  before_action only: [:show, :edit, :update, :destroy] do
-    set_candidate_project
-  end
+  # filters/callbacks
+  before_action :set_candidate
+  before_action :set_candidate_project, only: [:show, :update, :destroy]
+    
 
   # GET /candidate/:id/projects
   # GET /candidate/:id/projects.json
@@ -16,18 +17,11 @@ class Candidate::ProjectsController < CandidatesController
     @candidate_projects = @candidate.projects
   end
 
-  # GET /candidate/:id/projects/1
-  # GET /candidate/:id/projects/1.json
-  def show
-  end
-
-  # GET /candidate/:id/projects/new
-  def new
-    @candidate_project = Candidate::Project.new
-  end
 
   # GET /candidate/:id/projects/1/edit
   def edit
+    @candidate_projects = @candidate.projects
+    @new_candidate_project = Candidate::Project.new
   end
 
   # POST /candidate/:id/projects
@@ -37,10 +31,12 @@ class Candidate::ProjectsController < CandidatesController
 
     respond_to do |format|
       if @candidate_project.save
-        format.html { redirect_to candidate_project_path(project_path_params(@candidate_project)), notice: 'Project was successfully created.' }
+        flash[:success] ='Project was successfully created.' 
+        format.html { redirect_to edit_candidate_projects_path(params[:candidate_id])}
         format.json { render :show, status: :created, location: @candidate_project }
       else
-        format.html { render :new }
+        flash[:failure] ='Project creation unsuccessful.' 
+        format.html { redirect_to edit_candidate_projects_path(params[:candidate_id])}
         format.json { render json: @candidate_project.errors, status: :unprocessable_entity }
       end
     end
@@ -51,9 +47,11 @@ class Candidate::ProjectsController < CandidatesController
   def update
     respond_to do |format|
       if @candidate_project.update(candidate_project_params)
-        format.html { redirect_to candidate_project_path(project_path_params(@candidate_project)), notice: 'Project was successfully updated.' }
+        flash[:success] ='Project was successfully updated.' 
+        format.html { redirect_to edit_candidate_projects_path(params[:candidate_id])}
         format.json { render :show, status: :ok, location: @candidate_project }
       else
+        flash[:failure] ='Project updation unsuccessful.' 
         format.html { render :edit }
         format.json { render json: @candidate_project.errors, status: :unprocessable_entity }
       end
@@ -65,7 +63,8 @@ class Candidate::ProjectsController < CandidatesController
   def destroy
     @candidate_project.destroy
     respond_to do |format|
-      format.html { redirect_to candidate_projects_url, notice: 'Project was successfully destroyed.' }
+      flash[:success] =  'Project was successfully destroyed.' 
+      format.html { redirect_to edit_candidate_projects_path(params[:candidate_id])}
       format.json { head :no_content }
     end
   end
@@ -75,6 +74,7 @@ class Candidate::ProjectsController < CandidatesController
     def set_candidate
       @candidate = Candidate.find(params[:candidate_id])
     end
+
     def set_candidate_project
       @candidate_project = @candidate.projects.find(params[:id])
     end

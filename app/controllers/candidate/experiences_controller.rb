@@ -1,11 +1,13 @@
 class Candidate::ExperiencesController < ApplicationController
 
+  #layout 
+  layout 'candidate/layout'
   # helpers
   include Candidate::ExperiencesHelper
 
   # filters/callbacks
   before_action :set_candidate
-  before_action :set_candidate_experience, only: [:show, :edit, :update, :destroy]
+  before_action :set_candidate_experience, only: [:show,:update, :destroy]
 
   # GET /candidate/:id/experiencess
   # GET /candidate/:id/experiencess.json
@@ -13,18 +15,11 @@ class Candidate::ExperiencesController < ApplicationController
     @candidate_experiences = @candidate.experiences
   end
 
-  # GET /candidate/:id/experiencess/1
-  # GET /candidate/:id/experiencess/1.json
-  def show
-  end
-
-  # GET /candidate/:id/experiencess/new
-  def new
-    @candidate_experience = Candidate::Experience.new
-  end
 
   # GET /candidate/:id/experiencess/1/edit
   def edit
+    @candidate_experiences = @candidate.experiences
+    @new_candidate_experience = Candidate::Experience.new
   end
 
   # POST /candidate/:id/experiencess
@@ -34,10 +29,12 @@ class Candidate::ExperiencesController < ApplicationController
 
     respond_to do |format|
       if @candidate_experience.save
-        format.html { redirect_to candidate_experience_path(experience_path_params(@candidate_experience)), notice: 'Experience was successfully created.' }
+        flash[:success] =  'Experience was successfully created.'
+        format.html { redirect_to edit_candidate_experiences_path(params[:candidate_id]) }
         format.json { render :show, status: :created, location: @candidate_experience }
       else
-        format.html { render :new }
+        flash[:failure] =  'Experience creation unsuccessful.'
+        format.html { redirect_to edit_candidate_experiences_path(params[:candidate_id]) }
         format.json { render json: @candidate_experience.errors, status: :unprocessable_entity }
       end
     end
@@ -48,9 +45,13 @@ class Candidate::ExperiencesController < ApplicationController
   def update
     respond_to do |format|
       if @candidate_experience.update(candidate_experience_params)
-        format.html { redirect_to candidate_experience_path(experience_path_params(@candidate_experience)), notice: 'Experience was successfully updated.' }
+        flash[:success] =  'Experience was successfully updated.'
+        format.html { redirect_to edit_candidate_experiences_path(params[:candidate_id])}
         format.json { render :show, status: :ok, location: @candidate_experience }
       else
+        flash[:failure] =  'Experience updation unsuccessful.'
+        @new_candidate_experience = Candidate::Experience.new
+        @candidate_experiences = [@candidate_experience]
         format.html { render :edit }
         format.json { render json: @candidate_experience.errors, status: :unprocessable_entity }
       end
@@ -61,8 +62,9 @@ class Candidate::ExperiencesController < ApplicationController
   # DELETE /candidate/:id/experiencess/1.json
   def destroy
     @candidate_experience.destroy
+    flash[:success] =  'Experience was successfully deleted'
     respond_to do |format|
-      format.html { redirect_to candidate_experiences_url, notice: 'Experience was successfully destroyed.' }
+      format.html { redirect_to edit_candidate_experiences_path}
       format.json { head :no_content }
     end
   end

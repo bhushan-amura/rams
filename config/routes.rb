@@ -3,30 +3,63 @@ Rails.application.routes.draw do
   root to: 'user#index'
 
   resources :companies do
-    resources :jobs, to: 'company/job_opportunities' do
-      resources :events, to: 'company/events'
+    scope module:'company' do
+    resources :jobs  do
+      resources :events
+    end
     end
   end
 
   resources :admins
 
   resources :candidates do
+    member do
+      get 'home'
+    end
     scope module:'candidate' do
-      resources :achievements
-      resources :projects
+      resources :achievements, except:[:edit,:show,:new] do
+        collection do
+          get 'edit'
+        end
+      end
+      resources :projects, except:[:edit,:show,:new] do
+        collection do
+          get 'edit'
+        end
+      end
       resources :course_scores
-      resources :references
-      resources :experiences
-      resources :links
-      resources :references
+      resources :experiences, except:[:edit,:show,:new] do
+        collection do
+          get 'edit'
+        end
+      end
+      resources  :links, except:[:edit,:show,:new] do
+        collection do
+          get 'edit'
+        end
+      end
+      resources :references, except:[:edit,:show,:new] do
+        collection do
+          get 'edit'
+        end
+      end
+>>>>>>> origin/feature/candidate-controller
     end
   end
 
 
   scope '/candidates/:candidate_id/' do
-    resources :qualifications, as:'candidate_qualification'
-    resources :skills, as:'candidate_skill'
-    resources :reviews, as:'candidate_reviews', except:[:update,:edit]
+    resources :qualifications, as:'candidate_qualification', except:[:edit,:show,:new] do
+      collection do
+        get 'edit'
+      end
+    end
+    resources :skills, as:'candidate_skill', except:[:edit,:show,:new,:update,:create,:destroy] do
+      collection do
+        get 'edit'
+        put 'update'
+      end
+    end
     resource :location , as:'candidate_location'
   end
 

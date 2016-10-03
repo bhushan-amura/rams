@@ -1,28 +1,60 @@
-<%= form_for(@candidate_achievement, url: required_url ) do |f| %>
-  <% if @candidate_achievement.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@candidate_achievement.errors.count, "error") %> prohibited this candidate_achievement from being saved:</h2>
+<div class="row well">
 
-      <ul>
-      <% @candidate_achievement.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+  <div class="col-sm-9">
+
+    <%= form_for(candidate_achievement, url: required_url,class: "form-horizontal" ) do |f| %>
+
+      <% if candidate_achievement.errors.any? %>
+        <div class="alert alert-danger">
+          <div id="error_explanation">
+            <h3><%= pluralize(candidate_achievement.errors.count, "error") %> prohibited this achievement from being saved:</h3>
+
+            <ul>
+              <% candidate_achievement.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
       <% end %>
-      </ul>
+
+
+      <div class="form-group">
+        <%= f.label(:title, class: "control-label col-sm-3")  %>
+        <div class="col-sm-9">
+          <%= f.text_field(:title, class: "form-control",placeholder:"Enter title") %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= f.label(:description,"Description", class: "control-label col-sm-3")  %>
+        <div class="col-sm-9">
+          <%= f.text_area(:description, class: "form-control",rows:3,placeholder:"Write description of this achievement") %>
+        </div>
+      </div>
+
+  </div>
+  
+  <div class="form-group">
+    <% if !new_achievement %>
+      <div class="col-sm-2">
+        <%= f.submit "Update",class: "btn btn-default update-button btn-md" %>
+      </div>
+    <% else %>
+      <div class="col-sm-offset-2 create-button">
+        <%= f.submit "Create",class:"btn btn-default" %>
+      </div>
+    <% end %>
+  </div>
+
+<% end %>
+<% if !new_achievement %>
+  <div class="form-group">
+    <div class="col-sm-1">
+      <%= link_to "Delete",candidate_achievement_path(achievement_path_params(candidate_achievement)),method: :delete, data:{confirm:'Are you sure?'},class:"btn btn-danger btn-md active", role:"button" %>
+
     </div>
-  <% end %>
-
-  <p>
-  <%=  f.label :title %>
-  <%=  f.text_field :title %>
-  </p>
-
-  <p>
-
-  <%=  f.label :description %>
-  <%=  f.text_area :description %>
-  </p>
-
-  <div class="actions">
-    <%= f.submit %>
   </div>
 <% end %>
+</div>
+
