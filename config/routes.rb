@@ -43,7 +43,6 @@ Rails.application.routes.draw do
           get 'edit'
         end
       end
->>>>>>> origin/feature/candidate-controller
     end
   end
 
