@@ -45,4 +45,8 @@ class Candidate < ActiveRecord::Base
   # constants
   GENDER = [["M","M"], ["F","F"], ["T","T"]]
   MARITAL = ["married", "unmarried"]
+
+  def name_with_initial
+    "  #{first_name} #{last_name}"
+  end
 end
