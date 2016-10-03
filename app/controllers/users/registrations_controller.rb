@@ -1,5 +1,5 @@
 class Users::RegistrationsController < Devise::RegistrationsController
- # before_action :configure_sign_up_params, only: [:create]
+# before_action :configure_sign_up_params, only: [:create]
 # before_action :configure_account_update_params, only: [:update]
 
   # GET /resource/sign_up
@@ -9,21 +9,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # POST /resource
   # def create
-  #   build_resource(configure_sign_up_params)
-  #   byebug
-    # @user = User.new(configure_sign_up_params)
-    # byebug
-    # respond_to do |format|
-    #   format.html do
-    #     if @user.save
-    #       if @user.is? :company
-    #       redirect_to new_company_path, notice: 'Signed up successfully.' 
-    #       end
-    #     else
-    #      render :new 
-    #     end
-    #   end  
-    # end
+  #    super
   # end
 
   # GET /resource/edit
@@ -67,6 +53,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     elsif resource.is? :candidate
       "/candidates/new"
     else
+      "/admin/new"
     end  
   end
  
