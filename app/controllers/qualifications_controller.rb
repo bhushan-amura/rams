@@ -16,7 +16,7 @@ class QualificationsController < ApplicationController
   def index
     if @entity.class == Company::JobOpportunity
       @qualifications = @entity.qualifications
-    else @entity.class == Candidate
+    else 
       @entity_institutes_with_qualifications = @entity.get_institutes_with_qualifications
     end
   end
@@ -41,31 +41,30 @@ class QualificationsController < ApplicationController
   # POST /companies/:company_id/jobs/:job_id/qualifications
   # POST /companies/:company_id/jobs/:job_id/qualifications.json
   def create
-<<<<<<< HEAD
-    @qualification = Qualification.new(qualification_params)
-
-    respond_to do |format|
-      if @qualification.save
-        @entity.qualifications << @qualification
-        flash[:notice] = 'Qualification was successfully created.'
-        format.html { redirect_to self.send(qualification_path,qualification_path_params(@qualification)) }
-        format.json { render :show, status: :created, location: @qualification }
-      else
-        format.html { render :new }
-        format.json { render json: @qualification.errors, status: :unprocessable_entity }
-=======
     if @entity.class == Candidate
       @institute = Institute.find_or_create_by(institute_params)
       @qualification = Qualification.find_or_create_by(qualification_params)
       if @institute.id && @qualification.id && @entity.add_institute_with_qualification(@institute,@qualification)
         flash[:success] = 'Qualification was successfully created'
         redirect_to edit_candidate_qualification_index_path(candidate_id:params[:candidate_id])
-      else 
+      else
         flash[:failure] = 'Qualification creation unsuccessful'
         redirect_to edit_candidate_qualification_index_path(candidate_id:params[:candidate_id])
->>>>>>> feature/candidate-controller
       end
     elsif @entity.class == Comapany::JobOpportunity
+      @qualification = Qualification.new(qualification_params)
+
+      respond_to do |format|
+        if @qualification.save
+          @entity.qualifications << @qualification
+          flash[:notice] = 'Qualification was successfully created.'
+          format.html { redirect_to self.send(qualification_path,qualification_path_params(@qualification)) }
+          format.json { render :show, status: :created, location: @qualification }
+        else
+          format.html { render :new }
+          format.json { render json: @qualification.errors, status: :unprocessable_entity }
+        end
+      end
     end
   end
 
@@ -74,30 +73,28 @@ class QualificationsController < ApplicationController
   # PATCH/PUT /companies/:company_id/jobs/:job_id/qualifications/1
   # PATCH/PUT /companies/:company_id/jobs/:job_id/qualifications/1.json
   def update
-<<<<<<< HEAD
-    respond_to do |format|
-      if @qualification.update(qualification_params)
-        flash[:notice] = 'Qualification was successfully updated.'
-        format.html { redirect_to self.send(qualification_path,qualification_path_params(@qualification)) }
-        format.json { render :show, status: :ok, location: @qualification }
-      else
-        format.html { render :edit }
-        format.json { render json: @qualification.errors, status: :unprocessable_entity }
-=======
     if @entity.class == Candidate
       @institute = Institute.find_or_create_by(institute_params)
       @qualification = Qualification.find_or_create_by(qualification_params)
       if @institute.id && @qualification.id && @entity.update_institute_with_qualification(@institute,@qualification,params[:candidate_id],params[:id])
         flash[:success] = 'Qualification successfully updated'
         redirect_to edit_candidate_qualification_index_path(candidate_id:params[:candidate_id])
-      else 
+      else
         flash[:failure] = 'Qualification updation unsuccessful'
         redirect_to edit_candidate_qualification_index_path(candidate_id:params[:candidate_id])
->>>>>>> feature/candidate-controller
       end
-    elsif @entity.class == Company::JobOpportunity 
+    elsif @entity.class == Company::JobOpportunity
+      respond_to do |format|
+        if @qualification.update(qualification_params)
+          flash[:notice] = 'Qualification was successfully updated.'
+          format.html { redirect_to self.send(qualification_path,qualification_path_params(@qualification)) }
+          format.json { render :show, status: :ok, location: @qualification }
+        else
+          format.html { render :edit }
+          format.json { render json: @qualification.errors, status: :unprocessable_entity }
+        end
+      end
     end
-
   end
 
   # DELETE /candidates/:candidate_id/qualifications/1
@@ -105,21 +102,19 @@ class QualificationsController < ApplicationController
   # DELETE /companies/:company_id/jobs/:job_id/qualifications/1
   # DELETE /companies/:company_id/jobs/:job_id/qualifications/1.json
   def destroy
-<<<<<<< HEAD
-    @entity.qualifications.destroy(@qualification)
-    flash[:notice] = 'Qualification was successfully destroyed.'
-    respond_to do |format|
-      format.html { redirect_to self.send(qualification_path('index')) }
-      format.json { head :no_content }
-=======
     if @entity.class == Candidate
       cqa = CandidateQualificationAssignment.find_by(candidate_id: params[:candidate_id],qualification_assignment_id:params[:id])
       if cqa.destroy
         flash[:success] = 'Qualification successfully deleted'
-        redirect_to edit_candidate_qualification_index_path(candidate_id:params[:candidate_id]) 
+        redirect_to edit_candidate_qualification_index_path(candidate_id:params[:candidate_id])
       end
     elsif @entity.class == Company::JobOpportunity
->>>>>>> feature/candidate-controller
+      @entity.qualifications.destroy(@qualification)
+      flash[:notice] = 'Qualification was successfully destroyed.'
+      respond_to do |format|
+        format.html { redirect_to self.send(qualification_path('index')) }
+        format.json { head :no_content }
+      end
     end
   end
 
