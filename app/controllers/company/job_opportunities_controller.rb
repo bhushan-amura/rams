@@ -39,7 +39,7 @@ class Company::JobOpportunitiesController < ApplicationController
       else
         format.html { render :new }
         format.json { render json: @company_job_opportunity.errors, status: :unprocessable_entity }
-      end
+      end    
     end
   end
 

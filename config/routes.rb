@@ -2,8 +2,6 @@ Rails.application.routes.draw do
   devise_for :users, :controllers => {:registrations => "users/registrations"}
   root to: 'user#switch'
 
-  get '/secret', to: 'user#secret', as: :secret
-
   resources :companies do
     member do
         get :home
