@@ -14,7 +14,11 @@ class QualificationsController < ApplicationController
   # GET /companies/:company_id/jobs/:job_id/qualifications
   # GET /companies/:company_id/jobs/:job_id/qualifications.json
   def index
-    @qualifications = @entity.qualifications
+    if @entity.class == Company::JobOpportunity
+      @qualifications = @entity.qualifications
+    else @entity.class == Candidate
+      @entity_institutes_with_qualifications = @entity.get_institutes_with_qualifications
+    end
   end
 
   # GET /candidates/:candidate_id/qualifications/1/edit
