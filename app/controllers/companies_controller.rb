@@ -2,12 +2,13 @@ class CompaniesController < ApplicationController
 
   # callbacks
   before_filter :authenticate_user!
+  # before_action :authorize
   # before_action :home
   before_action :set_company, only: [:show, :edit, :update, :destroy, :home]
 
   include Company::JobOpportunitiesHelper
   # layout
-  layout 'company'
+  layout :resolve_layout
 
   # GET /companies
   # GET /companies.json
@@ -85,4 +86,14 @@ class CompaniesController < ApplicationController
     def company_params
       params.require(:company).permit(:id,:name,:type,:url,:tagline,:phone,:number_of_employees,:description,:logo)
     end
+
+    def resolve_layout
+      case action_name
+       when "new", "create"
+        'application'
+       else
+        'company'
+       end
+    end
+
 end

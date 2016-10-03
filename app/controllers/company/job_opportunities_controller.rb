@@ -1,7 +1,6 @@
 class Company::JobOpportunitiesController < ApplicationController
   #layout
   layout 'company'
-
   before_action :set_company
   before_action :set_company_job_opportunity, only: [:show, :edit, :update, :destroy]
   include Company::JobOpportunitiesHelper

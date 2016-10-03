@@ -1,7 +1,6 @@
 class UserController < ApplicationController
- before_filter :authenticate_user!
-
- def index
+before_action :authenticate_user!
+ def switch
     @user = current_user.info.class
  	if( @user == Admin )
  		redirect_to( admins_path )
@@ -13,13 +12,4 @@ class UserController < ApplicationController
  		redirect_to( home_company_path(@company) )
  	end
  end
-
- # def destroy
- #    current_user.destroy
- #    respond_to do |format|
- #      format.html { redirect_to new_user_session_path, notice: 'user was successfully logged out.' }
- #      format.json { head :no_content }
- #    end
- # end
-
 end

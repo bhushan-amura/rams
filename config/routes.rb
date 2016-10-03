@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
-  devise_for :users
-  root to: 'user#index'
+  # devise_for :users
+  # devise_for :users, :controllers => {:registrations => "registrations"}
+  devise_for :users, :controllers => {:registrations => "users/registrations"}
+  root to: 'user#switch'
 
+  get '/secret', to: 'user#secret', as: :secret
 
   resources :companies do
     member do
