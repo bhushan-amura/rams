@@ -12,9 +12,6 @@
  *
  *= require_self
  *= require bootstrap_overrides
-<<<<<<< HEAD:app/assets/stylesheets/application.css
- */
-=======
  *= require bootstrap-tagsinput
  *= require bootstrap-multiselect
 */
@@ -22,4 +19,3 @@
 // "bootstrap-sprockets" must be imported before "bootstrap" and "bootstrap/variables"
 @import "bootstrap-sprockets";
 @import "bootstrap";
->>>>>>> feature/candidate-controller:app/assets/stylesheets/application.scss

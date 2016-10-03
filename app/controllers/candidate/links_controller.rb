@@ -29,13 +29,8 @@ class Candidate::LinksController < ApplicationController
 
     respond_to do |format|
       if @candidate_link.save
-<<<<<<< HEAD
-        flash[:notice] = 'Link was successfully created.'
-        format.html { redirect_to candidate_link_path(link_path_params(@candidate_link)) }
-=======
         flash[:success] =  'Link was successfully created.' 
         format.html { redirect_to edit_candidate_links_path(params[:candidate_id])}
->>>>>>> feature/candidate-controller
         format.json { render :show, status: :created, location: @candidate_link }
       else
         flash[:failure] =  'Link creation unsuccessful.' 
@@ -51,13 +46,8 @@ class Candidate::LinksController < ApplicationController
   def update
     respond_to do |format|
       if @candidate_link.update(candidate_link_params)
-<<<<<<< HEAD
-        flash[:notice] = 'Link was successfully updated.'
-        format.html { redirect_to candidate_link_path(link_path_params(@candidate_link)) }
-=======
         flash[:success] =  'Link was successfully updated.' 
         format.html { redirect_to edit_candidate_links_path(params[:candidate_id])}
->>>>>>> feature/candidate-controller
         format.json { render :show, status: :ok, location: @candidate_link }
       else
         flash[:failure] =  'Link updation unsuccessful.' 
@@ -73,12 +63,8 @@ class Candidate::LinksController < ApplicationController
     @candidate_link.destroy
     flash[:notice] = 'Link was successfully destroyed.' 
     respond_to do |format|
-<<<<<<< HEAD
-      format.html { redirect_to candidate_links_url }
-=======
       flash[:success] =  'Link was successfully deleted.' 
       format.html { redirect_to edit_candidate_links_path(params[:candidate_id])}
->>>>>>> feature/candidate-controller
       format.json { head :no_content }
     end
   end

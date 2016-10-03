@@ -4,11 +4,7 @@ class CandidatesController < ApplicationController
   layout 'candidate/layout'
 
   # filters/callbacks
-<<<<<<< HEAD
-  before_action :set_candidate, only: [:show, :edit, :update, :destroy]
-=======
   before_action :set_candidate, only: [:show, :edit, :update, :destroy, :home]  
->>>>>>> feature/candidate-controller
 
   # GET /candidates
   # GET /candidates.json
@@ -52,13 +48,8 @@ class CandidatesController < ApplicationController
   def update
     respond_to do |format|
       if @candidate.update(candidate_params)
-<<<<<<< HEAD
-        flash[:notice] = 'Candidate was successfully updated.'
-        format.html { redirect_to @candidate }
-=======
         flash[:success] = 'Candidate was successfully updated'
         format.html { redirect_to edit_candidate_path(@candidate), notice: 'Candidate was successfully updated.' }
->>>>>>> feature/candidate-controller
         format.json { render :show, status: :ok, location: @candidate }
       else
         flash[:failure] = 'Candidate updation unsuccessful'

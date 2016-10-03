@@ -30,7 +30,6 @@ class SkillsController < ApplicationController
     @entity_skills = @entity.skills
   end
 
-<<<<<<< HEAD
   # POST /skills
   # POST /skills.json
   def create
@@ -48,8 +47,6 @@ class SkillsController < ApplicationController
       end
     end
   end
-=======
->>>>>>> feature/candidate-controller
 
   # PATCH/PUT /skills/1
   # PATCH/PUT /skills/1.json
@@ -61,14 +58,8 @@ class SkillsController < ApplicationController
     end
 
     respond_to do |format|
-<<<<<<< HEAD
-      if @skill.update(skill_params)
-        flash[:notice] = 'Skill was successfully updated.'
-        format.html { redirect_to self.send(skill_path,skill_path_params(@skill)) }
-=======
       if @entity.skills = entity_skills 
         format.html { redirect_to edit_candidate_skill_index_path(params[:candidate_id]),notice: 'Skill was successfully updated.' }
->>>>>>> feature/candidate-controller
         format.json { render :show, status: :ok, location: @skill }
       else
         format.html { render :edit }
@@ -77,7 +68,6 @@ class SkillsController < ApplicationController
     end
   end
 
-<<<<<<< HEAD
   # DELETE /skills/1
   # DELETE /skills/1.json
   def destroy
@@ -89,8 +79,6 @@ class SkillsController < ApplicationController
     end
   end
 
-=======
->>>>>>> feature/candidate-controller
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_entity

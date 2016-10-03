@@ -5,15 +5,16 @@ Rails.application.routes.draw do
 
   resources :companies do
     member do
-        get :home
+      get :home
     end
     resources :jobs, to: 'company/job_opportunities' do
       patch :select_candidates
       resources :events, to: 'company/events'
-    scope module:'company' do
-    resources :jobs  do
-      resources :events
-    end
+      scope module:'company' do
+        resources :jobs  do
+          resources :events
+        end
+      end
     end
   end
 

@@ -8,13 +8,8 @@ class Candidate::AchievementsController < ApplicationController
 
   # filters/callbacks
   before_action :set_candidate
-<<<<<<< HEAD
-  before_action :set_candidate_achievement, only: [:show, :edit, :update, :destroy]
-
-=======
   before_action :set_candidate_achievement, only: [:show, :update, :destroy]
     
->>>>>>> feature/candidate-controller
 
   # GET /candidate/:id/achievements
   # GET /candidate/:id/achievements.json
@@ -36,13 +31,8 @@ class Candidate::AchievementsController < ApplicationController
 
     respond_to do |format|
       if @candidate_achievement.save
-<<<<<<< HEAD
-        flash[:notice] = 'Achievement was successfully created.'
-        format.html { redirect_to candidate_achievement_path(achievement_path_params(@candidate_achievement)) }
-=======
         flash[:success] =  'Achievement was successfully created.' 
         format.html { redirect_to edit_candidate_achievements_path(params[:candidate_id])}
->>>>>>> feature/candidate-controller
         format.json { render :show, status: :created, location: @candidate_achievement }
       else
         flash[:failure] = 'Achievement creation  unsuccessful'
@@ -57,13 +47,8 @@ class Candidate::AchievementsController < ApplicationController
   def update
     respond_to do |format|
       if @candidate_achievement.update(candidate_achievement_params)
-<<<<<<< HEAD
-        flash[:notice] = 'Achievement was successfully updated.'
-        format.html { redirect_to candidate_achievement_path(achievement_path_params(@candidate_achievement)) }
-=======
         flash[:success] =  'Achievement was successfully updated.' 
         format.html { redirect_to edit_candidate_achievements_path(params[:candidate_id]) }
->>>>>>> feature/candidate-controller
         format.json { render :show, status: :ok, location: @candidate_achievement }
       else
         flash[:failure] = 'Achievement updation unsuccessful'
@@ -80,13 +65,8 @@ class Candidate::AchievementsController < ApplicationController
   def destroy
     @candidate_achievement.destroy
     respond_to do |format|
-<<<<<<< HEAD
-      flash[:notice] = 'Achievement was successfully destroyed.'
-      format.html { redirect_to candidate_achievements_url }
-=======
       flash[:success] =  'Achievement was successfully deleted.' 
       format.html { redirect_to edit_candidate_achievements_path(params[:candidate_id]) }
->>>>>>> feature/candidate-controller
       format.json { head :no_content }
     end
   end

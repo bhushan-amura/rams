@@ -23,14 +23,11 @@ class Candidate < ActiveRecord::Base
   has_many :skills, through: :skill_assignments
   has_many :reviews, dependent: :destroy
 
-<<<<<<< HEAD
   has_and_belongs_to_many :job_opportunities, join_table: 'candidates_job_opportunities', class_name:'Company::JobOpportunity'
-=======
   has_many :candidate_qualification_assignments,dependent: :destroy
   has_many :qualification_assignments, through: :candidate_qualification_assignments
   has_many :qualifications, through: :qualification_assignments 
   has_many :institutes, through: :qualification_assignments, source: :qualifiable, source_type: "Institute"
->>>>>>> feature/candidate-controller
 
   belongs_to :user
 
@@ -51,10 +48,9 @@ class Candidate < ActiveRecord::Base
   GENDER = [["M","M"], ["F","F"], ["T","T"]]
   MARITAL = ["married", "unmarried"]
 
-<<<<<<< HEAD
   def name_with_initial
     "  #{first_name} #{last_name}"
-=======
+  end
 
   # instance methods
   def add_institute_with_qualification(institute,qualification)
@@ -84,6 +80,5 @@ class Candidate < ActiveRecord::Base
       institutes_with_qualifications << {institute: institute, qualification: qualification,qual_ass_id: assignment}
     end
     institutes_with_qualifications
->>>>>>> feature/candidate-controller
   end
 end

@@ -31,13 +31,8 @@ class Candidate::ProjectsController < ApplicationController
 
     respond_to do |format|
       if @candidate_project.save
-<<<<<<< HEAD
-        flash[:notice] = 'Project was successfully created.'
-        format.html { redirect_to candidate_project_path(project_path_params(@candidate_project)) }
-=======
         flash[:success] ='Project was successfully created.' 
         format.html { redirect_to edit_candidate_projects_path(params[:candidate_id])}
->>>>>>> feature/candidate-controller
         format.json { render :show, status: :created, location: @candidate_project }
       else
         flash[:failure] ='Project creation unsuccessful.' 
@@ -52,13 +47,8 @@ class Candidate::ProjectsController < ApplicationController
   def update
     respond_to do |format|
       if @candidate_project.update(candidate_project_params)
-<<<<<<< HEAD
-        flash[:notice] = 'Project was successfully updated.'
-        format.html { redirect_to candidate_project_path(project_path_params(@candidate_project)) }
-=======
         flash[:success] ='Project was successfully updated.' 
         format.html { redirect_to edit_candidate_projects_path(params[:candidate_id])}
->>>>>>> feature/candidate-controller
         format.json { render :show, status: :ok, location: @candidate_project }
       else
         flash[:failure] ='Project updation unsuccessful.' 
@@ -74,12 +64,8 @@ class Candidate::ProjectsController < ApplicationController
     @candidate_project.destroy
     flash[:notice] = 'Project was successfully destroyed.'
     respond_to do |format|
-<<<<<<< HEAD
-      format.html { redirect_to candidate_projects_url }
-=======
       flash[:success] =  'Project was successfully destroyed.' 
       format.html { redirect_to edit_candidate_projects_path(params[:candidate_id])}
->>>>>>> feature/candidate-controller
       format.json { head :no_content }
     end
   end

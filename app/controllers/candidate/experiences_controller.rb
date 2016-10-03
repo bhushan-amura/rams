@@ -29,13 +29,8 @@ class Candidate::ExperiencesController < ApplicationController
 
     respond_to do |format|
       if @candidate_experience.save
-<<<<<<< HEAD
-        flash[:notice] = 'Experience was successfully created.'
-        format.html { redirect_to candidate_experience_path(experience_path_params(@candidate_experience)) }
-=======
         flash[:success] =  'Experience was successfully created.'
         format.html { redirect_to edit_candidate_experiences_path(params[:candidate_id]) }
->>>>>>> feature/candidate-controller
         format.json { render :show, status: :created, location: @candidate_experience }
       else
         flash[:failure] =  'Experience creation unsuccessful.'
@@ -50,13 +45,8 @@ class Candidate::ExperiencesController < ApplicationController
   def update
     respond_to do |format|
       if @candidate_experience.update(candidate_experience_params)
-<<<<<<< HEAD
-        flash[:notice] = 'Experience was successfully updated.'
-        format.html { redirect_to candidate_experience_path(experience_path_params(@candidate_experience)) }
-=======
         flash[:success] =  'Experience was successfully updated.'
         format.html { redirect_to edit_candidate_experiences_path(params[:candidate_id])}
->>>>>>> feature/candidate-controller
         format.json { render :show, status: :ok, location: @candidate_experience }
       else
         flash[:failure] =  'Experience updation unsuccessful.'
@@ -72,15 +62,9 @@ class Candidate::ExperiencesController < ApplicationController
   # DELETE /candidate/:id/experiencess/1.json
   def destroy
     @candidate_experience.destroy
-<<<<<<< HEAD
-    flash[:notice] = 'Experience was successfully destroyed.'
-    respond_to do |format|
-      format.html { redirect_to candidate_experiences_url }
-=======
     flash[:success] =  'Experience was successfully deleted'
     respond_to do |format|
       format.html { redirect_to edit_candidate_experiences_path}
->>>>>>> feature/candidate-controller
       format.json { head :no_content }
     end
   end
