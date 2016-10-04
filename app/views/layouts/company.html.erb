@@ -28,10 +28,13 @@
             <li class="dropdown">
               <a class="dropdown-toggle" data-toggle="dropdown">
                 <span class="glyphicon glyphicon-user"></span>
-                <%= current_user.info.name %>
+                <%= current_user.info.email %>
                 <span class="caret"></span>
               </a>
               <ul class="dropdown-menu">
+                <li>
+                  <%= link_to 'Profile',  %>
+                </li>
                 <li>
                   <%= link_to 'Edit Profile', edit_company_path(@company) %>
                 </li>
