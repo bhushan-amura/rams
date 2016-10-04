@@ -1,11 +1,8 @@
 class Company::JobOpportunitiesController < ApplicationController
   #layout
   layout 'company'
-<<<<<<< HEAD
 
   # callbacks
-=======
->>>>>>> origin/user-authentication
   before_action :set_company
   before_action :set_qualifications
   before_action :set_skills
@@ -49,7 +46,7 @@ class Company::JobOpportunitiesController < ApplicationController
       else
         format.html { render :new }
         format.json { render json: @company_job_opportunity.errors, status: :unprocessable_entity }
-      end    
+      end
     end
   end
 

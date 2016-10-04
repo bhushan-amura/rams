@@ -29,7 +29,7 @@ class CandidatesController < ApplicationController
   # POST /candidates.json
   def create
     @candidate = Candidate.new(candidate_params)
-    byebug
+    @candidate.user_id = current_user.id
 
     respond_to do |format|
       if @candidate.save
