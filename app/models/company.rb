@@ -23,8 +23,6 @@ class Company < ActiveRecord::Base
   validates :description, presence:true
   validates :url, presence:true, length: { :maximum => 255 }
 
-  # scope :sorted, lambda { order("updated_at DESC") }
-  
   def recent_events(event_count=5)
     self.events.order("created_at DESC").limit(event_count)
   end

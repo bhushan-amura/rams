@@ -8,7 +8,7 @@ class Company::JobOpportunitiesController < ApplicationController
   before_action :set_skills
   before_action :set_company_job_opportunity, only: [:show, :index, :edit, :update, :select_candidates,:destroy]
   before_action :get_candidates, only: [:show, :edit, :update]
-  before_action :selected_candidates, only: [:show]
+  before_action :selected_candidates, only: [:show, :index]
 
   # helpers
   include Company::JobOpportunitiesHelper
