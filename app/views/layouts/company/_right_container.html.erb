@@ -1,5 +1,7 @@
 <div class="col-sm-2 well">
-  <% if @company.recent_events(5).nil? %>
+  <% if @company.recent_events(5).empty? %>
+    <strong>No Upcoming Events</strong>    
+  <% else %>
     <strong>Recent or Upcoming Events</strong>
     <% @company.recent_events(5).each do |e| %>
     <div class="well">
@@ -17,7 +19,5 @@
      </div>
    </div>
    <% end %>
-  <% else %>
-    <strong>No Upcoming Events</strong>  
   <% end %>
 </div>
