@@ -1,10 +1,9 @@
 class CandidatesController < ApplicationController
 
   # layouts
-  layout 'candidate/layout'
-
+  layout :resolve_layout
   # filters/callbacks
-  before_action :set_candidate, only: [:show, :edit, :update, :destroy, :home]  
+  before_action :set_candidate, only: [:show, :edit, :update, :destroy, :home]
 
   # GET /candidates
   # GET /candidates.json
@@ -30,11 +29,12 @@ class CandidatesController < ApplicationController
   # POST /candidates.json
   def create
     @candidate = Candidate.new(candidate_params)
+    byebug
 
     respond_to do |format|
       if @candidate.save
         flash[:notice] = 'Candidate was successfully created.'
-        format.html { redirect_to @candidate }
+        format.html { redirect_to home_candidate_path(@candidate) }
         format.json { render :show, status: :created, location: @candidate }
       else
         format.html { render :new }
@@ -74,7 +74,7 @@ class CandidatesController < ApplicationController
 
   # HOME /candidate/1/home
   def home
-    @recent_jobs = Company::JobOpportunity.get_recent_jobs(5) 
+    @recent_jobs = Company::JobOpportunity.get_recent_jobs(5)
   end
 
   private
@@ -86,5 +86,14 @@ class CandidatesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def candidate_params
       params.require(:candidate).permit( :first_name,:last_name,:dob,:gender, :marital_status, :status,:languages,:summary)
+    end
+
+    def resolve_layout
+     case action_name
+     when "new"
+        'application'
+     else
+      'candidate/layout'
+     end
     end
 end
