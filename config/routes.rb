@@ -7,7 +7,7 @@ Rails.application.routes.draw do
       get :home
     end
     scope module:'company' do
-      resources :jobs,to: 'job_opportunities' do
+      resources :jobs, controller: 'job_opportunities' do
         patch :select_candidates
         resources :events
       end
