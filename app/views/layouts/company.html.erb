@@ -19,21 +19,18 @@
             <li>
               <%= link_to "Home", home_company_path(@company) %>
             </li>
-            <!-- <li>
-              <a href="#">Messages</a>
-            </li> -->
           </ul>
 
           <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
               <a class="dropdown-toggle" data-toggle="dropdown">
                 <span class="glyphicon glyphicon-user"></span>
-                <%= current_user.info.email %>
+                <%= current_user.email %>
                 <span class="caret"></span>
               </a>
               <ul class="dropdown-menu">
                 <li>
-                  <%= link_to 'Profile',  %>
+                  <%= link_to 'Profile', company_path(@company) %>
                 </li>
                 <li>
                   <%= link_to 'Edit Profile', edit_company_path(@company) %>
