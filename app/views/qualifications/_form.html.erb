@@ -1,0 +1,51 @@
+<div class="row">
+  <div class="col-sm-9">
+    <%= form_for entity_qualification, url: required_url do |f| %>
+      <% if entity_qualification.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(entity_qualification.errors.count, "error") %> prohibited this qualification from being saved:</h2>
+
+          <ul>
+          <% entity_qualification.errors.full_messages.each do |message| %>
+            <li><%# message %></li>
+          <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+
+      <div class="form-group">
+        <%= f.label(:course, class: "control-label col-sm-3")  %>
+        <div class="col-sm-9">
+          <%= f.text_field(:course, class: "form-control",placeholder:"Enter course") %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label(:domain, class: "control-label col-sm-3")  %>
+        <div class="col-sm-9">
+          <%= f.text_field(:domain, class: "form-control",placeholder:"Enter domain") %>
+        </div>
+      </div>
+  </div>
+
+  <div class="form-group">
+    <% if !new_qualification %>
+      <div class="col-sm-2">
+        <%= f.submit "Update",class: "btn btn-default update-button btn-md" %>
+      </div>
+    <% else %>
+      <div class="col-sm-offset-2 create-button">
+        <%= f.submit "Create",class:"btn btn-default" %>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+<% if !new_qualification %>
+  <div class="form-group">
+    <div class="col-sm-1">
+      <%= link_to "Delete",candidate_qualification_path(candidate_id:params[:candidate_id],id:entity_qualification.id),method: :delete, class:"btn btn-danger btn-md active", role:"button" %>
+
+    </div>
+  </div>
+<% end %>
+</div>

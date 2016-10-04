@@ -1,0 +1,31 @@
+<% content_for :edit_content do %>
+  <div class="row achievement-title">
+    <h2 class="col-sm-5">Achievements</h2>
+    <button class="btn btn-default col-sm-1 add-button-achievement" data-toggle="modal" data-target="#myModal"> Add</button>
+  </div>
+  <div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Add achievement</h4>
+        </div>
+        <div class="modal-body">
+          <%= render partial: 'form', locals:{candidate_achievement: @new_candidate_achievement,required_url:candidate_achievements_path,new_achievement: true} %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <% @candidate_achievements.each do |candidate_achievement| %>
+    <%= render partial: 'form',locals:{ candidate_achievement: candidate_achievement ,required_url: candidate_achievement_path(achievement_path_params(candidate_achievement)),new_achievement: false} %>
+  <% end %>
+<% end %>
+
+<%= render 'candidates/edit_navbar' %>

@@ -1,0 +1,71 @@
+<%= form_for(@company, html: {class: 'form-horizontal'}) do |f| %>
+
+<% if @company.errors.any? %>
+<div id="error_explanation">
+  <h2><%= pluralize(@company.errors.count, "error") %>
+    prohibited this company from being saved:</h2>
+
+  <ul>
+    <% @company.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
+
+<div class="field form-group">
+  <%= f.label :name, class:'col-sm-2 control-label' %>
+  <div class="col-sm-10">
+    <%= f.text_field :name, class: 'form-control', placeholder: 'Company name', required: 'required' %>
+  </div>
+</div>
+
+<div class="field form-group">
+  <%= f.label :company_type, class:'col-sm-2 control-label' %>
+  <div class="col-sm-10">
+    <%= f.text_field :company_type, class: 'form-control', placeholder: 'MNC, LLC etc', required: 'required' %>
+  </div>
+</div>
+
+<div class="field form-group">
+  <%= f.label :visit_us_at, class:'col-sm-2 control-label' %>
+  <div class="col-sm-10">
+    <%= f.text_field :url, class: 'form-control', placeholder: 'URL of your company', required: 'required' %>
+  </div>
+</div>
+
+<div class="field form-group">
+  <%= f.label :tagline, class:'col-sm-2 control-label' %>
+  <div class="col-sm-10">
+    <%= f.text_field :tagline, class: 'form-control', placeholder: 'Your tagline' %>
+  </div>
+</div>
+
+<div class="field form-group">
+  <%= f.label :phone_number, class:'col-sm-2 control-label' %>
+  <div class="col-sm-10">
+    <%= f.text_field :phone, class: 'form-control', placeholder: 'Phone number', required: 'required' %>
+  </div>
+</div>
+
+<div class="field form-group">
+  <%= f.label :number_of_employees, class:'col-sm-2 control-label' %>
+  <div class="col-sm-10">
+    <%= f.text_field :number_of_employees, class: 'form-control', placeholder: 'Number of Employees' %>
+  </div>
+</div>
+
+<div class="field form-group">
+  <%= f.label :description, class:'col-sm-2 control-label' %>
+  <div class="col-sm-10">
+    <%= f.text_area :description, class: 'form-control', placeholder: 'Short but informative description about your company', required: 'required' %>
+  </div>
+</div>
+
+<div class="actions form-group">
+  <div class="col-sm-offset-2 col-sm-10">
+    <%= f.submit class:"btn btn-default" %>
+  </div>
+</div>
+
+<% end %>

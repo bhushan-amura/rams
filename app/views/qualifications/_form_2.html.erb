@@ -1,0 +1,66 @@
+<div class="row well">
+  <div class="col-sm-9">
+    <%= form_for entity_institute, url: required_url do |f| %>
+      <% if entity_institute.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(entity_institute.errors.count, "error") %> prohibited this qualification from being saved:</h2>
+
+          <ul>
+          <% entity_institute.errors.full_messages.each do |message| %>
+            <li><%# message %></li>
+          <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+
+      <div class="form-group">
+        <%= f.label(:university, class: "control-label col-sm-3")  %>
+        <div class="col-sm-9">
+          <%= f.text_field(:university, class: "form-control",placeholder:"Enter university") %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label(:campus, class: "control-label col-sm-3")  %>
+        <div class="col-sm-9">
+          <%= f.text_field(:campus, class: "form-control",placeholder:"Enter campus") %>
+        </div>
+      </div>
+
+      <%= fields_for entity_qualification do |qual| %> 
+        <div class="form-group">
+          <%= qual.label(:course, class: "control-label col-sm-3")  %>
+          <div class="col-sm-9">
+            <%= qual.text_field(:course, class: "form-control",placeholder:"Enter course") %>
+          </div>
+        </div>
+        <div class="form-group">
+          <%= qual.label(:domain, class: "control-label col-sm-3")  %>
+          <div class="col-sm-9">
+            <%= qual.text_field(:domain, class: "form-control",placeholder:"Enter domain") %>
+          </div>
+        </div>
+      <% end %>
+  </div>
+
+  <div class="form-group">
+    <% if !new_qualification %>
+      <div class="col-sm-2">
+        <%= f.submit "Update",class: "btn btn-default update-button btn-md" %>
+      </div>
+    <% else %>
+      <div class="col-sm-offset-2 create-button">
+        <%= f.submit "Create",class:"btn btn-default" %>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+<% if !new_qualification %>
+  <div class="form-group">
+    <div class="col-sm-1">
+      <%= link_to "Delete",required_url,method: :delete, class:"btn btn-danger btn-md active", role:"button" %>
+
+    </div>
+  </div>
+<% end %>
+</div>

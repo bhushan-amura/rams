@@ -1,0 +1,104 @@
+<!-- <p id="notice"><%= notice %></p> -->
+
+<% @company.job_opportunities.each do |company_job_opportunity| %>
+<div class="well text-capitalize">
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-3">
+        <b class="text-center">Title</b>
+      </div>
+      <div class="col-sm-4">
+        <%= company_job_opportunity.title %>
+      </div>
+      <div class="col-sm-5 text-right">
+        <%= company_job_opportunity.updated_at.strftime("%b, %d-%Y %I:%M %p") %>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-3">
+        <b class="text-center">Job Status</b>
+      </div>
+      <div class="col-sm-9">
+        <% if company_job_opportunity.status %>
+        Available
+      <% else %>
+        Closed
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-3">
+        <b class="text-center">Experience</b>
+      </div>
+      <div class="col-sm-9">
+        <%= pluralize(company_job_opportunity.experience, "Year") %>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-3">
+        <b class="text-center">shift</b>
+      </div>
+      <div class="col-sm-9">
+        <%= company_job_opportunity.shift %>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-3">
+        <b class="text-center">Positions</b>
+      </div>
+      <div class="col-sm-9">
+        <%= company_job_opportunity.number_of_positions %>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-3">
+        <b class="text-center">CTC</b>
+      </div>
+      <div class="col-sm-9">
+        <%= company_job_opportunity.ctc %>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-3">
+        <b class="text-center">Description</b>
+      </div>
+      <div class="col-sm-9">
+        <%= company_job_opportunity.description %>
+      </div>
+    </div>
+  </div>
+
+  <div class="field form-group">
+    <div class="row">
+      <div class="col-sm-12 col-sm-offset-1">
+        <%= link_to 'Edit Post', edit_company_job_path(job_opportunity_path_params(company_job_opportunity)),class:"btn btn-warning", role:"button" %>
+        <%= link_to 'Remove Post', company_job_path(job_opportunity_path_params(company_job_opportunity)), method: :delete, data: { confirm: 'Are you sure?' },class:"btn btn-danger", role:"button" %>
+        <%= link_to 'Related Events',  company_job_events_path(events_path_params(job_opportunity_path_params(company_job_opportunity))),class:"btn btn-success", role:"button" %>
+        <%= link_to 'View Full Post',  company_job_path(job_opportunity_path_params(company_job_opportunity)),class:"btn btn-info", role:"button" %>
+      </div>
+    </div>
+  </div>
+
+</div>
+<% end %>
+
+<!-- <p><%#= link_to 'Show',  company_job_path(job_opportunity_path_params(company_job_opportunity)) %></p> -->

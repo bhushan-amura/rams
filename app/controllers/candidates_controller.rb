@@ -1,5 +1,9 @@
 class CandidatesController < ApplicationController
-  before_action :set_candidate, only: [:show, :edit, :update, :destroy]
+
+  # layouts
+  layout :resolve_layout
+  # filters/callbacks
+  before_action :set_candidate, only: [:show, :edit, :update, :destroy, :home]
 
   # GET /candidates
   # GET /candidates.json
@@ -10,7 +14,6 @@ class CandidatesController < ApplicationController
   # GET /candidates/1
   # GET /candidates/1.json
   def show
-    @candidate = Candidate.find(params[:id])
   end
 
   # GET /candidates/new
@@ -20,17 +23,18 @@ class CandidatesController < ApplicationController
 
   # GET /candidates/1/edit
   def edit
-    @candidate = Candidate.find(params[:id])
   end
 
   # POST /candidates
   # POST /candidates.json
   def create
     @candidate = Candidate.new(candidate_params)
+    @candidate.user_id = current_user.id
 
     respond_to do |format|
       if @candidate.save
-        format.html { redirect_to @candidate, notice: 'Candidate was successfully created.' }
+        flash[:notice] = 'Candidate was successfully created.'
+        format.html { redirect_to home_candidate_path(@candidate) }
         format.json { render :show, status: :created, location: @candidate }
       else
         format.html { render :new }
@@ -44,9 +48,11 @@ class CandidatesController < ApplicationController
   def update
     respond_to do |format|
       if @candidate.update(candidate_params)
-        format.html { redirect_to @candidate, notice: 'Candidate was successfully updated.' }
+        flash[:success] = 'Candidate was successfully updated'
+        format.html { redirect_to edit_candidate_path(@candidate), notice: 'Candidate was successfully updated.' }
         format.json { render :show, status: :ok, location: @candidate }
       else
+        flash[:failure] = 'Candidate updation unsuccessful'
         format.html { render :edit }
         format.json { render json: @candidate.errors, status: :unprocessable_entity }
       end
@@ -55,15 +61,20 @@ class CandidatesController < ApplicationController
 
   # DELETE /candidates/1
   # DELETE /candidates/1.json
-  def delete
-    @candidate = Cndidate.find(params[:id])
-  end
+
+
   def destroy
     @candidate.destroy
     respond_to do |format|
-      format.html { redirect_to candidates_url, notice: 'Candidate was successfully destroyed.' }
+      flash[:notice] = 'Candidate was successfully destroyed.'
+      format.html { redirect_to candidates_url }
       format.json { head :no_content }
     end
+  end
+
+  # HOME /candidate/1/home
+  def home
+    @recent_jobs = Company::JobOpportunity.get_recent_jobs(5)
   end
 
   private
@@ -75,5 +86,14 @@ class CandidatesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def candidate_params
       params.require(:candidate).permit( :first_name,:last_name,:dob,:gender, :marital_status, :status,:languages,:summary)
+    end
+
+    def resolve_layout
+     case action_name
+     when "new"
+        'application'
+     else
+      'candidate/layout'
+     end
     end
 end

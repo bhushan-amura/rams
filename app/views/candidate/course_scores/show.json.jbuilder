@@ -1,0 +1,1 @@
+json.partial! "candidate_course_scores/candidate_course_score", candidate_course_score: @candidate_course_score

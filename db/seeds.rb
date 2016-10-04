@@ -13,10 +13,12 @@ def create_users(user_count=50)
   puts "Generating test users from seed.....(check out file in tmp/test_users.txt)"
   File.open(Rails.root.join('tmp','test_users.txt'),'w') do |file|
     user_count.times do |count|
+      name =  Faker::Internet.user_name
       email = Faker::Internet.email 
       password = Faker::Internet.password
-      file.puts "#{count+1}) #{email}|#{password}"
-      user = User.new(email:email,password:password)
+      password_confirmation = password
+      file.puts "#{count+1}) #{name}|#{email}|#{password}|#{password_confirmation}"
+      user = User.new(name:name,email:email,password:password,password_confirmation:password_confirmation)
       user.save!
     end
   end
@@ -29,6 +31,9 @@ def create_admins(admin_count=5)
     admin_count.times do |count|
       admin = Admin.new(user_id:admin_users[count].id)
       admin.save!
+      user = User.find_by(id:admin.user_id)
+      user.role = "Admin"
+      user.save!
       file.puts "#{count+1}) #{admin_users[count].email}"
     end
   end
@@ -61,6 +66,9 @@ def create_companies(company_count=20)
     company_count.times do |count|
       company = Company.new(name:Faker::Company.name,company_type:Faker::Company.suffix,url:Faker::Internet.url,tagline:Faker::Company.catch_phrase,phone:Faker::PhoneNumber.phone_number,number_of_employees:rand(100),description:Faker::Lorem.paragraph(2),logo:Faker::Company.logo,user_id:company_users[count].id)
       company.save!
+      user = User.find_by(id:company.user_id)
+      user.role = "Company"
+      user.save!
       file.puts "#{count+1}) #{company_users[count].email}"
     end
   end
@@ -74,7 +82,7 @@ def create_jobs(max_job_count_per_company=10)
     shifts = ["full-time","part-time","internship"]
     statuses = [true,false]
     job_count.times do |j|
-      job = Company::JobOpportunity.new(title:Faker::Lorem.word,shift:shifts[rand(shifts.length)],description:Faker::Lorem.paragraph(2),number_of_positions:rand(10),status:statuses[rand(statuses.length)],ctc: rand(10000..50000),experience:rand(10)) # TODO : Fill in the fields
+      job = Company::JobOpportunity.new(title:Faker::Company.profession,shift:shifts[rand(shifts.length)],description:Faker::Lorem.paragraph(2),number_of_positions:rand(10),status:statuses[rand(statuses.length)],ctc: rand(10000..50000),experience:rand(10)) # TODO : Fill in the fields
       company.job_opportunities << job
     end
   end
@@ -143,6 +151,9 @@ def create_candidates(candidate_count=25)
     candidate_count.times do |count|
       candidate = Candidate.new(first_name:Faker::Name.first_name,last_name:Faker::Name.last_name,dob:Faker::Date.between(50.years.ago,20.years.ago),gender:genders[rand(3)],marital_status: marital_statuses[rand(2)],status:statuses[rand(2)],languages:Faker::Lorem.words.join(','),summary:Faker::Lorem.paragraph(2),user_id:candidate_users[count].id)
       candidate.save!
+      user = User.find_by(id:candidate.user_id)
+      user.role = "Candidate"
+      user.save!
       file.puts "#{count+1}) #{candidate_users[count].email}"
     end
   end
@@ -212,14 +223,24 @@ def create_references(reference_count=3)
   end
 end
 
+
+def create_institutes(institute_count=20)
+  puts "Generating institutes...."
+  institute_count.times do |count|
+    institute = Institute.new(university:Faker::Educator.university,campus:Faker::Educator.campus)
+    institute.save!
+  end
+end
+
 def assign_qualification_candidate(max_qualifications_per_candidate=5)
   puts "Assigning qualification to candidates....."
   qualifications = Qualification.all
+  institutes = Institute.all
   candidates = Candidate.all
   candidates.each do |candidate|
     qualification_count = rand(max_qualifications_per_candidate)
     qualification_count.times do |count|
-      candidate.qualifications << qualifications[rand(qualifications.length)]
+      candidate.add_institute_with_qualification(institutes[rand(Institute.count)],qualifications[rand(qualifications.length)])
     end
   end
 end
@@ -318,6 +339,7 @@ create_experiences
 create_projects
 create_links
 create_references
+create_institutes
 assign_qualification_candidate
 create_course_scores
 assign_skill_candidate

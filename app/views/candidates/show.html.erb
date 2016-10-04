@@ -1,38 +1,65 @@
 <p id="notice"><%= notice %></p>
+<% content_for :show_content do %>
+  <h2>Profile</h2>
+  <div class="well">
+    <div class="row">
+      <div class="col-sm-3">
+        <p><b>First Name</b></p>
+      </div>
+      <div class="col-sm-6">
+        <p><%= @candidate.first_name%> </p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-3">
+        <p><b>Last Name</b></p>
+      </div>
+      <div class="col-sm-6">
+        <p><%= @candidate.last_name%> </p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-3">
+        <p><b>Date of birth</b></p>
+      </div>
+      <div class="col-sm-6">
+        <p><%= @candidate.dob%> </p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-3">
+        <p><b>Marital status</b></p>
+      </div>
+      <div class="col-sm-6">
+        <p><%= @candidate.marital_status %> </p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-3">
+        <p><b>Job status</b></p>
+      </div>
+      <div class="col-sm-6">
+        <p><%= @candidate.status%> </p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-3">
+        <p><b>Languages</b></p>
+      </div>
+      <div class="col-sm-6">
+        <p><%= @candidate.languages%> </p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-3">
+        <p><b>Summary</b></p>
+      </div>
+      <div class="col-sm-6">
+        <p><%= @candidate.summary%> </p>
+      </div>
+    </div>
+  </div>
+<%= link_to "Edit Profile", edit_candidate_path(params[:id]||params[:candidate_id]),class:"btn btn-default text-center" %>
+<% end %>
 
-<table>
-  <tr>
-    <th>First Name</th>
-    <td><%= @candidate.first_name%></td>
-  </tr>
-  <tr>
-    <th>Last Name</th>
-    <td><%= @candidate.last_name%></td>
-  </tr>
-  <tr>
-    <th>Date of Birth</th>
-    <td><%= @candidate.dob%></td>
-  </tr>
-  <tr>
-    <th>Gender</th>
-    <td><%= @candidate.gender%></td>
-  </tr>
-  <tr>
-    <th>Marital Status</th>
-    <td><%= @candidate.marital_status%></td>
-  </tr>
-  <tr>
-    <th>Job Status</th>
-    <td><%= @candidate.status%></td>
-  </tr>
-  <tr>
-    <th>Languages</th>
-    <td><%= @candidate.languages%></td>
-  </tr>
-  <tr>
-    <th>Summary</th>
-    <td><%= @candidate.summary%></td>
-  </tr>
-</table>
-<%= link_to 'Edit', edit_candidate_path(@candidate) %> |
-<%= link_to 'Back', candidates_path %>
+<%= render 'show_navbar' %>
