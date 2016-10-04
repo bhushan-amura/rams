@@ -1,3 +1,4 @@
+
 module Company::EventsHelper
 	def events_path_params(event_object)
 		{ company_id:event_object[:company_id],job_id:event_object[:id] }
