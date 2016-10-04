@@ -63,8 +63,8 @@ RSpec.describe Location, type: :model do
   end
   context "when building_number" do
     it "invalid! building_number required" do
-      location.building_number = ""
-      expect(location).to be_invalid
+      location.building_number = nil
+      expect(location).to be_valid
     end
   end
   context "when state" do
