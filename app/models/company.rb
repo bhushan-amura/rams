@@ -6,6 +6,7 @@ class Company < ActiveRecord::Base
 
   # callbacks
   before_save :lower_fields
+  
 
   # associations
   has_many :job_opportunities, dependent: :destroy
@@ -15,6 +16,8 @@ class Company < ActiveRecord::Base
   belongs_to :user
 
   # validations
+  
+  mount_uploader :logo, LogoUploader
   validates :name, presence:true, length: { :maximum => 255 }
   validates :company_type, presence:true, length: { :maximum => 255 }
   validates :description, presence:true
