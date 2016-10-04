@@ -1,83 +1,64 @@
+<p id="notice"><%= notice %></p>
 <% content_for :show_content do %>
-<div class="well">
-  <div class="row">
-    <div class="col-sm-3">
-      <p>
-        <b>First Name</b>
-      </p>
+  <h2>Profile</h2>
+  <div class="well">
+    <div class="row">
+      <div class="col-sm-3">
+        <p><b>First Name</b></p>
+      </div>
+      <div class="col-sm-6">
+        <p><%= @candidate.first_name%> </p>
+      </div>
     </div>
-    <div class="col-sm-6">
-      <p><%= @candidate.first_name%>
-      </p>
+    <div class="row">
+      <div class="col-sm-3">
+        <p><b>Last Name</b></p>
+      </div>
+      <div class="col-sm-6">
+        <p><%= @candidate.last_name%> </p>
+      </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-sm-3">
-      <p>
-        <b>Last Name</b>
-      </p>
+    <div class="row">
+      <div class="col-sm-3">
+        <p><b>Date of birth</b></p>
+      </div>
+      <div class="col-sm-6">
+        <p><%= @candidate.dob%> </p>
+      </div>
     </div>
-    <div class="col-sm-6">
-      <p><%= @candidate.last_name%>
-      </p>
+    <div class="row">
+      <div class="col-sm-3">
+        <p><b>Marital status</b></p>
+      </div>
+      <div class="col-sm-6">
+        <p><%= @candidate.marital_status %> </p>
+      </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-sm-3">
-      <p>
-        <b>Date of birth</b>
-      </p>
+    <div class="row">
+      <div class="col-sm-3">
+        <p><b>Job status</b></p>
+      </div>
+      <div class="col-sm-6">
+        <p><%= @candidate.status%> </p>
+      </div>
     </div>
-    <div class="col-sm-6">
-      <p><%= @candidate.dob%>
-      </p>
+    <div class="row">
+      <div class="col-sm-3">
+        <p><b>Languages</b></p>
+      </div>
+      <div class="col-sm-6">
+        <p><%= @candidate.languages%> </p>
+      </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-sm-3">
-      <p>
-        <b>Marital status</b>
-      </p>
-    </div>
-    <div class="col-sm-6">
-      <p><%= @candidate.marital_status %>
-      </p>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-sm-3">
-      <p>
-        <b>Job status</b>
-      </p>
-    </div>
-    <div class="col-sm-6">
-      <p><%= @candidate.status%>
-      </p>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-sm-3">
-      <p>
-        <b>Languages</b>
-      </p>
-    </div>
-    <div class="col-sm-6">
-      <p><%= @candidate.languages%>
-      </p>
+    <div class="row">
+      <div class="col-sm-3">
+        <p><b>Summary</b></p>
+      </div>
+      <div class="col-sm-6">
+        <p><%= @candidate.summary%> </p>
+      </div>
     </div>
   </div>
-  <div class="row">
-    <div class="col-sm-3">
-      <p>
-        <b>Summary</b>
-      </p>
-    </div>
-    <div class="col-sm-6">
-      <p><%= @candidate.summary%>
-      </p>
-    </div>
-  </div>
-</div>
 <%= link_to "Edit Profile", edit_candidate_path(params[:id]||params[:candidate_id]),class:"btn btn-default text-center" %>
 <% end %>
 

@@ -59,9 +59,11 @@ class SkillsController < ApplicationController
 
     respond_to do |format|
       if @entity.skills = entity_skills 
+        flash[:success] = 'Skills successfully updated'
         format.html { redirect_to edit_candidate_skill_index_path(params[:candidate_id]),notice: 'Skill was successfully updated.' }
         format.json { render :show, status: :ok, location: @skill }
       else
+        flash[:failure] = 'Skill updation unsuccessful'
         format.html { render :edit }
         format.json { render json: @skill.errors, status: :unprocessable_entity }
       end

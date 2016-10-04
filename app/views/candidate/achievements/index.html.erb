@@ -1,29 +1,30 @@
-<% content_for :show_content do %>
-<% @candidate_achievements.each do |candidate_achievement| %>
-<div class="well">
 
-  <div class="row">
-    <div class="col-sm-3">
-      <p>
-        <b>Title</b>
-      </p>
+<% content_for :show_content do %>
+  <h2>Achievements</h2>
+  <% @candidate_achievements.each do |candidate_achievement| %>
+    <div class="well">
+
+      <div class="row">
+        <div class="col-sm-3">
+          <p><b>Title</b></p>
+        </div>
+        <div class="col-sm-6">
+          <p><%= candidate_achievement.title%></p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-3">
+          <p><b>Description</b></p>
+        </div>
+        <div class="col-sm-6">
+          <p><%= candidate_achievement.description %></p>
+        </div>
+      </div>
     </div>
-    <div class="col-sm-6">
-      <p><%= candidate_achievement.title%></p>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-sm-3">
-      <p>
-        <b>Description</b>
-      </p>
-    </div>
-    <div class="col-sm-6">
-      <p><%= candidate_achievement.description %></p>
-    </div>
-  </div>
-</div>
+  <% end %>
+  <%= link_to "Edit Achievements", edit_candidate_achievements_path(params[:id]||params[:candidate_id]),class:"btn btn-default text-center",onclick: "javascript:window.location.reload()" %>
 <% end %>
-<%= link_to "Edit Achievements", edit_candidate_achievements_path(params[:id]||params[:candidate_id]),class:"btn btn-default text-center",onclick: "javascript:window.location.reload()" %>
-<% end %>
+
+
 <%= render "candidates/show_navbar" %>
+
