@@ -41,5 +41,17 @@ RSpec.describe Company::Event, type: :model do
       expect(event).to be_invalid
     end
   end
-  
+
+  context "when Association" do
+	  it "belongs to job opportunity" do
+			assc = Company::Event.reflect_on_association(:job_opportunity)
+      expect(assc.macro).to eq :belongs_to
+	  end
+
+    it "has one location" do
+			assc = Company::Event.reflect_on_association(:location)
+      expect(assc.macro).to eq :has_one
+	  end
+  end
+
 end
