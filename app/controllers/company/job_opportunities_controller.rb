@@ -6,9 +6,9 @@ class Company::JobOpportunitiesController < ApplicationController
   before_action :set_company
   before_action :set_qualifications
   before_action :set_skills
-  before_action :set_company_job_opportunity, only: [:show, :index, :edit, :update, :select_candidates,:destroy]
+  before_action :set_company_job_opportunity, only: [:show, :edit, :update, :select_candidates,:destroy]
   before_action :get_candidates, only: [:show, :edit, :update]
-  before_action :selected_candidates, only: [:show, :index]
+  before_action :selected_candidates, only: [:show]
 
   # helpers
   include Company::JobOpportunitiesHelper
@@ -16,7 +16,8 @@ class Company::JobOpportunitiesController < ApplicationController
   # GET /company/job_opportunities
   # GET /company/job_opportunities.json
   def index
-    @company_job_opportunities = @company.job_opportunities
+    redirect_to home_company_path(@company)
+    # @company_job_opportunities = @company.job_opportunities
   end
 
   # GET /company/job_opportunities/1
