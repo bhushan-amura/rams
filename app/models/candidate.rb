@@ -48,11 +48,12 @@ class Candidate < ActiveRecord::Base
   GENDER = [["M","M"], ["F","F"], ["T","T"]]
   MARITAL = ["married", "unmarried"]
 
+
+  # instance methods
   def name_with_initial
     "  #{first_name} #{last_name}"
   end
 
-  # instance methods
   def add_institute_with_qualification(institute,qualification)
     qa = QualificationAssignment.find_or_create_by(qualification_id:qualification.id,qualifiable_id:institute.id,qualifiable_type:institute.class.to_s)
 

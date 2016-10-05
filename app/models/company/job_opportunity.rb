@@ -28,6 +28,24 @@ class  Company::JobOpportunity < ActiveRecord::Base
   #constants
   STATUS = ["OPEN","CLOSED"]
 
+  #instance method
+  def shortlist_candidates
+    # TODO : Figure out a way to incorporate experience in this
+    # Maybe precompute columns of experience, achievements, qualifications,etc. in candidate table in order to
+    # sort the results
+    job_qualifications = self.qualifications || Qualification.all
+    job_skills = self.skills || Skill.all
+    #job_experience = self.experience
+
+    candidates_with_required_qualifications = Candidate.joins(:qualifications).where(qualification_assignments:{qualification_id:job_qualifications})
+
+    candidates_with_required_skills =  Candidate.joins(:skills).where(skill_assignments:{skill_id:job_skills})
+    candidates_ids = candidates_with_required_skills.pluck(:id) + candidates_with_required_qualifications.pluck(:id)
+
+    candidate_shortlist_1 = Candidate.where(id:candidates_ids.uniq).where.not(id:self.candidates.pluck(:id))
+    Candidate::Experience.in_days.where(id:candidate_shortlist_1)
+  end
+
   # class methods/scope
   def self.get_recent_jobs(job_count=5)
     Company.joins(:job_opportunities).select('companies.name','company_job_opportunities.title','company_job_opportunities.id','company_job_opportunities.created_at').distinct.order(:created_at).limit(job_count)
