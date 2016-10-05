@@ -36,6 +36,9 @@
                   <%= link_to 'Edit Profile', edit_company_path(@company) %>
                 </li>
                 <li>
+                  <%= link_to 'Settings', edit_user_registration_path %>
+                </li>
+                <li>
                   <%= link_to 'Log out', destroy_user_session_path, method: :delete %>
                 </li>
               </ul>
