@@ -5,6 +5,8 @@ class ApplicationController < ActionController::Base
   before_filter :authenticate_user!
   # , :get_new_messages
 
+
+
   # private
 
   # def after_sign_in_path_for(resource)
