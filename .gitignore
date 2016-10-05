@@ -5,4 +5,4 @@ log/*
 db/migrate/*
 tmp/*
 *.swo
-
+public/uploads/*
