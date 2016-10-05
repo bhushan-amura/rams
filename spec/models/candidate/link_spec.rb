@@ -6,7 +6,7 @@ RSpec.describe Candidate::Link, type: :model do
 	let(:link) {Candidate::Link.new(link_type:"linkedin",url:"https://amuratech.hipchat.com/chat/room/3124190")}
 
 
-	context "model with attributes valid?" do	
+	context "model with attributes valid?" do
 		it "is valid with valid attributes" do
 		    expect(candidate).to be_valid
 		    candidate.save!
@@ -37,5 +37,12 @@ RSpec.describe Candidate::Link, type: :model do
 			link.link_type = "g"*65535
 			expect(link).to_not be_valid
 		end
+	end
+
+	context "when Association" do
+	  it "belongs to candidate" do
+			assc = Candidate::Link.reflect_on_association(:candidate)
+      expect(assc.macro).to eq :belongs_to
+	  end
 	end
 end
