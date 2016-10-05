@@ -6,6 +6,7 @@ class Company < ActiveRecord::Base
 
   # callbacks
   before_save :lower_fields
+  
 
   # associations
   has_many :job_opportunities, dependent: :destroy
@@ -15,13 +16,13 @@ class Company < ActiveRecord::Base
   belongs_to :user
 
   # validations
+  
+  mount_uploader :logo, LogoUploader
   validates :name, presence:true, length: { :maximum => 255 }
   validates :company_type, presence:true, length: { :maximum => 255 }
   validates :description, presence:true
   validates :url, presence:true, length: { :maximum => 255 }
 
-  # scope :sorted, lambda { order("updated_at DESC") }
-  
   def recent_events(event_count=5)
     self.events.order("created_at DESC").limit(event_count)
   end

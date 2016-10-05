@@ -38,7 +38,7 @@ class CompaniesController < ApplicationController
     respond_to do |format|
       if @company.save
         flash[:notice] = 'Company was successfully created.'
-        format.html { redirect_to home_company_path(@company)}
+        format.html { redirect_to new_company_job_path(@company) }
         format.json { render :show, status: :created, location: @company }
       else
         format.html { render :new }
@@ -75,7 +75,9 @@ class CompaniesController < ApplicationController
 
 
   def home
-
+    if @company.job_opportunities.empty?
+      redirect_to new_company_job_path(@company)
+    end
   end
 
   private
