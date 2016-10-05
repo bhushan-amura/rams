@@ -38,7 +38,11 @@
         <b class="text-center">Experience</b>
       </div>
       <div class="col-sm-9">
-        <%= pluralize(company_job_opportunity.experience, "Year") %>
+        <% if company_job_opportunity.experience == 0 %>
+          none
+        <% else %>
+          <%= pluralize(company_job_opportunity.experience, "Year") %>
+        <% end %>
       </div>
     </div>
   </div>
