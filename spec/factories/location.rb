@@ -1,16 +1,18 @@
 require "faker"
 
 FactoryGirl.define do
-  factory :location do |f|
-    f.city:Faker::Address.city
-    f.street_name:Faker::Address.street_name
-    f.street_address:Faker::Address.street_address
-    f.building_name:Faker::Lorem.word
-    f.building_number:Faker::Address.building_number
-    f.zipcode:Faker::Address.zip_code
-    f.state:Faker::Address.state
-    f.country:Faker::Address.country
-    f.latitude:Faker::Address.latitude
-    f.longitude:Faker::Address.longitude
+  factory :location do
+     city {Faker::Address.city}
+     street_name {Faker::Address.street_name}
+     street_address {Faker::Address.street_address}
+     building_name {Faker::Lorem.word}
+     building_number {Faker::Address.building_number}
+     zipcode {Faker::Address.zip_code}
+     state {Faker::Address.state}
+     country {Faker::Address.country}
+     latitude {Faker::Address.latitude}
+     longitude {Faker::Address.longitude}
+
+    #  candidate
   end
 end
