@@ -5,7 +5,7 @@ RSpec.describe Skill, type: :model do
 	let(:skill) {Skill.new(name:"C")}
 	let(:job_opportunity) {Company::JobOpportunity.new(title:"qq",shift:"q",description:"a",number_of_positions:12) }
 
-	context "model with attributes valid?" do	
+	context "model with attributes valid?" do
 		it "is valid with valid attributes" do
 		    expect(candidate).to be_valid
 		    candidate.save!
@@ -13,7 +13,7 @@ RSpec.describe Skill, type: :model do
 		    expect(candidate.skills.first).to be_valid
 		    expect(job_opportunity).to be_valid
 		    job_opportunity.skills << skill
-		    expect(candidate.skills.first).to be_valid
+		    expect(job_opportunity.skills.first).to be_valid
 		 end
 	end
 
