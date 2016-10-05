@@ -10,6 +10,7 @@ RSpec.describe Location, type: :model do
 
   context "model with attributes valid?" do
     it "" do
+      FactoryGirl.build(:location).to be_valid
       expect(location).to be_valid
       company.save!
       location.save!
@@ -96,6 +97,13 @@ RSpec.describe Location, type: :model do
     it "invalid! zipcode length exceeds 255" do
       location.zipcode = "a"*256
       expect(location).to be_invalid
+    end
+  end
+
+  context "Associations" do
+    it "it belongs to locatable" do
+      assc = Location.reflect_on_association(:locatable)
+      expect(assc.macro).to eq :belongs_to
     end
   end
 end
