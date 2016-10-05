@@ -1,5 +1,6 @@
 class QualificationsController < ApplicationController
 
+
   #layout
   layout 'candidate/layout'
 
@@ -14,6 +15,7 @@ class QualificationsController < ApplicationController
   # GET /companies/:company_id/jobs/:job_id/qualifications
   # GET /companies/:company_id/jobs/:job_id/qualifications.json
   def index
+    authorize! :index, @entity
     if @entity.class == Company::JobOpportunity
       @qualifications = @entity.qualifications
     else 
@@ -24,6 +26,7 @@ class QualificationsController < ApplicationController
   # GET /candidates/:candidate_id/qualifications/1/edit
   # GET /companies/:company_id/jobs/:job_id/qualifications/1/edit
   def edit
+    authorize! :edit, @entity 
     if @entity.class == Company::JobOpportunity
       @entity_qualifications = @entity.qualifications
       @new_entity_qualification = Qualification.new
@@ -41,6 +44,7 @@ class QualificationsController < ApplicationController
   # POST /companies/:company_id/jobs/:job_id/qualifications
   # POST /companies/:company_id/jobs/:job_id/qualifications.json
   def create
+    authorize! :create, @entity
     if @entity.class == Candidate
       @institute = Institute.find_or_create_by(institute_params)
       @qualification = Qualification.find_or_create_by(qualification_params)
@@ -73,6 +77,7 @@ class QualificationsController < ApplicationController
   # PATCH/PUT /companies/:company_id/jobs/:job_id/qualifications/1
   # PATCH/PUT /companies/:company_id/jobs/:job_id/qualifications/1.json
   def update
+    authorize! :update, @entity
     if @entity.class == Candidate
       @institute = Institute.find_or_create_by(institute_params)
       @qualification = Qualification.find_or_create_by(qualification_params)
@@ -103,6 +108,7 @@ class QualificationsController < ApplicationController
   # DELETE /companies/:company_id/jobs/:job_id/qualifications/1.json
   def destroy
     if @entity.class == Candidate
+      authorize! :destroy, @entity
       cqa = CandidateQualificationAssignment.find_by(candidate_id: params[:candidate_id],qualification_assignment_id:params[:id])
       if cqa.destroy
         flash[:success] = 'Qualification successfully deleted'

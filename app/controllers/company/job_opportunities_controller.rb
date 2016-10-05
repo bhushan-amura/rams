@@ -1,4 +1,7 @@
 class Company::JobOpportunitiesController < ApplicationController
+
+  load_and_authorize_resource :company
+  load_and_authorize_resource :job_opportunity, :through => :company, :param_method => "company_job_opportunity_params"
   #layout
   layout 'company'
 

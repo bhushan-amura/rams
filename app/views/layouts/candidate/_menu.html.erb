@@ -1,9 +1,9 @@
 <nav class="candidate-menu navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
-      <%= link_to "RAMS", home_candidate_path(id:current_user.info.id), class:"navbar-brand" %>
+      <%= link_to "RAMS", home_candidate_path(@candidate||@entity), class:"navbar-brand" %>
     </div>
-    <% if current_user %>
+    <% if @candidate||@entity %>
     <ul class="nav navbar-nav"></ul>
     <form class="navbar-form navbar-left">
       <div class="form-group">
@@ -19,7 +19,7 @@
         </a>
       </li>
       <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= current_user.info.first_name %>
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= (@candidate||@entity).first_name %>
           <span class="caret"></span>
         </a>
         <ul class="dropdown-menu">

@@ -13,6 +13,7 @@ class SkillsController < ApplicationController
   # GET /skills
   # GET /skills.json
   def index
+    authorize! :index, @entity
     @skills = @entity.skills
   end
 
@@ -26,6 +27,7 @@ class SkillsController < ApplicationController
 
   # GET /skills/1/edit
   def edit
+    authorize! :edit, @entity
     @entity_skill = Skill.new
     @entity_skills = @entity.skills
   end
@@ -33,6 +35,7 @@ class SkillsController < ApplicationController
   # POST /skills
   # POST /skills.json
   def create
+    authorize! :create, @entity
     @skill = Skill.new(skill_params)
 
     respond_to do |format|
@@ -51,6 +54,7 @@ class SkillsController < ApplicationController
   # PATCH/PUT /skills/1
   # PATCH/PUT /skills/1.json
   def update
+    authorize! :update, @entity
     skill_names = skill_params[:names].split(',')
     entity_skills = skill_names.each_with_object([]) do |skill,skills|
       skill = Skill.find_or_create_by(name:skill)
@@ -73,6 +77,7 @@ class SkillsController < ApplicationController
   # DELETE /skills/1
   # DELETE /skills/1.json
   def destroy
+    authorize! :destroy, @entity
     @entity.skills.destroy(@skill)
     flash[:notice] = 'Skill was successfully destroyed.'
     respond_to do |format|

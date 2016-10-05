@@ -1,5 +1,6 @@
 class CompaniesController < ApplicationController
 
+  load_and_authorize_resource
   # callbacks
   before_filter :authenticate_user!
   before_action :set_company, only: [:show, :edit, :update, :destroy, :home]
@@ -89,12 +90,12 @@ class CompaniesController < ApplicationController
     end
 
     def resolve_layout
-      case action_name
-       when "new", "create"
-        'application'
-       else
-        'company'
-       end
+     case action_name
+     when "new", "create"
+      'application'
+     else
+      'company'
+     end
     end
 
 end

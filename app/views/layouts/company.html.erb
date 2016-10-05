@@ -57,6 +57,11 @@
     </nav>
 
     <div class="container text-center custom">
+      <% if flash[:alert] %>
+         <div class="alert alert-danger">
+           <span><%= flash[:alert] %></span>
+         </div>
+      <%end%>
       <div class="row">
         <!-- left================== -->
         <%= render 'layouts/company/left_container' %>
@@ -68,7 +73,7 @@
     </div>
 
     <footer class="container-fluid text-center">
-      <p>Footer Text says : "Hello World!!"</p>
+      <p>Recruitment Agency Management System</p>
     </footer>
 
   </body>

@@ -1,5 +1,6 @@
 class CandidatesController < ApplicationController
 
+  load_and_authorize_resource
   # layouts
   layout :resolve_layout
   # filters/callbacks
