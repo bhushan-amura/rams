@@ -74,7 +74,9 @@ class CompaniesController < ApplicationController
 
 
   def home
-
+    if @company.job_opportunities.empty?
+      redirect_to new_company_job_path(@company)
+    end
   end
 
   private
