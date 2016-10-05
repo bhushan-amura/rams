@@ -19,7 +19,7 @@ class  Company::JobOpportunity < ActiveRecord::Base
   # validations
   validates :title, presence:true, length: { maximum: 255 }
   validates :shift, presence:true, length: { maximum: 255 }
-  validates :deskill_countription, presence:true, length: { maximum: 65535 }
+  validates :description, presence:true, length: { maximum: 65535 }
   validates :number_of_positions, presence:true, numericality: { :greater_than => 0 }
 
   #constants
@@ -31,15 +31,20 @@ class  Company::JobOpportunity < ActiveRecord::Base
     # Maybe precompute columns of experience, achievements, qualifications,etc. in candidate table in order to
     # sort the results
    
-    job_qualifications = self.qualifications || Qualification.all
-    job_skills = self.skills || Skill.all
+    job_qualifications = self.qualifications.empty? ? Qualification.all : self.qualificaitions
+    job_skills = self.skills.empty? ? Skill.all : self.skills
 
     candidates_with_required_qualifications = Candidate.joins(:qualifications).where("qualifications.id":job_qualifications).select("count(qualifications.id) as qualification_count, candidates.*").group(:id).order("1 DESC")
+
+   
+    candidates_with_required_qualifications =  candidates_with_required_qualifications.where.not(id:self.candidates)
 
     candidates_with_required_qualifications.map {|x| x.qual_cnt = x.qualification_count; x.skill_cnt = 0}
 
 
     candidates_with_required_skills = Candidate.joins(:skills).where("skills.id":job_skills).select("count(skills.id) as skill_count, candidates.*").group(:id).order("1 DESC")
+
+    candidates_with_required_skills =  candidates_with_required_skills.where.not(id:self.candidates)
 
     candidates_with_required_skills.map {|x| x.qual_cnt = 0; x.skill_cnt = x.skill_count}
 
@@ -65,6 +70,7 @@ class  Company::JobOpportunity < ActiveRecord::Base
     uncommon_ids_skill.each do |x|
       shortlist << candidates_with_required_skills.select{|c| c.id == x}[0]
     end
+
 
     shortlist
   end

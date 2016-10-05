@@ -104,7 +104,7 @@ class Company::JobOpportunitiesController < ApplicationController
     end
 
     def get_candidates
-      @shortlisted_candidates = @company_job_opportunity.shortlist_candidate
+      @shortlisted_candidates = @company_job_opportunity.shortlist_candidates
     end
 
     def selected_candidates
