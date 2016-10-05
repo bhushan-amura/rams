@@ -5,12 +5,17 @@ RSpec.describe Qualification, type: :model do
 
 	let(:qualification) {Qualification.new(course:"BTech",domain:"IT")}
 
-	context "model with attributes valid?" do	
+	let(:job_opportunity) {Company::JobOpportunity.new(title:"qq",shift:"q",description:"a",number_of_positions:12) }
+
+	context "model with attributes valid?" do
 		it "is valid with valid attributes" do
 		    expect(candidate).to be_valid
 		    candidate.save!
-		    candidate.qualifications << qualification
-		    expect(candidate.qualifications.first).to be_valid
+		    # candidate.qualifications << qualification
+		    expect(qualification).to be_valid
+				expect(job_opportunity).to be_valid
+				job_opportunity.qualifications << qualification
+				expect(job_opportunity.qualifications.first).to be_valid
 		 end
 	end
 
@@ -37,8 +42,4 @@ RSpec.describe Qualification, type: :model do
 			expect(qualification).to be_invalid
 		end
 	end
-
-
-
-
 end
