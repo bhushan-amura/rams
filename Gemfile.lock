@@ -20,6 +20,8 @@ GEM
       erubis (~> 2.7.0)
       rails-dom-testing (~> 1.0, >= 1.0.5)
       rails-html-sanitizer (~> 1.0, >= 1.0.2)
+    active_record_union (1.2.0)
+      activerecord (>= 4.0)
     activejob (4.2.6)
       activesupport (= 4.2.6)
       globalid (>= 0.3.0)
@@ -218,6 +220,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  active_record_union
   bootstrap-multiselect-rails
   bootstrap-sass (~> 3.3, >= 3.3.7)
   bootstrap-tagsinput-rails

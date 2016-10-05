@@ -5,10 +5,7 @@ class  Company::JobOpportunity < ActiveRecord::Base
   # callbacks
   belongs_to :company
 
-
-
   # relationships
-
   has_many :events, foreign_key: :company_job_opportunity_id, dependent: :destroy
   has_many :skill_assignments, as: :skillable, dependent: :destroy
   has_many :skills, through: :skill_assignments
@@ -22,7 +19,7 @@ class  Company::JobOpportunity < ActiveRecord::Base
   # validations
   validates :title, presence:true, length: { maximum: 255 }
   validates :shift, presence:true, length: { maximum: 255 }
-  validates :description, presence:true, length: { maximum: 65535 }
+  validates :deskill_countription, presence:true, length: { maximum: 65535 }
   validates :number_of_positions, presence:true, numericality: { :greater_than => 0 }
 
   #constants
@@ -33,17 +30,43 @@ class  Company::JobOpportunity < ActiveRecord::Base
     # TODO : Figure out a way to incorporate experience in this
     # Maybe precompute columns of experience, achievements, qualifications,etc. in candidate table in order to
     # sort the results
+   
     job_qualifications = self.qualifications || Qualification.all
     job_skills = self.skills || Skill.all
-    #job_experience = self.experience
 
-    candidates_with_required_qualifications = Candidate.joins(:qualifications).where(qualification_assignments:{qualification_id:job_qualifications})
+    candidates_with_required_qualifications = Candidate.joins(:qualifications).where("qualifications.id":job_qualifications).select("count(qualifications.id) as qualification_count, candidates.*").group(:id).order("1 DESC")
 
-    candidates_with_required_skills =  Candidate.joins(:skills).where(skill_assignments:{skill_id:job_skills})
-    candidates_ids = candidates_with_required_skills.pluck(:id) + candidates_with_required_qualifications.pluck(:id)
+    candidates_with_required_qualifications.map {|x| x.qual_cnt = x.qualification_count; x.skill_cnt = 0}
 
-    candidate_shortlist_1 = Candidate.where(id:candidates_ids.uniq).where.not(id:self.candidates.pluck(:id))
-    Candidate::Experience.in_days.where(id:candidate_shortlist_1)
+
+    candidates_with_required_skills = Candidate.joins(:skills).where("skills.id":job_skills).select("count(skills.id) as skill_count, candidates.*").group(:id).order("1 DESC")
+
+    candidates_with_required_skills.map {|x| x.qual_cnt = 0; x.skill_cnt = x.skill_count}
+
+    qual_ids = candidates_with_required_qualifications.pluck(:id)
+    skill_ids = candidates_with_required_skills.pluck(:id)
+
+    common_ids = qual_ids & skill_ids 
+    uncommon_ids_qual = qual_ids - common_ids
+    uncommon_ids_skill = skill_ids - common_ids
+    shortlist = []
+
+    common_ids.each do |x|
+      cand_qual = candidates_with_required_qualifications.select{|c| c.id  ==  x}[0]
+      cand_skill = candidates_with_required_skills.select{|c| c.id == x}[0]
+      cand_qual.skill_cnt = cand_skill.skill_cnt
+      shortlist << cand_qual
+    end
+
+    uncommon_ids_qual.each do |x|
+      shortlist << candidates_with_required_qualifications.select{|c| c.id == x}[0]
+    end
+
+    uncommon_ids_skill.each do |x|
+      shortlist << candidates_with_required_skills.select{|c| c.id == x}[0]
+    end
+
+    shortlist
   end
 
   # class methods/scope

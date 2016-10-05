@@ -4,6 +4,8 @@ class Candidate < ActiveRecord::Base
   include ForbiddenValues
   include DatabaseStorageFormat
 
+  attr_accessor :qual_cnt,:skill_cnt
+
   # callbacks
   before_save :lower_fields
 
