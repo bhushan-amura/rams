@@ -9,7 +9,7 @@ class Company::JobOpportunitiesController < ApplicationController
   before_action :set_company
   before_action :set_qualifications
   before_action :set_skills
-  before_action :set_company_job_opportunity, only: [:show, :edit, :update, :select_candidates,:destroy]
+  before_action :set_company_job_opportunity, only: [:show, :edit, :update, :select_candidates,:destroy,:send_mail_to_shortlisted_candidates]
   before_action :get_candidates, only: [:show, :edit, :update]
   before_action :selected_candidates, only: [:show]
 
@@ -86,7 +86,11 @@ class Company::JobOpportunitiesController < ApplicationController
   end
 
   def send_mail_to_shortlisted_candidates
-    UserNotifier.send_shortlist_mail_to(@company_job_opportunity.get_candidates_as_users).deliver_later
+    byebug
+    if UserNotifier.send_shortlist_mail_to(@company_job_opportunity.get_candidates_as_users,@company_job_opportunity).deliver
+      flash[:success] = 'Messages sent successfully' 
+      redirect_to :back
+    end
   end
 
   private

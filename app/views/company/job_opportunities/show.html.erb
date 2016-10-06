@@ -114,7 +114,7 @@
         </div>
       </div>
       <% end %>
-      <a href="#" class="btn btn-default col-sm-offset-5">Send Mail</a>
+      <%= link_to "Send Mail", select_candidates_mail_company_job_path(company_id: @company.id,id: @company_job_opportunity.id), method: :post,class:"btn btn-default col-sm-offset-5" %>
     </div>
   </div>
 
