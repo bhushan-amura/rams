@@ -1,5 +1,7 @@
 class Candidate::ExperiencesController < ApplicationController
 
+  load_and_authorize_resource :candidate
+  load_and_authorize_resource :experience, :through => :candidate, :param_method => :candidate_experience_params
   #layout 
   layout 'candidate/layout'
   # helpers

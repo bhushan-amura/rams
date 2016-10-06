@@ -19,20 +19,16 @@
             <li>
               <%= link_to "Home", home_company_path(@company) %>
             </li>
-
           </ul>
 
           <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
               <a class="dropdown-toggle" data-toggle="dropdown">
                 <span class="glyphicon glyphicon-user"></span>
-                <%= current_user.email %>
+                <%= current_user.info.name %>
                 <span class="caret"></span>
               </a>
               <ul class="dropdown-menu">
-                <li>
-                  <%= link_to 'Profile', company_path(@company) %>
-                </li>
                 <li>
                   <%= link_to 'Edit Profile', edit_company_path(@company) %>
                 </li>
@@ -61,6 +57,11 @@
     </nav>
 
     <div class="container text-center custom">
+      <% if flash[:alert] %>
+         <div class="alert alert-danger">
+           <span><%= flash[:alert] %></span>
+         </div>
+      <%end%>
       <div class="row">
         <!-- left================== -->
         <%= render 'layouts/company/left_container' %>
@@ -70,6 +71,10 @@
         <%= render 'layouts/company/right_container' %>
       </div>
     </div>
+
+    <footer class="container-fluid text-center">
+      <p>Recruitment Agency Management System</p>
+    </footer>
 
   </body>
 </html>

@@ -1,5 +1,8 @@
 class Candidate::AchievementsController < ApplicationController
 
+  load_and_authorize_resource :candidate
+  load_and_authorize_resource :achievement, :through => :candidate, :param_method  => :candidate_achievement_params
+
   # layouts 
   layout 'candidate/layout'
 

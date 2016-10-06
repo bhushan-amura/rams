@@ -1,32 +1,39 @@
 class Company::EventsController < ApplicationController
+
+  include Company::EventsHelper
+
   before_action :set_company
   before_action :set_company_job
   before_action :set_company_event, only: [:show, :edit, :update, :destroy]
   include Company::EventsHelper
-  # layout 'company'
   # GET /company/events
   # GET /company/events.json
   def index
+    authorize! :index, @company
     @company_events = @company_job.events
   end
 
   # GET /company/events/1
   # GET /company/events/1.json
   def show
+    authorize! :show, @company
   end
 
   # GET /company/events/new
   def new
+    authorize! :new, @company
     @company_event = Company::Event.new
   end
 
   # GET /company/events/1/edit
   def edit
+    authorize! :edit, @company
   end
 
   # POST /company/events
   # POST /company/events.json
   def create
+    authorize! :create, @company
     @company_event = @company_job.events.build(company_event_params)
 
     respond_to do |format|
@@ -44,6 +51,7 @@ class Company::EventsController < ApplicationController
   # PATCH/PUT /company/events/1
   # PATCH/PUT /company/events/1.json
   def update
+    authorize! :update, @company
     respond_to do |format|
       if @company_event.update(company_event_params)
         flash[:notice] = 'Event was successfully updated.'
@@ -59,6 +67,7 @@ class Company::EventsController < ApplicationController
   # DELETE /company/events/1
   # DELETE /company/events/1.json
   def destroy
+    authorize! :destroy, @company
     @company_event.destroy
     flash[:notice] = 'Event was successfully destroyed.'
     respond_to do |format|

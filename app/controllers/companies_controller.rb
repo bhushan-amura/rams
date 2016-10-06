@@ -1,5 +1,6 @@
 class CompaniesController < ApplicationController
 
+  load_and_authorize_resource
   # callbacks
   before_filter :authenticate_user!
   before_action :set_company, only: [:show, :edit, :update, :destroy, :home]
@@ -99,5 +100,6 @@ class CompaniesController < ApplicationController
     #     'company'
     #    end
     # end
+
 
 end

@@ -2,6 +2,20 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
+    if !user.nil?
+      if user.is? :candidate
+        can :manage, Candidate, user_id: user.id
+        can :manage, Candidate::Achievement, :candidate => {:user_id => user.id}
+        can :manage, Candidate::Project, :candidate => {:user_id => user.id}
+        can :manage, Candidate::Experience, :candidate => {:user_id => user.id}
+        can :manage, Candidate::Link, :candidate => {:user_id => user.id}
+        can :manage, Candidate::Reference, :candidate => {:user_id => user.id}
+      elsif user.is? :company
+        can :manage, Company, user_id: user.id
+        can :manage, Company::JobOpportunity, :company => {:user_id => user.id}
+        can :resume, Candidate
+      end
+    end
     # Define abilities for the passed in user here. For example:
     #
     #   user ||= User.new # guest user (not logged in)

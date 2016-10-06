@@ -1,4 +1,7 @@
 class Company::JobOpportunitiesController < ApplicationController
+
+  load_and_authorize_resource :company
+  load_and_authorize_resource :job_opportunity, :through => :company, :param_method => "company_job_opportunity_params"
   #layout
   # layout 'company'
 
@@ -101,7 +104,7 @@ class Company::JobOpportunitiesController < ApplicationController
     end
 
     def get_candidates
-      @shortlisted_candidates = Admin.shortlist_candidates(@company_job_opportunity)
+      @shortlisted_candidates = @company_job_opportunity.shortlist_candidates
     end
 
     def selected_candidates

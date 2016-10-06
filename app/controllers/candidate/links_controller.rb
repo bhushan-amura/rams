@@ -1,5 +1,7 @@
 class Candidate::LinksController < ApplicationController
 
+  load_and_authorize_resource :candidate
+  load_and_authorize_resource :links,:through => :candidate, :param_method => :candidate_links_params
   layout 'candidate/layout'
   # helpers
   include Candidate::LinksHelper

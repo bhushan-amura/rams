@@ -1,5 +1,6 @@
 source 'http://rubygems.org'
 
+gem 'active_record_union'
 gem 'cancancan', '~> 1.15'
 gem 'cancan', '~> 1.6', '>= 1.6.10'
 gem 'bootstrap-sass', '~> 3.3', '>= 3.3.7'
