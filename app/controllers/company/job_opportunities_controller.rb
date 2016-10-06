@@ -1,6 +1,6 @@
 class Company::JobOpportunitiesController < ApplicationController
   #layout
-  layout 'company'
+  # layout 'company'
 
   # callbacks
   before_action :set_company
