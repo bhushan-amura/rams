@@ -32,7 +32,7 @@ def create_admins(admin_count=5)
       admin = Admin.new(user_id:admin_users[count].id)
       admin.save!
       user = User.find_by(id:admin.user_id)
-      user.role = "Admin"
+      user.role = "admin"
       user.save!
       file.puts "#{count+1}) #{admin_users[count].email}"
     end
@@ -67,7 +67,7 @@ def create_companies(company_count=20)
       company = Company.new(name:Faker::Company.name,company_type:Faker::Company.suffix,url:Faker::Internet.url,tagline:Faker::Company.catch_phrase,phone:Faker::PhoneNumber.phone_number,number_of_employees:rand(100),description:Faker::Lorem.paragraph(2),logo:Faker::Company.logo,user_id:company_users[count].id)
       company.save!
       user = User.find_by(id:company.user_id)
-      user.role = "Company"
+      user.role = "company"
       user.save!
       file.puts "#{count+1}) #{company_users[count].email}"
     end
@@ -152,7 +152,7 @@ def create_candidates(candidate_count=25)
       candidate = Candidate.new(first_name:Faker::Name.first_name,last_name:Faker::Name.last_name,dob:Faker::Date.between(50.years.ago,20.years.ago),gender:genders[rand(3)],marital_status: marital_statuses[rand(2)],status:statuses[rand(2)],languages:Faker::Lorem.words.join(','),summary:Faker::Lorem.paragraph(2),user_id:candidate_users[count].id)
       candidate.save!
       user = User.find_by(id:candidate.user_id)
-      user.role = "Candidate"
+      user.role = "candidate"
       user.save!
       file.puts "#{count+1}) #{candidate_users[count].email}"
     end
