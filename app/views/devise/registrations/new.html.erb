@@ -1,40 +1,60 @@
-<% header "Sign Up" %>
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+<div class="custom-2">
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
 
-<% if resource.errors.any? %>
-<div class="alert alert-danger">
-  <div id="error_explanation">  
-    <ul>
-      <% resource.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-    </ul>
-  </div>
+    <div class="field form-group">
+        <div class="col-sm-offset-2 col-sm-2 control-label">
+            <h2>SIGN UP</h2>
+        </div>
+    </div>
+
+    <% if resource.errors.any? %>
+    <div class="alert alert-danger">
+        <div id="error_explanation">
+            <h2><%= pluralize(resource.errors.count, "error") %>
+                prohibited from signing in!</h2>
+            <ul>
+                <% resource.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+                <% end %>
+            </ul>
+        </div>
+    </div>
+    <% end %>
+
+    <div class="field form-group">
+        <%= f.label :email, class:'col-sm-2 control-label' %>
+        <div class="col-sm-3">
+            <%= f.email_field :email, autofocus: true, class: 'form-control', placeholder: 'Email id', required: 'required' %>
+        </div>
+    </div>
+
+    <div class="field form-group">
+        <%= f.label :password, class:'col-sm-2 control-label' %>
+        <div class="col-sm-3">
+            <%= f.password_field :password, autocomplete: "off", class: 'form-control', placeholder: 'password', required: 'required' %>
+            <% if @validatable %>
+            <span class="help-block"><%= @minimum_password_length %>
+                characters minimum</span>
+            <% end %>
+        </div>
+    </div>
+
+    <div class="field form-group">
+        <%= f.label :password_confirmation, class:'col-sm-2 control-label' %>
+        <div class="col-sm-3">
+            <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control', placeholder: 'password', required: 'required' %>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <%= f.hidden_field :role, :value => @role , class: 'form-control' %>
+    </div>
+
+    <div class="actions form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <%= f.submit "Sign up", class:"btn btn-default btn-size-custom" %>
+      </div>
+    </div>
+
+    <% end %>
 </div>
-<% end %>
-
-<div class="form-group">
-  <%= f.label :email %>
-  <%= f.email_field :email, class: 'form-control' %>
-</div>
-
-<div class="form-group">
-  <%= f.label :password %>
-  <%= f.password_field :password, autocomplete: "off", class: 'form-control' %>
-  <% if @validatable %>
-  <span class="help-block"><%= @minimum_password_length %>
-    characters minimum</span>
-  <% end %>
-</div>
-
-<div class="form-group">
-  <%= f.label :password_confirmation %>
-  <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control' %>
-</div>
-
-<div class="form-group">
-  <%= f.hidden_field :role, :value => @role , class: 'form-control' %>
-</div>
-
-<%= f.submit "Sign up", class: 'btn btn-primary'%>
-<% end %>

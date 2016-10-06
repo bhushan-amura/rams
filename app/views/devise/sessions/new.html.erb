@@ -1,11 +1,13 @@
 <div class="custom-2" >
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: 'form-horizontal', multipart: true }) do |f| %>
-  
+
   <div class="field form-group">
-    <p class="col-sm-2">SIGN IN</p>  
+    <div  class="col-sm-offset-2 col-sm-2 control-label" >
+      <h2>SIGN IN</h2>
+    </div>
   </div>
-  
+
   <% if resource.errors.any? %>
   <div id="error_explanation">
     <h2><%= pluralize(resource.errors.count, "error") %>
@@ -45,7 +47,7 @@
 
   <div class="actions form-group">
     <div class="col-sm-offset-2 col-sm-10">
-      <%= f.submit "Sign in", class:"btn btn-default" %>
+      <%= f.submit "Sign in", class:"btn btn-default btn-size-custom" %>
     </div>
   </div>
 

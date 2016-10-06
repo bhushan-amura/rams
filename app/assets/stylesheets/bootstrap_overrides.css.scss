@@ -31,7 +31,7 @@
 }
 
 .custom-2 {
-    padding-top: 200px;
+    padding-top: 150px;
 }
 
 @media (min-width: 768px) {
@@ -85,4 +85,9 @@
 
 .jumbotron p {
     font-size: 14px;
+}
+
+.btn-size-custom {
+  width: 28%;
+  background-color: #A27DC3;
 }
