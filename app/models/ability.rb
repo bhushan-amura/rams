@@ -13,6 +13,7 @@ class Ability
       elsif user.is? :company
         can :manage, Company, user_id: user.id
         can :manage, Company::JobOpportunity, :company => {:user_id => user.id}
+        can :resume, Candidate
       end
     end
     # Define abilities for the passed in user here. For example:

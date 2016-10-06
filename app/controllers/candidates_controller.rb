@@ -6,7 +6,7 @@ class CandidatesController < ApplicationController
   layout :resolve_layout
 
   # filters/callbacks
-  before_action :set_candidate, only: [:show, :edit, :update, :destroy, :home]
+  before_action :set_candidate, only: [:show, :edit, :update, :destroy, :home, :resume]
 
   # GET /candidates
   # GET /candidates.json
@@ -78,6 +78,11 @@ class CandidatesController < ApplicationController
   # HOME /candidate/1/home
   def home
     @recent_jobs = Company::JobOpportunity.get_recent_jobs(5)
+  end
+
+  # RESUME /candidate/1/resume
+  def resume
+    authorize! :resume, current_user.info
   end
 
   private
