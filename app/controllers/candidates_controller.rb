@@ -34,8 +34,8 @@ class CandidatesController < ApplicationController
 
     respond_to do |format|
       if @candidate.save
-        ExampleMailer.sample_email(User.find(@candidate.user_id)).deliver
         flash[:notice] = 'Candidate was successfully created.'
+        ExampleMailer.sample_email(User.find(@candidate.user_id)).deliver_later
         format.html { redirect_to home_candidate_path(@candidate) }
         format.json { render :show, status: :created, location: @candidate }
       else
