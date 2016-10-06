@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   resources :candidates do
     member do
       get 'home'
+      get 'resume'
     end
     scope module:'candidate' do
       resources :achievements, except:[:edit,:show,:new] do
