@@ -15,11 +15,8 @@ class ApplicationController < ActionController::Base
 
   private
   def resolve_layout
-    # byebug
-    #  
-    #   'application'
     if !current_user.nil?
-      if (params[:action] == "new" || params[:action] == "create") && (params[:controller] == "company" || params[:controller] == "candidate" )
+      if (params[:action] == "new" || params[:action] == "create") && (params[:controller] == "companies" || params[:controller] == "candidates" )
         'application'
       elsif (current_user.is? :company)
         'company'
