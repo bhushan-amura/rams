@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   include CanCan::ControllerAdditions
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
-  protect_from_forgery with: :exception  
+  protect_from_forgery with: :exception
   before_filter :authenticate_user!
 
   rescue_from CanCan::AccessDenied do |exception|
@@ -10,6 +10,27 @@ class ApplicationController < ActionController::Base
     redirect_to root_url, :alert => exception.message
   end
 
+  # , :get_new_messages
+  layout :resolve_layout
+
+  private
+  def resolve_layout
+    # byebug
+    #  
+    #   'application'
+    if !current_user.nil?
+      if (params[:action] == "new" || params[:action] == "create") && (params[:controller] == "company" || params[:controller] == "candidate" )
+        'application'
+      elsif (current_user.is? :company)
+        'company'
+      elsif (current_user.is? :candidate)
+        'candidate/layout'
+      end
+    else
+      'application'
+    end
+
+  end
 
 
   # def after_sign_in_path_for(resource)
@@ -19,7 +40,7 @@ class ApplicationController < ActionController::Base
   #       home_company_path
   #     elsif resource.is? :candidate
   #       @candidate = Candidate.find_by(user_id:current_user.id)
-        
+
   #     else
   #       super
   #     end
