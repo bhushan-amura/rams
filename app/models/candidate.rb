@@ -4,6 +4,8 @@ class Candidate < ActiveRecord::Base
   include ForbiddenValues
   include DatabaseStorageFormat
 
+  attr_accessor :qual_cnt,:skill_cnt
+
   # callbacks
   before_save :lower_fields
 
@@ -17,14 +19,14 @@ class Candidate < ActiveRecord::Base
 	has_many :references, dependent: :destroy
 	has_many :test_scores, dependent: :destroy
   has_many :course_scores, dependent: :destroy
-  has_one :location, as: :locatable, dependent: :destroy
+  has_one  :location, as: :locatable, dependent: :destroy
 	has_many :tests, through: :test_scores
   has_many :skill_assignments, as: :skillable, dependent: :destroy
   has_many :skills, through: :skill_assignments
   has_many :reviews, dependent: :destroy
 
   has_and_belongs_to_many :job_opportunities, join_table: 'candidates_job_opportunities', class_name:'Company::JobOpportunity'
-  has_many :candidate_qualification_assignments,dependent: :destroy
+  has_many :candidate_qualification_assignments, dependent: :destroy
   has_many :qualification_assignments, through: :candidate_qualification_assignments
   has_many :qualifications, through: :qualification_assignments 
   has_many :institutes, through: :qualification_assignments, source: :qualifiable, source_type: "Institute"
@@ -48,11 +50,12 @@ class Candidate < ActiveRecord::Base
   GENDER = [["M","M"], ["F","F"], ["T","T"]]
   MARITAL = ["married", "unmarried"]
 
+
+  # instance methods
   def name_with_initial
     "  #{first_name} #{last_name}"
   end
 
-  # instance methods
   def add_institute_with_qualification(institute,qualification)
     qa = QualificationAssignment.find_or_create_by(qualification_id:qualification.id,qualifiable_id:institute.id,qualifiable_type:institute.class.to_s)
 

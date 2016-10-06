@@ -1,5 +1,6 @@
 source 'http://rubygems.org'
 
+gem 'active_record_union'
 gem 'cancancan', '~> 1.15'
 gem 'cancan', '~> 1.6', '>= 1.6.10'
 gem 'bootstrap-sass', '~> 3.3', '>= 3.3.7'
@@ -9,6 +10,7 @@ gem 'twitter-typeahead-rails'
 gem 'bootstrap-tagsinput-rails'
 gem 'mysql2', '>= 0.3.13', '< 0.5'
 gem 'devise'
+gem 'carrierwave', '~> 0.11.2'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'
 # Use sqlite3 as the database for Active Record

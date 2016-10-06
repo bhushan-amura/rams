@@ -1,20 +1,23 @@
 <div class="col-sm-2 well">
-  <strong>Recent or Upcoming Events:</strong>
-  <% @company.recent_events(5).each do |e| %>
-  <%#= link_to  %>
-  <div class="well">
-    <div class="row">
-      <b><%= e.event_type.capitalize %></b>
-    </div>
-    <div class="row">
-      <%= e.date_time.strftime("%b, %d - %Y") %>
-    </div>
-    <div class="row">
-      <%= e.date_time.strftime("%I:%M %p") %>
-    </div>
-    <div class="row">
-      <%= e.location.city %>
-    </div>
-  </div>
+  <% if @company.recent_events(5).empty? %>
+    <strong>No Upcoming Events</strong>    
+  <% else %>
+    <strong>Recent or Upcoming Events</strong>
+    <% @company.recent_events(5).each do |e| %>
+    <div class="well">
+     <div class="row">
+       <b><%= e.event_type.capitalize %></b>
+     </div>
+     <div class="row">
+       <%= e.date_time.strftime("%b, %d - %Y") %>
+     </div>
+     <div class="row">
+       <%= e.date_time.strftime("%I:%M %p") %>
+     </div>
+     <div class="row">
+       <%= e.location.city %>
+     </div>
+   </div>
+   <% end %>
   <% end %>
 </div>

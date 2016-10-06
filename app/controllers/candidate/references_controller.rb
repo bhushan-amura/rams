@@ -1,5 +1,7 @@
 class Candidate::ReferencesController < ApplicationController
 
+  load_and_authorize_resource :candidate
+  load_and_authorize_resource :reference, :through => :candidate, :param_method => :candidate_reference_params
   # layouts 
   layout 'candidate/layout'
 

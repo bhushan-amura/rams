@@ -11,6 +11,11 @@
 
 <%= render "layouts/candidate/menu" %>
 
+<% if flash[:alert] %>
+   <div class="alert alert-danger">
+     <span><%= flash[:alert] %></span>
+   </div>
+<%end%>
 <%= yield %>
 
 <%= render "layouts/candidate/footer" %>

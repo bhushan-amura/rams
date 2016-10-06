@@ -1,4 +1,14 @@
-<!-- <p id="notice"><%= notice %></p> -->
+<div class="well text-capitalize">
+  <div class="container-fluid">
+      <div class="col-sm-12">
+        <p class="text-center">
+        <%  if !@company_events.empty? %>
+          <%= link_to 'Create New Event', new_company_job_event_path(job_events_path_params(@company_events.first)), class:"btn btn-info create-button" %>
+        <% end %>
+        </p>
+    </div>
+  </div>
+</div>
 
 <% @company_events.each do |company_event| %>
 <div class="well text-capitalize">
@@ -89,10 +99,8 @@
 </div>
 
 <div class="col-sm-8 text-right event-font-size">
-  <!-- <div class="row-sm-1"> -->
   <%= company_event.updated_at.strftime("%B, %d - %Y") %><br/>
   <%= company_event.updated_at.strftime("%I:%M %p") %>
-  <!-- </div> -->
 </div>
 
 </div>
@@ -100,3 +108,4 @@
 
 </div>
 <% end %>
+

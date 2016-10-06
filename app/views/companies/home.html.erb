@@ -38,7 +38,11 @@
         <b class="text-center">Experience</b>
       </div>
       <div class="col-sm-9">
-        <%= pluralize(company_job_opportunity.experience, "Year") %>
+        <% if company_job_opportunity.experience == 0 %>
+          none
+        <% else %>
+          <%= pluralize(company_job_opportunity.experience, "Year") %>
+        <% end %>
       </div>
     </div>
   </div>
@@ -90,15 +94,22 @@
   <div class="field form-group">
     <div class="row">
       <div class="col-sm-12 col-sm-offset-1">
+
         <%= link_to 'Edit Post', edit_company_job_path(job_opportunity_path_params(company_job_opportunity)),class:"btn btn-warning", role:"button" %>
+
         <%= link_to 'Remove Post', company_job_path(job_opportunity_path_params(company_job_opportunity)), method: :delete, data: { confirm: 'Are you sure?' },class:"btn btn-danger", role:"button" %>
-        <%= link_to 'Related Events',  company_job_events_path(events_path_params(job_opportunity_path_params(company_job_opportunity))),class:"btn btn-success", role:"button" %>
+
+        <% if company_job_opportunity.events.empty? %>
+        <%= link_to 'Create Events', new_company_job_event_path(events_path_params(job_opportunity_path_params(company_job_opportunity))),class:"btn btn-success", role:"button" %>  
+        <% else %>
+        <%= link_to 'Related Events', company_job_events_path(events_path_params(job_opportunity_path_params(company_job_opportunity))),class:"btn btn-success", role:"button" %>
+        <% end %>
+
         <%= link_to 'View Full Post',  company_job_path(job_opportunity_path_params(company_job_opportunity)),class:"btn btn-info", role:"button" %>
+
       </div>
     </div>
   </div>
 
 </div>
 <% end %>
-
-<!-- <p><%#= link_to 'Show',  company_job_path(job_opportunity_path_params(company_job_opportunity)) %></p> -->

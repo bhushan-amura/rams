@@ -1,14 +1,15 @@
 class UserController < ApplicationController
+
   def switch
-    @user = current_user.info.class
- 	  if( @user == Admin )
+    if( current_user.is? :admin )
  		  redirect_to( admins_path )
- 	  elsif ( @user == Candidate )
+ 	  elsif ( current_user.is? :candidate )
  		  @candidate = Candidate.find_by(user_id:current_user.id)
- 		  redirect_to( home_candidate_path(@candidate) )
- 	  else
+ 		  @candidate.nil?? redirect_to(new_candidate_path) : redirect_to(home_candidate_path(@candidate))
+ 	  else 
  		  @company = Company.find_by(user_id:current_user.id)
- 		  redirect_to( home_company_path(@company) )
+ 		  @company.nil?? redirect_to(new_company_path) : redirect_to(home_company_path(@company))
     end
   end
+
 end

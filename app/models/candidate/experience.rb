@@ -22,7 +22,7 @@ class Candidate::Experience < ActiveRecord::Base
 
   # class methods
   def self.in_days
-    Candidate.joins(:experiences).select('SUM(DATEDIFF(candidate_experiences.end_date,candidate_experiences.start_date)) AS days,candidates.id').group(:candidate_id).order('1 DESC')
+    Candidate.joins(:experiences).select('SUM(DATEDIFF(candidate_experiences.end_date,candidate_experiences.start_date)) AS days,candidates.*').group(:candidate_id).order('1 DESC')
   end
 
 end

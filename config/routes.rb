@@ -7,9 +7,9 @@ Rails.application.routes.draw do
       get :home
     end
     scope module:'company' do
-      resources :jobs,to: 'job_opportunities' do
+      resources :jobs,controller: 'job_opportunities' do
         patch :select_candidates
-        resources :events
+        resources :events, controller: 'events'
       end
     end
   end
@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   resources :candidates do
     member do
       get 'home'
+      get 'resume'
     end
     scope module:'candidate' do
       resources :achievements, except:[:edit,:show,:new] do

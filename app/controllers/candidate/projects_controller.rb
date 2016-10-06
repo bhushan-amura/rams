@@ -1,5 +1,7 @@
 class Candidate::ProjectsController < ApplicationController
 
+  load_and_authorize_resource :candidate
+  load_and_authorize_resource :project, :through => :candidate, :param_method => :candidate_project_params
   # layouts 
   layout 'candidate/layout'
 

@@ -1,4 +1,7 @@
 class Company::JobOpportunitiesController < ApplicationController
+
+  load_and_authorize_resource :company
+  load_and_authorize_resource :job_opportunity, :through => :company, :param_method => "company_job_opportunity_params"
   #layout
   layout 'company'
 
@@ -6,7 +9,7 @@ class Company::JobOpportunitiesController < ApplicationController
   before_action :set_company
   before_action :set_qualifications
   before_action :set_skills
-  before_action :set_company_job_opportunity, only: [:show, :index, :edit, :update, :select_candidates,:destroy]
+  before_action :set_company_job_opportunity, only: [:show, :edit, :update, :select_candidates,:destroy]
   before_action :get_candidates, only: [:show, :edit, :update]
   before_action :selected_candidates, only: [:show]
 
@@ -16,7 +19,8 @@ class Company::JobOpportunitiesController < ApplicationController
   # GET /company/job_opportunities
   # GET /company/job_opportunities.json
   def index
-    @company_job_opportunities = @company.job_opportunities
+    redirect_to home_company_path(@company)
+    # @company_job_opportunities = @company.job_opportunities
   end
 
   # GET /company/job_opportunities/1
@@ -100,7 +104,7 @@ class Company::JobOpportunitiesController < ApplicationController
     end
 
     def get_candidates
-      @shortlisted_candidates = Admin.shortlist_candidates(@company_job_opportunity)
+      @shortlisted_candidates = @company_job_opportunity.shortlist_candidates
     end
 
     def selected_candidates

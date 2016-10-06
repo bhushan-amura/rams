@@ -1,9 +1,12 @@
 class CandidatesController < ApplicationController
 
+  load_and_authorize_resource
+
   # layouts
   layout :resolve_layout
+
   # filters/callbacks
-  before_action :set_candidate, only: [:show, :edit, :update, :destroy, :home]
+  before_action :set_candidate, only: [:show, :edit, :update, :destroy, :home, :resume]
 
   # GET /candidates
   # GET /candidates.json
@@ -77,6 +80,11 @@ class CandidatesController < ApplicationController
     @recent_jobs = Company::JobOpportunity.get_recent_jobs(5)
   end
 
+  # RESUME /candidate/1/resume
+  def resume
+    authorize! :resume, current_user.info
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_candidate
@@ -91,7 +99,7 @@ class CandidatesController < ApplicationController
     def resolve_layout
      case action_name
      when "new"
-        'application'
+      'application'
      else
       'candidate/layout'
      end
