@@ -1,8 +1,10 @@
 class CandidatesController < ApplicationController
 
   load_and_authorize_resource
+
   # layouts
   layout :resolve_layout
+
   # filters/callbacks
   before_action :set_candidate, only: [:show, :edit, :update, :destroy, :home]
 
@@ -92,7 +94,7 @@ class CandidatesController < ApplicationController
     def resolve_layout
      case action_name
      when "new"
-        'application'
+      'application'
      else
       'candidate/layout'
      end
