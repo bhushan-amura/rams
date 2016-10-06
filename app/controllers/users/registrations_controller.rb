@@ -14,9 +14,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # GET /resource/edit
-  # def edit
-  #   super
-  # end
+   def edit
+     @company = Company.find_by(user_id:current_user.id) 
+     super
+   end
 
   # PUT /resource
   # def update
