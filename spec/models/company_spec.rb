@@ -2,30 +2,38 @@ require 'rails_helper'
 
 RSpec.describe Company, type: :model do
 
-  let(:company){Company.new(name:"jayesh",company_type:"qwe",url:"qwe.com",tagline:"qwerty",phone:"1234567789",description:"qwerty ytrewq",number_of_employees:123,logo:"qwe")}
+  before (:each) do
+    @company = FactoryGirl.build(:company)
+  end
 
-  let(:event){ Company::Event.new(event_type:'interview', organiser:'qwerty', date_time:'12-12-12',duration: 3, company_job_opportunity_id: 2) }
-
-  let(:job) {Company::JobOpportunity.new(title:'qwerty',shift:"qwerty", description:'qwerty', number_of_positions: 150, status:'seeker', ctc:'12',experience: 1, company_id: company.id)}
-
+  context "model with attributes valid?" do
+		it "is valid with valid attributes" do
+		    company = @company
+        company.should be_valid
+		end
+	end
 
   context 'Attributes' do
     it 'invalid if name is nil' do
+      company = @company
       company.name = ""
       expect(company).to_not be_valid
     end
 
     it 'invalid if company type is nil' do
+      company = @company
       company.company_type = nil
       expect(company).to_not be_valid
     end
 
     it 'invalid if description is nil' do
+      company = @company
       company.description = nil
       expect(company).to_not be_valid
     end
 
     it 'invalid if url is nil' do
+      company = @company
       company.url = nil
       expect(company).to_not be_valid
     end
@@ -53,14 +61,16 @@ RSpec.describe Company, type: :model do
     end
   end
 
-  describe Company, "when methods" do
+  describe "when methods" do
     context "when recent_events is called" do
       it "should return list" do
+        company = @company
         company.save!
-        job.save!
-        expect(job).to be_valid
-        job.events << event
-        expect(job.events.first).to be_valid
+        events = FactoryGirl.create_list(:event,8)
+        job = FactoryGirl.create(:job_opportunity)
+        job.events << events
+        company.job_opportunities << job
+        expect(company.recent_events(3)).to be_truthy
       end
     end
   end

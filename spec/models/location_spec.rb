@@ -10,7 +10,7 @@ RSpec.describe Location, type: :model do
     it "all the fields are valid" do
       # FactoryGirl.build(:location).should be_valid
       company = FactoryGirl.create(:company)
-      candidate = FactoryGirl.create(:candidate)
+      candidate = FactoryGirl.build(:candidate)
       location = @location
       location.should be_valid
       location.save!

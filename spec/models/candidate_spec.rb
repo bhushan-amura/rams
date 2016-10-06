@@ -15,31 +15,6 @@ RSpec.describe Candidate, type: :model do
 		end
 	end
 
-=begin
-	context "first_name" do
-		it "invalid! field required." do
-			candidate.first_name = ""
-			expect(candidate).to_not be_valid
-		end
-
-		it "invalid! character limit 20 exceeded." do
-			candidate.first_name = [*('A'..'Z'),*('0'..'9')].sample(21).join
-			expect(candidate).to_not be_valid
-		end
-	end
-
-	context "last_name" do
-		it "invalid! field required." do
-			candidate.last_name = ""
-			expect(candidate).to_not be_valid
-		end
-		it "invalid! character limit 20 exceeded." do
-			candidate.last_name = [*('A'..'Z'),*('0'..'9')].sample(21).join
-			expect(candidate).to_not be_valid
-		end
-	end
-
-=end
 	context "date of birth" do
 		it "invalid! field required." do
 			candidate.dob = ""

@@ -10,6 +10,6 @@ FactoryGirl.define do
      number_of_employees {rand(100)}
      description {Faker::Lorem.paragraph(2)}
      logo {Faker::Company.logo}
-     user_id {rand(5)}
+     association :user, factory: :user, strategy: :build
   end
 end
