@@ -3,7 +3,7 @@ class Company::EventsController < ApplicationController
   before_action :set_company_job
   before_action :set_company_event, only: [:show, :edit, :update, :destroy]
   include Company::EventsHelper
-  layout 'company'
+  # layout 'company'
   # GET /company/events
   # GET /company/events.json
   def index
