@@ -85,6 +85,10 @@ class Company::JobOpportunitiesController < ApplicationController
     redirect_to company_job_path(company_id:params[:company_id],id: params[:job_id])
   end
 
+  def send_mail_to_shortlisted_candidates
+    UserNotifier.send_shortlist_mail_to(@company_job_opportunity.get_candidates_as_users).deliver_later
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_company_job_opportunity
