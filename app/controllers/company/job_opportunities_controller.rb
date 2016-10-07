@@ -81,14 +81,21 @@ class Company::JobOpportunitiesController < ApplicationController
   end
 
   def select_candidates
-    @company_job_opportunity.candidates << Candidate.find(params[:shortlist][:candidate_ids].reverse.drop(1))
-    redirect_to company_job_path(company_id:params[:company_id],id: params[:job_id])
+    Candidate.find(params[:shortlist][:candidate_ids].reverse.drop(1)).each do |candidate|
+      @company_job_opportunity.candidates_job_opportunities << CandidatesJobOpportunity.new(candidate_id:candidate.id,status:CandidatesJobOpportunity.statuses[:selected])
+      redirect_to company_job_path(company_id:params[:company_id],id: params[:job_id]) and return
+    end
   end
 
   def send_mail_to_shortlisted_candidates
-    UserNotifier.send_shortlist_mail_to(@company_job_opportunity.get_candidates_as_users,@company_job_opportunity).deliver
-    flash[:success] = 'Messages sent successfully' 
-    redirect_to :back
+    begin 
+      UserNotifier.send_shortlist_mail_to(@company_job_opportunity.get_candidates_as_users,@company_job_opportunity).deliver_now
+      flash[:success] = 'Messages sent successfully' 
+      redirect_to :back
+    rescue 
+      flash[:alert] = 'Messages not send successfully'
+      redirect_to :back
+    end
   end
 
   private

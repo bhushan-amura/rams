@@ -11,7 +11,9 @@ class  Company::JobOpportunity < ActiveRecord::Base
   has_many :skills, through: :skill_assignments
   has_many :qualification_assignments, as: :qualifiable, dependent: :destroy
   has_many :qualifications, through: :qualification_assignments
-  has_and_belongs_to_many :candidates, join_table:'candidates_job_opportunities'
+  
+  has_many :candidates_job_opportunities
+  has_many :candidates, through: :candidates_job_opportunities
 
   accepts_nested_attributes_for :qualifications, :allow_destroy => true
   accepts_nested_attributes_for :skills, :allow_destroy => true

@@ -11,8 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
-ActiveRecord::Schema.define(version: 20160930133911) do
+ActiveRecord::Schema.define(version: 20161007070104) do
 
   create_table "admins", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
@@ -123,9 +122,10 @@ ActiveRecord::Schema.define(version: 20160930133911) do
 
   add_index "candidates", ["user_id"], name: "index_candidates_on_user_id", using: :btree
 
-  create_table "candidates_job_opportunities", id: false, force: :cascade do |t|
+  create_table "candidates_job_opportunities", force: :cascade do |t|
     t.integer "candidate_id",       limit: 4, null: false
     t.integer "job_opportunity_id", limit: 4, null: false
+    t.integer "status",             limit: 4
   end
 
   add_index "candidates_job_opportunities", ["candidate_id", "job_opportunity_id"], name: "index_candidate_jo", using: :btree

@@ -61,6 +61,10 @@
          <div class="alert alert-danger">
            <span><%= flash[:alert] %></span>
          </div>
+      <% elsif flash[:success] %>
+        <div class="alert alert-success">
+          <span><%= flash[:success] %></span>
+        </div>
       <%end%>
       <div class="row">
         <!-- left================== -->
