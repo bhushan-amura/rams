@@ -10,7 +10,7 @@ Rails.application.routes.draw do
       get :all_events
     end
     scope module:'company' do
-      resources :jobs,controller: 'job_opportunities' do
+      resources :jobs, controller: 'job_opportunities' do
         patch :select_candidates
         member do
           post 'select_candidates/mail' => :send_mail_to_shortlisted_candidates

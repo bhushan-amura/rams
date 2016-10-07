@@ -65,7 +65,6 @@ RSpec.describe Candidate::Project, type: :model do
 		end
 	end
 
-
 	context "description" do
 		it "invalid! field required." do
 			project.description = ""
@@ -76,5 +75,12 @@ RSpec.describe Candidate::Project, type: :model do
 			project.description = "g"*65536
 			expect(project).to be_invalid
 		end
+	end
+
+	context "when Association" do
+	  it "belongs to candidate" do
+			assc = Candidate::Project.reflect_on_association(:candidate)
+      expect(assc.macro).to eq :belongs_to
+	  end
 	end
 end

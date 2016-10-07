@@ -241,6 +241,7 @@ DEPENDENCIES
   coffee-rails (~> 4.1.0)
   database_cleaner (~> 1.5, >= 1.5.3)
   devise
+  factory_girl (~> 4.7)
   factory_girl_rails (~> 4.0)
   faker (~> 1.6, >= 1.6.6)
   figaro

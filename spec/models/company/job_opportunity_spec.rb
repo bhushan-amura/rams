@@ -57,4 +57,37 @@ RSpec.describe Company::JobOpportunity, type: :model do
       expect(job_opportunity).to be_invalid
     end
   end
+
+  context "when Association" do
+    it "has many events" do
+      assc = Company::JobOpportunity.reflect_on_association(:events)
+      expect(assc.macro).to eq :has_many
+    end
+
+    it "has many skill_assignments" do
+      assc = Company::JobOpportunity.reflect_on_association(:skill_assignments)
+      expect(assc.macro).to eq :has_many
+    end
+
+    it "has many skills" do
+      assc = Company::JobOpportunity.reflect_on_association(:skills)
+      expect(assc.macro).to eq :has_many
+    end
+
+    it "has many qualification_assignments" do
+      assc = Company::JobOpportunity.reflect_on_association(:qualification_assignments)
+      expect(assc.macro).to eq :has_many
+    end
+
+    it "has many qualifications" do
+      assc = Company::JobOpportunity.reflect_on_association(:qualifications)
+      expect(assc.macro).to eq :has_many
+    end
+
+    it "has and belong to many candidates" do
+      assc = Company::JobOpportunity.reflect_on_association(:candidates)
+      expect(assc.macro).to eq :has_and_belongs_to_many
+    end
+  end
+
 end
