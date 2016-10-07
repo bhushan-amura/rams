@@ -32,13 +32,13 @@ class  Company::JobOpportunity < ActiveRecord::Base
     # TODO : Figure out a way to incorporate experience in this
     # Maybe precompute columns of experience, achievements, qualifications,etc. in candidate table in order to
     # sort the results
-   
-    job_qualifications = self.qualifications.empty? ? Qualification.all : self.qualificaitions
+
+    job_qualifications = self.qualifications.empty? ? Qualification.all : self.qualifications
     job_skills = self.skills.empty? ? Skill.all : self.skills
 
     candidates_with_required_qualifications = Candidate.joins(:qualifications).where("qualifications.id":job_qualifications).select("count(qualifications.id) as qualification_count, candidates.*").group(:id).order("1 DESC")
 
-   
+
     candidates_with_required_qualifications =  candidates_with_required_qualifications.where.not(id:self.candidates)
 
     candidates_with_required_qualifications.map {|x| x.qual_cnt = x.qualification_count; x.skill_cnt = 0}
@@ -53,7 +53,7 @@ class  Company::JobOpportunity < ActiveRecord::Base
     qual_ids = candidates_with_required_qualifications.pluck(:id)
     skill_ids = candidates_with_required_skills.pluck(:id)
 
-    common_ids = qual_ids & skill_ids 
+    common_ids = qual_ids & skill_ids
     uncommon_ids_qual = qual_ids - common_ids
     uncommon_ids_skill = skill_ids - common_ids
     shortlist = []
