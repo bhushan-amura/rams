@@ -6,17 +6,15 @@ class ApplicationController < ActionController::Base
   before_filter :authenticate_user!
 
   rescue_from CanCan::AccessDenied do |exception|
-    byebug
     redirect_to root_url, :alert => exception.message
   end
 
-  # , :get_new_messages
   layout :resolve_layout
 
   private
   def resolve_layout
     if !current_user.nil?
-      if (params[:action] == "new" || params[:action] == "create") && (params[:controller] == "companies" || params[:controller] == "candidates" )
+      if (params[:action] == "new" || params[:action] == "create") && (params[:controller] == "companies" || params[:controller] == "candidates")
         'application'
       elsif (current_user.is? :company)
         'company'
