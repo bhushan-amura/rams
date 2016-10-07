@@ -86,11 +86,9 @@ class Company::JobOpportunitiesController < ApplicationController
   end
 
   def send_mail_to_shortlisted_candidates
-    byebug
-    if UserNotifier.send_shortlist_mail_to(@company_job_opportunity.get_candidates_as_users,@company_job_opportunity).deliver
-      flash[:success] = 'Messages sent successfully' 
-      redirect_to :back
-    end
+    UserNotifier.send_shortlist_mail_to(@company_job_opportunity.get_candidates_as_users,@company_job_opportunity).deliver
+    flash[:success] = 'Messages sent successfully' 
+    redirect_to :back
   end
 
   private
