@@ -8,7 +8,7 @@ class Company::JobOpportunitiesController < ApplicationController
   before_action :set_company
   before_action :set_qualifications
   before_action :set_skills
-  before_action :set_company_job_opportunity, only: [:show, :edit, :update, :select_candidates,:destroy,:send_mail_to_shortlisted_candidates]
+  before_action :set_company_job_opportunity, only: [:show, :edit, :update, :select_candidates,:destroy,:send_mail_to_all_shortlisted_candidates,:send_mail_to_shortlisted_candidate]
   before_action :get_candidates, only: [:show, :edit, :update]
   before_action :selected_candidates, only: [:show]
   before_action :get_job_events, only: [:index, :show, :edit]
@@ -87,13 +87,12 @@ class Company::JobOpportunitiesController < ApplicationController
     redirect_to company_job_path(company_id:params[:company_id],id: params[:job_id]) and return
   end
 
-  def send_mail_to_shortlisted_candidates
+  def send_mail_to_all_shortlisted_candidates
     begin 
-      @company_job_opportunity.get_candidates_as_users.each do |candidate|
-        UserNotifier.send_shortlist_mail_to(candidate,@company_job_opportunity).deliver_later
-        @company_job_opportunity.change_status(candidate,:mailed)
+      @company_job_opportunity.get_candidates_as_users.each do |user|
+        UserNotifier.send_shortlist_mail_to(user,@company_job_opportunity).deliver_later
+        @company_job_opportunity.change_status(user.info,:mailed)
       end
-
       flash[:success] = 'Messages sent successfully' 
       redirect_to :back
     #rescue 
@@ -101,6 +100,21 @@ class Company::JobOpportunitiesController < ApplicationController
       #redirect_to :back
     end
   end
+
+  def send_mail_to_shortlisted_candidate
+    begin
+      candidate = @company_job_opportunity.candidates.find(params[:candidate_id])
+      @company_job_opportunity.change_status(candidate,:mailed)
+      UserNotifier.send_shortlist_mail_to(candidate.user,@company_job_opportunity).deliver_later
+      flash[:success] = 'Messages sent successfully' 
+      redirect_to :back
+    rescue 
+      flash[:alert] = 'Messages not send successfully'
+      redirect_to :back
+    end
+  end
+
+ 
 
   private
     # Use callbacks to share common setup or constraints between actions.

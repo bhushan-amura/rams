@@ -85,8 +85,8 @@ class  Company::JobOpportunity < ActiveRecord::Base
     self.candidates_job_opportunities.joins(:candidate).select("candidates.*,candidates_job_opportunities.*")
   end
 
-  def change_status(user,status)
-    CandidatesJobOpportunity.update(self.candidates_job_opportunities.find_by(candidate_id: user.info.id).id,status:CandidatesJobOpportunity.statuses[status])
+  def change_status(candidate,status)
+    CandidatesJobOpportunity.update(self.candidates_job_opportunities.find_by(candidate_id: candidate.id).id,status:CandidatesJobOpportunity.statuses[status])
   end
 
   # class methods/scope

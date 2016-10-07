@@ -13,7 +13,8 @@ Rails.application.routes.draw do
       resources :jobs, controller: 'job_opportunities' do
         patch :select_candidates
         member do
-          post 'select_candidates/mail' => :send_mail_to_shortlisted_candidates
+          post 'select_candidates/mail' => :send_mail_to_all_shortlisted_candidates
+          post 'select_candidate/:candidate_id/mail' => :send_mail_to_shortlisted_candidate, as: 'send_mail_to_candidate'
         end
         resources :events, controller: 'events'
       end
