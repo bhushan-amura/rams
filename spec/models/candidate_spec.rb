@@ -2,7 +2,9 @@ require 'rails_helper'
 
 RSpec.describe Candidate, type: :model do
 
-	let(:candidate) {Candidate.new(first_name:"abcd", last_name:"efgh", dob:'1992/03/15', gender:'M', marital_status:"married", status:true, languages:"HIBRU", summary:"dont know", phone:"12321442415", interests:"dddd")}
+	before(:each) do
+		@candidate = FactoryGirl.build(:candidate)
+	end
 
 	let(:institute) { Institute.new(university:'sppu', campus:'pict')}
 
@@ -11,12 +13,14 @@ RSpec.describe Candidate, type: :model do
 
 	context "model with attributes valid?" do
 		it "is valid with valid attributes" do
-		    expect(candidate).to be_valid
+			candidate = @candidate
+		  candidate.should be_valid
 		end
 	end
 
 	context "date of birth" do
 		it "invalid! field required." do
+			candidate = @candidate
 			candidate.dob = ""
 			expect(candidate).to_not be_valid
 		end
@@ -24,11 +28,13 @@ RSpec.describe Candidate, type: :model do
 
 	context "gender" do
 		it "invalid! field required." do
+			candidate = @candidate
 			candidate.gender = ""
 			expect(candidate).to_not be_valid
 		end
 
 		it "invalid! values must be either M, F or T." do
+			candidate = @candidate
 			candidate.gender = ([*('A'..'Z'),*('0'..'9')]-%w(M F T)).sample(1).join
 			expect(candidate).to_not be_valid
 		end
@@ -36,11 +42,13 @@ RSpec.describe Candidate, type: :model do
 
 	context "marital status" do
 		it "invalid! field required." do
+			candidate = @candidate
 			candidate.marital_status = ""
 			expect(candidate).to_not be_valid
 		end
 
 		it "invalid! values must be either married or unmarried." do
+			candidate = @candidate
 			candidate.marital_status = ([*('A'..'Z'),*('0'..'9')]-%w(married unmarried)).sample([7,9].sample).join
 			expect(candidate).to_not be_valid
 		end
@@ -48,6 +56,7 @@ RSpec.describe Candidate, type: :model do
 
 	context "languages" do
 		it "invalid! character limit 65535 exceeded." do
+			candidate = @candidate
 			candidate.languages = "g"*65536
 			expect(candidate).to_not be_valid
 		end
@@ -55,6 +64,7 @@ RSpec.describe Candidate, type: :model do
 
 	context "summary" do
 		it "invalid! character limit 65535 exceeded." do
+			candidate = @candidate
 			candidate.summary = "g"*65536
 			expect(candidate).to_not be_valid
 		end
@@ -62,6 +72,7 @@ RSpec.describe Candidate, type: :model do
 
 	context "interests" do
 		it "invalid! character limit 65535 exceeded." do
+			candidate = @candidate
 			candidate.interests = "g"*65536
 			expect(candidate).to_not be_valid
 		end
@@ -157,29 +168,36 @@ RSpec.describe Candidate, type: :model do
 	describe Candidate, 'methods' do
 	  context "when name_with_initial" do
 	    it "should return full name(first_name + last_name)" do
+				candidate = @candidate
 				str = "  "+candidate.first_name+" "+candidate.last_name
-	      expect(candidate.name_with_initial).to eql(str)
+	      candidate.name_with_initial.should eql(str)
 	    end
 	  end
 
-		context "when add_institute_with_qualification" do
+		describe "when add_institute_with_qualification" do
 		  it "should return candidate_qualification_assignment object" do
+				# institute = FactoryGirl.build(:institute)
+				# qualification = FactoryGirl.build(:qualification)
+				candidate = @candidate
 				candidate.save!
 				institute.save!
-				expect(institute).to be_valid
+				institute.should be_valid
 				qualification.save!
-				expect(qualification).to be_valid
+				qualification.should be_valid
 		    expect(candidate.add_institute_with_qualification(institute, qualification)).not_to eql(nil)
 		  end
 		end
 
-		context "when get_institutes_with_qualifications" do
+		describe "when get_institutes_with_qualifications" do
 		  it "should return institutes_with_qualifications object" do
+				# institute = FactoryGirl.build(:institute)
+				# qualification = FactoryGirl.build(:qualification)
+				candidate = @candidate
 				candidate.save!
 				institute.save!
-				expect(institute).to be_valid
+				institute.should be_valid
 				qualification.save!
-				expect(qualification).to be_valid
+				qualification.should be_valid
 				expect(candidate.get_institutes_with_qualifications).not_to eql(nil)
 		  end
 		end
