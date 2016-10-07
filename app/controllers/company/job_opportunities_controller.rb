@@ -126,7 +126,7 @@ class Company::JobOpportunitiesController < ApplicationController
     end
 
     def selected_candidates
-      @selected_candidates = @company_job_opportunity.candidates
+      @selected_candidates = @company_job_opportunity.get_candidates_with_status
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

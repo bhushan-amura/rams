@@ -80,6 +80,10 @@ class  Company::JobOpportunity < ActiveRecord::Base
   def get_candidates_as_users
     User.where(id:self.candidates.pluck(:user_id))
   end
+  
+  def get_candidates_with_status
+    self.candidates_job_opportunities.joins(:candidate).select("candidates.*,candidates_job_opportunities.*")
+  end
 
   # class methods/scope
   def self.get_recent_jobs(job_count=5)

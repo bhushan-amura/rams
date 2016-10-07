@@ -120,22 +120,29 @@
 
       <div class="well tab-pane fade" id="selected_candidates">
         <h4 class="h4formpadd text-center">Your selected Candidates</h4>
-        <% @selected_candidates.each do |f| %>
-        <div class="field form-group">
-          <div class="col-sm-2 col-sm-offset-1">
-            <b class="text-center">Name</b>
-          </div>
-          <div class="col-sm-9">
-            <%= link_to resume_candidate_path(f.id) do %>
-            <p class="text-left">
-              <%= f.first_name %>
-              <%= f.last_name %>
-            </p>
-            <% end %>
-          </div>
-        </div>
-        <% end %>
-        <%= link_to "Send Mail", select_candidates_mail_company_job_path(company_id: @company.id,id: @company_job_opportunity.id), method: :post,class:"btn btn-default col-sm-offset-5" %>
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Name</th>
+              <th>Status</th>
+              <th>View Resume</th>
+              <th>Send Mail</th>
+            </tr>
+          </thead>
+          <tbody>
+          <% @selected_candidates.each_with_index do |candidate,index| %>
+            <tr>
+              <th scope="row"><%= index+1 %></th>
+              <td><%= candidate.first_name %></td>
+              <td><%= candidate.status %></td>
+              <td><%= link_to "View",resume_candidate_path(candidate.candidate_id) %></td>
+              <td><%= link_to "Send Mail" %></td>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+        <%= link_to "Send Mail To Everyone", select_candidates_mail_company_job_path(company_id: @company.id,id: @company_job_opportunity.id), method: :post,class:"btn btn-default col-sm-offset-5" %>
       </div>
 
       <div class="well tab-pane fade" id="shortlisted_candidates">
