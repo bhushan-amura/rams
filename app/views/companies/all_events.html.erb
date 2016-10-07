@@ -1,10 +1,25 @@
-<% @all_events.each do |event| %>
-<div class="well text-capitalize col-sm-12">
-  <table class="table table-hover">
-    <%= event.event_type %>
-    <%= event.organiser %>
-    <%= event.date_time.to_formatted_s(:long_ordinal) %>
-    <%= event.location.city %>
-  </table>
-</div>
-<% end %>
+<table class="table table-hover text-capitalize">
+  <thead>
+    <tr>
+      <th>Event Type</th>
+      <th>Organiser</th>
+      <th>Date-Time</th>
+      <th>Location-City</th>
+      <th>Edit</th>
+      <th>Destroy</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @all_events.each do |event| %>
+    <tr>
+      <td><%= event.event_type %></td>
+      <td><%= event.organiser %></td>
+      <td><%= event.date_time.strftime("%b, %d - %Y %I:%M %p") %></td>
+      <td><%= event.location.city %></td>
+      <td><%#= link_to 'Edit', edit_company_job_event_path(events_path_params( event ) ),class:"btn btn-success", role:"button" %></td>
+      <td><%#= link_to 'Destroy', company_job_event_path(events_path_params(event)), method: :delete, data: { confirm: 'Are you sure?' } ,class:"btn btn-danger", role:"button"%></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

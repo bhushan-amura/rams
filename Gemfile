@@ -12,6 +12,11 @@ gem 'bootstrap-tagsinput-rails'
 gem 'mysql2', '>= 0.3.13', '< 0.5'
 gem 'devise'
 gem 'carrierwave', '~> 0.11.2'
+
+# for pdf
+gem 'prawn'
+gem 'prawn_rails'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'
 # Use sqlite3 as the database for Active Record
