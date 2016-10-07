@@ -13,9 +13,9 @@
       <li>
         <a data-toggle="tab" href="#shortlisted_candidates">Shortlisted Candidates</a>
       </li>
-      <!-- <li>
-        <a data-toggle="tab" href="#menu3">Menu 3</a>
-      </li> -->
+      <li>
+        <a data-toggle="tab" href="#related_events">Related Events</a>
+      </li>
     </ul>
     <div class="tab-content">
       <div class="well tab-pane fade in active" id="job">
@@ -138,8 +138,12 @@
         <%= link_to "Send Mail", select_candidates_mail_company_job_path(company_id: @company.id,id: @company_job_opportunity.id), method: :post,class:"btn btn-default col-sm-offset-5" %>
       </div>
 
-      <div class="well tab-content fade" id="shortlisted_candidates">
+      <div class="well tab-pane fade" id="shortlisted_candidates">
         <%= render partial: 'shortlisted_candidates' %>
+      </div>
+
+      <div class="well tab-pane fade" id="related_events">
+        <%= render partial: 'related_events' %>
       </div>
 
     </div>

@@ -1,11 +1,11 @@
 <div class="well text-capitalize">
   <div class="container-fluid">
-      <div class="col-sm-12">
-        <p class="text-center">
+    <div class="col-sm-12">
+      <p class="text-center">
         <%  if !@company_events.empty? %>
-          <%= link_to 'Create New Event', new_company_job_event_path(job_events_path_params(@company_events.first)), class:"btn btn-info create-button" %>
+        <%= link_to 'Create New Event', new_company_job_event_path(job_events_path_params(@company_events.first)), class:"btn btn-info create-button" %>
         <% end %>
-        </p>
+      </p>
     </div>
   </div>
 </div>
@@ -108,4 +108,3 @@
 
 </div>
 <% end %>
-

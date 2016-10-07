@@ -1,0 +1,8 @@
+<% @all_events.each do |event| %>
+<div class="well text-capitalize col-sm-12">
+  <%= event.event_type %>
+  <%= event.organiser %>
+  <%= event.date_time.to_formatted_s(:long_ordinal) %>
+  <%= event.location.city %>
+</div>
+<% end %>

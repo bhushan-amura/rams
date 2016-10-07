@@ -7,7 +7,7 @@ class CompaniesController < ApplicationController
 
   include Company::JobOpportunitiesHelper
   # layout 'application', only: [:new, :create]
-  # layout 'company', only: [:home] 
+  # layout 'company', only: [:home]
   # layout :resolve_layout
 
   # GET /companies
@@ -79,6 +79,10 @@ class CompaniesController < ApplicationController
     if @company.job_opportunities.empty?
       redirect_to new_company_job_path(@company)
     end
+  end
+
+  def all_events
+    @all_events = @company.events
   end
 
   private
