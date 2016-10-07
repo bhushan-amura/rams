@@ -1,0 +1,11 @@
+<% content_for :show_content do %>
+<h3>Skills</h3>
+<div class="row well">
+  <% @skills.each do |skill| %>
+  <button class="btn btn-info"><%= skill.name %></button>
+  <% end %>
+</div>
+<%= link_to "Edit Skills",edit_candidate_skill_index_path,class:"btn btn-default", onclick: "javascript:window.location.reload()"%>
+<% end %>
+
+<%= render "candidates/show_navbar" %>

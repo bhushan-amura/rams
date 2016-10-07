@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Reviews</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @reviews.each do |review| %>
+      <tr>
+        <td><%= review.rating %></td>
+        <td><%= review.text %></td>
+        <td><%= link_to 'Show',self.send(review_path,review_path_params(review))%></td>
+        <% if @entity.instance_of?(Candidate) %>
+        <td><%= link_to 'Destroy', self.send(review_path, review_path_params(review)), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+<% if @entity.instance_of?(Candidate) %>
+  <%= link_to 'New Review', new_candidate_review_path %>
+
+<% end %>

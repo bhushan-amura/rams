@@ -1,0 +1,51 @@
+<div class="container">
+  <h2 class="text-center jumbotron">Editing <%= current_user.info.first_name.capitalize %>'s Profile </h2>
+  <div class="row jumbotron">
+    <div class="col-sm-3">
+      <div class="sidebar-nav">
+        <div class="navbar navbar-default" role="navigation">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <span class="visible-xs navbar-brand">Sidebar menu</span>
+          </div>
+          <div class="navbar-collapse collapse sidebar-navbar-collapse">
+            <ul class="nav navbar-nav">
+              <li><%= link_to "Profile", edit_candidate_path(params[:id]||params[:candidate_id]),onclick: "javascript:window.location.reload()" %></li>
+              <li><%= link_to "Achievements", edit_candidate_achievements_path(candidate_id: params[:id]||params[:candidate_id]) , onclick: "javascript:window.location.reload()"%></li>
+              <li><%= link_to "Projects", edit_candidate_projects_path(candidate_id: params[:id]||params[:candidate_id]), onclick: "javascript:window.location.reload()" %></li>
+              <li><%= link_to "Experiences", edit_candidate_experiences_path(candidate_id: params[:id]||params[:candidate_id]), onclick: "javascript:window.location.reload()" %></li>
+              <li><%= link_to "Links", edit_candidate_links_path(candidate_id: params[:id]||params[:candidate_id]), onclick: "javascript:window.location.reload()" %></li>
+              <li><%= link_to "References", edit_candidate_references_path(candidate_id: params[:id]||params[:candidate_id]), onclick: "javascript:window.location.reload()" %></li>
+              <li><a href="#">Tests</a></li>
+              <li><%= link_to "Skills", edit_candidate_skill_index_path(candidate_id: params[:id]||params[:candidate_id]), onclick: "javascript:window.location.reload()" %></li>
+              <li><%= link_to "Qualifications", edit_candidate_qualification_index_path(candidate_id: params[:id]||params[:candidate_id]), onclick: "javascript:window.location.reload()" %></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-9">
+      <% if flash[:success] %>
+        <div class="alert alert-success" role="alert">
+          <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span>
+          <span class="sr-only">Success:</span>
+          <%= flash[:success]%>
+        </div>
+
+      <% elsif flash[:failure] %>
+        <div class="alert alert-danger" role="alert">
+          <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
+          <span class="sr-only">Error:</span>
+          <%= flash[:failure] %>
+        </div>
+      <% end %>
+      <%= yield :edit_content %>
+    </div>
+  </div>
+  </div>
+</div>

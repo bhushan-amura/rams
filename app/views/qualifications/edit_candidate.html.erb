@@ -1,0 +1,33 @@
+<% content_for :edit_content do %>
+  <div class="row qualification-title">
+    <h2 class="col-sm-5">Qualifications</h2>
+
+    <button class="btn btn-default col-sm-1 add-button-qualification" data-toggle="modal" data-target="#myModal"> Add</button>
+  </div>
+  <div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Add qualification</h4>
+        </div>
+        <div class="modal-body">
+          <%= render partial: 'form_2', locals:{entity_institute: @new_entity_institute,entity_qualification:@new_entity_qualification,required_url:candidate_qualification_index_path,new_qualification: true} %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <% @entity_institutes_with_qualifications.each do |entity| %>
+    <%= render partial: 'form_2',locals:{entity_institute: entity[:institute],entity_qualification: entity[:qualification] ,required_url:candidate_qualification_path(candidate_id:params[:candidate_id],id:entity[:qual_ass_id]),new_qualification: false} %>
+  <% end %>
+<% end %>
+
+<%= render 'candidates/edit_navbar' %>
+
+

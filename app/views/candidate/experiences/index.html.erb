@@ -1,0 +1,50 @@
+<% content_for :show_content do %>
+  <h2>Experiences</h2>
+  <% @candidate_experiences.each do |candidate_experience| %>
+    <div class="well">
+      <div class="row">
+        <div class="col-sm-3">
+          <p><b>Name</b></p>
+        </div>
+        <div class="col-sm-6">
+          <p><%= candidate_experience.name %></p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-3">
+          <p><b>Start Date</b></p>
+        </div>
+        <div class="col-sm-6">
+          <p><%= candidate_experience.start_date %></p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-3">
+          <p><b>End Date</b></p>
+        </div>
+        <div class="col-sm-6">
+          <p><%= candidate_experience.end_date %></p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-3">
+          <p><b>Shift Type</b></p>
+        </div>
+        <div class="col-sm-6">
+          <p><%= candidate_experience.shift_type %></p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-3">
+          <p><b>Description</b></p>
+        </div>
+        <div class="col-sm-6">
+          <p><%= candidate_experience.description %></p>
+        </div>
+      </div>
+    </div>
+  <% end %>
+ <%=  link_to "Edit Experiences", edit_candidate_experiences_path(params[:id]||params[:candidate_id]),class:"btn btn-default", onclick: "javascript:window.location.reload()"%>
+<% end %>
+
+<%= render "candidates/show_navbar" %>

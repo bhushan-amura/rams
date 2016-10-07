@@ -1,0 +1,33 @@
+<% content_for :show_content do %>
+  <h2>References</h2>
+  <% @candidate_references.each do |candidate_reference| %>
+    <div class="well">
+      <div class="row">
+        <div class="col-sm-3">
+          <p><b>Name</b></p>
+        </div>
+        <div class="col-sm-9">
+          <p><%= candidate_reference.name %></p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-3">
+          <p><b>Email</b></p>
+        </div>
+        <div class="col-sm-9">
+          <p><%= candidate_reference.email %></p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-3">
+          <p><b>Contact</b></p>
+        </div>
+        <div class="col-sm-9">
+          <p><%= candidate_reference.contact %></p>
+        </div>
+      </div>
+    </div>
+  <% end %>
+  <%= link_to "Edit references", edit_candidate_references_path(params[:id]||params[:candidate_id]),class:"btn btn-default" ,onclick: "javascript:window.location.reload()"%>
+<% end %>
+<%= render "candidates/show_navbar" %>

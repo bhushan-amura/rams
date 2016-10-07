@@ -1,0 +1,84 @@
+<!-- <p id="notice"><%= notice %></p> -->
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-3">
+      <b class="text-center">Name</b>
+    </div>
+    <div class="col-sm-9">
+      <p class="text-left"><%= @company.name %></p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-3">
+      <b class="text-center">Company Type</b>
+    </div>
+    <div class="col-sm-9">
+      <p class="text-left"><%= @company.company_type %></p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-3">
+      <b class="text-center">URL</b>
+    </div>
+    <div class="col-sm-9">
+      <p class="text-left"><%= @company.url %></p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-3">
+      <b class="text-center">Tagline</b>
+    </div>
+    <div class="col-sm-9">
+      <p class="text-left"><%= @company.tagline %></p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-3">
+      <b class="text-center">Phone</b>
+    </div>
+    <div class="col-sm-9">
+      <p class="text-left"><%= @company.phone %></p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-3">
+      <b class="text-center">Description</b>
+    </div>
+    <div class="col-sm-9">
+      <p class="text-left"><%= @company.description %></p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-3">
+      <b class="text-center">Number of Employees</b>
+    </div>
+    <div class="col-sm-9">
+      <p class="text-left"><%= @company.number_of_employees %></p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-3">
+      <b class="text-center">Company Logo</b>
+    </div>
+    <div class="col-sm-9">
+      <p class="text-left"><%= image_tag( @company.logo , size: "120x70", alt: @company.name) %></p>
+    </div>
+  </div>
+
+
+
+
+</div>
+
+<div class="col-sm-offset-3">
+  <%= link_to 'Edit Profile', edit_company_path(@company), class:"btn btn-default" %>
+  <%= link_to 'Job Postings', home_company_path(@company), class:"btn btn-default" %>
+</div>

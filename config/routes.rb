@@ -1,6 +1,88 @@
 Rails.application.routes.draw do
-  devise_for :users
-  resources :candidates
+  devise_for :users, :controllers => {:registrations => "users/registrations"}
+  root to: 'user#switch'
+
+  resources :companies do
+    member do
+      get :home
+    end
+    scope module:'company' do
+      resources :jobs,controller: 'job_opportunities' do
+        patch :select_candidates
+        member do
+          post 'select_candidates/mail' => :send_mail_to_shortlisted_candidates
+        end
+        resources :events, controller: 'events'
+      end
+    end
+  end
+
+  resources :admins
+
+  resources :candidates do
+    member do
+      get 'home'
+      get 'resume'
+    end
+    scope module:'candidate' do
+      resources :achievements, except:[:edit,:show,:new] do
+        collection do
+          get 'edit'
+        end
+      end
+      resources :projects, except:[:edit,:show,:new] do
+        collection do
+          get 'edit'
+        end
+      end
+      resources :course_scores
+      resources :experiences, except:[:edit,:show,:new] do
+        collection do
+          get 'edit'
+        end
+      end
+      resources  :links, except:[:edit,:show,:new] do
+        collection do
+          get 'edit'
+        end
+      end
+      resources :references, except:[:edit,:show,:new] do
+        collection do
+          get 'edit'
+        end
+      end
+    end
+  end
+
+
+  scope '/candidates/:candidate_id/' do
+    resources :qualifications, as:'candidate_qualification', except:[:edit,:show,:new] do
+      collection do
+        get 'edit'
+      end
+    end
+    resources :skills, as:'candidate_skill', except:[:edit,:show,:new,:update,:create,:destroy] do
+      collection do
+        get 'edit',as: 'edit'
+        put 'update',as: 'update'
+      end
+    end
+    resource :location , as:'candidate_location'
+  end
+
+  scope '/companies/:company_id/' do
+    resource :location, as:'company_location'
+    resources :reviews, as:'company_reviews', only:[:index,:show]
+    scope 'jobs/:job_id' do
+      resources :qualifications, as:'job_qualification'
+      resources :skills, as:'job_skill'
+      scope '/events/:event_id' do
+        resource :location, as: 'event_location'
+      end
+    end
+  end
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

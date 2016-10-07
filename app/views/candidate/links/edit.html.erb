@@ -1,0 +1,31 @@
+<% content_for :edit_content do %>
+  <div class="row link-title">
+    <h2 class="col-sm-5">Links</h2>
+    <button class="btn btn-default col-sm-1 add-button-link" data-toggle="modal" data-target="#myModal"> Add</button>
+  </div>
+  <div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Add link</h4>
+        </div>
+        <div class="modal-body">
+          <%= render partial: 'form', locals:{candidate_link: @new_candidate_link,required_url:candidate_links_path,new_link: true} %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <% @candidate_links.each do |candidate_link| %>
+    <%= render partial: 'form',locals:{ candidate_link: candidate_link ,required_url: candidate_link_path(link_path_params(candidate_link)),new_link: false} %>
+  <% end %>
+<% end %>
+
+<%= render 'candidates/edit_navbar' %>

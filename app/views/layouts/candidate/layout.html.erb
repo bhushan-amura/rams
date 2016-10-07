@@ -1,0 +1,24 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Rams</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<%= render "layouts/candidate/menu" %>
+
+<% if flash[:alert] %>
+   <div class="alert alert-danger">
+     <span><%= flash[:alert] %></span>
+   </div>
+<%end%>
+<%= yield %>
+
+<%= render "layouts/candidate/footer" %>
+
+</body>
+</html>

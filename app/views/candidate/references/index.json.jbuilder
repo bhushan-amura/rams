@@ -1,0 +1,1 @@
+json.array! @candidate_references, partial: 'candidate_references/candidate_reference', as: :candidate_reference

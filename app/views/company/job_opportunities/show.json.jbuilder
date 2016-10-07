@@ -1,0 +1,1 @@
+json.partial! "company_job_opportunities/company_job_opportunity", company_job_opportunity: @company_job_opportunity

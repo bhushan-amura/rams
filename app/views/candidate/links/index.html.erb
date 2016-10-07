@@ -1,0 +1,26 @@
+<% content_for :show_content do %>
+  <h2>Links</h2>
+  <% @candidate_links.each do |candidate_link| %>
+    <div class="well">
+      <div class="row">
+        <div class="col-sm-3">
+          <p><b>Link Type</b></p>
+        </div>
+        <div class="col-sm-9">
+          <p><%= candidate_link.link_type %></p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-3">
+          <p><b>Url</b></p>
+        </div>
+        <div class="col-sm-9">
+          <p><%= link_to candidate_link.url %></p>
+        </div>
+      </div>
+    </div>
+  <% end %>
+  <%= link_to "Edit Links",edit_candidate_links_path(params[:id]||params[:candidate_id]),class:"btn btn-default",onclick: "javascript:window.location.reload()" %>
+<% end %>
+
+<%= render "candidates/show_navbar" %>

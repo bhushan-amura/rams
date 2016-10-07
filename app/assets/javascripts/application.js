@@ -11,6 +11,16 @@
 // about supported directives.
 //
 //= require jquery
+//= require bootstrap-sprockets
+//= require bootstrap-tagsinput
+//= require bootstrap-multiselect
 //= require jquery_ujs
+//= require bootstrap-sprockets
+//= require jquery.turbolinks
+//= require bootstrap/dropdown
 //= require turbolinks
+//= require twitter/typeahead
+//= require twitter/typeahead.min
+//= require twitter/typeahead/bloodhound
 //= require_tree .
+//= require jquery_nested_form

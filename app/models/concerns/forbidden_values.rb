@@ -2,6 +2,7 @@ module ForbiddenValues
 # Module for restricting the values stored in tables.
 # Add a good comment to explain the function included in this file 
 	extend ActiveSupport::Concern
+
 	REGEX_NAME_FORMAT = /\A[a-zA-Z\-\s]+\Z/
 	EMAIL_REGEX = /\A[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}\Z/i
 	FORBIDDEN_EMAILS = /\A[a-z0-9._%+-]+@rams+\.[a-z]{2,4}\Z/i

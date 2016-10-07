@@ -1,0 +1,41 @@
+<% content_for :show_content do %>
+  <h2>Qualifications</h2>
+  <% @entity_institutes_with_qualifications.each do |entity| %>
+    <div class="well">
+      <div class="row">
+        <div class="col-sm-3">
+          <p><b>Course</b></p>
+        </div>
+        <div class="col-sm-9">
+          <p><%= entity[:qualification].course %></p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-3">
+          <p><b>Domain</b></p>
+        </div>
+        <div class="col-sm-9">
+          <p><%= entity[:qualification].domain %></p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-3">
+          <p><b>Campus</b></p>
+        </div>
+        <div class="col-sm-9">
+          <p><%= entity[:institute].campus %></p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-3">
+          <p><b>University</b></p>
+        </div>
+        <div class="col-sm-9">
+          <p><%= entity[:institute].university  %></p>
+        </div>
+      </div>
+    </div>
+  <% end %> 
+  <%= link_to "Edit qualifications",edit_candidate_qualification_index_path(params[:id]||params[:candidate_id]),class:"btn btn-default",onclick:"javascript:window.location.reload()" %>
+<% end %>
+<%= render "candidates/show_navbar" %>

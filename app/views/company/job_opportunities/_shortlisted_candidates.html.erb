@@ -1,0 +1,15 @@
+<div class="form-group">
+  <!--  -->
+  <h3 class="text-center">Candidates matching your requirments
+  </h3>
+  <%= form_tag company_job_select_candidates_path(company_id:params[:company_id],job_id:params[:id]), method: :patch, class: "navbar-form navbar-left search-form" do  %>
+  <div class="well">
+    <%= collection_check_boxes :shortlist,:candidate_ids,@shortlisted_candidates,:id,:name_with_initial do |b| %>
+    <p><%#= b.label(:"data-value" => b.value) %>
+      <%=  b.check_box %><%=link_to b.text , resume_candidate_path(b.object.id)%></p>
+    <% end %>
+  </div>
+  <p>
+    <%= submit_tag "Add to shortlist", class: "btn btn-success" %></p>
+  <% end %>
+</div>
