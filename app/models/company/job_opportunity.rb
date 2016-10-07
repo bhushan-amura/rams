@@ -85,6 +85,10 @@ class  Company::JobOpportunity < ActiveRecord::Base
     self.candidates_job_opportunities.joins(:candidate).select("candidates.*,candidates_job_opportunities.*")
   end
 
+  def change_status(user,status)
+    CandidatesJobOpportunity.update(self.candidates_job_opportunities.find_by(candidate_id: user.info.id).id,status:CandidatesJobOpportunity.statuses[status])
+  end
+
   # class methods/scope
   def self.get_recent_jobs(job_count=5)
     Company.joins(:job_opportunities).select('companies.name','company_job_opportunities.title','company_job_opportunities.id','company_job_opportunities.created_at').distinct.order(:created_at).limit(job_count)

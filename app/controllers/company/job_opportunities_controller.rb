@@ -3,7 +3,6 @@ class Company::JobOpportunitiesController < ApplicationController
   load_and_authorize_resource :company
   load_and_authorize_resource :job_opportunity, :through => :company, :param_method => "company_job_opportunity_params"
   #layout
-  # layout 'company'
 
   # callbacks
   before_action :set_company
@@ -84,18 +83,22 @@ class Company::JobOpportunitiesController < ApplicationController
   def select_candidates
     Candidate.find(params[:shortlist][:candidate_ids].reverse.drop(1)).each do |candidate|
       @company_job_opportunity.candidates_job_opportunities << CandidatesJobOpportunity.new(candidate_id:candidate.id,status:CandidatesJobOpportunity.statuses[:selected])
-      redirect_to company_job_path(company_id:params[:company_id],id: params[:job_id]) and return
     end
+    redirect_to company_job_path(company_id:params[:company_id],id: params[:job_id]) and return
   end
 
   def send_mail_to_shortlisted_candidates
     begin 
-      UserNotifier.send_shortlist_mail_to(@company_job_opportunity.get_candidates_as_users,@company_job_opportunity).deliver_now
+      @company_job_opportunity.get_candidates_as_users.each do |candidate|
+        UserNotifier.send_shortlist_mail_to(candidate,@company_job_opportunity).deliver_later
+        @company_job_opportunity.change_status(candidate,:mailed)
+      end
+
       flash[:success] = 'Messages sent successfully' 
       redirect_to :back
-    rescue 
-      flash[:alert] = 'Messages not send successfully'
-      redirect_to :back
+    #rescue 
+      #flash[:alert] = 'Messages not send successfully'
+      #redirect_to :back
     end
   end
 
