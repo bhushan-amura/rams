@@ -32,25 +32,6 @@ class SkillsController < ApplicationController
     @entity_skills = @entity.skills
   end
 
-  # POST /skills
-  # POST /skills.json
-  def create
-    authorize! :create, @entity
-    @skill = Skill.new(skill_params)
-
-    respond_to do |format|
-      if @skill.save
-        @entity.skills << @skill
-        flash[:notice] = 'Skill was successfully created.'
-        format.html { redirect_to self.send(skill_path,skill_path_params(@skill)) }
-        format.json { render :show, status: :created, location: @skill }
-      else
-        format.html { render :new }
-        format.json { render json: @skill.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
   # PATCH/PUT /skills/1
   # PATCH/PUT /skills/1.json
   def update
@@ -74,17 +55,6 @@ class SkillsController < ApplicationController
     end
   end
 
-  # DELETE /skills/1
-  # DELETE /skills/1.json
-  def destroy
-    authorize! :destroy, @entity
-    @entity.skills.destroy(@skill)
-    flash[:notice] = 'Skill was successfully destroyed.'
-    respond_to do |format|
-      format.html { redirect_to self.send(skill_path('index')) }
-      format.json { head :no_content }
-    end
-  end
 
   private
     # Use callbacks to share common setup or constraints between actions.

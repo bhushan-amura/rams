@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
 
 
   ROLE = [:candidate, :company, :admin]
+
   # Instance methods
   def is?(requested_role)
     self.role == requested_role.to_s

@@ -1,14 +1,14 @@
 class CompaniesController < ApplicationController
 
+  #Helper
+  include Company::JobOpportunitiesHelper
+
+  #cancan
   load_and_authorize_resource
+
   # callbacks
-  before_filter :authenticate_user!
   before_action :set_company, only: [:show, :edit, :update, :destroy, :home]
 
-  include Company::JobOpportunitiesHelper
-  # layout 'application', only: [:new, :create]
-  # layout 'company', only: [:home] 
-  # layout :resolve_layout
 
   # GET /companies
   # GET /companies.json
