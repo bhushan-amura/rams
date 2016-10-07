@@ -1,0 +1,78 @@
+<div class="form-group">
+  <h3 class="text-center">Events</h3>
+  <% @events.each do |company_event| %>
+  <div class="well text-capitalize">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3">
+          <b class="text-center">Event Type</b>
+        </div>
+        <div class="col-sm-9">
+          <p class="text-left"><%= company_event.event_type %></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3">
+          <b class="text-center">organiser</b>
+        </div>
+        <div class="col-sm-9">
+          <p class="text-left"><%= company_event.organiser %></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3">
+          <b class="text-center">venue</b>
+        </div>
+        <div class="col-sm-9">
+          <p class="text-left"><%= company_event.date_time.to_formatted_s(:long_ordinal) %>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3">
+          <b class="text-center">duration</b>
+        </div>
+        <div class="col-sm-9">
+          <p class="text-left"><%= company_event.duration %>
+            hr</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3">
+          <b class="text-center">location</b>
+        </div>
+
+        <div class="col-sm-9">
+          <p class="text-left">
+            <%= company_event.location.building_number %>-<%= company_event.location.building_name %>
+          </br>
+          <%= company_event.location.street_address %>,
+          <%= company_event.location.street_name %>
+        </br>
+        <%= company_event.location.city %>,
+        <%= company_event.location.state %>,
+        <%= company_event.location.country %>
+      </br>
+      ZipCode:
+      <%= company_event.location.zipcode %>
+    </p>
+  </div>
+</div>
+</div>
+
+</div>
+<% end %>
+
+</div>

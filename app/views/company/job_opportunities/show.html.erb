@@ -1,127 +1,153 @@
 <div class="well">
   <div class="form-horizontal">
-    <div class="well">
-      <h2 class="h4formpadd text-capitalize text-center">
-        <b><%= @company_job_opportunity.title %></b>
-      </h2>
+    <h2 class="h4formpadd text-capitalize text-center">
+      <b><%= @company_job_opportunity.title %></b>
+    </h2>
+    <ul class="nav nav-tabs">
+      <li class="active">
+        <a data-toggle="tab" href="#job">Job Post</a>
+      </li>
+      <li>
+        <a data-toggle="tab" href="#selected_candidates">Selected Candidates</a>
+      </li>
+      <li>
+        <a data-toggle="tab" href="#shortlisted_candidates">Shortlisted Candidates</a>
+      </li>
+      <li>
+        <a data-toggle="tab" href="#related_events">Related Events</a>
+      </li>
+    </ul>
+    <div class="tab-content">
+      <div class="well tab-pane fade in active" id="job">
+        <div class="field form-group">
+          <div class="col-sm-2 col-sm-offset-1">
+            <b class="text-center">Shift</b>
+          </div>
+          <div class="col-sm-9">
+            <p class="text-left"><%= @company_job_opportunity.shift %></p>
+          </div>
+        </div>
 
-      <div class="field form-group">
-        <div class="col-sm-2 col-sm-offset-1">
-          <b class="text-center">Shift</b>
+        <div class="field form-group">
+          <div class="col-sm-2 col-sm-offset-1">
+            <b class="text-center">Description</b>
+          </div>
+          <div class="col-sm-9">
+            <p class="text-left"><%= @company_job_opportunity.description %></p>
+          </div>
         </div>
-        <div class="col-sm-9">
-          <p class="text-left"><%= @company_job_opportunity.shift %></p>
-        </div>
-      </div>
 
-      <div class="field form-group">
-        <div class="col-sm-2 col-sm-offset-1">
-          <b class="text-center">Description</b>
+        <div class="field form-group">
+          <div class="col-sm-2 col-sm-offset-1">
+            <b class="text-center">Positions</b>
+          </div>
+          <div class="col-sm-9">
+            <p class="text-left"><%= @company_job_opportunity.number_of_positions %></p>
+          </div>
         </div>
-        <div class="col-sm-9">
-          <p class="text-left"><%= @company_job_opportunity.description %></p>
-        </div>
-      </div>
 
-      <div class="field form-group">
-        <div class="col-sm-2 col-sm-offset-1">
-          <b class="text-center">Positions</b>
+        <div class="field form-group">
+          <div class="col-sm-2 col-sm-offset-1">
+            <b class="text-center">Status</b>
+          </div>
+          <div class="col-sm-9">
+            <p class="text-left"><%= @company_job_opportunity.status %></p>
+          </div>
         </div>
-        <div class="col-sm-9">
-          <p class="text-left"><%= @company_job_opportunity.number_of_positions %></p>
-        </div>
-      </div>
 
-      <div class="field form-group">
-        <div class="col-sm-2 col-sm-offset-1">
-          <b class="text-center">Status</b>
+        <div class="field form-group">
+          <div class="col-sm-2 col-sm-offset-1">
+            <b class="text-center">Experiance</b>
+          </div>
+          <div class="col-sm-9">
+            <p class="text-left"><%= @company_job_opportunity.experience %></p>
+          </div>
         </div>
-        <div class="col-sm-9">
-          <p class="text-left"><%= @company_job_opportunity.status %></p>
-        </div>
-      </div>
 
-      <div class="field form-group">
-        <div class="col-sm-2 col-sm-offset-1">
-          <b class="text-center">Experiance</b>
+        <div class="field form-group">
+          <div class="col-sm-2 col-sm-offset-1">
+            <b class="text-center">CTC</b>
+          </div>
+          <div class="col-sm-9">
+            <p class="text-left"><%= @company_job_opportunity.ctc %></p>
+          </div>
         </div>
-        <div class="col-sm-9">
-          <p class="text-left"><%= @company_job_opportunity.experience %></p>
-        </div>
-      </div>
 
-      <div class="field form-group">
-        <div class="col-sm-2 col-sm-offset-1">
-          <b class="text-center">CTC</b>
-        </div>
-        <div class="col-sm-9">
-          <p class="text-left"><%= @company_job_opportunity.ctc %></p>
-        </div>
-      </div>
-    </div>
-    <div class="well">
-      <h4 class="h4formpadd text-center">Qualifications Required</h4>
-      <% @company_job_opportunity.qualifications.each do |f| %>
-      <div class="field form-group">
-        <div class="col-sm-2 col-sm-offset-1">
-          <b class="text-center">Course</b>
-        </div>
-        <div class="col-sm-9">
-          <p class="text-left"><%= f.course %></p>
-        </div>
-      </div>
+        <div class="well">
+          <h4 class="h4formpadd text-center">Qualifications Required</h4>
+          <% @company_job_opportunity.qualifications.each do |f| %>
+          <div class="field form-group">
+            <div class="col-sm-2 col-sm-offset-1">
+              <b class="text-center">Course</b>
+            </div>
+            <div class="col-sm-9">
+              <p class="text-left"><%= f.course %></p>
+            </div>
+          </div>
 
-      <div class="field form-group">
-        <div class="col-sm-2 col-sm-offset-1">
-          <b class="text-center">Domain</b>
-        </div>
-        <div class="col-sm-9">
-          <p class="text-left"><%= f.domain %></p>
-        </div>
-      </div>
-      <div class="field form-group"></div>
-      <% end %>
-    </div>
-    <div class="well">
-      <h4 class="h4formpadd text-center">Skills Required</h4>
-      <% @company_job_opportunity.skills.each do |f| %>
-      <div class="field form-group">
-        <div class="col-sm-2 col-sm-offset-1">
-          <b class="text-center">Name</b>
-        </div>
-        <div class="col-sm-9">
-          <p class="text-left"><%= f.name %></p>
-        </div>
-      </div>
-      <% end %>
-    </div>
-
-    <div class="well">
-      <h4 class="h4formpadd text-center">Your selected Candidates</h4>
-      <% @selected_candidates.each do |f| %>
-      <div class="field form-group">
-        <div class="col-sm-2 col-sm-offset-1">
-          <b class="text-center">Name</b>
-        </div>
-        <div class="col-sm-9">
-          <%= link_to resume_candidate_path(f.id) do %>
-          <p class="text-left">
-            <%= f.first_name %>
-            <%= f.last_name %>
-          </p>
+          <div class="field form-group">
+            <div class="col-sm-2 col-sm-offset-1">
+              <b class="text-center">Domain</b>
+            </div>
+            <div class="col-sm-9">
+              <p class="text-left"><%= f.domain %></p>
+            </div>
+          </div>
+          <div class="field form-group"></div>
           <% end %>
         </div>
+        <div class="well">
+          <h4 class="h4formpadd text-center">Skills Required</h4>
+          <% @company_job_opportunity.skills.each do |f| %>
+          <div class="field form-group">
+            <div class="col-sm-2 col-sm-offset-1">
+              <b class="text-center">Name</b>
+            </div>
+            <div class="col-sm-9">
+              <p class="text-left"><%= f.name %></p>
+            </div>
+          </div>
+          <% end %>
+        </div>
+
+        <div class="col-sm-2 col-sm-offset-3">
+          <%= link_to 'Edit', edit_company_job_path(job_opportunity_path_params(@company_job_opportunity)), class:"btn btn-info" %>
+        </div>
+
+        <%= link_to 'New Event', new_company_job_event_path(events_path_params(@company_job_opportunity)), class:"btn btn-info" %>
+
       </div>
-      <% end %>
-      <%= link_to "Send Mail", select_candidates_mail_company_job_path(company_id: @company.id,id: @company_job_opportunity.id), method: :post,class:"btn btn-default col-sm-offset-5" %>
+
+      <div class="well tab-pane fade" id="selected_candidates">
+        <h4 class="h4formpadd text-center">Your selected Candidates</h4>
+        <% @selected_candidates.each do |f| %>
+        <div class="field form-group">
+          <div class="col-sm-2 col-sm-offset-1">
+            <b class="text-center">Name</b>
+          </div>
+          <div class="col-sm-9">
+            <%= link_to resume_candidate_path(f.id) do %>
+            <p class="text-left">
+              <%= f.first_name %>
+              <%= f.last_name %>
+            </p>
+            <% end %>
+          </div>
+        </div>
+        <% end %>
+        <%= link_to "Send Mail", select_candidates_mail_company_job_path(company_id: @company.id,id: @company_job_opportunity.id), method: :post,class:"btn btn-default col-sm-offset-5" %>
+      </div>
+
+      <div class="well tab-pane fade" id="shortlisted_candidates">
+        <%= render partial: 'shortlisted_candidates' %>
+      </div>
+
+      <div class="well tab-pane fade" id="related_events">
+        <%= render partial: 'related_events' %>
+      </div>
+
     </div>
+
   </div>
 
-  <div class="col-sm-2 col-sm-offset-3">
-    <%= link_to 'Edit', edit_company_job_path(job_opportunity_path_params(@company_job_opportunity)), class:"btn btn-info" %>
-  </div>
-
-  <%= link_to 'New Event', new_company_job_event_path(events_path_params(@company_job_opportunity)), class:"btn btn-info" %>
 </div>
-
-<%= render partial: 'shortlisted_candidates' %>

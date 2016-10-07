@@ -12,6 +12,7 @@ class Company::JobOpportunitiesController < ApplicationController
   before_action :set_company_job_opportunity, only: [:show, :edit, :update, :select_candidates,:destroy,:send_mail_to_shortlisted_candidates]
   before_action :get_candidates, only: [:show, :edit, :update]
   before_action :selected_candidates, only: [:show]
+  before_action :get_job_events, only: [:index, :show, :edit]
 
   # helpers
   include Company::JobOpportunitiesHelper
@@ -118,6 +119,10 @@ class Company::JobOpportunitiesController < ApplicationController
 
     def get_candidates
       @shortlisted_candidates = @company_job_opportunity.shortlist_candidates
+    end
+
+    def get_job_events
+      @events = @company_job_opportunity.events
     end
 
     def selected_candidates

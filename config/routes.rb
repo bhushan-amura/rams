@@ -6,6 +6,9 @@ Rails.application.routes.draw do
     member do
       get :home
     end
+    member do
+      get :all_events
+    end
     scope module:'company' do
       resources :jobs,controller: 'job_opportunities' do
         patch :select_candidates
