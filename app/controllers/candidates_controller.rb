@@ -82,6 +82,7 @@ class CandidatesController < ApplicationController
   # RESUME /candidate/1/resume
   def resume
     authorize! :resume, current_user.info
+    render layout: "company"
   end
 
   private
@@ -93,14 +94,5 @@ class CandidatesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def candidate_params
       params.require(:candidate).permit( :first_name,:last_name,:dob,:gender, :marital_status, :status,:languages,:summary)
-    end
-
-    def resolve_layout
-     case action_name
-     when "new"
-      'application'
-     else
-      'candidate/layout'
-     end
     end
 end

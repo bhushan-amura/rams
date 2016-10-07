@@ -1,12 +1,12 @@
 <div class="col-sm-3 well">
-  <%= link_to @company.url do %>
+  <%= link_to current_user.info.url do %>
   <div class="well nounderline">
     <p>
       <div class="nounderline">
-        <h3><%= @company.name %></h3>
+        <h3><%= current_user.info.name %></h3>
       </div>
     </p>
-    <%= image_tag( @company.logo , size: "120x70", alt: @company.name) %>
+    <%= image_tag( current_user.info.logo , size: "120x70", alt: current_user.info.name) %>
   </div>
   <% end %>
   <div class="well">
@@ -16,12 +16,12 @@
   </p>
   <p>
     <h4>
-      <span><%= @company.tagline %></span>
+      <span><%= current_user.info.tagline %></span>
     </h4>
   </p>
 </div>
 
 <p>
-  <%= link_to "Post Job Opening", new_company_job_path(@company),class: "btn btn-default" %>
+  <%= link_to "Post Job Opening", new_company_job_path(current_user.info),class: "btn btn-default" %>
 </p>
 </div>
