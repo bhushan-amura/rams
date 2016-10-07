@@ -75,6 +75,10 @@ class  Company::JobOpportunity < ActiveRecord::Base
     shortlist
   end
 
+  def get_candidates_as_users
+    User.where(id:self.candidates.pluck(:user_id))
+  end
+
   # class methods/scope
   def self.get_recent_jobs(job_count=5)
     Company.joins(:job_opportunities).select('companies.name','company_job_opportunities.title','company_job_opportunities.id','company_job_opportunities.created_at').distinct.order(:created_at).limit(job_count)

@@ -6,7 +6,8 @@ class Company::EventsController < ApplicationController
   before_action :set_company_job
   before_action :set_company_event, only: [:show, :edit, :update, :destroy]
 
-  layout 'company'
+
+  include Company::EventsHelper
 
   # GET /company/events
   # GET /company/events.json

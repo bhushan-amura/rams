@@ -2,8 +2,6 @@ class CandidatesController < ApplicationController
 
   load_and_authorize_resource
 
-  # layouts
-  layout :resolve_layout
 
   # filters/callbacks
   before_action :set_candidate, only: [:show, :edit, :update, :destroy, :home, :resume]
@@ -37,6 +35,7 @@ class CandidatesController < ApplicationController
     respond_to do |format|
       if @candidate.save
         flash[:notice] = 'Candidate was successfully created.'
+        ExampleMailer.sample_email(User.find(@candidate.user_id)).deliver_later
         format.html { redirect_to home_candidate_path(@candidate) }
         format.json { render :show, status: :created, location: @candidate }
       else

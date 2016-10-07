@@ -3,13 +3,13 @@ class Company::JobOpportunitiesController < ApplicationController
   load_and_authorize_resource :company
   load_and_authorize_resource :job_opportunity, :through => :company, :param_method => "company_job_opportunity_params"
   #layout
-  layout 'company'
+  # layout 'company'
 
   # callbacks
   before_action :set_company
   before_action :set_qualifications
   before_action :set_skills
-  before_action :set_company_job_opportunity, only: [:show, :edit, :update, :select_candidates,:destroy]
+  before_action :set_company_job_opportunity, only: [:show, :edit, :update, :select_candidates,:destroy,:send_mail_to_shortlisted_candidates]
   before_action :get_candidates, only: [:show, :edit, :update]
   before_action :selected_candidates, only: [:show]
 
@@ -83,6 +83,12 @@ class Company::JobOpportunitiesController < ApplicationController
   def select_candidates
     @company_job_opportunity.candidates << Candidate.find(params[:shortlist][:candidate_ids].reverse.drop(1))
     redirect_to company_job_path(company_id:params[:company_id],id: params[:job_id])
+  end
+
+  def send_mail_to_shortlisted_candidates
+    UserNotifier.send_shortlist_mail_to(@company_job_opportunity.get_candidates_as_users,@company_job_opportunity).deliver
+    flash[:success] = 'Messages sent successfully' 
+    redirect_to :back
   end
 
   private
