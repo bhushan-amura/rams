@@ -141,7 +141,7 @@ RSpec.describe Candidate, type: :model do
 
 		it "has many job_opportunities" do
 			assc = Candidate.reflect_on_association(:job_opportunities)
-	    expect(assc.macro).to eq :has_and_belongs_to_many
+	    expect(assc.macro).to eq :has_many
 		end
 
 		it "has many candidate_qualification_assignments" do
