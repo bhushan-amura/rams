@@ -2,7 +2,6 @@ class Company::JobOpportunitiesController < ApplicationController
 
   load_and_authorize_resource :company
   load_and_authorize_resource :job_opportunity, :through => :company, :param_method => "company_job_opportunity_params"
-  #layout
 
   # callbacks
   before_action :set_company
@@ -117,6 +116,7 @@ class Company::JobOpportunitiesController < ApplicationController
  
 
   private
+
     # Use callbacks to share common setup or constraints between actions.
     def set_company_job_opportunity
       @company_job_opportunity = @company.job_opportunities.find(params[:id]||params[:job_id])
