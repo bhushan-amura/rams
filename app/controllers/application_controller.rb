@@ -8,22 +8,23 @@ class ApplicationController < ActionController::Base
 
   private
   def resolve_layout
+        # byebug
+
     if !current_user.nil?
       if (params[:action] == "new" || params[:action] == "create") && (params[:controller] == "companies" || params[:controller] == "candidates" )
         'application'
-      elsif (current_user.is? :company)
+      elsif (current_user.is? :company) || (params[:action] == "resume")
         'company'
+        byebug
       elsif (current_user.is? :candidate)
         'candidate/layout'
       end
     else
       'application'
     end
-
   end
 
   rescue_from CanCan::AccessDenied do |exception|
-    byebug
     redirect_to root_url, :alert => exception.message
   end
 

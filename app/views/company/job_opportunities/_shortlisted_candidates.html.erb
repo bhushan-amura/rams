@@ -7,6 +7,7 @@
     <%= collection_check_boxes :shortlist,:candidate_ids,@shortlisted_candidates,:id,:name_with_initial do |b| %>
     <p><%#= b.label(:"data-value" => b.value) %>
       <%=  b.check_box %><%=link_to b.text , resume_candidate_path(b.object.id)%></p>
+      <%#= render partial: 'resume', :locals => {:resume => b.object} %>
     <% end %>
   </div>
   <p>

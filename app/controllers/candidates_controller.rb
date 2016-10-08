@@ -3,7 +3,7 @@ class CandidatesController < ApplicationController
   load_and_authorize_resource
 
   # layouts
-  layout :resolve_layout
+  # layout :resolve_layout
 
   # filters/callbacks
   before_action :set_candidate, only: [:show, :edit, :update, :destroy, :home, :resume]
@@ -96,12 +96,12 @@ class CandidatesController < ApplicationController
       params.require(:candidate).permit( :first_name,:last_name,:dob,:gender, :marital_status, :status,:languages,:summary)
     end
 
-    def resolve_layout
-     case action_name
-     when "new"
-      'application'
-     else
-      'candidate/layout'
-     end
-    end
+    # def resolve_layout
+    #  case action_name
+    #  when "new"
+    #   'application'
+    #  else
+    #   'candidate/layout'
+    #  end
+    # end
 end

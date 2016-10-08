@@ -31,7 +31,7 @@ class  Company::JobOpportunity < ActiveRecord::Base
     # Maybe precompute columns of experience, achievements, qualifications,etc. in candidate table in order to
     # sort the results
    
-    job_qualifications = self.qualifications.empty? ? Qualification.all : self.qualificaitions
+    job_qualifications = self.qualifications.empty? ? Qualification.all : self.qualifications
     job_skills = self.skills.empty? ? Skill.all : self.skills
 
     candidates_with_required_qualifications = Candidate.joins(:qualifications).where("qualifications.id":job_qualifications).select("count(qualifications.id) as qualification_count, candidates.*").group(:id).order("1 DESC")
