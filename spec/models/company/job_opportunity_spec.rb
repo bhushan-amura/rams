@@ -84,9 +84,9 @@ RSpec.describe Company::JobOpportunity, type: :model do
       expect(assc.macro).to eq :has_many
     end
 
-    it "has and belong to many candidates" do
+    it "has many candidates" do
       assc = Company::JobOpportunity.reflect_on_association(:candidates)
-      expect(assc.macro).to eq :has_and_belongs_to_many
+      expect(assc.macro).to eq :has_many
     end
   end
 
