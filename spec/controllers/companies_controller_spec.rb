@@ -26,7 +26,7 @@ RSpec.describe CompaniesController, type: :controller do
   describe "GET #index" do
     it "assigns all companies as @companies" do
       company = @company.save valid_attributes
-      get :index, {attributes_for(:company)}, session: valid_session
+      get :index, attributes_for(:company), session: valid_session
       expect(assigns(:companies)).to eq([company])
     end
   end

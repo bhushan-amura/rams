@@ -6,7 +6,11 @@ RSpec.describe Candidate, type: :model do
 		@candidate = FactoryGirl.build(:candidate)
 	end
 
-	let(:institute) { Institute.new(university:'sppu', campus:'pict')}
+	before(:each) do
+		@institute = FactoryGirl.build(:institute)
+	end
+
+	# let(:institute) { Institute.new(university:'sppu', campus:'pict')}
 
 
 	let(:qualification) {Qualification.new(course:"engineering", domain: "comp")}
@@ -179,6 +183,7 @@ RSpec.describe Candidate, type: :model do
 				# institute = FactoryGirl.build(:institute)
 				# qualification = FactoryGirl.build(:qualification)
 				candidate = @candidate
+				institute = @institute
 				candidate.save!
 				institute.save!
 				institute.should be_valid
@@ -193,6 +198,7 @@ RSpec.describe Candidate, type: :model do
 				# institute = FactoryGirl.build(:institute)
 				# qualification = FactoryGirl.build(:qualification)
 				candidate = @candidate
+				institute = @institute
 				candidate.save!
 				institute.save!
 				institute.should be_valid
