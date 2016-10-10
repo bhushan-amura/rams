@@ -1,5 +1,6 @@
 source 'http://rubygems.org'
 
+gem 'simplecov', :require => false, :group => :test
 gem 'figaro'
 gem 'active_record_union'
 gem 'cancancan', '~> 1.15'
