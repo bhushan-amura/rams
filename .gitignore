@@ -6,3 +6,6 @@ db/migrate/*
 tmp/*
 *.swo
 public/uploads/*
+
+# Ignore application configuration
+/config/application.yml

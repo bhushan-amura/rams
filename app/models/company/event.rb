@@ -15,10 +15,9 @@ class Company::Event < ActiveRecord::Base
 
   # associations
   belongs_to :job_opportunity
-
   has_one :location, as: :locatable
   accepts_nested_attributes_for :location
-  
+
   # validations
   validates :event_type, presence:true, :format => REGEX_NAME_FORMAT, length: { :maximum => 255}
   validates :date_time, presence:true

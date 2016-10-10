@@ -31,11 +31,6 @@ RSpec.describe Review, type: :model do
 	end
 
 	context "text" do
-		# it "invalid! field required." do
-		# 	review.text = ""
-		# 	expect(review).to be_invalid
-		# end
-
 		it "invalid! character limit 65535 exceeded." do
 			review.text = "g"*65536
 			expect(review).to be_invalid
@@ -44,11 +39,22 @@ RSpec.describe Review, type: :model do
 
 	context "rating" do
 		it "invalid! must be in between 1-5." do
-			# review.rating = 4#(1..5).to_a.sample
-			# expect(review).to be_valid
-			# expect(2).to be_within(1).of(5)
-			# expect(review).to validate_inclusion_of(:rating).in_array((1..5).to_a)
+			review.rating = 6
+			expect(review).to be_invalid
+			expect(review.rating).to be > 5
+			expect(review).to be_invalid
 		end
 	end
 
+	context "when Association" do
+	  it "belongs to candidate" do
+			assc = Review.reflect_on_association(:candidate)
+      expect(assc.macro).to eq :belongs_to
+	  end
+
+		it "belongs to company" do
+			assc = Review.reflect_on_association(:company)
+      expect(assc.macro).to eq :belongs_to
+	  end
+	end
 end

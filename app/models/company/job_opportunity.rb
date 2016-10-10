@@ -11,7 +11,9 @@ class  Company::JobOpportunity < ActiveRecord::Base
   has_many :skills, through: :skill_assignments
   has_many :qualification_assignments, as: :qualifiable, dependent: :destroy
   has_many :qualifications, through: :qualification_assignments
-  has_and_belongs_to_many :candidates, join_table:'candidates_job_opportunities'
+  
+  has_many :candidates_job_opportunities
+  has_many :candidates, through: :candidates_job_opportunities
 
   accepts_nested_attributes_for :qualifications, :allow_destroy => true
   accepts_nested_attributes_for :skills, :allow_destroy => true
@@ -30,13 +32,13 @@ class  Company::JobOpportunity < ActiveRecord::Base
     # TODO : Figure out a way to incorporate experience in this
     # Maybe precompute columns of experience, achievements, qualifications,etc. in candidate table in order to
     # sort the results
-   
+
     job_qualifications = self.qualifications.empty? ? Qualification.all : self.qualifications
     job_skills = self.skills.empty? ? Skill.all : self.skills
 
     candidates_with_required_qualifications = Candidate.joins(:qualifications).where("qualifications.id":job_qualifications).select("count(qualifications.id) as qualification_count, candidates.*").group(:id).order("1 DESC")
 
-   
+
     candidates_with_required_qualifications =  candidates_with_required_qualifications.where.not(id:self.candidates)
 
     candidates_with_required_qualifications.map {|x| x.qual_cnt = x.qualification_count; x.skill_cnt = 0}
@@ -51,7 +53,7 @@ class  Company::JobOpportunity < ActiveRecord::Base
     qual_ids = candidates_with_required_qualifications.pluck(:id)
     skill_ids = candidates_with_required_skills.pluck(:id)
 
-    common_ids = qual_ids & skill_ids 
+    common_ids = qual_ids & skill_ids
     uncommon_ids_qual = qual_ids - common_ids
     uncommon_ids_skill = skill_ids - common_ids
     shortlist = []
@@ -73,6 +75,18 @@ class  Company::JobOpportunity < ActiveRecord::Base
 
 
     shortlist
+  end
+
+  def get_candidates_as_users
+    User.where(id:self.candidates.pluck(:user_id))
+  end
+  
+  def get_candidates_with_status
+    self.candidates_job_opportunities.joins(:candidate).select("candidates.*,candidates_job_opportunities.*")
+  end
+
+  def change_status(candidate,status)
+    CandidatesJobOpportunity.update(self.candidates_job_opportunities.find_by(candidate_id: candidate.id).id,status:CandidatesJobOpportunity.statuses[status])
   end
 
   # class methods/scope

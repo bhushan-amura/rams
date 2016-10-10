@@ -17,11 +17,16 @@
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 # require 'support/factory_girl'
+# Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 
 RSpec.configure do |config|
 
   config.before(:all) do
     FactoryGirl.reload
+  end
+
+  config.expect_with :rspec do |c|
+    c.syntax = [:should, :expect]
   end
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest

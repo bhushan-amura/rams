@@ -25,7 +25,9 @@
     border-color: #c3c3c3;
     // padding-bottom: 4px;
 }
-
+.custompadd {
+  padding-top: 10px;
+}
 .custom {
     padding-top: 60px;
 }
@@ -90,4 +92,7 @@
 .btn-size-custom {
     width: 28%;
     background-color: #A27DC3;
+}
+.bordercustom {
+  border: 0;
 }

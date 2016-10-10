@@ -1,5 +1,6 @@
 source 'http://rubygems.org'
 
+gem 'figaro'
 gem 'active_record_union'
 gem 'cancancan', '~> 1.15'
 gem 'cancan', '~> 1.6', '>= 1.6.10'
@@ -11,6 +12,11 @@ gem 'bootstrap-tagsinput-rails'
 gem 'mysql2', '>= 0.3.13', '< 0.5'
 gem 'devise'
 gem 'carrierwave', '~> 0.11.2'
+
+# for pdf
+gem 'prawn'
+gem 'prawn_rails'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'
 # Use sqlite3 as the database for Active Record
@@ -52,7 +58,7 @@ group :development, :test do
   # gem 'rspec-mocks', '~> 3.5'
   # gem 'rspec-support', '~> 3.4', '>= 3.4.1'
   # gem 'rspec-matchers-matchers', '~> 1.0'
-  # gem 'factory_girl'#, '~> 4.7'
+  gem 'factory_girl', '~> 4.7'
   gem "factory_girl_rails", "~> 4.0"
   # gem 'activesupport', '~> 5.0', '>= 5.0.0.1'
   gem 'database_cleaner', '~> 1.5', '>= 1.5.3'

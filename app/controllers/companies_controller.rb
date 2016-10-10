@@ -1,14 +1,13 @@
 class CompaniesController < ApplicationController
 
-  load_and_authorize_resource
-  # callbacks
-  before_filter :authenticate_user!
-  before_action :set_company, only: [:show, :edit, :update, :destroy, :home]
-
+  #Helper
   include Company::JobOpportunitiesHelper
-  # layout 'application', only: [:new, :create]
-  # layout 'company', only: [:home] 
-  # layout :resolve_layout
+
+  #cancan
+  load_and_authorize_resource
+
+  # callbacks
+  before_action :set_company, only: [:show, :edit, :update, :destroy, :home]
 
   # GET /companies
   # GET /companies.json
@@ -81,6 +80,10 @@ class CompaniesController < ApplicationController
     end
   end
 
+  def all_events
+    @all_events = @company.events
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_company
@@ -100,6 +103,5 @@ class CompaniesController < ApplicationController
     #     'company'
     #    end
     # end
-
 
 end

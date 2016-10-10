@@ -25,7 +25,9 @@ class Candidate < ActiveRecord::Base
   has_many :skills, through: :skill_assignments
   has_many :reviews, dependent: :destroy
 
-  has_and_belongs_to_many :job_opportunities, join_table: 'candidates_job_opportunities', class_name:'Company::JobOpportunity'
+  has_many :candidates_job_opportunities
+  has_many :job_opportunities, through: :candidates_job_opportunities
+
   has_many :candidate_qualification_assignments, dependent: :destroy
   has_many :qualification_assignments, through: :candidate_qualification_assignments
   has_many :qualifications, through: :qualification_assignments 

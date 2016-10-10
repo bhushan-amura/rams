@@ -48,4 +48,11 @@ RSpec.describe Candidate::Experience, type: :model do
 			expect(experience).to be_invalid
 		end
 	end
+
+	context "when Association" do
+	  it "belongs to candidate" do
+			assc = Candidate::Experience.reflect_on_association(:candidate)
+      expect(assc.macro).to eq :belongs_to
+	  end
+	end
 end

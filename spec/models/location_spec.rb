@@ -2,40 +2,44 @@ require 'rails_helper'
 
 RSpec.describe Location, type: :model do
 
-  let(:candidate) {Candidate.new(first_name:"abcd",last_name:"efgh", dob:'1992/03/15', gender:'M', marital_status:"married",status:true, languages:"HIBRU", summary:"dont know",  phone:"12321442415",interests:"dddd")}
-
-  let(:company){Company.new(name:"jayesh",company_type:"qwe",url:"qwe.com",tagline:"qwerty",phone:"1234567789",description:"qwerty ytrewq",number_of_employees:123,logo:"qwe")}
-
-  let(:location) {Location.new(city: "New Erickaville", street_name: "Antonietta Street", street_address: "57611 MacGyver Pines", building_name: "facilis", building_number: "4691", zipcode: "89066-8916", state: "North Dakota", country: "Puerto Rico")}
+  before(:each) do
+    @location = FactoryGirl.build(:location)
+  end
 
   context "model with attributes valid?" do
-    it "" do
-      expect(location).to be_valid
-      company.save!
+    it "all the fields are valid" do
+      # FactoryGirl.build(:location).should be_valid
+      company = FactoryGirl.create(:company)
+      candidate = FactoryGirl.build(:candidate)
+      location = @location
+      location.should be_valid
       location.save!
-      Company.first.location = location
-      expect(Company.first.location).to be_valid
-      candidate.save!
-      Candidate.first.location = location
-      expect(Candidate.first.location).to be_valid
+      company.location = location
+      expect(company.location).to be_valid
+      candidate.location = location
+      expect(candidate.location).to be_valid
     end
   end
   context "when city" do
     it "invalid! city required" do
+      location = @location
       location.city = ""
       expect(location).to be_invalid
     end
     it "invalid! city length exceeds 255" do
+      location = @location
       location.city = "a"*256
       expect(location).to be_invalid
     end
   end
   context "when street_name" do
     it "invalid! street_name required" do
+      location = @location
       location.street_name = ""
       expect(location).to be_invalid
     end
     it "invalid! street_name length exceeds 255" do
+      location = @location
       location.street_name = "a"*256
       expect(location).to be_invalid
     end
@@ -43,36 +47,43 @@ RSpec.describe Location, type: :model do
 
   context "when street_address" do
     it "invalid! street_address required" do
+      location = @location
       location.street_address = ""
       expect(location).to be_invalid
     end
     it "invalid! street_address length exceeds 255" do
+      location = @location
       location.street_address = "a"*256
       expect(location).to be_invalid
     end
   end
   context "when building_name" do
     it "invalid! building_name required" do
+      location = @location
       location.building_name = ""
       expect(location).to be_invalid
     end
     it "invalid! building_name length exceeds 255" do
+      location = @location
       location.building_name = "a"*256
       expect(location).to be_invalid
     end
   end
   context "when building_number" do
-    it "invalid! building_number required" do
-      location.building_number = ""
-      expect(location).to be_invalid
+    it "invalid! building_number required(optional)" do
+      location = @location
+      location.building_number = nil
+      expect(location).to be_valid
     end
   end
   context "when state" do
     it "invalid! state required" do
+      location = @location
       location.state = ""
       expect(location).to be_invalid
     end
     it "invalid! state length exceeds 255" do
+      location = @location
       location.state = "a"*256
       expect(location).to be_invalid
     end
@@ -80,22 +91,33 @@ RSpec.describe Location, type: :model do
 
   context "when country" do
     it "invalid! country required" do
+      location = @location
       location.country = ""
       expect(location).to be_invalid
     end
     it "invalid! country length exceeds 255" do
+      location = @location
       location.country = "a"*256
       expect(location).to be_invalid
     end
   end
   context "when zipcode" do
     it "invalid! zipcode required" do
+      location = @location
       location.zipcode = ""
       expect(location).to be_invalid
     end
     it "invalid! zipcode length exceeds 255" do
+      location = @location
       location.zipcode = "a"*256
       expect(location).to be_invalid
+    end
+  end
+
+  context "Associations" do
+    it "it belongs to locatable" do
+      assc = Location.reflect_on_association(:locatable)
+      expect(assc.macro).to eq :belongs_to
     end
   end
 end

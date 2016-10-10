@@ -5,33 +5,31 @@ class Company::EventsController < ApplicationController
   before_action :set_company
   before_action :set_company_job
   before_action :set_company_event, only: [:show, :edit, :update, :destroy]
-  include Company::EventsHelper
-  # GET /company/events
-  # GET /company/events.json
+
   def index
     authorize! :index, @company
     @company_events = @company_job.events
   end
 
-  # GET /company/events/1
-  # GET /company/events/1.json
+  # GET /company/1/events/1
+  # GET /company/1/events/1.json
   def show
     authorize! :show, @company
   end
 
-  # GET /company/events/new
+  # GET /company/1/events/new
   def new
     authorize! :new, @company
     @company_event = Company::Event.new
   end
 
-  # GET /company/events/1/edit
+  # GET /company/1/events/1/edit
   def edit
     authorize! :edit, @company
   end
 
-  # POST /company/events
-  # POST /company/events.json
+  # POST /company/1/events
+  # POST /company/1/events.json
   def create
     authorize! :create, @company
     @company_event = @company_job.events.build(company_event_params)
@@ -48,8 +46,8 @@ class Company::EventsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /company/events/1
-  # PATCH/PUT /company/events/1.json
+  # PATCH/PUT /company/1/events/1
+  # PATCH/PUT /company/1/events/1.json
   def update
     authorize! :update, @company
     respond_to do |format|
@@ -64,8 +62,8 @@ class Company::EventsController < ApplicationController
     end
   end
 
-  # DELETE /company/events/1
-  # DELETE /company/events/1.json
+  # DELETE /company/1/events/1
+  # DELETE /company/1/events/1.json
   def destroy
     authorize! :destroy, @company
     @company_event.destroy

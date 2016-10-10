@@ -1,324 +1,391 @@
-<div class="container">
-  <h2>Profile</h2>
+<div class="container col-sm-12">
+  <h2 class="text-center"><%= @candidate.first_name %>'s Profile</h2>
   <div class="well">
     <div class="row">
       <div class="col-sm-3">
-        <p><b>First Name</b></p>
+        <p>
+          <b>First Name</b>
+        </p>
       </div>
       <div class="col-sm-6">
-        <p><%= @candidate.first_name%> </p>
+        <p><%= @candidate.first_name%>
+        </p>
       </div>
     </div>
     <div class="row">
       <div class="col-sm-3">
-        <p><b>Last Name</b></p>
+        <p>
+          <b>Last Name</b>
+        </p>
       </div>
       <div class="col-sm-6">
-        <p><%= @candidate.last_name%> </p>
+        <p><%= @candidate.last_name%>
+        </p>
       </div>
     </div>
     <div class="row">
       <div class="col-sm-3">
-        <p><b>Date of birth</b></p>
+        <p>
+          <b>Date of birth</b>
+        </p>
       </div>
       <div class="col-sm-6">
-        <p><%= @candidate.dob%> </p>
+        <p><%= @candidate.dob%>
+        </p>
       </div>
     </div>
     <div class="row">
       <div class="col-sm-3">
-        <p><b>Marital status</b></p>
+        <p>
+          <b>Marital status</b>
+        </p>
       </div>
       <div class="col-sm-6">
-        <p><%= @candidate.marital_status %> </p>
+        <p><%= @candidate.marital_status %>
+        </p>
       </div>
     </div>
     <div class="row">
       <div class="col-sm-3">
-        <p><b>Job status</b></p>
+        <p>
+          <b>Job status</b>
+        </p>
       </div>
       <div class="col-sm-6">
-        <p><%= @candidate.status%> </p>
+        <p><%= @candidate.status%>
+        </p>
       </div>
     </div>
     <div class="row">
       <div class="col-sm-3">
-        <p><b>Languages</b></p>
+        <p>
+          <b>Languages</b>
+        </p>
       </div>
       <div class="col-sm-6">
-        <p><%= @candidate.languages%> </p>
+        <p><%= @candidate.languages%>
+        </p>
       </div>
     </div>
     <div class="row">
       <div class="col-sm-3">
-        <p><b>Summary</b></p>
+        <p>
+          <b>Summary</b>
+        </p>
       </div>
       <div class="col-sm-6">
-        <p><%= @candidate.summary%> </p>
+        <p><%= @candidate.summary%>
+        </p>
       </div>
     </div>
   </div>
   <h2>Achievements</h2>
   <% if !@candidate.achievements.empty? %>
-    <% @candidate.achievements.each do |candidate_achievement| %>
-      <div class="well">
+  <% @candidate.achievements.each do |candidate_achievement| %>
+  <div class="well">
 
-        <div class="row">
-          <div class="col-sm-3">
-            <p><b>Title</b></p>
-          </div>
-          <div class="col-sm-6">
-            <p><%= candidate_achievement.title%></p>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-3">
-            <p><b>Description</b></p>
-          </div>
-          <div class="col-sm-6">
-            <p><%= candidate_achievement.description %></p>
-          </div>
-        </div>
+    <div class="row">
+      <div class="col-sm-3">
+        <p>
+          <b>Title</b>
+        </p>
       </div>
-    <% end %>
-  <% else %>
-    <div class="jumbotron">
-      <h3 class="text-muted col-sm-offset-5">No Achievements</h3>
+      <div class="col-sm-6">
+        <p><%= candidate_achievement.title%></p>
+      </div>
     </div>
+    <div class="row">
+      <div class="col-sm-3">
+        <p>
+          <b>Description</b>
+        </p>
+      </div>
+      <div class="col-sm-6">
+        <p><%= candidate_achievement.description %></p>
+      </div>
+    </div>
+  </div>
+  <% end %>
+<% else %>
+  <div class="jumbotron">
+    <h3 class="text-muted col-sm-offset-5">No Achievements</h3>
+  </div>
   <% end %>
   <h2>Experiences</h2>
   <% if !@candidate.experiences.empty? %>
-    <% @candidate.experiences.each do |candidate_experience| %>
-      <div class="well">
-        <div class="row">
-          <div class="col-sm-3">
-            <p><b>Name</b></p>
-          </div>
-          <div class="col-sm-6">
-            <p><%= candidate_experience.name %></p>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-3">
-            <p><b>Start Date</b></p>
-          </div>
-          <div class="col-sm-6">
-            <p><%= candidate_experience.start_date %></p>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-3">
-            <p><b>End Date</b></p>
-          </div>
-          <div class="col-sm-6">
-            <p><%= candidate_experience.end_date %></p>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-3">
-            <p><b>Shift Type</b></p>
-          </div>
-          <div class="col-sm-6">
-            <p><%= candidate_experience.shift_type %></p>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-3">
-            <p><b>Description</b></p>
-          </div>
-          <div class="col-sm-6">
-            <p><%= candidate_experience.description %></p>
-          </div>
-        </div>
+  <% @candidate.experiences.each do |candidate_experience| %>
+  <div class="well">
+    <div class="row">
+      <div class="col-sm-3">
+        <p>
+          <b>Name</b>
+        </p>
       </div>
-    <% end %>
-  <% else %>
-    <div class="jumbotron">
-      <h3 class="text-muted col-sm-offset-5">No Experiences</h3>
+      <div class="col-sm-6">
+        <p><%= candidate_experience.name %></p>
+      </div>
     </div>
+    <div class="row">
+      <div class="col-sm-3">
+        <p>
+          <b>Start Date</b>
+        </p>
+      </div>
+      <div class="col-sm-6">
+        <p><%= candidate_experience.start_date %></p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-3">
+        <p>
+          <b>End Date</b>
+        </p>
+      </div>
+      <div class="col-sm-6">
+        <p><%= candidate_experience.end_date %></p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-3">
+        <p>
+          <b>Shift Type</b>
+        </p>
+      </div>
+      <div class="col-sm-6">
+        <p><%= candidate_experience.shift_type %></p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-3">
+        <p>
+          <b>Description</b>
+        </p>
+      </div>
+      <div class="col-sm-6">
+        <p><%= candidate_experience.description %></p>
+      </div>
+    </div>
+  </div>
+  <% end %>
+<% else %>
+  <div class="jumbotron">
+    <h3 class="text-muted col-sm-offset-5">No Experiences</h3>
+  </div>
   <% end %>
   <h2>Links</h2>
   <% if !@candidate.links.empty? %>
-    <% @candidate.links.each do |candidate_link| %>
-      <div class="well">
-        <div class="row">
-          <div class="col-sm-3">
-            <p><b>Link Type</b></p>
-          </div>
-          <div class="col-sm-9">
-            <p><%= candidate_link.link_type %></p>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-3">
-            <p><b>Url</b></p>
-          </div>
-          <div class="col-sm-9">
-            <p><%= link_to candidate_link.url %></p>
-          </div>
-        </div>
+  <% @candidate.links.each do |candidate_link| %>
+  <div class="well">
+    <div class="row">
+      <div class="col-sm-3">
+        <p>
+          <b>Link Type</b>
+        </p>
       </div>
-    <% end %>
-  <% else %>
-    <div class="jumbotron">
-      <h3 class="text-muted col-sm-offset-5">No Links</h3>
+      <div class="col-sm-9">
+        <p><%= candidate_link.link_type %></p>
+      </div>
     </div>
+    <div class="row">
+      <div class="col-sm-3">
+        <p>
+          <b>Url</b>
+        </p>
+      </div>
+      <div class="col-sm-9">
+        <p><%= link_to candidate_link.url %></p>
+      </div>
+    </div>
+  </div>
+  <% end %>
+<% else %>
+  <div class="jumbotron">
+    <h3 class="text-muted col-sm-offset-5">No Links</h3>
+  </div>
   <% end %>
   <h2>Projects</h2>
   <% if !@candidate.projects.empty? %>
-    <% @candidate.projects.each do |candidate_project| %>
-      <div class="well">
-        <div class="row">
-          <div class="col-sm-3">
-            <p><b>Title</b></p>
-          </div>
-          <div class="col-sm-6">
-            <p><%= candidate_project.title %></p>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-3">
-            <p><b>Domain</b></p>
-          </div>
-          <div class="col-sm-6">
-            <p><%= candidate_project.domain %></p>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-3">
-            <p><b>Start date</b></p>
-          </div>
-          <div class="col-sm-6">
-            <p><%= candidate_project.start_date %></p>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-3">
-            <p><b>End date</b></p>
-          </div>
-          <div class="col-sm-6">
-            <p><%= candidate_project.end_date %></p>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-3">
-            <p><b>Position</b></p>
-          </div>
-          <div class="col-sm-6">
-            <p><%= candidate_project.position %></p>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-3">
-            <p><b>Organisation</b></p>
-          </div>
-          <div class="col-sm-6">
-            <p><%= candidate_project.organisation%></p>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-3">
-            <p><b>Description</b></p>
-          </div>
-          <div class="col-sm-6">
-            <p><%= candidate_project.description %></p>
-          </div>
-        </div>
+  <% @candidate.projects.each do |candidate_project| %>
+  <div class="well">
+    <div class="row">
+      <div class="col-sm-3">
+        <p>
+          <b>Title</b>
+        </p>
       </div>
-    <% end %>
-  <% else %>
-    <div class="jumbotron">
-      <h3 class="text-muted col-sm-offset-5">No Projects</h3>
+      <div class="col-sm-6">
+        <p><%= candidate_project.title %></p>
+      </div>
     </div>
+    <div class="row">
+      <div class="col-sm-3">
+        <p>
+          <b>Domain</b>
+        </p>
+      </div>
+      <div class="col-sm-6">
+        <p><%= candidate_project.domain %></p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-3">
+        <p>
+          <b>Start date</b>
+        </p>
+      </div>
+      <div class="col-sm-6">
+        <p><%= candidate_project.start_date %></p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-3">
+        <p>
+          <b>End date</b>
+        </p>
+      </div>
+      <div class="col-sm-6">
+        <p><%= candidate_project.end_date %></p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-3">
+        <p>
+          <b>Position</b>
+        </p>
+      </div>
+      <div class="col-sm-6">
+        <p><%= candidate_project.position %></p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-3">
+        <p>
+          <b>Organisation</b>
+        </p>
+      </div>
+      <div class="col-sm-6">
+        <p><%= candidate_project.organisation%></p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-3">
+        <p>
+          <b>Description</b>
+        </p>
+      </div>
+      <div class="col-sm-6">
+        <p><%= candidate_project.description %></p>
+      </div>
+    </div>
+  </div>
+  <% end %>
+<% else %>
+  <div class="jumbotron">
+    <h3 class="text-muted col-sm-offset-5">No Projects</h3>
+  </div>
   <% end %>
   <h2>References</h2>
   <% if !@candidate.references.empty? %>
-    <% @candidate.references.each do |candidate_reference| %>
-      <div class="well">
-        <div class="row">
-          <div class="col-sm-3">
-            <p><b>Name</b></p>
-          </div>
-          <div class="col-sm-9">
-            <p><%= candidate_reference.name %></p>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-3">
-            <p><b>Email</b></p>
-          </div>
-          <div class="col-sm-9">
-            <p><%= candidate_reference.email %></p>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-3">
-            <p><b>Contact</b></p>
-          </div>
-          <div class="col-sm-9">
-            <p><%= candidate_reference.contact %></p>
-          </div>
-        </div>
+  <% @candidate.references.each do |candidate_reference| %>
+  <div class="well">
+    <div class="row">
+      <div class="col-sm-3">
+        <p>
+          <b>Name</b>
+        </p>
       </div>
-    <% end %>
-  <% else %>
-    <div class="jumbotron">
-      <h3 class="text-muted col-sm-offset-5">No References</h3>
+      <div class="col-sm-9">
+        <p><%= candidate_reference.name %></p>
+      </div>
     </div>
+    <div class="row">
+      <div class="col-sm-3">
+        <p>
+          <b>Email</b>
+        </p>
+      </div>
+      <div class="col-sm-9">
+        <p><%= candidate_reference.email %></p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-3">
+        <p>
+          <b>Contact</b>
+        </p>
+      </div>
+      <div class="col-sm-9">
+        <p><%= candidate_reference.contact %></p>
+      </div>
+    </div>
+  </div>
+  <% end %>
+<% else %>
+  <div class="jumbotron">
+    <h3 class="text-muted col-sm-offset-5">No References</h3>
+  </div>
   <% end %>
   <h3>Skills</h3>
   <% if !@candidate.skills.empty? %>
-    <div class="row well">
-      <% @candidate.skills.each do |skill| %>
-        <button class="btn btn-info"><%= skill.name %></button>
-      <% end %>
-    </div>
-  <% else %>
-    <div class="jumbotron">
-      <h3 class="text-muted col-sm-offset-5">No Skills</h3>
-    </div>
+  <div class="row well">
+    <% @candidate.skills.each do |skill| %>
+    <button class="btn btn-info"><%= skill.name %></button>
+    <% end %>
+  </div>
+<% else %>
+  <div class="jumbotron">
+    <h3 class="text-muted col-sm-offset-5">No Skills</h3>
+  </div>
   <% end %>
   <h2>Qualifications</h2>
   <% if !@candidate.get_institutes_with_qualifications.empty? %>
-    <% @candidate.get_institutes_with_qualifications.each do |entity| %>
-      <div class="well">
-        <div class="row">
-          <div class="col-sm-3">
-            <p><b>Course</b></p>
-          </div>
-          <div class="col-sm-9">
-            <p><%= entity[:qualification].course %></p>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-3">
-            <p><b>Domain</b></p>
-          </div>
-          <div class="col-sm-9">
-            <p><%= entity[:qualification].domain %></p>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-3">
-            <p><b>Campus</b></p>
-          </div>
-          <div class="col-sm-9">
-            <p><%= entity[:institute].campus %></p>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-3">
-            <p><b>University</b></p>
-          </div>
-          <div class="col-sm-9">
-            <p><%= entity[:institute].university  %></p>
-          </div>
-        </div>
+  <% @candidate.get_institutes_with_qualifications.each do |entity| %>
+  <div class="well">
+    <div class="row">
+      <div class="col-sm-3">
+        <p>
+          <b>Course</b>
+        </p>
       </div>
-    <% end %> 
-  <% else %>
-    <div class="jumbotron">
-      <h3 class="text-muted col-sm-offset-5">No qualifications</h3>
+      <div class="col-sm-9">
+        <p><%= entity[:qualification].course %></p>
+      </div>
     </div>
+    <div class="row">
+      <div class="col-sm-3">
+        <p>
+          <b>Domain</b>
+        </p>
+      </div>
+      <div class="col-sm-9">
+        <p><%= entity[:qualification].domain %></p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-3">
+        <p>
+          <b>Campus</b>
+        </p>
+      </div>
+      <div class="col-sm-9">
+        <p><%= entity[:institute].campus %></p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-3">
+        <p>
+          <b>University</b>
+        </p>
+      </div>
+      <div class="col-sm-9">
+        <p><%= entity[:institute].university  %></p>
+      </div>
+    </div>
+  </div>
+  <% end %>
+<% else %>
+  <div class="jumbotron">
+    <h3 class="text-muted col-sm-offset-5">No qualifications</h3>
+  </div>
   <% end %>
 </div>

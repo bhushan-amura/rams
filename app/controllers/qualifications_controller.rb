@@ -1,19 +1,17 @@
 class QualificationsController < ApplicationController
 
+  # helpers
+  include QualificationsHelper
 
   #layout
   layout 'candidate/layout'
 
-  # helpers
-  include QualificationsHelper
 
   # filter/callbacks
   before_action :set_entity
 
-  # GET /candidates/:candidate_id/qualifications
-  # GET /candidates/:candidate_id/qualifications.json
-  # GET /companies/:company_id/jobs/:job_id/qualifications
-  # GET /companies/:company_id/jobs/:job_id/qualifications.json
+  # GET */qualifications
+  # GET */qualifications.json
   def index
     authorize! :index, @entity
     if @entity.class == Company::JobOpportunity
@@ -23,8 +21,7 @@ class QualificationsController < ApplicationController
     end
   end
 
-  # GET /candidates/:candidate_id/qualifications/1/edit
-  # GET /companies/:company_id/jobs/:job_id/qualifications/1/edit
+  # GET */qualifications/1/edit
   def edit
     authorize! :edit, @entity 
     if @entity.class == Company::JobOpportunity
@@ -39,10 +36,8 @@ class QualificationsController < ApplicationController
     end
   end
 
-  # POST /candidates/:candidate_id/qualifications
-  # POST /candidates/:candidate_id/qualifications.json
-  # POST /companies/:company_id/jobs/:job_id/qualifications
-  # POST /companies/:company_id/jobs/:job_id/qualifications.json
+  # POST */qualifications
+  # POST */qualifications.json
   def create
     authorize! :create, @entity
     if @entity.class == Candidate
@@ -72,10 +67,8 @@ class QualificationsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /candidates/:candidate_id/qualifications/1
-  # PATCH/PUT /candidates/:candidate_id/qualifications/1.json
-  # PATCH/PUT /companies/:company_id/jobs/:job_id/qualifications/1
-  # PATCH/PUT /companies/:company_id/jobs/:job_id/qualifications/1.json
+  # PATCH/PUT */qualifications/1
+  # PATCH/PUT */qualifications/1.json
   def update
     authorize! :update, @entity
     if @entity.class == Candidate
@@ -102,10 +95,8 @@ class QualificationsController < ApplicationController
     end
   end
 
-  # DELETE /candidates/:candidate_id/qualifications/1
-  # DELETE /candidates/:candidate_id/qualifications/1.json
-  # DELETE /companies/:company_id/jobs/:job_id/qualifications/1
-  # DELETE /companies/:company_id/jobs/:job_id/qualifications/1.json
+  # DELETE */qualifications/1
+  # DELETE */qualifications/1.json
   def destroy
     if @entity.class == Candidate
       authorize! :destroy, @entity

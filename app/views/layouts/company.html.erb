@@ -18,25 +18,28 @@
           <ul class="nav navbar-nav">
 
             <li>
-              <%= link_to "Home", home_company_path(@company) %>
+              <%= link_to "Home", home_company_path(current_user.info) %>
             </li>
-          
+            <li>
+              <%= link_to "Post a Job", new_company_job_path(current_user.info) %>
+            </li>
+            <li>
+              <%= link_to "All events", all_events_company_path(current_user.info) %>
+            </li>
 
           </ul>
 
           <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
               <a class="dropdown-toggle" data-toggle="dropdown">
-                <span class="glyphicon glyphicon-user"></span>
+                <!-- <span class="glyphicon glyphicon-user"></span> -->
+                <%= image_tag( current_user.info.logo, size: "35x30", alt: "bhu") %>
                 <%= current_user.info.name %>
                 <span class="caret"></span>
               </a>
               <ul class="dropdown-menu">
-                <li>
-                  <%= link_to 'Profile', company_path(@company) %>
-                </li>
-                <li>
-                  <%= link_to 'Edit Profile', edit_company_path(@company) %>
+                  <%#= link_to 'Profile', company_path(@company) %>                
+                  <%= link_to 'Edit Profile', edit_company_path(current_user.info) %>
                 </li>
                 <li>
                   <%= link_to 'Settings', edit_user_registration_path %>
@@ -48,7 +51,7 @@
             </li>
 
           </ul>
-          <form class="navbar-form navbar-right" role="search">
+          <!-- <form class="navbar-form navbar-right" role="search">
             <div class="form-group input-group">
               <input type="text" class="form-control" placeholder="Search..">
               <span class="input-group-btn">
@@ -57,18 +60,22 @@
                 </button>
               </span>
             </div>
-          </form>
+          </form> -->
         </div>
       </div>
     </nav>
 
     <div class="container text-center custom">
       <% if flash[:alert] %>
-         <div class="alert alert-danger">
-           <span><%= flash[:alert] %></span>
-         </div>
+      <div class="alert alert-danger">
+        <span><%= flash[:alert] %></span>
+      </div>
+    <% elsif flash[:success] %>
+        <div class="alert alert-success">
+          <span><%= flash[:success] %></span>
+        </div>
       <%end%>
-      <div class="row">
+      <div class="row custompadd">
         <!-- left================== -->
         <%= render 'layouts/company/left_container' %>
         <!-- center================ -->

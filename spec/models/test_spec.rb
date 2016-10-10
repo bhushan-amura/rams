@@ -7,7 +7,7 @@ RSpec.describe Test, type: :model do
 
 	let(:test_score) {Candidate::TestScore.new(score:67)}
 
-	context "model with attributes valid?" do	
+	context "model with attributes valid?" do
 		it "is valid with valid attributes" do
 		    expect(candidate).to be_valid
 		    candidate.save!
@@ -44,5 +44,12 @@ RSpec.describe Test, type: :model do
 			expect(test).to be_invalid
 		end
 	end
+
+	context "when Association" do
+    it "has many test scores" do
+      assc = Test.reflect_on_association(:test_scores)
+      expect(assc.macro).to eq :has_many
+    end
+  end
 
 end

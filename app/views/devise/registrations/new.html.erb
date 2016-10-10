@@ -1,4 +1,5 @@
 <div class="custom-2">
+<<<<<<< HEAD
     <div class="col-sm-7 control-label">
         <h2>SIGN UP</h2>
     </div>
@@ -25,6 +26,13 @@
             <div class="col-sm-3">
                 <%= f.email_field :email, autofocus: true, class: 'form-control', placeholder: 'Email id', required: 'required' %>
             </div>
+=======
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name),html: {class:"form-horizontal"}) do |f| %>
+
+    <div class="field form-group">
+        <div class="col-sm-offset-1 col-sm-2 control-label">
+            <h2>SIGN UP</h2>
+>>>>>>> origin/develop
         </div>
 
         <div class="field form-group">
@@ -55,9 +63,5 @@
           </div>
         </div>
 
-        <% end %>
-    </div>
-    
-
-    
+        <% end %>  
 </div>

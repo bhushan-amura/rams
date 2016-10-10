@@ -2,16 +2,15 @@ class Company::JobOpportunitiesController < ApplicationController
 
   load_and_authorize_resource :company
   load_and_authorize_resource :job_opportunity, :through => :company, :param_method => "company_job_opportunity_params"
-  #layout
-  # layout 'company'
 
   # callbacks
   before_action :set_company
   before_action :set_qualifications
   before_action :set_skills
-  before_action :set_company_job_opportunity, only: [:show, :edit, :update, :select_candidates,:destroy]
+  before_action :set_company_job_opportunity, only: [:show, :edit, :update, :select_candidates,:destroy,:send_mail_to_all_shortlisted_candidates,:send_mail_to_shortlisted_candidate]
   before_action :get_candidates, only: [:show, :edit, :update]
   before_action :selected_candidates, only: [:show]
+  before_action :get_job_events, only: [:index, :show, :edit]
 
   # helpers
   include Company::JobOpportunitiesHelper
@@ -81,11 +80,43 @@ class Company::JobOpportunitiesController < ApplicationController
   end
 
   def select_candidates
-    @company_job_opportunity.candidates << Candidate.find(params[:shortlist][:candidate_ids].reverse.drop(1))
-    redirect_to company_job_path(company_id:params[:company_id],id: params[:job_id])
+    Candidate.find(params[:shortlist][:candidate_ids].reverse.drop(1)).each do |candidate|
+      @company_job_opportunity.candidates_job_opportunities << CandidatesJobOpportunity.new(candidate_id:candidate.id,status:CandidatesJobOpportunity.statuses[:selected])
+    end
+    redirect_to company_job_path(company_id:params[:company_id],id: params[:job_id]) and return
   end
 
+  def send_mail_to_all_shortlisted_candidates
+    begin 
+      @company_job_opportunity.get_candidates_as_users.each do |user|
+        UserNotifier.send_shortlist_mail_to(user,@company_job_opportunity).deliver_later
+        @company_job_opportunity.change_status(user.info,:mailed)
+      end
+      flash[:success] = 'Messages sent successfully' 
+      redirect_to :back
+    #rescue 
+      #flash[:alert] = 'Messages not send successfully'
+      #redirect_to :back
+    end
+  end
+
+  def send_mail_to_shortlisted_candidate
+    begin
+      candidate = @company_job_opportunity.candidates.find(params[:candidate_id])
+      @company_job_opportunity.change_status(candidate,:mailed)
+      UserNotifier.send_shortlist_mail_to(candidate.user,@company_job_opportunity).deliver_later
+      flash[:success] = 'Messages sent successfully' 
+      redirect_to :back
+    rescue 
+      flash[:alert] = 'Messages not send successfully'
+      redirect_to :back
+    end
+  end
+
+ 
+
   private
+
     # Use callbacks to share common setup or constraints between actions.
     def set_company_job_opportunity
       @company_job_opportunity = @company.job_opportunities.find(params[:id]||params[:job_id])
@@ -107,8 +138,12 @@ class Company::JobOpportunitiesController < ApplicationController
       @shortlisted_candidates = @company_job_opportunity.shortlist_candidates
     end
 
+    def get_job_events
+      @events = @company_job_opportunity.events
+    end
+
     def selected_candidates
-      @selected_candidates = @company_job_opportunity.candidates
+      @selected_candidates = @company_job_opportunity.get_candidates_with_status
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
