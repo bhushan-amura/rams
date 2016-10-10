@@ -22,6 +22,7 @@ class Company::JobOpportunitiesController < ApplicationController
     # @company_job_opportunities = @company.job_opportunities
   end
 
+
   # GET /company/job_opportunities/1
   # GET /company/job_opportunities/1.json
   def show
@@ -107,9 +108,9 @@ class Company::JobOpportunitiesController < ApplicationController
       UserNotifier.send_shortlist_mail_to(candidate.user,@company_job_opportunity).deliver_later
       flash[:success] = 'Messages sent successfully' 
       redirect_to :back
-    rescue 
-      flash[:alert] = 'Messages not send successfully'
-      redirect_to :back
+    #rescue 
+      #flash[:alert] = 'Messages not send successfully'
+      #redirect_to :back
     end
   end
 

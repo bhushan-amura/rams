@@ -27,6 +27,10 @@ Rails.application.routes.draw do
     member do
       get 'home'
       get 'resume'
+      get 'jobs'
+      scope 'jobs' do
+        post ':job_id/apply' => :apply_job, as:'apply_job'
+      end
     end
     scope module:'candidate' do
       resources :achievements, except:[:edit,:show,:new] do

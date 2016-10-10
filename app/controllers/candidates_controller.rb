@@ -4,7 +4,7 @@ class CandidatesController < ApplicationController
 
 
   # filters/callbacks
-  before_action :set_candidate, only: [:show, :edit, :update, :destroy, :home, :resume]
+  before_action :set_candidate, only: [:show, :edit, :update, :destroy, :home, :resume,:apply_job,:jobs]
 
   # GET /candidates
   # GET /candidates.json
@@ -75,13 +75,23 @@ class CandidatesController < ApplicationController
 
   # HOME /candidate/1/home
   def home
-    @recent_jobs = Company::JobOpportunity.get_recent_jobs(5)
   end
 
   # RESUME /candidate/1/resume
   def resume
     authorize! :resume, current_user.info
     render layout: "company"
+  end
+
+  # SHOW JOBS 
+  def jobs
+    @companies = Company.paginate(:page => params[:page],:per_page => 10) 
+  end
+
+  def apply_job
+    job = Company::JobOpportunity.find(params[:job_id])
+    job.candidates_job_opportunities << CandidatesJobOpportunity.new(candidate_id:@candidate.id,status: CandidatesJobOpportunity.statuses[:applied])
+    redirect_to :back
   end
 
   private
