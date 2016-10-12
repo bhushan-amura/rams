@@ -13,10 +13,8 @@ FactoryGirl.define do
      association :user, factory: :user, strategy: :build
   end
 
-  factory :invalid_company, parent: :contact do
-    name nil
+  factory :invalid_company, parent: :company do
+    name {nil}
   end
   
 end
-
-
