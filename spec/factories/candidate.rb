@@ -12,4 +12,9 @@ FactoryGirl.define do
      summary {Faker::Lorem.paragraph(2)}
      association :user, factory: :user, strategy: :build
   end
+
+  factory :invalid_candidate, parent: :candidate do
+     dob {nil}
+  end
+
 end
