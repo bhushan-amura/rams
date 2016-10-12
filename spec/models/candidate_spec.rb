@@ -10,9 +10,6 @@ RSpec.describe Candidate, type: :model do
 		@institute = FactoryGirl.build(:institute)
 	end
 
-	# let(:institute) { Institute.new(university:'sppu', campus:'pict')}
-
-
 	let(:qualification) {Qualification.new(course:"engineering", domain: "comp")}
 
 	context "model with attributes valid?" do
