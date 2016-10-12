@@ -10,6 +10,7 @@ class Ability
         can :manage, Candidate::Experience, :candidate => {:user_id => user.id}
         can :manage, Candidate::Link, :candidate => {:user_id => user.id}
         can :manage, Candidate::Reference, :candidate => {:user_id => user.id}
+        can :read, Company
       elsif user.is? :company
         can :manage, Company, user_id: user.id
         can :manage, Company::JobOpportunity, :company => {:user_id => user.id}

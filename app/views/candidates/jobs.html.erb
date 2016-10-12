@@ -1,0 +1,18 @@
+<div class="container">
+  <h3 class="jumbotron text-center">Jobs</h3>
+  <% @companies.each do |company| %>
+
+    <% if !company.job_opportunities.empty? %>
+      <div class="jumbotron">
+        <h3><%= company.name %></h3>
+        <% company.job_opportunities.each do |job| %>
+          <div class="row">
+          <p class="col-sm-6"><%= job.title %></p>
+          <%= link_to "Apply",apply_job_candidate_path(id:@candidate.id, job_id:job.id),method: :post %> 
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  <% end %>
+  <%= will_paginate @companies %>
+</div>

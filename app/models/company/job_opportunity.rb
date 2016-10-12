@@ -13,7 +13,7 @@ class  Company::JobOpportunity < ActiveRecord::Base
   has_many :qualifications, through: :qualification_assignments
   
   has_many :candidates_job_opportunities
-  has_many :candidates, through: :candidates_job_opportunities
+  has_many :selected_candidates, through: :candidates_job_opportunities, source: :candidate
 
   accepts_nested_attributes_for :qualifications, :allow_destroy => true
   accepts_nested_attributes_for :skills, :allow_destroy => true
@@ -39,14 +39,14 @@ class  Company::JobOpportunity < ActiveRecord::Base
     candidates_with_required_qualifications = Candidate.joins(:qualifications).where("qualifications.id":job_qualifications).select("count(qualifications.id) as qualification_count, candidates.*").group(:id).order("1 DESC")
 
 
-    candidates_with_required_qualifications =  candidates_with_required_qualifications.where.not(id:self.candidates)
+    candidates_with_required_qualifications =  candidates_with_required_qualifications.where.not(id:self.selected_candidates)
 
     candidates_with_required_qualifications.map {|x| x.qual_cnt = x.qualification_count; x.skill_cnt = 0}
 
 
     candidates_with_required_skills = Candidate.joins(:skills).where("skills.id":job_skills).select("count(skills.id) as skill_count, candidates.*").group(:id).order("1 DESC")
 
-    candidates_with_required_skills =  candidates_with_required_skills.where.not(id:self.candidates)
+    candidates_with_required_skills =  candidates_with_required_skills.where.not(id:self.selected_candidates)
 
     candidates_with_required_skills.map {|x| x.qual_cnt = 0; x.skill_cnt = x.skill_count}
 
@@ -78,11 +78,15 @@ class  Company::JobOpportunity < ActiveRecord::Base
   end
 
   def get_candidates_as_users
-    User.where(id:self.candidates.pluck(:user_id))
+    User.where(id:self.selected_candidates.pluck(:user_id))
   end
   
   def get_candidates_with_status
     self.candidates_job_opportunities.joins(:candidate).select("candidates.*,candidates_job_opportunities.*")
+  end
+
+  def select_candidate(candidate)
+      self.candidates_job_opportunities << CandidatesJobOpportunity.new(candidate_id:candidate.id,status:CandidatesJobOpportunity.statuses[:selected])
   end
 
   def change_status(candidate,status)

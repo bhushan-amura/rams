@@ -7,6 +7,9 @@ RSpec.describe Company::JobOpportunity, type: :model do
 
   let(:job_opportunity) {Company::JobOpportunity.new(title:"qweqwe", shift:"full time", description:"good one", number_of_positions:12)}
 
+  let(:candidate) { FactoryGirl.build(:candidate) }
+
+
   context "model with attributes valid?" do
 		it "is valid with valid attributes" do
 		    expect(company).to be_valid
@@ -85,9 +88,52 @@ RSpec.describe Company::JobOpportunity, type: :model do
     end
 
     it "has many candidates" do
-      assc = Company::JobOpportunity.reflect_on_association(:candidates)
+      assc = Company::JobOpportunity.reflect_on_association(:selected_candidates)
       expect(assc.macro).to eq :has_many
     end
+  end
+
+  context "methods" do
+
+    it  "should shortlist candidates" do
+      job_opportunity.save!
+      expect(job_opportunity.shortlist_candidates).to_not be_nil
+    end
+
+    it "should get recent jobs" do
+      job_opportunity.save!
+      expect(Company::JobOpportunity.get_recent_jobs).to_not be_nil
+    end
+
+    it "should select candidates" do
+      job_opportunity.save!
+      candidate.save!
+      job_opportunity.select_candidate(candidate)
+      expect(job_opportunity.selected_candidates).to_not be_nil
+    end
+
+    it "should get candidates as users" do
+      job_opportunity.save!
+      candidate.save!
+      job_opportunity.select_candidate(candidate)
+      expect(job_opportunity.get_candidates_as_users.first).to be_an_instance_of(User)
+    end
+
+    it "should change status" do
+      job_opportunity.save!
+      candidate.save!
+      job_opportunity.select_candidate(candidate)
+      job_opportunity.change_status(candidate,:mailed)
+      expect(CandidatesJobOpportunity.find_by(candidate_id:candidate.id,job_opportunity_id:job_opportunity.id).status).to eq("mailed")
+    end
+
+    it "should get candidates with status" do
+      job_opportunity.save!
+      candidate.save!
+      job_opportunity.select_candidate(candidate)
+      expect(job_opportunity.get_candidates_with_status.first.status).to_not be_nil
+    end
+
   end
 
 end

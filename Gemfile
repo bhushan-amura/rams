@@ -1,5 +1,7 @@
 source 'http://rubygems.org'
 
+gem 'filterrific'
+gem 'will_paginate', '~> 3.1.0'
 gem 'simplecov', :require => false, :group => :test
 gem 'figaro'
 gem 'active_record_union'
