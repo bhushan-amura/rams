@@ -75,13 +75,14 @@ class CompaniesController < ApplicationController
 
 
   def home
+    @jobs = @company.job_opportunities.paginate(:page => params[:page],:per_page => 10)
     if @company.job_opportunities.empty?
       redirect_to new_company_job_path(@company)
     end
   end
 
   def all_events
-    @all_events = @company.events
+    @all_events = @company.events.paginate(:page => params[:page],:per_page => 30)
   end
 
   private

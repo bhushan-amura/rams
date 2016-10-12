@@ -1,6 +1,6 @@
 <!-- <p id="notice"><%= notice %></p> -->
 
-<% @company.job_opportunities.each do |company_job_opportunity| %>
+<% @jobs.each do |company_job_opportunity| %>
 <div class="well text-capitalize">
 
   <div class="container-fluid">
@@ -39,9 +39,9 @@
       </div>
       <div class="col-sm-9">
         <% if company_job_opportunity.experience == 0 %>
-          none
-        <% else %>
-          <%= pluralize(company_job_opportunity.experience, "Year") %>
+        none
+      <% else %>
+        <%= pluralize(company_job_opportunity.experience, "Year") %>
         <% end %>
       </div>
     </div>
@@ -100,8 +100,8 @@
         <%= link_to 'Remove Post', company_job_path(job_opportunity_path_params(company_job_opportunity)), method: :delete, data: { confirm: 'Are you sure?' },class:"btn btn-danger", role:"button" %>
 
         <% if company_job_opportunity.events.empty? %>
-        <%= link_to 'Create Events', new_company_job_event_path(events_path_params(job_opportunity_path_params(company_job_opportunity))),class:"btn btn-success", role:"button" %>  
-        <% else %>
+        <%= link_to 'Create Events', new_company_job_event_path(events_path_params(job_opportunity_path_params(company_job_opportunity))),class:"btn btn-success", role:"button" %>
+      <% else %>
         <%= link_to 'Related Events', company_job_events_path(events_path_params(job_opportunity_path_params(company_job_opportunity))),class:"btn btn-success", role:"button" %>
         <% end %>
 
@@ -110,6 +110,6 @@
       </div>
     </div>
   </div>
-
+  <%= will_paginate @jobs %>
 </div>
 <% end %>
