@@ -90,8 +90,8 @@ class CandidatesController < ApplicationController
 
   def apply_job
     job = Company::JobOpportunity.find(params[:job_id])
-    job.candidates_job_opportunities << CandidatesJobOpportunity.new(candidate_id:@candidate.id,status: CandidatesJobOpportunity.statuses[:applied])
-    redirect_to :back
+    job.select_candidate(@candidate)
+    redirect_to jobs_candidate_path(@candidate.id)
   end
 
   private
