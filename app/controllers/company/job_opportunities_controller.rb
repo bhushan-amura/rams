@@ -1,12 +1,17 @@
 class Company::JobOpportunitiesController < ApplicationController
 
   load_and_authorize_resource :company
-  load_and_authorize_resource :job_opportunity, :through => :company, :param_method => "company_job_opportunity_params"
+  load_and_authorize_resource :job_opportunity, class: 'Company::JobOpportunity', :through => :company, :param_method => "company_job_opportunity_params"
+
+  #CanCan
+  load_resource :skills, through: :job_opportunity
+  load_resource :qualifications, through: :job_opportunity
+  load_and_authorize_resource
 
   # callbacks
-  before_action :set_company
-  before_action :set_qualifications
-  before_action :set_skills
+  # before_action :set_company
+  # before_action :set_qualifications
+  # before_action :set_skills
   before_action :set_company_job_opportunity, only: [:show, :edit, :update, :select_candidates,:destroy,:send_mail_to_all_shortlisted_candidates,:send_mail_to_shortlisted_candidate]
   before_action :get_candidates, only: [:show, :edit, :update]
   before_action :selected_candidates, only: [:show]
@@ -88,16 +93,13 @@ class Company::JobOpportunitiesController < ApplicationController
   end
 
   def send_mail_to_all_shortlisted_candidates
-    begin 
+    begin
       @company_job_opportunity.get_candidates_as_users.each do |user|
         UserNotifier.send_shortlist_mail_to(user,@company_job_opportunity).deliver_later
         @company_job_opportunity.change_status(user.info,:mailed)
       end
-      flash[:success] = 'Messages sent successfully' 
+      flash[:success] = 'Messages sent successfully'
       redirect_to :back
-    #rescue 
-      #flash[:alert] = 'Messages not send successfully'
-      #redirect_to :back
     end
   end
 
@@ -106,15 +108,10 @@ class Company::JobOpportunitiesController < ApplicationController
       candidate = @company_job_opportunity.candidates.find(params[:candidate_id])
       @company_job_opportunity.change_status(candidate,:mailed)
       UserNotifier.send_shortlist_mail_to(candidate.user,@company_job_opportunity).deliver_later
-      flash[:success] = 'Messages sent successfully' 
+      flash[:success] = 'Messages sent successfully'
       redirect_to :back
-    #rescue 
-      #flash[:alert] = 'Messages not send successfully'
-      #redirect_to :back
     end
   end
-
- 
 
   private
 
@@ -136,11 +133,11 @@ class Company::JobOpportunitiesController < ApplicationController
     end
 
     def get_candidates
-      @shortlisted_candidates = @company_job_opportunity.shortlist_candidates
+      @shortlisted_candidates = @company_job_opportunity.shortlist_candidates#.paginate(:page => params[:page],:per_page => 10)
     end
 
     def get_job_events
-      @events = @company_job_opportunity.events
+      @events = @company_job_opportunity.events.paginate(:page => params[:page],:per_page => 1)
     end
 
     def selected_candidates

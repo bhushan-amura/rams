@@ -13,7 +13,7 @@ class Company::EventsController < ApplicationController
   # GET /company/1/events.json
   def index
     authorize! :index, @company
-    @company_events = @company_job.events
+    @company_events = @company_job.events.paginate(:page => params[:page],:per_page => 10) 
   end
 
   # GET /company/1/events/1

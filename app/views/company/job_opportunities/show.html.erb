@@ -131,7 +131,7 @@
             </tr>
           </thead>
           <tbody>
-          <% @selected_candidates.each_with_index do |candidate,index| %>
+            <% @selected_candidates.each_with_index do |candidate,index| %>
             <tr>
               <th scope="row"><%= index+1 %></th>
               <td><%= candidate.first_name %></td>
@@ -139,7 +139,7 @@
               <td><%= link_to "View",resume_candidate_path(candidate.candidate_id) %></td>
               <td><%= link_to "Send Mail",send_mail_to_candidate_company_job_path(candidate_id:candidate.candidate_id),method: :post %></td>
             </tr>
-          <% end %>
+            <% end %>
           </tbody>
         </table>
         <%= link_to "Send Mail To Everyone", select_candidates_mail_company_job_path(company_id: @company.id,id: @company_job_opportunity.id), method: :post,class:"btn btn-default col-sm-offset-5" %>

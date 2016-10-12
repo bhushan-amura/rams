@@ -7,7 +7,6 @@ class CompaniesController < ApplicationController
   load_and_authorize_resource
 
   # callbacks
-  before_action :set_company, only: [:show, :edit, :update, :destroy, :home]
 
   # GET /companies
   # GET /companies.json
@@ -42,7 +41,6 @@ class CompaniesController < ApplicationController
         format.json { render :show, status: :created, location: @company }
       else
         format.html { render :new }
-        # format.json { render json: @company.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -52,12 +50,11 @@ class CompaniesController < ApplicationController
   def update
     respond_to do |format|
       if @company.update(company_params)
-        flash[:notice] = 'Company was successfully updated.'
+        flash[:success] = 'Company was successfully updated.'
         format.html { redirect_to home_company_path(@company) }
         format.json { render :show, status: :ok, location: @company }
       else
         format.html { render :edit }
-        # format.json { render json: @company.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -67,7 +64,7 @@ class CompaniesController < ApplicationController
   def destroy
     @company.destroy
     respond_to do |format|
-      flash[:notice] = 'Company was successfully destroyed.'
+      flash[:success] = 'Company was successfully destroyed.'
       format.html { redirect_to companies_url}
       format.json { head :no_content }
     end
@@ -86,11 +83,6 @@ class CompaniesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_company
-      @company = Company.find(params[:id])
-    end
-
     # Never trust parameters from the scary internet, only allow the white list through.
     def company_params
       params.require(:company).permit(:id,:name,:company_type,:url,:tagline,:phone,:number_of_employees,:description,:logo)
