@@ -24,11 +24,12 @@ RSpec.describe CandidatesController, type: :controller do
   # Candidate. As you add validations to Candidate, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    #skip("Add a hash of attributes valid for your model")
+    {first_name: "Marisol", last_name: "Langworth", dob: "1991-05-17", gender: "T", marital_status: "unmarried", status: true, languages: "ipsum,error,possimus", summary: "Deleniti qui est quasi alias eum omnis harum. Aut ..."}
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    {first_name: "Marisol", last_name: "Langworth", dob: nil, gender: nil, marital_status: "unmarried", status: true, languages: "ipsum,error,possimus", summary: "Deleniti qui est quasi alias eum omnis harum. Aut ..."}
   }
 
   # This should return the minimal set of values that should be in the session
@@ -38,15 +39,14 @@ RSpec.describe CandidatesController, type: :controller do
 
   before do
     @candidate = FactoryGirl.create(:candidate)
-    sign_in :user, @candidate.user
+    sign_in @candidate.user
     allow_any_instance_of(CanCan::ControllerResource).to receive(:load_and_authorize_resource){ nil } 
   end
 
   describe "GET #index" do
     it "assigns all candidates as @candidates" do
-      candidate = Candidate.create! valid_attributes
-      get :index, params: {}, session: valid_session
-      expect(assigns(:candidates)).to eq([candidate])
+      get :index
+      expect(assigns(:candidates)).to eq([@candidate])
     end
   end
 
@@ -66,9 +66,8 @@ RSpec.describe CandidatesController, type: :controller do
 
   describe "GET #edit" do
     it "assigns the requested candidate as @candidate" do
-      candidate = Candidate.create! valid_attributes
-      get :edit, params: {id: candidate.to_param}, session: valid_session
-      expect(assigns(:candidate)).to eq(candidate)
+      get :edit, id: @candidate.id
+      expect(assigns(:candidate)).to eq(@candidate)
     end
   end
 
@@ -76,30 +75,30 @@ RSpec.describe CandidatesController, type: :controller do
     context "with valid params" do
       it "creates a new Candidate" do
         expect {
-          post :create, params: {candidate: valid_attributes}, session: valid_session
+          post :create, candidate: valid_attributes
         }.to change(Candidate, :count).by(1)
       end
 
       it "assigns a newly created candidate as @candidate" do
-        post :create, params: {candidate: valid_attributes}, session: valid_session
+        post :create, candidate: valid_attributes
         expect(assigns(:candidate)).to be_a(Candidate)
         expect(assigns(:candidate)).to be_persisted
       end
 
-      it "redirects to the created candidate" do
-        post :create, params: {candidate: valid_attributes}, session: valid_session
-        expect(response).to redirect_to(Candidate.last)
+      it "redirects to the created candidates home" do
+        post :create, candidate: valid_attributes
+        expect(response).to redirect_to(home_candidate_path(Candidate.last))
       end
     end
 
     context "with invalid params" do
       it "assigns a newly created but unsaved candidate as @candidate" do
-        post :create, params: {candidate: invalid_attributes}, session: valid_session
+        post :create, candidate: invalid_attributes
         expect(assigns(:candidate)).to be_a_new(Candidate)
       end
 
       it "re-renders the 'new' template" do
-        post :create, params: {candidate: invalid_attributes}, session: valid_session
+        post :create, candidate: invalid_attributes
         expect(response).to render_template("new")
       end
     end
@@ -108,39 +107,34 @@ RSpec.describe CandidatesController, type: :controller do
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+ {first_name: "Marisol", last_name: "Doe", dob: "1991-05-17", gender: "T", marital_status: "unmarried", status: true, languages: "ipsum,error,possimus", summary: "Deleniti qui est quasi alias eum omnis harum. Aut ..."} 
       }
 
       it "updates the requested candidate" do
-        candidate = Candidate.create! valid_attributes
-        put :update, params: {id: candidate.to_param, candidate: new_attributes}, session: valid_session
-        candidate.reload
-        skip("Add assertions for updated state")
+        put :update, id: @candidate.id, candidate: new_attributes
+        @candidate.reload
+        expect(@candidate.last_name).to eq("Doe")
       end
 
       it "assigns the requested candidate as @candidate" do
-        candidate = Candidate.create! valid_attributes
-        put :update, params: {id: candidate.to_param, candidate: valid_attributes}, session: valid_session
-        expect(assigns(:candidate)).to eq(candidate)
+        put :update, id: @candidate.id, candidate: valid_attributes
+        expect(assigns(:candidate)).to eq(@candidate)
       end
 
-      it "redirects to the candidate" do
-        candidate = Candidate.create! valid_attributes
-        put :update, params: {id: candidate.to_param, candidate: valid_attributes}, session: valid_session
-        expect(response).to redirect_to(candidate)
+      it "redirects to the edit candidate again" do
+        put :update, id: @candidate.id, candidate: valid_attributes
+        expect(response).to redirect_to(edit_candidate_path(@candidate))
       end
     end
 
     context "with invalid params" do
       it "assigns the candidate as @candidate" do
-        candidate = Candidate.create! valid_attributes
-        put :update, params: {id: candidate.to_param, candidate: invalid_attributes}, session: valid_session
-        expect(assigns(:candidate)).to eq(candidate)
+        put :update, id: @candidate.id, candidate: invalid_attributes
+        expect(assigns(:candidate)).to eq(@candidate)
       end
 
       it "re-renders the 'edit' template" do
-        candidate = Candidate.create! valid_attributes
-        put :update, params: {id: candidate.to_param, candidate: invalid_attributes}, session: valid_session
+        put :update, id: @candidate.id, candidate: invalid_attributes
         expect(response).to render_template("edit")
       end
     end
@@ -148,15 +142,13 @@ RSpec.describe CandidatesController, type: :controller do
 
   describe "DELETE #destroy" do
     it "destroys the requested candidate" do
-      candidate = Candidate.create! valid_attributes
       expect {
-        delete :destroy, params: {id: candidate.to_param}, session: valid_session
+        delete :destroy, id: @candidate.id
       }.to change(Candidate, :count).by(-1)
     end
 
     it "redirects to the candidates list" do
-      candidate = Candidate.create! valid_attributes
-      delete :destroy, params: {id: candidate.to_param}, session: valid_session
+      delete :destroy, id: @candidate.id
       expect(response).to redirect_to(candidates_url)
     end
   end
