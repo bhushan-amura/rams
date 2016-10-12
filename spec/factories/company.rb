@@ -12,4 +12,11 @@ FactoryGirl.define do
      logo {Faker::Company.logo}
      association :user, factory: :user, strategy: :build
   end
+
+  factory :invalid_company, parent: :contact do
+    name nil
+  end
+  
 end
+
+

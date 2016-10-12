@@ -6,12 +6,8 @@ RSpec.describe CompaniesController, type: :controller do
   # Company. As you add validations to Company, be sure to
   # adjust the attributes here as well.
 
-  before(:each) do
-    @company = FactoryGirl.build(:company)
-  end
-
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    
   }
 
   let(:invalid_attributes) {
@@ -23,25 +19,32 @@ RSpec.describe CompaniesController, type: :controller do
   # CompaniesController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
+  before do
+    @company = FactoryGirl.create(:company)
+    sign_in @company.user
+    allow_any_instance_of(CanCan::ControllerResource).to receive(:load_and_authorize_resource){ nil }
+  end
+
   describe "GET #index" do
-    it "assigns all companies as @companies" do
-      company = @company.save valid_attributes
-      get :index, attributes_for(:company), session: valid_session
-      expect(assigns(:companies)).to eq([company])
+    before(:each) {get :index}
+    it "renders the index view" do
+      expect(response).to render_template(:index)
     end
   end
 
   describe "GET #show" do
+    before(:each) {get :show, id: @company.id}
     it "assigns the requested company as @company" do
-      company = Company.create! valid_attributes
-      get :show, params: {id: company.to_param}, session: valid_session
-      expect(assigns(:company)).to eq(company)
+      expect(assigns(:company)).to eq(@company)
+    end
+    it "renders the show view" do
+      expect(response).to render_template(:show)
     end
   end
 
   describe "GET #new" do
+    before(:each){ get :new }
     it "assigns a new company as @company" do
-      get :new, params: {}, session: valid_session
       expect(assigns(:company)).to be_a_new(Company)
     end
   end
@@ -58,7 +61,7 @@ RSpec.describe CompaniesController, type: :controller do
     context "with valid params" do
       it "creates a new Company" do
         expect {
-          post :create, params: {company: valid_attributes}, session: valid_session
+          post :create, company: @company
         }.to change(Company, :count).by(1)
       end
 
@@ -130,15 +133,13 @@ RSpec.describe CompaniesController, type: :controller do
 
   describe "DELETE #destroy" do
     it "destroys the requested company" do
-      company = Company.create! valid_attributes
       expect {
-        delete :destroy, params: {id: company.to_param}, session: valid_session
+        delete :destroy, id: @company
       }.to change(Company, :count).by(-1)
     end
 
     it "redirects to the companies list" do
-      company = Company.create! valid_attributes
-      delete :destroy, params: {id: company.to_param}, session: valid_session
+      delete :destroy, id: @company
       expect(response).to redirect_to(companies_url)
     end
   end
