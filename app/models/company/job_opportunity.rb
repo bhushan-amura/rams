@@ -78,11 +78,15 @@ class  Company::JobOpportunity < ActiveRecord::Base
   end
 
   def get_candidates_as_users
-    User.where(id:self.candidates.pluck(:user_id))
+    User.where(id:self.selected_candidates.pluck(:user_id))
   end
   
   def get_candidates_with_status
     self.candidates_job_opportunities.joins(:candidate).select("candidates.*,candidates_job_opportunities.*")
+  end
+
+  def select_candidate(candidate)
+      self.candidates_job_opportunities << CandidatesJobOpportunity.new(candidate_id:candidate.id,status:CandidatesJobOpportunity.statuses[:selected])
   end
 
   def change_status(candidate,status)

@@ -82,7 +82,7 @@ class Company::JobOpportunitiesController < ApplicationController
 
   def select_candidates
     Candidate.find(params[:shortlist][:candidate_ids].reverse.drop(1)).each do |candidate|
-      @company_job_opportunity.candidates_job_opportunities << CandidatesJobOpportunity.new(candidate_id:candidate.id,status:CandidatesJobOpportunity.statuses[:selected])
+      @company_job_opportunity.select_candidate(candidate)
     end
     redirect_to company_job_path(company_id:params[:company_id],id: params[:job_id]) and return
   end

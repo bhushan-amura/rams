@@ -201,5 +201,20 @@ RSpec.describe Candidate, type: :model do
 				expect(candidate.get_institutes_with_qualifications).not_to eql(nil)
 		  end
 		end
+
+    describe "when update_institute_with_qualification" do
+      it "should update candidates qualifications" do
+        candidate = @candidate
+        candidate.save!
+        institute.save!
+        qualification.save!
+        candidate.add_institute_with_qualification(institute,qualification)
+        institute_new = Institute.new(university:'mu',campus:'vjti')
+        institute_new.save!
+        candidate.update_institute_with_qualification(institute_new,qualification,candidate.id,QualificationAssignment.first)
+
+        expect(candidate.institutes).to include(institute_new)
+      end
+    end
 	end
 end
