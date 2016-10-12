@@ -23,8 +23,8 @@ RSpec.describe CandidatesController, type: :controller do
   # This should return the minimal set of attributes required to create a valid
   # Candidate. As you add validations to Candidate, be sure to
   # adjust the attributes here as well.
+  #
   let(:valid_attributes) {
-    #skip("Add a hash of attributes valid for your model")
     {first_name: "Marisol", last_name: "Langworth", dob: "1991-05-17", gender: "T", marital_status: "unmarried", status: true, languages: "ipsum,error,possimus", summary: "Deleniti qui est quasi alias eum omnis harum. Aut ..."}
   }
 
@@ -55,12 +55,32 @@ RSpec.describe CandidatesController, type: :controller do
       get :show, id: @candidate.id
       expect(assigns(:candidate)).to eq(@candidate)
     end
+    
+    it "should give correct status code" do
+      get :show, id: @candidate.id
+      expect(response.status).to eq(200)
+    end
+
+    it "should render correct show template" do
+      get :show, id: @candidate.id
+      expect(response).to render_template :show
+    end
   end
 
   describe "GET #new" do
     it "assigns a new candidate as @candidate" do
-      get :new, params: {}, session: valid_session
+      get :new
       expect(assigns(:candidate)).to be_a_new(Candidate)
+    end
+
+    it "should give correct status code" do
+      get :new
+      expect(response.status).to eq(200)
+    end
+
+    it "should render correct template" do
+      get :new
+      expect(response).to render_template(:new)
     end
   end
 
@@ -68,6 +88,16 @@ RSpec.describe CandidatesController, type: :controller do
     it "assigns the requested candidate as @candidate" do
       get :edit, id: @candidate.id
       expect(assigns(:candidate)).to eq(@candidate)
+    end
+
+    it "should give correct status code" do
+      get :edit, id: @candidate.id
+      expect(response.status).to eq(200)
+    end
+
+    it "should render correct edit template" do
+      get :edit, id: @candidate.id
+      expect(response).to render_template(:edit)
     end
   end
 
@@ -150,6 +180,27 @@ RSpec.describe CandidatesController, type: :controller do
     it "redirects to the candidates list" do
       delete :destroy, id: @candidate.id
       expect(response).to redirect_to(candidates_url)
+    end
+  end
+
+  describe "HOME #home" do
+    it "should render home template" do
+      get :home,id: @candidate.id
+      expect(response).to render_template(:home)
+    end
+  end
+
+  describe "APPLY JOB #apply_job" do
+    it "should apply for a job" do
+      job = FactoryGirl.create(:job_opportunity)
+      post :apply_job, id: @candidate.id, job_id: job.id
+      expect(job.selected_candidates).to include(@candidate)
+    end
+
+    it "should redirect back to jobs page" do
+      job = FactoryGirl.create(:job_opportunity)
+      post :apply_job, id: @candidate.id, job_id: job.id
+      expect(response.status).to eq(302)
     end
   end
 
