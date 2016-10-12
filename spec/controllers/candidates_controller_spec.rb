@@ -36,6 +36,12 @@ RSpec.describe CandidatesController, type: :controller do
   # CandidatesController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
+  before do
+    @candidate = FactoryGirl.create(:candidate)
+    sign_in :user, @candidate.user
+    allow_any_instance_of(CanCan::ControllerResource).to receive(:load_and_authorize_resource){ nil } 
+  end
+
   describe "GET #index" do
     it "assigns all candidates as @candidates" do
       candidate = Candidate.create! valid_attributes
@@ -46,9 +52,8 @@ RSpec.describe CandidatesController, type: :controller do
 
   describe "GET #show" do
     it "assigns the requested candidate as @candidate" do
-      candidate = Candidate.create! valid_attributes
-      get :show, params: {id: candidate.to_param}, session: valid_session
-      expect(assigns(:candidate)).to eq(candidate)
+      get :show, id: @candidate.id
+      expect(assigns(:candidate)).to eq(@candidate)
     end
   end
 
