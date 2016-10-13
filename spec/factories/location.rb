@@ -12,7 +12,8 @@ FactoryGirl.define do
      country {Faker::Address.country}
      latitude {Faker::Address.latitude}
      longitude {Faker::Address.longitude}
-
-    #  candidate
   end
+
+  
+  
 end
