@@ -1,5 +1,7 @@
 source 'http://rubygems.org'
 
+gem 'mongoid', '~> 5.1.0'
+gem 'bson_ext'
 gem 'filterrific'
 gem 'will_paginate', '~> 3.1.0'
 gem 'simplecov', :require => false, :group => :test
@@ -12,7 +14,7 @@ gem 'nested_form'
 gem 'bootstrap-multiselect-rails'
 gem 'twitter-typeahead-rails'
 gem 'bootstrap-tagsinput-rails'
-gem 'mysql2', '>= 0.3.13', '< 0.5'
+# gem 'mysql2', '>= 0.3.13', '< 0.5'
 gem 'devise'
 gem 'carrierwave', '~> 0.11.2'
 
