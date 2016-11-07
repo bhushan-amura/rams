@@ -1,5 +1,5 @@
-class Candidate::Reference < ActiveRecord::Base
-
+class Candidate::Reference
+include Mongoid::Document
   # concerns
 	include ForbiddenValues
 	include DatabaseStorageFormat

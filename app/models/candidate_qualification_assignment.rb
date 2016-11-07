@@ -1,4 +1,5 @@
-class CandidateQualificationAssignment < ActiveRecord::Base
+class CandidateQualificationAssignment
+include Mongoid::Document
   self.table_name = 'candidates_qualification_assignments'
 
   belongs_to :qualification_assignment

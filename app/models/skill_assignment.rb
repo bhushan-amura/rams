@@ -1,5 +1,5 @@
-class SkillAssignment < ActiveRecord::Base
-
+class SkillAssignment
+include Mongoid::Document
   # concerns
   
   # callbacks

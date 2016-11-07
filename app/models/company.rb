@@ -1,5 +1,5 @@
-class Company < ActiveRecord::Base
-
+class Company
+include Mongoid::Document
   # concerns
   include ForbiddenValues
   include DatabaseStorageFormat

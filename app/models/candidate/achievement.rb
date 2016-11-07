@@ -1,5 +1,6 @@
-class Candidate::Achievement < ActiveRecord::Base
+class Candidate::Achievement
   # concerns
+  include Mongoid::Document
   include DatabaseStorageFormat
   
   # callbacks  

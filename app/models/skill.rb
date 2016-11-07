@@ -1,5 +1,5 @@
-class Skill < ActiveRecord::Base
-
+class Skill
+include Mongoid::Document
   # concerns
 	include DatabaseStorageFormat
 

@@ -1,5 +1,5 @@
-class Candidate::Experience < ActiveRecord::Base
-
+class Candidate::Experience
+include Mongoid::Document
   # concerns
   include ForbiddenValues
   include DatabaseStorageFormat

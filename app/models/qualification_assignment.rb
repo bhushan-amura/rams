@@ -1,5 +1,5 @@
-class QualificationAssignment < ActiveRecord::Base
-
+class QualificationAssignment
+include Mongoid::Document
   # concerns
   
   # callbacks

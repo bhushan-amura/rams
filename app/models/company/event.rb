@@ -1,5 +1,5 @@
-class Company::Event < ActiveRecord::Base
-
+class Company::Event
+include Mongoid::Document
   # concerns
   include ForbiddenValues
   include DatabaseStorageFormat

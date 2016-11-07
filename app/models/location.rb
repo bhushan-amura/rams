@@ -1,5 +1,5 @@
-class Location < ActiveRecord::Base
-
+class Location
+include Mongoid::Document
   # concerns
   include ForbiddenValues
   include DatabaseStorageFormat

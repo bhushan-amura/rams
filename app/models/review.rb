@@ -1,5 +1,5 @@
-class Review < ActiveRecord::Base
-
+class Review
+include Mongoid::Document
   # concern
   include DatabaseStorageFormat
 

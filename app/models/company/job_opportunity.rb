@@ -1,5 +1,5 @@
-class  Company::JobOpportunity < ActiveRecord::Base
-
+class  Company::JobOpportunity
+include Mongoid::Document
   # concerns
 
   # callbacks

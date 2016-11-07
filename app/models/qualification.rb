@@ -1,5 +1,5 @@
-class Qualification < ActiveRecord::Base
-
+class Qualification
+include Mongoid::Document
   # concerns
 	include DatabaseStorageFormat
 

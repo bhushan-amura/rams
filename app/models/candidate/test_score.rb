@@ -1,5 +1,5 @@
-class Candidate::TestScore < ActiveRecord::Base
-
+class Candidate::TestScore
+include Mongoid::Document
   # concerns
   include ForbiddenValues
   include DatabaseStorageFormat

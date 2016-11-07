@@ -1,5 +1,5 @@
-class Candidate::Project < ActiveRecord::Base
-
+class Candidate::Project
+include Mongoid::Document
   # concerns
 	include DatabaseStorageFormat
 

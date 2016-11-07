@@ -1,5 +1,5 @@
-class Admin < ActiveRecord::Base
-
+class Admin
+include Mongoid::Document
   # concerns
 
   # callbacks

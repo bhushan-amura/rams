@@ -1,4 +1,5 @@
-class CandidatesJobOpportunity < ActiveRecord::Base
+class CandidatesJobOpportunity
+include Mongoid::Document
   self.table_name = "candidates_job_opportunities"
   enum status: [:selected,:mailed,:applied]
 

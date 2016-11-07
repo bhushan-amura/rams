@@ -1,5 +1,5 @@
-class Test < ActiveRecord::Base
-
+class Test
+include Mongoid::Document
   # concern
   include DatabaseStorageFormat
 

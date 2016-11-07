@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users, :controllers => {:registrations => "users/registrations"}
-  root to: 'user#switch'
-
+  # root to: 'user#switch'
+  root to: "Welcome#index"
   resources :companies do
     member do
       get :home

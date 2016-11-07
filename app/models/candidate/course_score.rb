@@ -1,5 +1,5 @@
-class Candidate::CourseScore < ActiveRecord::Base
-
+class Candidate::CourseScore
+include Mongoid::Document
   # concerns
   include DatabaseStorageFormat
 
