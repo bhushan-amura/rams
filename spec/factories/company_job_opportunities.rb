@@ -1,7 +1,7 @@
 require "faker"
 
 FactoryGirl.define do
-  factory :job_event, class: Company::JobOpportunity do
+  factory :company_job_opportunity, class: Company::JobOpportunity do
   	title {Faker::Company.profession}
   	shift {shifts[rand(shifts.length)]}
   	description {Faker::Lorem.paragraph(2)} 
